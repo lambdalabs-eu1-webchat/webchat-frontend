@@ -1,1 +1,1 @@
-export default "https://web-chat-labs.herokuapp.com/";
+export default "https://web-chat-labs.herokuapp.com/api/";
