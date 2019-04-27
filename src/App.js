@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-
+import store from "./redux/store";
+import { Provider } from "react-redux";
 import userCalls from "./ajax/users";
 
 function App() {
@@ -17,12 +18,14 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <h1>Hello, world!</h1>
-      {users.map(user => (
-        <p key={user._id}> {user.username} </p>
-      ))}
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <h1>Hello, world!</h1>
+        {users.map(user => (
+          <p key={user._id}> {user.username} </p>
+        ))}
+      </div>
+    </Provider>
   );
 }
 
