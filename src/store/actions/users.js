@@ -56,6 +56,31 @@ export const fetchSingleUserFailure = (error) => {
     },
   };
 };
+
+export const createUserSuccess = (newUser) => {
+  if (!newUser) {
+    throw new Error('createUserSuccess requires an newUser argument');
+  }
+  return {
+    type: CREATE_USER_SUCCESS,
+    payload: {
+      newUser,
+    },
+  };
+};
+
+export const createUserFailure = (error) => {
+  if (!error) {
+    throw new Error('createUserFailure requires an error argument');
+  }
+  return {
+    type: CREATE_USER_FAILURE,
+    payload: {
+      error,
+    },
+  };
+};
+
 // Asynchronous action creators
 
 export const fetchAllUsers = () => async (dispatch) => {
@@ -79,3 +104,35 @@ export const fetchSingleUser = id => async (dispatch) => {
     dispatch(fetchAllUsersFailure(error));
   }
 };
+
+export const createUser = (hotel_id, name, email, password, motto, user_type) => async (dispatch) => {
+  dispatch({ type: CREATE_USER });
+  const user = {
+    hotel_id: String(hotel_id),
+    name: String(name),
+    email: String(email),
+    password: String(password),
+    motto: String(motto),
+    user_type: String(user_type)
+  };
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  };
+  try {
+    const result = await fetch(`${DOMAIN}users`, config);
+    const jsonResult = await result.json();
+    const newUser = { ...jsonResult };
+    if (result.ok) {
+      dispatch(createUserSuccess(newUser));
+    } else {
+      throw new Error(jsonResult.message);
+    }
+  } catch (error) {
+    dispatch(createUserFailure(error.message));
+  }
+};
+
