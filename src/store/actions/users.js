@@ -81,6 +81,30 @@ export const createUserFailure = (error) => {
   };
 };
 
+export const updateUserSuccess = (updatedUser) => {
+  if (!updatedUser) {
+    throw new Error('updateUserSuccess requires an updatedUser argument');
+  }
+  return {
+    type: UPDATE_USER_SUCCESS,
+    payload: {
+      updatedUser,
+    },
+  };
+};
+
+export const updateUserFailure = (error) => {
+  if (!error) {
+    throw new Error('updateUserFailure requires an error argument');
+  }
+  return {
+    type: UPDATE_USER_FAILURE,
+    payload: {
+      error,
+    },
+  };
+};
+
 // Asynchronous action creators
 
 export const fetchAllUsers = () => async (dispatch) => {
@@ -133,6 +157,35 @@ export const createUser = (hotel_id, name, email, password, motto, user_type) =>
     }
   } catch (error) {
     dispatch(createUserFailure(error.message));
+  }
+};
+
+export const updateUser = (id, name, email, password, motto) => async (dispatch) => {
+  dispatch({ type: UPDATE_USER });
+  const updatedUser = {
+    name: String(name),
+    email: String(email),
+    password: String(password),
+    motto: String(motto)
+  };
+  const config = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedUser),
+  };
+  try {
+    const result = await fetch(`${DOMAIN}users/${id}`, config);
+    const jsonResult = await result.json();
+    if (result.ok) {
+      const newUser = { ...jsonResult };
+      dispatch(updateUserSuccess(newUser));
+    } else {
+      throw new Error(jsonResult.message);
+    }
+  } catch (error) {
+    dispatch(updateUserFailure(error.message));
   }
 };
 
