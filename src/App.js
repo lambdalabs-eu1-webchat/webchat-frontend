@@ -1,32 +1,39 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import store from "./redux/store";
-import { Provider } from "react-redux";
-import userCalls from "./ajax/users";
+import React from "react";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchAllUsers } from './store/actions/users';
 
-function App() {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    userCalls
-      .get()
-      .then(res => {
-        setUsers(res.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
 
-  return (
-    <Provider store={store}>
-      <div className="App">
-        <h1>Hello, world!</h1>
-        {users.map(user => (
-          <p key={user._id}> {user.username} </p>
+  componentWillMount() {
+    const {dispatchFetchAllUsers} = this.props;
+    dispatchFetchAllUsers();
+  }
+
+  render() {
+    const { state } = this.props;
+    return (
+      <div className='App'>
+        <h1>Hello, World!</h1>
+        {state.users.map(user => (
+            <p key={user._id}> {user.name} </p>
         ))}
       </div>
-    </Provider>
-  );
+    );
+  };
 }
 
-export default App;
+App.propTypesypes = {
+  state: PropTypes.shape().isRequired,
+};
+
+const mapStateToProps = state => ({ state });
+
+export default (connect(mapStateToProps, {
+  dispatchFetchAllUsers: fetchAllUsers,
+})(App));
+
