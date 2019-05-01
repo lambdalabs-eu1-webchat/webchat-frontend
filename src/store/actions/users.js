@@ -32,12 +32,47 @@ export const fetchAllUsersFailure = (error) => {
     },
   };
 };
+
+export const fetchSingleUserSuccess = (user) => {
+  if (!user) {
+    throw new Error('fetchSingleUserSuccess requires a user argument');
+  }
+  return {
+    type: FETCH_SINGLE_USER_SUCCESS,
+    payload: {
+      user,
+    },
+  };
+};
+
+export const fetchSingleUserFailure = (error) => {
+  if (!error) {
+    throw new Error('fetchSingleUserFailure requires an error argument');
+  }
+  return {
+    type: FETCH_SINGLE_USER_FAILURE,
+    payload: {
+      error,
+    },
+  };
+};
 // Asynchronous action creators
 
 export const fetchAllUsers = () => async (dispatch) => {
   dispatch({ type: FETCH_ALL_USERS });
   try {
     const result = await fetch(`${DOMAIN}users`);
+    const jsonResult = await result.json();
+    dispatch(fetchAllUsersSuccess(jsonResult));
+  } catch (error) {
+    dispatch(fetchAllUsersFailure(error));
+  }
+};
+
+export const fetchSingleUser = id => async (dispatch) => {
+  dispatch({ type: FETCH_SINGLE_USER });
+  try {
+    const result = await fetch(`${DOMAIN}users/:${id}`);
     const jsonResult = await result.json();
     dispatch(fetchAllUsersSuccess(jsonResult));
   } catch (error) {
