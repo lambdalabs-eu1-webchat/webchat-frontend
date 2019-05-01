@@ -27,6 +27,52 @@ export const registerUserFailure = (error) => {
   };
 };
 
+export const logout = () => ({
+  type: LOGOUT,
+});
+
+export const loginSuccess = (id, hotel_id, name, token) => {
+  return {
+    type: LOGIN_SUCCESS,
+    payload: {
+      id,
+      hotel_id,
+      name,
+      token,
+    },
+  };
+};
+
+export const loginFailure = error => ({
+  type: LOGIN_FAILURE,
+  payload: {
+    error,
+  },
+});
+
+// Asynchronous action creators
+
+export const loginRequest = (name, password) => async (dispatch) => {
+  dispatch({ type: LOGIN_REQUEST });
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, password }),
+  };
+  try {
+    const result = await fetch(`${DOMAIN}login`, config);
+    const jsonResult = await result.json();
+    if (result.status === 401) {
+      throw new Error(jsonResult.error);
+    }
+    dispatch(loginSuccess(jsonResult.token, jsonResult.name, jsonResult.hotel_id));
+  } catch (error) {
+    dispatch(loginFailure(error.message));
+  }
+};
+
 export const registerUser = (name, hotel_id, password, email) => async (dispatch) => {
   dispatch({ type: REGISTER_USER });
   const user = {
