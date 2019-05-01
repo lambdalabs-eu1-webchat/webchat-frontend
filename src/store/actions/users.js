@@ -105,6 +105,30 @@ export const updateUserFailure = (error) => {
   };
 };
 
+export const deleteUserSuccess = (id) => {
+  if (!id) {
+    throw new Error('deleteUserSuccess requires a userId argument');
+  }
+  return {
+    type: DELETE_USER_SUCCESS,
+    payload: {
+      id,
+    },
+  };
+};
+
+export const deleteUserFailure = (error) => {
+  if (!error) {
+    throw new Error('deleteUserFailure requires an error argument');
+  }
+  return {
+    type: DELETE_USER_FAILURE,
+    payload: {
+      error,
+    },
+  };
+};
+
 // Asynchronous action creators
 
 export const fetchAllUsers = () => async (dispatch) => {
@@ -186,6 +210,27 @@ export const updateUser = (id, name, email, password, motto) => async (dispatch)
     }
   } catch (error) {
     dispatch(updateUserFailure(error.message));
+  }
+};
+
+export const deleteUser = id => async (dispatch) => {
+  dispatch({ type: DELETE_USER });
+  const config = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const result = await fetch(`${DOMAIN}users/${id}`, config);
+    const jsonResult = await result.json();
+    if (result.ok) {
+      dispatch(deleteUserSuccess(id));
+    } else {
+      throw new Error(jsonResult.message);
+    }
+  } catch (error) {
+    dispatch(deleteUserFailure(error));
   }
 };
 
