@@ -3,6 +3,9 @@ import { Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchAllUsers } from './store/actions/users';
+import { loginRequest, registerUser, logout } from './store/actions/auth';
+import NavBar from './components/NavBar';
+import Register from './views/Register';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +19,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { state } = this.props;
+    const { state, dispatchLoginRequest, dispatchRegisterUser, dispatchFetchAllUsers, dispatchLogout } = this.props;
     return (
       <div className='App'>
         <h1>Hello, World!</h1>
@@ -28,13 +31,15 @@ class App extends React.Component {
   };
 }
 
-App.propTypesypes = {
+App.propTypes = {
   state: PropTypes.shape().isRequired,
+  dispatchRegisterUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({ state });
 
-export default (connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
+  dispatchRegisterUser: registerUser,
   dispatchFetchAllUsers: fetchAllUsers,
 })(App));
 
