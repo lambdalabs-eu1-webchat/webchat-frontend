@@ -67,7 +67,7 @@ export const loginRequest = (name, password) => async (dispatch) => {
     if (result.status === 401) {
       throw new Error(jsonResult.error);
     }
-    dispatch(loginSuccess(jsonResult.token, jsonResult.name, jsonResult.hotel_id));
+    dispatch(loginSuccess(jsonResult.user._id, jsonResult.user.hotel_id, jsonResult.user.name, jsonResult.token));
   } catch (error) {
     dispatch(loginFailure(error.message));
   }
