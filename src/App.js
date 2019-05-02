@@ -8,6 +8,7 @@ import { loginRequest, registerUser, logout } from './store/actions/auth';
 import NavBar from './components/NavBar';
 import Logout from './components/Logout';
 import HomePage from './views/HomePage';
+import Chat from './views/Chat';
 import Login from './views/Login';
 import Register from './views/Register';
 
