@@ -20,17 +20,17 @@ const handleClick = loginRequest => (event) => {
 
 const Login = ({ loggedIn, loginRequest }) => {
   if (loggedIn) {
-    return <Redirect to ='/chat' />
+    return <Redirect to ="/chat" />
   }
   return (
-    <div className='login-wrapper'>
-      <form className='login-form'>
+    <div className="login-wrapper">
+      <form className="login-form">
         <h2>Login</h2>
         <p>Name</p>
-        <input name='name' placeholder='Your name...' type='text' />
+        <input name="name" placeholder="Your name..." type="text" />
         <p>Password</p>
-        <input name='password' placeholder='Your password...' type='password' />
-        <button type='submit' onClick={handleClick(loginRequest)}>Login</button>
+        <input name="password" placeholder="Your password..." type="password" />
+        <button type="submit" onClick={handleClick(loginRequest)}>Login</button>
       </form>
       </div>
   )

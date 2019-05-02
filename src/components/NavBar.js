@@ -6,12 +6,12 @@ const NavBar = ({ loggedIn }) => (
     <div>
       {!loggedIn ? (
           <nav>
-            <NavLink to='/register'>Register</NavLink>
-            <NavLink to='/login'>Login</NavLink>
+            <NavLink to="/register">Register</NavLink>
+            <NavLink to="/login">Login</NavLink>
           </nav>
       ) : (
           <nav>
-            <NavLink to='/logout'>Logout</NavLink>
+            <NavLink to="/logout">Logout</NavLink>
           </nav>
       )}
 

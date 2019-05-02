@@ -53,22 +53,22 @@ const handleRegister = (event, registerUser) => {
 
 const Register = ({ loggedIn, registerUser }) => {
   if (loggedIn) {
-    return <Redirect to ='/' />
+    return <Redirect to ="/" />
   }
   return (
-    <div className='register-wrapper'>
-      <form className='register-form'>
+    <div className="register-wrapper">
+      <form className="register-form">
         <h2>Register</h2>
         <p>Name</p>
-        <input name='name' placeholder='Choose a name...' type='text' />
+        <input name="name" placeholder="Choose a name..." type="text" />
         <p>Hotel ID</p>
-        <input name='hotelId' placeholder='Your hotel ID...' type='text' />
+        <input name="hotelId" placeholder="Your hotel ID..." type="text" />
         <p>Password</p>
-        <input name='password' placeholder='Choose a password...' type='password' />
+        <input name="password" placeholder="Choose a password..." type="password" />
         <p>Email</p>
-        <input name='email' placeholder='Your email...' type='text' />
-        <p id='result-message'/>
-        <button type='submit' onClick={(e) => handleRegister(e, registerUser)}>Register</button>
+        <input name="email" placeholder="Your email..." type="text" />
+        <p id="result-message" />
+        <button type="submit" onClick={(e) => handleRegister(e, registerUser)}>Register</button>
       </form>
     </div>
   )
