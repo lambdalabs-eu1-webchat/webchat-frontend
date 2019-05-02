@@ -7,6 +7,7 @@ import { loginRequest, registerUser, logout } from './store/actions/auth';
 
 import NavBar from './components/NavBar';
 import Logout from './components/Logout';
+import HomePage from './views/HomePage';
 import Login from './views/Login';
 import Register from './views/Register';
 
@@ -16,19 +17,9 @@ class App extends React.Component {
     this.props = props;
   }
 
-  componentWillMount() {
-    const {dispatchFetchAllUsers} = this.props;
-    dispatchFetchAllUsers();
-  }
-
   render() {
     const { state, dispatchLoginRequest, dispatchRegisterUser, dispatchFetchAllUsers, dispatchLogout } = this.props;
     return (
-      <div className='App'>
-        <h1>Hello, World!</h1>
-        {state.users.map(user => (
-            <p key={user._id}> {user.name} </p>
-        ))}
       </div>
     );
   };
