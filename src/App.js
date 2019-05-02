@@ -21,6 +21,60 @@ class App extends React.Component {
   render() {
     const { state, dispatchLoginRequest, dispatchRegisterUser, dispatchFetchAllUsers, dispatchLogout } = this.props;
     return (
+      <div className="App">
+        <NavBar loggedIn={Boolean(state.authToken)} />
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <HomePage
+              {...props}
+              loggedIn={Boolean(state.authToken)}
+              fetchAllUsers={dispatchFetchAllUsers}
+            />
+          )}
+        />
+        <Route
+          path="/login"
+          render={props => (
+            <Login
+              {...props}
+              loggedIn={Boolean(state.authToken)}
+              loginRequest={dispatchLoginRequest}
+            />
+          )}
+        />
+        <Route
+          path="/register"
+          render={props => (
+            <Register
+              {...props}
+              loggedIn={Boolean(state.authToken)}
+              registerUser={dispatchRegisterUser}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/chat"
+          render={props => (
+            <Chat
+              {...props}
+              loggedIn={Boolean(state.authToken)}
+            />
+          )}
+        />
+
+        <Route
+          path="/logout"
+          render={props => (
+            <Logout
+              {...props}
+              loggedIn={Boolean(state.authToken)}
+              logout={dispatchLogout}
+            />
+          )}
+        />
       </div>
     );
   };
@@ -28,6 +82,7 @@ class App extends React.Component {
 
 App.propTypes = {
   state: PropTypes.shape().isRequired,
+  dispatchLoginRequest: PropTypes.func.isRequired,
   dispatchRegisterUser: PropTypes.func.isRequired,
   dispatchLogout: PropTypes.func.isRequired,
 };
@@ -35,6 +90,7 @@ App.propTypes = {
 const mapStateToProps = state => ({ state });
 
 export default withRouter(connect(mapStateToProps, {
+  dispatchLoginRequest: loginRequest,
   dispatchRegisterUser: registerUser,
   dispatchFetchAllUsers: fetchAllUsers,
   dispatchLogout: logout,
