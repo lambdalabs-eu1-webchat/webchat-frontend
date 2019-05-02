@@ -11,6 +11,7 @@ import HomePage from './views/HomePage';
 import Chat from './views/Chat';
 import Login from './views/Login';
 import Register from './views/Register';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
