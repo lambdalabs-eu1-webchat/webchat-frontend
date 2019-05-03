@@ -1,0 +1,57 @@
+nav {
+    background: #213952;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav a {
+    padding: 0 10px;
+    color: #0B9FEC;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 30px;
+    padding: 15px 0;
+    color: #213952;
+}
+
+form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+input {
+    margin: 10px 0;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+label {
+    margin-right: 10px;
+}
+button {
+    height: 40px;
+    font-size: 16px;
+    border-radius: 5px;
+    background: #0CD4AF;
+    border: none;
+    text-transform: uppercase;
+    color: #213952;
+}
+
+p {
+    color: #213952;
+}
+
+button:hover {
+    background: #00A56A;
+}
+

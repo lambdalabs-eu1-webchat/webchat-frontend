@@ -62,12 +62,12 @@ export const loginRequest = (name, password) => async (dispatch) => {
     body: JSON.stringify({ name, password }),
   };
   try {
-    const result = await fetch(`${DOMAIN}login`, config);
+    const result = await fetch(`${DOMAIN}auth/login`, config);
     const jsonResult = await result.json();
     if (result.status === 401) {
       throw new Error(jsonResult.error);
     }
-    dispatch(loginSuccess(jsonResult.token, jsonResult.name, jsonResult.hotel_id));
+    dispatch(loginSuccess(jsonResult.user._id, jsonResult.user.hotel_id, jsonResult.user.name, jsonResult.token));
   } catch (error) {
     dispatch(loginFailure(error.message));
   }
@@ -90,7 +90,7 @@ export const registerUser = (name, hotel_id, password, email) => async (dispatch
   };
 
   try {
-    const result = await fetch(`${DOMAIN}register`, config);
+    const result = await fetch(`${DOMAIN}auth/register`, config);
     const jsonResult = await result.json();
     const newUser = jsonResult;
     if (result.ok) {
