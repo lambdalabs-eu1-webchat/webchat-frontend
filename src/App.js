@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { fetchAllUsers } from './store/actions/users';
 import { loginRequest, registerUser, logout } from './store/actions/auth';
 
-import NavBar from './components/NavBar';
+import NavBar from './components/navbar/NavBar';
 import Logout from './components/Logout';
 import HomePage from './views/HomePage';
 import Chat from './views/Chat';
