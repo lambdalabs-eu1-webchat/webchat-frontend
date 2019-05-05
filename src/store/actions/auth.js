@@ -73,13 +73,14 @@ export const loginRequest = (email, password) => async (dispatch) => {
   }
 };
 
-export const registerUser = (name, hotel_id, password, email) => async (dispatch) => {
+export const registerUser = (name, hotel_id, password, email, motto) => async (dispatch) => {
   dispatch({ type: REGISTER_USER });
   const user = {
     name: String(name),
     hotel_id: String(hotel_id),
     password: String(password),
     email: String(email),
+    motto: String(motto),
   };
   const config = {
     method: 'POST',
