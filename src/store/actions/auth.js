@@ -31,13 +31,13 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
-export const loginSuccess = (id, hotel_id, name, token) => {
+export const loginSuccess = (id, hotel_id, email, token) => {
   return {
     type: LOGIN_SUCCESS,
     payload: {
       id,
       hotel_id,
-      name,
+      email,
       token,
     },
   };
@@ -52,14 +52,14 @@ export const loginFailure = error => ({
 
 // Asynchronous action creators
 
-export const loginRequest = (name, password) => async (dispatch) => {
+export const loginRequest = (email, password) => async (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
   const config = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ name, password }),
+    body: JSON.stringify({ email, password }),
   };
   try {
     const result = await fetch(`${DOMAIN}auth/login`, config);
@@ -67,7 +67,7 @@ export const loginRequest = (name, password) => async (dispatch) => {
     if (result.status === 401) {
       throw new Error(jsonResult.error);
     }
-    dispatch(loginSuccess(jsonResult.user._id, jsonResult.user.hotel_id, jsonResult.user.name, jsonResult.token));
+    dispatch(loginSuccess(jsonResult.user._id, jsonResult.user.hotel_id, jsonResult.user.email, jsonResult.token));
   } catch (error) {
     dispatch(loginFailure(error.message));
   }
