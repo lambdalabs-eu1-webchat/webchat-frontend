@@ -6,7 +6,7 @@ const NavBar = ({ loggedIn }) => (
     <div>
       {!loggedIn ? (
           <nav>
-            <NavLink to="/">LOGO</NavLink>
+            <NavLink to="/" className="brand-logo">logo</NavLink>
             <NavLink to="/register">Register</NavLink>
             <NavLink to="/login">Login</NavLink>
           </nav>
