@@ -31,13 +31,19 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
-export const loginSuccess = (id, hotel_id, email, token) => {
+export const loginSuccess = (id, hotel_id, email, name, user_type, token) => {
+  const currentUser = {
+    id, hotel_id, email, name, user_type, token,
+  };
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
   return {
     type: LOGIN_SUCCESS,
     payload: {
       id,
       hotel_id,
       email,
+      name,
+      user_type,
       token,
     },
   };
@@ -67,20 +73,21 @@ export const loginRequest = (email, password) => async (dispatch) => {
     if (result.status === 401) {
       throw new Error(jsonResult.error);
     }
-    dispatch(loginSuccess(jsonResult.user._id, jsonResult.user.hotel_id, jsonResult.user.email, jsonResult.token));
+    dispatch(loginSuccess(jsonResult.user._id, jsonResult.user.hotel_id, jsonResult.user.email, jsonResult.user.name, jsonResult.user.user_type, jsonResult.token));
   } catch (error) {
     dispatch(loginFailure(error.message));
   }
 };
 
-export const registerUser = (name, hotel_id, password, email, motto) => async (dispatch) => {
+export const registerUser = (name, email, password, motto, hotel_name, hotel_motto) => async (dispatch) => {
   dispatch({ type: REGISTER_USER });
   const user = {
     name: String(name),
-    hotel_id: String(hotel_id),
-    password: String(password),
     email: String(email),
+    password: String(password),
     motto: String(motto),
+    hotel_name: String(hotel_name),
+    hotel_motto: String(hotel_motto),
   };
   const config = {
     method: 'POST',
