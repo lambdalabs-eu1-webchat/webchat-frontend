@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAllUsers } from './store/actions/users';
+import { fetchAllUsers, fetchHotelStaff } from './store/actions/users';
 import { loginRequest, registerUser, logout } from './store/actions/auth';
 
 import NavBar from './components/NavBar';
@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { state, dispatchLoginRequest, dispatchRegisterUser, dispatchFetchAllUsers, dispatchLogout } = this.props;
+    const { state, dispatchLoginRequest, dispatchRegisterUser, dispatchFetchAllUsers, dispatchLogout, dispatchFetchHotelStaff } = this.props;
     return (
       <div className="App">
         <NavBar loggedIn={Boolean(state.authToken)} />
@@ -76,6 +76,17 @@ class App extends React.Component {
             />
           )}
         />
+
+        <Route
+            path="/team-members"
+            render={props => (
+                <TeamMembers
+                    {...props}
+                    loggedIn={Boolean(state.authToken)}
+                    fetchHotelStaff={dispatchFetchHotelStaff}
+                />
+            )}
+        />
       </div>
     );
   };
@@ -86,6 +97,7 @@ App.propTypes = {
   dispatchLoginRequest: PropTypes.func.isRequired,
   dispatchRegisterUser: PropTypes.func.isRequired,
   dispatchLogout: PropTypes.func.isRequired,
+  dispatchFetchHotelStaff: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({ state });
@@ -95,5 +107,6 @@ export default withRouter(connect(mapStateToProps, {
   dispatchRegisterUser: registerUser,
   dispatchFetchAllUsers: fetchAllUsers,
   dispatchLogout: logout,
+  dispatchFetchHotelStaff: fetchHotelStaff,
 })(App));
 

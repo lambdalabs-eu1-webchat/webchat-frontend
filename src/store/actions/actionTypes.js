@@ -1,5 +1,5 @@
-export default 'https://web-chat-labs.herokuapp.com/api/';
-// export default 'http://localhost:7000/api/';
+// export default 'https://web-chat-labs.herokuapp.com/api/';
+export default 'http://localhost:7000/api/';
 
 // =============== Auth ==================//
 
@@ -22,6 +22,10 @@ export const FETCH_ALL_USERS_FAILURE = 'FETCH_ALL_USERS_FAILURE';
 export const FETCH_SINGLE_USER = 'FETCH_SINGLE_USER';
 export const FETCH_SINGLE_USER_SUCCESS = 'FETCH_SINGLE_USER_SUCCESS';
 export const FETCH_SINGLE_USER_FAILURE = 'FETCH_SINGLE_USER_FAILURE';
+
+export const FETCH_HOTEL_STAFF = 'FETCH_HOTEL_STAFF';
+export const FETCH_HOTEL_STAFF_SUCCESS = 'FETCH_HOTEL_STAFF_SUCCESS';
+export const FETCH_HOTEL_STAFF_FAILURE = 'FETCH_HOTEL_STAFF_FAILURE';
 
 export const CREATE_USER = 'CREATE_USER';
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';

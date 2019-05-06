@@ -2,7 +2,7 @@
 import DOMAIN from "./actionTypes";
 import {
   FETCH_ALL_USERS_SUCCESS, FETCH_ALL_USERS_FAILURE, FETCH_ALL_USERS, FETCH_SINGLE_USER_SUCCESS,
-  FETCH_SINGLE_USER_FAILURE, FETCH_SINGLE_USER, CREATE_USER, CREATE_USER_SUCCESS,
+  FETCH_SINGLE_USER_FAILURE, FETCH_SINGLE_USER, FETCH_HOTEL_STAFF, FETCH_HOTEL_STAFF_SUCCESS, FETCH_HOTEL_STAFF_FAILURE, CREATE_USER, CREATE_USER_SUCCESS,
   CREATE_USER_FAILURE, UPDATE_USER, UPDATE_USER_SUCCESS, UPDATE_USER_FAILURE, DELETE_USER,
   DELETE_USER_SUCCESS, DELETE_USER_FAILURE,
 } from "./actionTypes";
@@ -67,6 +67,30 @@ export const createUserSuccess = (newUser) => {
       newUser,
     },
   };
+};
+
+export const fetchHotelStaffSuccess = (hotelStaff) => {
+  if(!hotelStaff) {
+    throw new Error('fetchHotelStaffSuccess requires a hotelStaff argument');
+  }
+  return {
+    type: FETCH_HOTEL_STAFF_SUCCESS,
+    payload: {
+      hotelStaff,
+    }
+  }
+};
+
+export const fetchHotelStaffFailure = (error) => {
+  if (!error) {
+    throw new Error('fetchHotelStaffFailure requires an error argument');
+  }
+  return {
+    type: FETCH_HOTEL_STAFF_FAILURE,
+    payload: {
+      error,
+    }
+  }
 };
 
 export const createUserFailure = (error) => {
@@ -153,16 +177,28 @@ export const fetchSingleUser = id => async (dispatch) => {
   }
 };
 
-export const createUser = (hotel_id, name, email, password, motto, user_type) => async (dispatch) => {
+export const fetchHotelStaff = id => async (dispatch) => {
+  dispatch({ type: FETCH_HOTEL_STAFF});
+  try {
+    const result = await fetch(`${DOMAIN}users?hotel_id=${id}`);
+    const jsonResult = await result.json();
+    dispatch(fetchHotelStaffSuccess(jsonResult));
+  } catch (error) {
+    dispatch(fetchHotelStaffFailure(error));
+  }
+};
+
+export const createUser = (name, email, password, user_type, motto="") => async (dispatch, getState) => {
   dispatch({ type: CREATE_USER });
   const user = {
-    hotel_id: String(hotel_id),
+    hotel_id: getState().currentUser.hotel_id,
     name: String(name),
     email: String(email),
     password: String(password),
     motto: String(motto),
     user_type: String(user_type)
   };
+  // createUser('mary', 'mary@gmail.com', '1234', 'receptionist', motto)
   const config = {
     method: 'POST',
     headers: {
