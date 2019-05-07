@@ -6,6 +6,10 @@ import styled from 'styled-components';
 
 const HighlighterWrapper = styled.div`
   background-color: ${props => props.highlight};
+  width: 30%;
+  padding: 3%;
+  border-radius: 2%;
+  border: 1px solid lightgrey;
 `;
 
 const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {

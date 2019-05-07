@@ -1,9 +1,13 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import styled from 'styled-components';
 
 import CardDetails from './CardDetails';
 import Checkout from './Checkout';
 import EditPaymentMethodModal from './EditPaymentMethodModal';
+
+const PaymentMethodWrapper = styled.div`
+  padding-top: 10%;
+`;
 
 const PaymentMethod = ({
   payment,
@@ -16,11 +20,8 @@ const PaymentMethod = ({
 }) => {
   if (payment) {
     return (
-      <div>
-        <CardDetails card={payment.card} email={payment.customer.email} />
-        <Button variant="contained" color="primary" onClick={handleModalSwitch}>
-          Change payment method
-        </Button>
+      <PaymentMethodWrapper>
+        <CardDetails card={payment.card} email={payment.customer.email} handleModalSwitch={handleModalSwitch}/>
         <EditPaymentMethodModal
           fireCreateNewCustomer={fireCreateNewCustomer}
           billingEmail={billingEmail}
@@ -29,17 +30,17 @@ const PaymentMethod = ({
           handleModalSwitch={handleModalSwitch}
           fireUpdateCustomerMethod={fireUpdateCustomerMethod}
         />
-      </div>
+      </PaymentMethodWrapper>
     );
   } else {
     return (
-      <div>
+      <PaymentMethodWrapper>
         <Checkout
           fireCreateNewCustomer={fireCreateNewCustomer}
           billingEmail={billingEmail}
           handleInputChange={handleInputChange}
         />
-      </div>
+      </PaymentMethodWrapper>
     );
   }
 };
