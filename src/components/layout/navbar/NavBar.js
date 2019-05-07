@@ -1,14 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const NavBar = ({ loggedIn }) => (
     <div>
       {!loggedIn ? (
           <nav>
-            <NavLink to="/" className="brand-logo">logo</NavLink>
-            <NavLink to="/register">Register</NavLink>
-            <NavLink to="/login">Login</NavLink>
+            <Link to="/" className="left">logo</Link>
+            <NavLink to="/register" className="">Register</NavLink>
+            <NavLink to="/login" className="">Login</NavLink>
+
           </nav>
       ) : (
           <nav>
