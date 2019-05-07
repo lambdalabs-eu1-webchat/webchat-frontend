@@ -275,6 +275,8 @@ export const changeUserType = (id, newType) => async (dispatch) => {
     dispatch(updateUserFailure(error.message));
   }
 };
+
+export const deleteUser = id => async (dispatch, getState) => {
   dispatch({ type: DELETE_USER });
   const config = {
     method: 'DELETE',

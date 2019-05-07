@@ -22,7 +22,7 @@ const users = (state = initialState, action) => {
         return user;
       });
     case DELETE_USER_SUCCESS:
-      return state.filter(user => user.id !== action.payload.id);
+      return state.filter(user => user._id !== action.payload._id);
     default:
       return state;
   }
