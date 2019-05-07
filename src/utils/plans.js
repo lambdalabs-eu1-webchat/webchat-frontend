@@ -15,3 +15,9 @@ export const proPlan = {
     features: ['Live chat with guests', 'Check guests in and out', 'Track ticket status', 'Full customer support', 'Unilimited users'],
     buttonText: 'Pro',
 }
+
+export const planIds = {
+    free: 'plan_F16WlQMwT3HKCi',
+    plus: 'plan_Ezd8eGcARtKvjs',
+    pro: 'plan_EzdACF4lzado30',
+}

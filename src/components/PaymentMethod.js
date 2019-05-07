@@ -20,7 +20,6 @@ const PaymentMethod = ({ payment }) => {
         <Button variant="contained" color="primary">
           Add payment method
         </Button>
-        ;
       </div>
     );
   }
