@@ -2,14 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import PlanCards from '../components/PlanCards';
 import { fetchSingleHotel } from '../store/actions/hotel';
+import PlanCards from '../components/PlanCards';
+import PaymentMethod from '../components/PaymentMethod';
+
 
 class Billing extends React.Component {
 
   componentDidMount() {
     // hardcoded until merged with updated branch for get current user on login
     this.props.fetchSingleHotel('5ccfe730a3c45a0394b719fc');
+    // no plan = 5ccfe730a3c45a0394b71a30
+    // plan and card obj =  5ccfe730a3c45a0394b719fc
   }
 
   // when this component mounts, go and grab everything related to billing: current plan, billing object USING the hotel_id on state
@@ -30,6 +34,7 @@ class Billing extends React.Component {
           // add a current payment method div showing card if they have one and ability to add one if not/edit existing one (this will sign up to a free plan automatically)
           // add/edit can be the same modal with React stripe elements - underlying component will then update with new information
         }
+        <PaymentMethod payment={this.props.hotel.billing}/>
       </div>
     );
   }
