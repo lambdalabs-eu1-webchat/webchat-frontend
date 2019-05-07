@@ -9,21 +9,33 @@ import TeamMembersAddNewMemberModal from "../components/TeamMembersAddNewMemberM
 class TeamMembers extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modalShown: false,
+    };
     this.props = props;
     const { state, dispatchFetchHotelStaff } = this.props;
     dispatchFetchHotelStaff(state.currentUser.hotel_id);
   }
 
+  handleShowModal = () => {
+    this.setState({ modalShown: true});
+  };
+
+  handleHideModal = () => {
+    this.setState({ modalShown: false});
+  };
+
   render() {
     const { state, dispatchCreateUser } = this.props;
+
     return (
         <div className="team-members">
           <SuperAdminNav/>
           <h2>Team Members Page</h2>
           <h3>Update and Assign Team Members</h3>
           <TeamMembersList users={state.users} currentUser={state.currentUser}/>
-          <TeamMembersAddNewMemberModal createUser={dispatchCreateUser}/>
-          <button onClick={(e) => console.log('open modal')}>Add Team Members</button>
+          <TeamMembersAddNewMemberModal createUser={dispatchCreateUser} handleHideModal={this.handleHideModal} modalShown={this.state.modalShown}/>
+          <button onClick={this.handleShowModal}>Add Team Members</button>
         </div>
     );
   };
