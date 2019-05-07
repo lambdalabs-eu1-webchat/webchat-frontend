@@ -6,7 +6,13 @@ import socketIOClient from 'socket.io-client';
 import { fetchAllUsers } from './store/actions/users';
 import { loginRequest, registerUser, logout } from './store/actions/auth';
 import { DOMAIN, SOCKET } from './utils/paths';
-import { addActiveChats, addQueuedChats } from './store/actions/chat';
+import {
+  addActiveChats,
+  addQueuedChats,
+  addMessage,
+  addQueuedChat,
+  removeQueuedChat,
+} from './store/actions/chat';
 
 import NavBar from './components/NavBar';
 import Logout from './components/Logout';
@@ -26,25 +32,28 @@ class App extends React.Component {
   };
 
   componentDidUpdate() {
-    debugger;
     const token = localStorage.getItem('token');
     if (token && this.state.socketInit) {
-      debugger;
       this.setState({ socketInit: false });
       const socket = socketIOClient(DOMAIN);
-
       socket.on(SOCKET.CONNECTION, () => {
         // set up listeners
-        socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {});
+        socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
+          this.props.dispatchAddMessage(chat_id, message);
+        });
         socket.on(SOCKET.ACTIVE_CHATS, chatLogs => {
           this.props.dispatchAddActiveChats(chatLogs);
         });
         socket.on(SOCKET.QUEUED_CHATS, chatLogs => {
           this.props.dispatchAddQueuedChats(chatLogs);
         });
-        socket.on(SOCKET.ADD_QUEUED, chat => {});
-        socket.on(SOCKET.REMOVE_QUEUED, chat_id => {});
-        socket.on(SOCKET.CHATLOG, chatLog => {});
+        socket.on(SOCKET.ADD_QUEUED, chatLog => {
+          this.props.dispatchAddQueuedChat(chatLog);
+        });
+        socket.on(SOCKET.REMOVE_QUEUED, chat_id => {
+          this.props.dispatchRemoveQueuedChat(chat_id);
+        });
+        // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
     }
@@ -134,6 +143,9 @@ export default withRouter(
       dispatchLogout: logout,
       dispatchAddActiveChats: addActiveChats,
       dispatchAddQueuedChats: addQueuedChats,
+      dispatchAddMessage: addMessage,
+      dispatchAddQueuedChat: addQueuedChat,
+      dispatchRemoveQueuedChat: removeQueuedChat,
     },
   )(App),
 );

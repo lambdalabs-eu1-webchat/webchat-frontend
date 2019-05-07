@@ -20,6 +20,30 @@ const chats = (state = initState, action) => {
       return { ...state, activeChats: action.payload };
     case ADD_QUEUED_CHATS:
       return { ...state, queuedChats: action.payload };
+    case ADD_QUEUED_CHAT:
+      return {
+        ...state,
+        queuedChats: [...state.queuedChats, action.payload],
+      };
+    case REMOVE_QUEUED_CHAT:
+      return {
+        ...state,
+        queuedChats: state.queuedChats.filter(
+          chat => chat._id !== action.target,
+        ),
+      };
+    case ADD_MESSAGE:
+      return {
+        ...state,
+        activeChats: state.activeChats.map(chat => {
+          if (chat._id === action.target) {
+            const newTickets = JSON.parse(JSON.stringify(chat.tickets));
+            newTickets[newTickets.length - 1].messages.push(action.payload);
+            return { ...chat, tickets: newTickets };
+          }
+          return chat;
+        }),
+      };
     default:
       return state;
   }

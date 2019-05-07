@@ -14,5 +14,5 @@ export const SOCKET = {
   MESSAGE: 'message',
   CONNECTION: 'connection',
   REMOVE_QUEUED: 'remove_queued',
-  ADD_QUEUED: 'add queued',
+  ADD_QUEUED: 'add_queued',
 };
