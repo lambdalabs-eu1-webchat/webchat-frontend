@@ -3,6 +3,9 @@ import {
   SWITCH_CUSTOMER_PLAN,
   SWITCH_CUSTOMER_PLAN_SUCCESS,
   SWITCH_CUSTOMER_PLAN_FAILURE,
+  CREATE_NEW_CUSTOMER,
+  CREATE_NEW_CUSTOMER_SUCCESS,
+  CREATE_NEW_CUSTOMER_FAILURE,
 } from './actionTypes';
 
 // Synchronous action creators
@@ -37,7 +40,9 @@ export const switchCustomerPlanFailure = error => {
 
 export const switchCustomerPlan = (hotelId, planId) => async dispatch => {
   dispatch({ type: SWITCH_CUSTOMER_PLAN });
-  const newPlan = planId;
+  const newPlan = {
+    newPlan: planId,
+  };
   const config = {
     method: 'PUT',
     headers: {
@@ -57,3 +62,4 @@ export const switchCustomerPlan = (hotelId, planId) => async dispatch => {
     dispatch(switchCustomerPlanFailure(error));
   }
 };
+

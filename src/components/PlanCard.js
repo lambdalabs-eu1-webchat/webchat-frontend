@@ -2,22 +2,31 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import styled from 'styled-components';
 
-const PlanCard = ({ plan, current }) => {
+const HighlighterWrapper = styled.div`
+  background-color: ${props => props.highlight};
+`;
+
+const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
   return (
-    <div>
+    <HighlighterWrapper highlight={current ? 'palevioletred' : false}>
       <h2>
-        {plan.title} {current}
+        {plan.title}
       </h2>
       <List>
         {plan.features.map(feature => (
           <ListItem key={feature}>+ {feature}</ListItem>
         ))}
       </List>
-      <Button variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => fireSwitchCustomerPlan(plan.title)}
+      >
         {plan.buttonText}
       </Button>
-    </div>
+    </HighlighterWrapper>
   );
 };
 

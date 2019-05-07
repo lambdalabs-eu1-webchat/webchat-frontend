@@ -10,7 +10,7 @@ const hotel = (state = initialState, action) => {
     case FETCH_SINGLE_HOTEL_SUCCESS:
       return action.payload.hotel;
     case SWITCH_CUSTOMER_PLAN_SUCCESS:
-      return action.payload.hotel;
+      return action.payload.updatedHotel;
     default:
       return state;
   }

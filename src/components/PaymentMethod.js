@@ -7,7 +7,7 @@ const PaymentMethod = ({ payment }) => {
   if (payment) {
     return (
       <div>
-        <CardDetails card={payment.card} />
+        <CardDetails card={payment.card} email={payment.customer.email}/>
         <Button variant="contained" color="primary">
           Change payment method
         </Button>
