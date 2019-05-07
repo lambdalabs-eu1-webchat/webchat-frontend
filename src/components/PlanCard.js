@@ -6,10 +6,10 @@ import ListItem from '@material-ui/core/ListItem';
 const PlanCard = ({ plan }) => {
   return (
     <div>
-      <h3>{plan.title}</h3>
+      <h2>{plan.title}</h2>
       <List>
         {plan.features.map(feature => (
-          <ListItem key={feature}>{feature}</ListItem>
+          <ListItem key={feature}>+ {feature}</ListItem>
         ))}
       </List>
       <Button variant="contained" color="primary">{plan.buttonText}</Button>
