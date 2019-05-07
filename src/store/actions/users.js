@@ -220,12 +220,13 @@ export const createUser = (name, email, password, user_type, motto="") => async 
   }
 };
 
-export const updateUser = (id, name, email, password, motto) => async (dispatch) => {
+export const updateUser = (id, name, email, password, user_type, motto) => async (dispatch) => {
   dispatch({ type: UPDATE_USER });
   const updatedUser = {
     name: String(name),
     email: String(email),
     password: String(password),
+    user_type: String(user_type),
     motto: String(motto)
   };
   const config = {
@@ -249,7 +250,31 @@ export const updateUser = (id, name, email, password, motto) => async (dispatch)
   }
 };
 
-export const deleteUser = id => async (dispatch) => {
+export const changeUserType = (id, newType) => async (dispatch) => {
+  dispatch({ type: UPDATE_USER });
+  const updatedUser = {
+    user_type: String(newType),
+  };
+  const config = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedUser),
+  };
+  try {
+    const result = await fetch(`${DOMAIN}users/${id}`, config);
+    const jsonResult = await result.json();
+    if (result.ok) {
+      const newUser = { ...jsonResult };
+      dispatch(updateUserSuccess(newUser));
+    } else {
+      throw new Error(jsonResult.message);
+    }
+  } catch (error) {
+    dispatch(updateUserFailure(error.message));
+  }
+};
   dispatch({ type: DELETE_USER });
   const config = {
     method: 'DELETE',
@@ -262,6 +287,7 @@ export const deleteUser = id => async (dispatch) => {
     const jsonResult = await result.json();
     if (result.ok) {
       dispatch(deleteUserSuccess(id));
+      dispatch(fetchHotelStaff(getState().currentUser.hotel_id));
     } else {
       throw new Error(jsonResult.message);
     }
@@ -269,4 +295,3 @@ export const deleteUser = id => async (dispatch) => {
     dispatch(deleteUserFailure(error));
   }
 };
-

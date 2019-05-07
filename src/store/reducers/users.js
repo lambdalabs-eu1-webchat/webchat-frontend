@@ -16,7 +16,7 @@ const users = (state = initialState, action) => {
       return [...state, { ...action.payload.newUser }];
     case UPDATE_USER_SUCCESS:
       return state.map((user) => {
-        if (user.id === action.payload.updatedUser.id) {
+        if (user._id === action.payload.updatedUser._id) {
           return { ...action.payload.updatedUser };
         }
         return user;
