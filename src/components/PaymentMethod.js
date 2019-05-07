@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 
 import CardDetails from './CardDetails';
+import Checkout from './Checkout';
 
 const PaymentMethod = ({ payment }) => {
   if (payment) {
@@ -17,6 +18,7 @@ const PaymentMethod = ({ payment }) => {
     return (
       <div>
         <h1>No payment method yet :(</h1>;
+        <Checkout />
         <Button variant="contained" color="primary">
           Add payment method
         </Button>
