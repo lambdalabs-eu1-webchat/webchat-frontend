@@ -64,11 +64,8 @@ export const createNewCustomerFailure = error => {
 
 // Asynchronous action creators
 
-export const switchCustomerPlan = (hotelId, planId) => async dispatch => {
+export const switchCustomerPlan = (hotelId, newPlan) => async dispatch => {
   dispatch({ type: SWITCH_CUSTOMER_PLAN });
-  const newPlan = {
-    newPlan: planId,
-  };
   const config = {
     method: 'PUT',
     headers: {

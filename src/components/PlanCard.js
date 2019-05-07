@@ -10,9 +10,9 @@ const HighlighterWrapper = styled.div`
 
 const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
   return (
-    <HighlighterWrapper highlight={current ? 'palevioletred' : false}>
+    <HighlighterWrapper highlight={current ? 'blanchedalmond' : false}>
       <h2>
-        {plan.title}
+        {plan.title.toUpperCase()}
       </h2>
       <List>
         {plan.features.map(feature => (

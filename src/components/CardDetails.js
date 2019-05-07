@@ -1,18 +1,22 @@
 import React from 'react';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import styled from 'styled-components';
+
+const CardDetailsWrapper = styled.div`
+  display: flex;
+`;
 
 const CardDetails = ({ card, email }) => {
   return (
     <div>
-      <List>
-        <ListItem>Receipts to: {email}</ListItem>
-        <ListItem>{card.brand}</ListItem>
-        <ListItem>xxxx xxxx xxxx {card.last_four}</ListItem>
+      <CardDetailsWrapper>
+        <ListItem>Card: {card.brand}</ListItem>
+        <ListItem>xxxx xxxx xxxx {card.last_four} (last four)</ListItem>
         <ListItem>
-          {card.expiration.month}/{card.expiration.year}
+          Exp: {card.expiration.month}/{card.expiration.year}
         </ListItem>
-      </List>
+        <ListItem>Receipts: {email}</ListItem>
+      </CardDetailsWrapper>
     </div>
   );
 };

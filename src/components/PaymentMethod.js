@@ -22,15 +22,11 @@ const PaymentMethod = ({
   } else {
     return (
       <div>
-        <h1>No payment method yet :(</h1>
         <Checkout
           fireCreateNewCustomer={fireCreateNewCustomer}
           billingEmail={billingEmail}
           handleInputChange={handleInputChange}
         />
-        <Button variant="contained" color="primary">
-          Add payment method
-        </Button>
       </div>
     );
   }
