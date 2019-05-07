@@ -36,6 +36,32 @@ export const switchCustomerPlanFailure = error => {
   };
 };
 
+export const creatNewCustomerSuccess = updatedHotel => {
+  if (!updatedHotel) {
+    throw new Error(
+      'creatNewCustomerSuccess requires an updatedHotel argument',
+    );
+  }
+  return {
+    type: CREATE_NEW_CUSTOMER_SUCCESS,
+    payload: {
+      updatedHotel,
+    },
+  };
+};
+
+export const createNewCustomerFailure = error => {
+  if (!error) {
+    throw new Error('switchCustomerPlanSuccess requires an error argument');
+  }
+  return {
+    type: CREATE_NEW_CUSTOMER_FAILURE,
+    payload: {
+      error,
+    },
+  };
+};
+
 // Asynchronous action creators
 
 export const switchCustomerPlan = (hotelId, planId) => async dispatch => {
@@ -63,3 +89,27 @@ export const switchCustomerPlan = (hotelId, planId) => async dispatch => {
   }
 };
 
+export const createNewCustomer = (
+  hotelId,
+  enhancedStripeToken,
+) => async dispatch => {
+  dispatch({ type: CREATE_NEW_CUSTOMER });
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(enhancedStripeToken),
+  };
+  try {
+    const result = await fetch(`${DOMAIN}${SUBSCRIPTION}/${hotelId}`, config);
+    const jsonResult = await result.json();
+    if (result.ok) {
+      dispatch(creatNewCustomerSuccess(jsonResult));
+    } else {
+      throw new Error(jsonResult.message);
+    }
+  } catch (error) {
+    dispatch(createNewCustomerFailure(error));
+  }
+};
