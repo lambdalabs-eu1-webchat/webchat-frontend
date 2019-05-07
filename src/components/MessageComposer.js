@@ -5,23 +5,16 @@ import propTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
-function MessageComposer({ messageInput, setMessageInput, sendMessage }) {
-  function updateInput(event) {
-    setMessageInput(event.target.value);
+class MessageComposer extends React.Component {
+  render() {
+    return (
+      <StyledMessageComposer>
+        <Input className='flex' />
+        <Button>Send</Button>
+      </StyledMessageComposer>
+    );
   }
-  return (
-    <StyledMessageComposer>
-      <Input className='flex' onChange={updateInput} value={messageInput} />
-      <Button onClick={sendMessage}>Send</Button>
-    </StyledMessageComposer>
-  );
 }
-
-MessageComposer.propTypes = {
-  messageInput: propTypes.string.isRequired,
-  sendMessage: propTypes.func.isRequired,
-  setMessageInput: propTypes.func.isRequired,
-};
 
 const StyledMessageComposer = styled.div`
   display: flex;
