@@ -6,7 +6,7 @@ import LoggedOut from '../../layout/logout/SignedOutLink'
 
 const NavBar = () => {
   return(
-    <nav className="nav-wrapper dark-blue darken-">
+    <nav className="nav-wrapper navy darken-2">
        <div className="container">
        <NavLink to="/" className="brand-logo">FrontDesk</NavLink>
        <LoggedIn />
