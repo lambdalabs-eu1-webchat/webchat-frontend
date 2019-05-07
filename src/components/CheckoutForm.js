@@ -29,7 +29,7 @@ class CheckoutForm extends Component {
           color="primary"
           onClick={
             this.props.mode === 'edit'
-              ? this.editPaymentMethod
+              ? () => this.editPaymentMethod()
               : () => this.createCustomer()
           }
         >

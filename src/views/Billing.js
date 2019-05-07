@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import styled from 'styled-components';
 
 import { fetchSingleHotel } from '../store/actions/hotel';
 import {
@@ -11,6 +12,10 @@ import {
 import { planIds } from '../utils/plans';
 import PlanCards from '../components/PlanCards';
 import PaymentMethod from '../components/PaymentMethod';
+
+const BillingWrapper = styled.div`
+  padding: 10% 25%;
+`;
 
 class Billing extends React.Component {
   state = {
@@ -73,7 +78,7 @@ class Billing extends React.Component {
 
   render() {
     return (
-      <div>
+      <BillingWrapper>
         <h2>Billing</h2>
         <PaymentMethod
           payment={this.props.hotel.billing}
@@ -88,7 +93,7 @@ class Billing extends React.Component {
           hotel={this.props.hotel}
           fireSwitchCustomerPlan={this.fireSwitchCustomerPlan}
         />
-      </div>
+      </BillingWrapper>
     );
   }
 }

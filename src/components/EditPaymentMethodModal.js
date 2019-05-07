@@ -7,10 +7,11 @@ import CheckoutForm from './CheckoutForm';
 
 const EditPaymentMethodModalWrapper = styled.div`
   display: ${props => props.modalstatus};
-  background-color: blanchedalmond;
-  width: 400px;
+  background-color: lightgrey;
+  z-index: 1;
+  width: 50%;
   position: absolute;
-  top: 50%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;

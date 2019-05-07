@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchAllUsers } from '../store/actions/users';
-import Billing from './Billing';
 
 class HomePage extends React.Component {
   constructor(props) {
