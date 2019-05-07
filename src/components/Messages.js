@@ -12,12 +12,12 @@ class Messages extends React.Component {
     this.scrollToBottom();
   };
   render() {
-    const { tickets, user_id } = this.props;
+    const { tickets, guest_id } = this.props;
     return (
       <StyledMessages>
         {tickets.map(ticket =>
           ticket.messages.map(message => (
-            <Message key={message._id} message={message} user_id={user_id} />
+            <Message key={message._id} message={message} guest_id={guest_id} />
           )),
         )}
 
@@ -50,7 +50,7 @@ Messages.propTypes = {
       status: propTypes.string.isRequired,
     }),
   ).isRequired,
-  user_id: propTypes.string.isRequired,
+  guest_id: propTypes.string.isRequired,
 };
 
 const StyledMessages = styled.div`

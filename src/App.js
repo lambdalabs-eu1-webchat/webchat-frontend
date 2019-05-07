@@ -69,7 +69,7 @@ class App extends React.Component {
       dispatchFetchAllUsers,
       dispatchLogout,
     } = this.props;
-    return <ChatScreen ticket={x} />;
+    return <ChatScreen chat={x} />;
     return (
       <div className='App'>
         <NavBar loggedIn={Boolean(state.authToken)} />

@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 
-function Message({ message, user_id }) {
+function Message({ message, guest_id }) {
   if (!message.sender) debugger;
   return (
-    <StyledMessage left={user_id === message.sender.id}>
+    <StyledMessage left={guest_id === message.sender.id}>
       <span>{message.sender.name} : </span>
       <div className='bubble-container'>
         <span className='bubble me'>{message.text}</span>
@@ -22,7 +22,7 @@ Message.propTypes = {
       name: propTypes.string.isRequired,
     }).isRequired,
   }),
-  user_id: propTypes.string.isRequired,
+  guest_id: propTypes.string.isRequired,
 };
 
 const StyledMessage = styled.div`
