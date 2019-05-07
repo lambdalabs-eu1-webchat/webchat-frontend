@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchAllUsers } from '../store/actions/users';
+import Billing from './Billing';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class HomePage extends React.Component {
         {state.users.map(user => (
             <p key={user._id}> {user.name} </p>
         ))}
+        <Billing />
       </div>
     );
   };
