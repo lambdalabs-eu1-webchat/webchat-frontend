@@ -8,18 +8,19 @@ import {
 // Synchronous action creators
 
 export const fetchSingleHotelSuccess = hotel => {
-  if (!hotel) {
-    throw new Error('fetchSingleHotelSuccess requires a hotel argument');
-  }
-  return {
-    type: FETCH_SINGLE_HOTEL_SUCCESS,
-    payload: {
-      hotel,
-    },
+    if (!hotel) {
+      throw new Error('fetchSingleHotelSuccess requires a hotel argument');
+    }
+    return {
+      type: FETCH_SINGLE_HOTEL_SUCCESS,
+      payload: {
+        hotel,
+      },
+    };
   };
-};
 
 export const fetchSingleHotelFailure = error => {
+    console.log('fail');
   if (!error) {
     throw new Error('fetchSingleHotelFailure requires an error argument');
   }

@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 import users from './users';
 import authToken from './auth';
+import hotel from './hotel';
 
 export default combineReducers({
-  users, authToken,
+  users, authToken, hotel,
 });
 
 
