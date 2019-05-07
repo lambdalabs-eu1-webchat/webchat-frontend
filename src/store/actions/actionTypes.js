@@ -1,5 +1,5 @@
-export default 'https://web-chat-labs.herokuapp.com/api/';
-// export default 'http://localhost:7000/api/';
+// export default 'https://web-chat-labs.herokuapp.com/api/';
+export default 'http://localhost:7000/api/';
 
 // =============== Auth ==================//
 
@@ -66,6 +66,3 @@ export const UPDATE_ROOM_FOR_HOTEL_FAILURE = 'UPDATE_ROOM_FOR_HOTEL_FAILURE';
 export const DELETE_ROOM_FOR_HOTEL = 'DELETE_ROOM_FOR_HOTEL';
 export const DELETE_ROOM_FOR_HOTEL_SUCCESS = 'DELETE_ROOM_FOR_HOTEL_SUCCESS';
 export const DELETE_ROOM_FOR_HOTEL_FAILURE = 'DELETE_ROOM_FOR_HOTEL_FAILURE';
-
-
-
