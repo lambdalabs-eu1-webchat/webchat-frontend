@@ -198,7 +198,6 @@ export const createUser = (name, email, password, user_type, motto="") => async 
     motto: String(motto),
     user_type: String(user_type)
   };
-  // createUser('mary', 'mary@gmail.com', '1234', 'receptionist', motto)
   const config = {
     method: 'POST',
     headers: {
@@ -212,6 +211,7 @@ export const createUser = (name, email, password, user_type, motto="") => async 
     const newUser = { ...jsonResult };
     if (result.ok) {
       dispatch(createUserSuccess(newUser));
+      dispatch(fetchHotelStaff(getState().currentUser.hotel_id));
     } else {
       throw new Error(jsonResult.message);
     }

@@ -11,7 +11,12 @@ const TeamMembersList = (props) => {
           <p>Remove</p>
         </div>
         {props.users.map(user => (
-            <TeamMember key={`${user.id} + ${user.name}`} name={user.name} email={user.email} currentUser={props.currentUser} user_type={user.user_type}/>
+            <TeamMember
+                key={`${user.id} + ${user.name}`}
+                name={user.name} email={user.email}
+                currentUser={props.currentUser}
+                user_type={user.user_type}
+            />
         ))}
       </div>
   )

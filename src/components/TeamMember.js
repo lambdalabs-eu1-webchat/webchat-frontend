@@ -8,7 +8,7 @@ const TeamMember = (props) => {
           <p>{ name }</p>
           <p>{ email }</p>
           <input type="checkbox" defaultChecked/>
-          <p><i className="fas fa-trash-alt" onClick={console.log('delete member')}></i></p>
+          <p><i className="fas fa-trash-alt"></i></p>
         </div>
     );
   }
