@@ -1,4 +1,4 @@
-import { DOMAIN, SUBSCRIPTION } from '../../utils/paths';
+import { DOMAIN, SUBSCRIPTION, METHOD } from '../../utils/paths';
 import {
   SWITCH_CUSTOMER_PLAN,
   SWITCH_CUSTOMER_PLAN_SUCCESS,
@@ -6,6 +6,9 @@ import {
   CREATE_NEW_CUSTOMER,
   CREATE_NEW_CUSTOMER_SUCCESS,
   CREATE_NEW_CUSTOMER_FAILURE,
+  UPDATE_CUSTOMER_METHOD,
+  UPDATE_CUSTOMER_METHOD_SUCCESS,
+  UPDATE_CUSTOMER_METHOD_FAILURE,
 } from './actionTypes';
 
 // Synchronous action creators
@@ -62,6 +65,32 @@ export const createNewCustomerFailure = error => {
   };
 };
 
+export const updateCustomerMethodSuccess = updatedHotel => {
+  if (!updatedHotel) {
+    throw new Error(
+      'updateCustomerMethodSuccess requires an updatedHotel argument',
+    );
+  }
+  return {
+    type: UPDATE_CUSTOMER_METHOD_SUCCESS,
+    payload: {
+      updatedHotel,
+    },
+  };
+}
+
+export const updateCustomerMethodFailure = error => {
+  if (!error) {
+    throw new Error('updateCustomerMethodFailure requires an error argument');
+  }
+  return {
+    type: UPDATE_CUSTOMER_METHOD_FAILURE,
+    payload: {
+      error,
+    },
+  };
+};
+
 // Asynchronous action creators
 
 export const switchCustomerPlan = (hotelId, newPlan) => async dispatch => {
@@ -110,3 +139,25 @@ export const createNewCustomer = (
     dispatch(createNewCustomerFailure(error));
   }
 };
+
+export const updateCustomerMethod = (hotelId, enhancedStripeToken) => async dispatch => {
+  dispatch({  type: UPDATE_CUSTOMER_METHOD });
+  const config = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(enhancedStripeToken),
+  };
+  try {
+    const result = await fetch(`${DOMAIN}${METHOD}/${hotelId}`, config);
+    const jsonResult = await result.json();
+    if (result.ok) {
+      dispatch(updateCustomerMethodSuccess(jsonResult));
+    } else {
+      throw new Error(jsonResult.message);
+    }
+  } catch (error) {
+    dispatch(updateCustomerMethodFailure(error));
+  }
+}

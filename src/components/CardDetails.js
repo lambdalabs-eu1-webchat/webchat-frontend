@@ -4,18 +4,19 @@ import styled from 'styled-components';
 
 const CardDetailsWrapper = styled.div`
   display: flex;
+  width: 1000px;
 `;
 
 const CardDetails = ({ card, email }) => {
   return (
     <div>
       <CardDetailsWrapper>
-        <ListItem>Card: {card.brand}</ListItem>
-        <ListItem>xxxx xxxx xxxx {card.last_four} (last four)</ListItem>
+        <ListItem>{card.brand}</ListItem>
+        <ListItem>xxxx xxxx xxxx {card.last_four}</ListItem>
         <ListItem>
           Exp: {card.expiration.month}/{card.expiration.year}
         </ListItem>
-        <ListItem>Receipts: {email}</ListItem>
+        <ListItem>{email}</ListItem>
       </CardDetailsWrapper>
     </div>
   );

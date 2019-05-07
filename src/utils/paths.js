@@ -4,3 +4,4 @@ export const REGISTER = 'api/auth/register';
 export const USERS = 'api/users';
 export const HOTEL = 'api/hotel';
 export const SUBSCRIPTION = 'api/subscription';
+export const METHOD = 'api/subscription/method';

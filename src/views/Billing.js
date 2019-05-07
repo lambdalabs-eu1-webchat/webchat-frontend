@@ -6,6 +6,7 @@ import { fetchSingleHotel } from '../store/actions/hotel';
 import {
   switchCustomerPlan,
   createNewCustomer,
+  updateCustomerMethod,
 } from '../store/actions/subscription';
 import { planIds } from '../utils/plans';
 import PlanCards from '../components/PlanCards';
@@ -14,6 +15,7 @@ import PaymentMethod from '../components/PaymentMethod';
 class Billing extends React.Component {
   state = {
     billingEmail: '',
+    editPaymentMethodModal: false,
   };
 
   componentDidMount() {
@@ -28,11 +30,23 @@ class Billing extends React.Component {
     });
   };
 
+  handleModalSwitch = () => {
+    this.setState({
+      editPaymentMethodModal: !this.state.editPaymentMethodModal,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      editPaymentMethodModal: false,
+    })
+  }
+
   fireSwitchCustomerPlan = plan => {
     if (!this.props.hotel.billing) {
       return alert('Please add a payment method before switching plan');
     } else {
-      const  newPlan = {newPlan: planIds[plan]};
+      const newPlan = { newPlan: planIds[plan] };
       this.props.switchCustomerPlan(this.props.hotel._id, newPlan);
     }
   };
@@ -46,6 +60,15 @@ class Billing extends React.Component {
     this.props.createNewCustomer(this.props.hotel._id, enhancedStripeToken);
   };
 
+  fireUpdateCustomerMethod = async token => {
+    const enhancedStripeToken = {
+      ...token,
+      email: this.state.billingEmail,
+    }
+    await this.props.updateCustomerMethod(this.props.hotel._id, enhancedStripeToken);
+    this.closeModal();
+  }
+
   render() {
     return (
       <div>
@@ -55,6 +78,9 @@ class Billing extends React.Component {
           fireCreateNewCustomer={this.fireCreateNewCustomer}
           billingEmail={this.state.billingEmail}
           handleInputChange={this.handleInputChange}
+          editPaymentMethodModal={this.state.editPaymentMethodModal}
+          handleModalSwitch={this.handleModalSwitch}
+          fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
         />
         {
           // do something to highlight to the user their current plan and disable the button on that plan card (done)
@@ -85,6 +111,7 @@ const mapDispatchToProps = dispatch => {
       fetchSingleHotel,
       switchCustomerPlan,
       createNewCustomer,
+      updateCustomerMethod,
     },
     dispatch,
   );
