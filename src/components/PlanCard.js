@@ -17,14 +17,17 @@ const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
           <ListItem key={feature}>+ {feature}</ListItem>
         ))}
       </List>
-      <Button
-        disabled={current}
-        variant="contained"
-        color="primary"
-        onClick={() => fireSwitchCustomerPlan(plan.title)}
-      >
-        {plan.buttonText}
-      </Button>
+      {!current ? (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => fireSwitchCustomerPlan(plan.title)}
+        >
+          {plan.buttonText}
+        </Button>
+      ) : (
+        <></>
+      )}
     </HighlighterWrapper>
   );
 };
