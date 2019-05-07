@@ -1,5 +1,5 @@
-export default 'https://web-chat-labs.herokuapp.com/api/';
-// export default 'http://localhost:7000/api/';
+// export default 'https://web-chat-labs.herokuapp.com/api/';
+export default 'http://localhost:7000/api/';
 
 // =============== Auth ==================//
 
@@ -67,5 +67,13 @@ export const DELETE_ROOM_FOR_HOTEL = 'DELETE_ROOM_FOR_HOTEL';
 export const DELETE_ROOM_FOR_HOTEL_SUCCESS = 'DELETE_ROOM_FOR_HOTEL_SUCCESS';
 export const DELETE_ROOM_FOR_HOTEL_FAILURE = 'DELETE_ROOM_FOR_HOTEL_FAILURE';
 
+// =============== Chats ==================//
 
-
+export const CHATS = {
+  ADD_MESSAGE: 'ADD_MESSAGE',
+  ADD_ACTIVE_CHATS: 'ADD_ACTIVE_CHATS',
+  ADD_QUEUED_CHATS: 'ADD_QUEUED_CHATS',
+  ADD_QUEUED_CHAT: 'ADD_QUEUED_CHAT',
+  REMOVE_QUEUED_CHAT: 'REMOVE_QUEUED_CHAT',
+  UPDATE_ACTIVE_CHAT: 'UPDATE_ACTIVE_CHAT',
+};
