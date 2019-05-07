@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -11,6 +11,7 @@ import HomePage from './views/HomePage';
 import Chat from './views/Chat';
 import Login from './views/Login';
 import Register from './views/Register';
+import Billing from './views/Billing';
 import './App.css';
 
 class App extends React.Component {
@@ -20,7 +21,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { state, dispatchLoginRequest, dispatchRegisterUser, dispatchFetchAllUsers, dispatchLogout } = this.props;
+    const {
+      state,
+      dispatchLoginRequest,
+      dispatchRegisterUser,
+      dispatchFetchAllUsers,
+      dispatchLogout,
+    } = this.props;
     return (
       <div className="App">
         <NavBar loggedIn={Boolean(state.authToken)} />
@@ -59,10 +66,7 @@ class App extends React.Component {
           exact
           path="/chat"
           render={props => (
-            <Chat
-              {...props}
-              loggedIn={Boolean(state.authToken)}
-            />
+            <Chat {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
@@ -76,9 +80,16 @@ class App extends React.Component {
             />
           )}
         />
+
+        <Route
+          path="/billing"
+          render={props => (
+            <Billing {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
       </div>
     );
-  };
+  }
 }
 
 App.propTypes = {
@@ -90,10 +101,14 @@ App.propTypes = {
 
 const mapStateToProps = state => ({ state });
 
-export default withRouter(connect(mapStateToProps, {
-  dispatchLoginRequest: loginRequest,
-  dispatchRegisterUser: registerUser,
-  dispatchFetchAllUsers: fetchAllUsers,
-  dispatchLogout: logout,
-})(App));
-
+export default withRouter(
+  connect(
+    mapStateToProps,
+    {
+      dispatchLoginRequest: loginRequest,
+      dispatchRegisterUser: registerUser,
+      dispatchFetchAllUsers: fetchAllUsers,
+      dispatchLogout: logout,
+    },
+  )(App),
+);

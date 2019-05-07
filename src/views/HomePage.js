@@ -18,7 +18,6 @@ class HomePage extends React.Component {
         {state.users.map(user => (
             <p key={user._id}> {user.name} </p>
         ))}
-        <Billing />
       </div>
     );
   };
