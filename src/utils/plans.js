@@ -1,19 +1,19 @@
 export const freePlan = {
     title: 'free',
     features: ['Live chat with guests', 'Check guests in and out', 'Track ticket status', 'Full customer support', 'Up to 5 users'],
-    buttonText: 'Free',
+    buttonText: 'Switch to Free',
 }
 
 export const plusPlan = {
     title: 'plus',
     features: ['Live chat with guests', 'Check guests in and out', 'Track ticket status', 'Full customer support', 'Up to 15 users'],
-    buttonText: 'Plus',
+    buttonText: 'Switch to Plus',
 }
 
 export const proPlan = {
     title: 'pro',
     features: ['Live chat with guests', 'Check guests in and out', 'Track ticket status', 'Full customer support', 'Unilimited users'],
-    buttonText: 'Pro',
+    buttonText: 'Switch to Pro',
 }
 
 export const planIds = {

@@ -11,15 +11,14 @@ const HighlighterWrapper = styled.div`
 const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
   return (
     <HighlighterWrapper highlight={current ? 'blanchedalmond' : false}>
-      <h2>
-        {plan.title.toUpperCase()}
-      </h2>
+      <h2>{plan.title.toUpperCase()}</h2>
       <List>
         {plan.features.map(feature => (
           <ListItem key={feature}>+ {feature}</ListItem>
         ))}
       </List>
       <Button
+        disabled={current}
         variant="contained"
         color="primary"
         onClick={() => fireSwitchCustomerPlan(plan.title)}
