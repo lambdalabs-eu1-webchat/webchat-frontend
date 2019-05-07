@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 
 const handleClick = loginRequest => (event) => {
   event.preventDefault();
-  let name = '';
+  let email = '';
   let password = '';
   event.target.parentNode.childNodes.forEach((childNode) => {
-    if (childNode.name === 'name') {
-      name = childNode.value;
+    if (childNode.name === 'email') {
+      email = childNode.value;
     } else if (childNode.name === 'password') {
       password = childNode.value;
     }
   });
-  if (name && password) {
-    loginRequest(name, password)
+  if (email && password) {
+    loginRequest(email, password)
   }
 };
 
@@ -26,8 +26,8 @@ const Login = ({ loggedIn, loginRequest }) => {
     <div className="login-wrapper">
       <form className="login-form">
         <h2>Login</h2>
-        <p>Name</p>
-        <input name="name" placeholder="Your name..." type="text" />
+        <p>Email</p>
+        <input name="email" placeholder="Your email..." type="text" />
         <p>Password</p>
         <input name="password" placeholder="Your password..." type="password" />
         <button type="submit" onClick={handleClick(loginRequest)}>Login</button>

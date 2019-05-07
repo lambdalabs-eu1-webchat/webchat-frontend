@@ -8,6 +8,7 @@ const handleRegister = (event, registerUser) => {
   let hotelId = '';
   let password = '';
   let email = '';
+  let motto = '';
 
   event.target.parentNode.childNodes.forEach((childNode) => {
     if (childNode.name === 'name') {
@@ -18,11 +19,13 @@ const handleRegister = (event, registerUser) => {
       password = childNode.value;
     } else if (childNode.name === 'email') {
       email = childNode.value;
+    } else if (childNode.name === 'motto') {
+      motto = childNode.value;
     }
   });
   let blank = false;
-  if (name && hotelId && password && email) {
-    registerUser(name, hotelId, password, email);
+  if (name && hotelId && password && email && motto) {
+    registerUser(name, hotelId, password, email, motto);
   } else {
     blank = true;
   }
@@ -46,6 +49,8 @@ const handleRegister = (event, registerUser) => {
         childNode.value = '';
       } else if (childNode.name === 'email') {
         childNode.value = '';
+      } else if (childNode.name === 'motto') {
+        childNode.value = '';
       }
     });
   }
@@ -67,6 +72,8 @@ const Register = ({ loggedIn, registerUser }) => {
         <input name="password" placeholder="Choose a password..." type="password" />
         <p>Email</p>
         <input name="email" placeholder="Your email..." type="text" />
+        <p>Motto</p>
+        <input name="motto" placeholder="Your motto..." type="text" />
         <p id="result-message" />
         <button type="submit" onClick={(e) => handleRegister(e, registerUser)}>Register</button>
       </form>
