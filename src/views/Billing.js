@@ -19,8 +19,7 @@ class Billing extends React.Component {
   };
 
   componentDidMount() {
-    // hardcoded until merged with updated branch for get current user on login > hotel_id
-    // this mount may be moved further up the chain
+    // hardcoded until merged with updated branch for get current user on login inc. hotel_id key
     this.props.fetchSingleHotel('5ccfe730a3c45a0394b71a3c');
   }
 
@@ -39,8 +38,8 @@ class Billing extends React.Component {
   closeModal = () => {
     this.setState({
       editPaymentMethodModal: false,
-    })
-  }
+    });
+  };
 
   fireSwitchCustomerPlan = plan => {
     if (!this.props.hotel.billing) {
@@ -64,10 +63,13 @@ class Billing extends React.Component {
     const enhancedStripeToken = {
       ...token,
       email: this.state.billingEmail,
-    }
-    await this.props.updateCustomerMethod(this.props.hotel._id, enhancedStripeToken);
+    };
+    await this.props.updateCustomerMethod(
+      this.props.hotel._id,
+      enhancedStripeToken,
+    );
     this.closeModal();
-  }
+  };
 
   render() {
     return (
@@ -82,20 +84,10 @@ class Billing extends React.Component {
           handleModalSwitch={this.handleModalSwitch}
           fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
         />
-        {
-          // do something to highlight to the user their current plan and disable the button on that plan card (done)
-          // if a user clicks a plan without any payment method created, prompt them to add a payment method (done with alert)
-          // if a user clicks on a plan they aren't eligible for, add a prompt to say why they can't switch plan (wait for merges)
-          // if a user clicks on an elligibile plan, create a confirmation modal
-        }
         <PlanCards
           hotel={this.props.hotel}
           fireSwitchCustomerPlan={this.fireSwitchCustomerPlan}
         />
-        {
-          // add a current payment method div showing card if they have one and ability to add one if not/edit existing one (this will sign up to a free plan automatically)
-          // add/edit can be the same modal with React stripe elements - underlying component will then update with new information (done)
-        }
       </div>
     );
   }
