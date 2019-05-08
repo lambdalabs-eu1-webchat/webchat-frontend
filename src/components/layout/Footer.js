@@ -65,6 +65,7 @@ class Footer extends React.Component {
                    psum dolor sit amet salami ham hock ham, hamburger corned beef short ribs kielbasa biltong
                    </Typography>
                 </Grid>
+                
                 <Grid className={classes.subFooter} item xs={12}>
                 <Typography className={classes.footerText}>
                 <span> Front Desk Web Chat ©{currentYear}</span>
