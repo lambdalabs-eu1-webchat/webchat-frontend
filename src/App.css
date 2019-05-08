@@ -1,11 +1,10 @@
 nav {
-    background: #213952;
+    background: #2f465e;
     padding: 10px 10px 30px;
     margin: 0px;
     display: flex;
     justify-content: flex-end;
 }
-
 nav a {
     padding: 0 10px;
     color: #0B9FEC;
