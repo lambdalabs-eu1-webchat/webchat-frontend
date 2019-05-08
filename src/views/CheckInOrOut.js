@@ -17,7 +17,10 @@ class CheckInOrOut extends React.Component {
       <StyledCheckInOrOut>
         <div>
           check in
-          <CheckInForm rooms={this.props.rooms} />
+          <CheckInForm
+            rooms={this.props.rooms}
+            hotel_id={this.props.hotel_id}
+          />
         </div>
         <div>
           checkout <CheckOutForm rooms={this.props.rooms} />
