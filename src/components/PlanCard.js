@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import PT from 'prop-types';
 import styled from 'styled-components';
 
 const HighlighterWrapper = styled.div`
@@ -34,6 +35,16 @@ const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
       )}
     </HighlighterWrapper>
   );
+};
+
+PlanCard.propTypes = {
+  plan: PT.shape({
+    title: PT.string.isRequired,
+    features: PT.arrayOf(PT.string).isRequired,
+    buttonText: PT.string.isRequired,
+  }),
+  current: PT.bool.isRequired,
+  fireSwitchCustomerPlan: PT.func.isRequired,
 };
 
 export default PlanCard;

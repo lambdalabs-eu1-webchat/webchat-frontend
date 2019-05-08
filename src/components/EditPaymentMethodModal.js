@@ -1,6 +1,7 @@
 import React from 'react';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import Button from '@material-ui/core/Button';
+import PT from 'prop-types';
 import styled from 'styled-components';
 
 import CheckoutForm from './CheckoutForm';
@@ -46,6 +47,15 @@ function EditPaymentMethodModal({
       </EditPaymentMethodModalWrapper>
     </StripeProvider>
   );
+}
+
+EditPaymentMethodModal.propTypes = {
+  fireCreateNewCustomer: PT.func.isRequired,
+  billingEmail: PT.string.isRequired,
+  handleInputChange: PT.func.isRequired,
+  editPaymentMethodModal: PT.bool.isRequired,
+  handleModalSwitch: PT.func.isRequired,
+  fireUpdateCustomerMethod: PT.func.isRequired,
 }
 
 export default EditPaymentMethodModal;

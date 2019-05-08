@@ -1,6 +1,7 @@
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import Button from '@material-ui/core/Button';
+import PT from 'prop-types';
 import styled from 'styled-components';
 
 const CardDetailsWrapper = styled.div`
@@ -23,6 +24,19 @@ const CardDetails = ({ card, email, handleModalSwitch }) => {
       </CardDetailsWrapper>
     </div>
   );
+};
+
+CardDetails.propTypes = {
+  card: PT.shape({
+    brand: PT.string.isRequired,
+    last_four: PT.string.isRequired,
+    expiration: PT.shape({
+      month: PT.number.isRequired,
+      year: PT.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+  email: PT.string.isRequired,
+  handleModalSwitch: PT.func.isRequired,
 };
 
 export default CardDetails;

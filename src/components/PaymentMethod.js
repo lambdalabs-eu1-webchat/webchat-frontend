@@ -1,4 +1,5 @@
 import React from 'react';
+import PT from 'prop-types';
 import styled from 'styled-components';
 
 import CardDetails from './CardDetails';
@@ -47,6 +48,15 @@ const PaymentMethod = ({
       </PaymentMethodWrapper>
     );
   }
+};
+
+PaymentMethod.propTypes = {
+  billingEmail: PT.string.isRequired,
+  fireCreateNewCustomer: PT.func.isRequired,
+  handleInputChange: PT.func.isRequired,
+  editPaymentMethodModal: PT.bool.isRequired,
+  handleModalSwitch: PT.func.isRequired,
+  fireUpdateCustomerMethod: PT.func.isRequired,
 };
 
 export default PaymentMethod;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import Button from '@material-ui/core/Button';
+import PT, { shape } from 'prop-types';
 
 class CheckoutForm extends Component {
   createCustomer = async () => {
@@ -39,5 +40,15 @@ class CheckoutForm extends Component {
     );
   }
 }
+
+CheckoutForm.propTypes = {
+  stripe: PT.shape({
+    createToken: PT.func.isRequired,
+  }).isRequired,
+  fireCreateNewCustomer: PT.func.isRequired,
+  billingEmail: PT.string.isRequired,
+  handleInputChange: PT.func.isRequired,
+  buttonText: PT.string.isRequired,
+};
 
 export default injectStripe(CheckoutForm);

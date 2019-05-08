@@ -1,6 +1,9 @@
 import React from 'react';
 import { Elements, StripeProvider } from 'react-stripe-elements';
+import PT from 'prop-types';
+
 import CheckoutForm from './CheckoutForm';
+
 
 function Checkout({ fireCreateNewCustomer, billingEmail, handleInputChange }) {
   return (
@@ -18,6 +21,12 @@ function Checkout({ fireCreateNewCustomer, billingEmail, handleInputChange }) {
       </div>
     </StripeProvider>
   );
+}
+
+Checkout.propTypes = {
+  fireCreateNewCustomer: PT.func.isRequired,
+  billingEmail: PT.string.isRequired,
+  handleInputChange: PT.func.isRequired,
 }
 
 export default Checkout;

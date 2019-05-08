@@ -5,7 +5,7 @@ import {
   UPDATE_CUSTOMER_METHOD_SUCCESS,
 } from '../actions/actionTypes';
 
-const initialState = [];
+const initialState = {};
 
 const hotel = (state = initialState, action) => {
   switch (action.type) {

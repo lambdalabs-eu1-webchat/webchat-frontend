@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PT from 'prop-types';
 import styled from 'styled-components';
 
 import { fetchSingleHotel } from '../store/actions/hotel';
@@ -98,6 +99,14 @@ class Billing extends React.Component {
   }
 }
 
+Billing.propTypes = {
+  hotel: PT.object.isRequired,
+  fetchSingleHotel: PT.func.isRequired,
+  createNewCustomer: PT.func.isRequired,
+  switchCustomerPlan: PT.func.isRequired,
+  updateCustomerMethod: PT.func.isRequired,
+};
+
 const mapStateToProps = state => ({
   hotel: state.hotel,
 });
@@ -106,8 +115,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchSingleHotel,
-      switchCustomerPlan,
       createNewCustomer,
+      switchCustomerPlan,
       updateCustomerMethod,
     },
     dispatch,

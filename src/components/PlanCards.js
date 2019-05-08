@@ -1,4 +1,5 @@
 import React from 'react';
+import PT from 'prop-types';
 import styled from 'styled-components';
 
 import PlanCard from '../components/PlanCard';
@@ -28,6 +29,11 @@ const PlanCards = ({ hotel, fireSwitchCustomerPlan }) => {
       />
     </PlanCardWrapper>
   );
+};
+
+PlanCards.propTypes = {
+  hotel: PT.object.isRequired,
+  fireSwitchCustomerPlan: PT.func.isRequired,
 };
 
 export default PlanCards;
