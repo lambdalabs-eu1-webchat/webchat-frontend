@@ -12,6 +12,7 @@ import { SOCKET } from '../utils/paths';
 class ChatScreen extends React.Component {
   closeTicket = () => {
     this.props.socket.emit(SOCKET.CLOSE_TICKET, this.props.chat._id);
+    // might want to have a function passed into this to stop rendering this component
   };
   render() {
     const { chat } = this.props;
