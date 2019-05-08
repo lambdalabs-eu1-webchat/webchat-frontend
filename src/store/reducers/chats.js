@@ -7,15 +7,19 @@ const {
   ADD_QUEUED_CHATS,
   REMOVE_QUEUED_CHAT,
   UPDATE_ACTIVE_CHAT,
+  SAVE_SOCKET,
 } = CHATS;
 
 const initState = {
   queuedChats: [],
   activeChats: [],
+  socket: null,
 };
 
 const chats = (state = initState, action) => {
   switch (action.type) {
+    case SAVE_SOCKET:
+      return { ...state, socket: action.payload };
     case ADD_ACTIVE_CHATS:
       return { ...state, activeChats: action.payload };
     case ADD_QUEUED_CHATS:
