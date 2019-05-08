@@ -14,12 +14,6 @@ const LoggedOut = () => {
 export default LoggedOut;
 
 
-
-
-
-
-
-
 // //  const LoggedOut = () => {
 // // return(
 

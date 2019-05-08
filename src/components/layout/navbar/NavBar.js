@@ -3,10 +3,11 @@ import logo from './logo.svg';
 import { NavLink } from 'react-router-dom';
 import LoggedIn from './SignedInLink'
 import LoggedOut from './SignedOutLink'
+import { connect } from 'react-redux'
 
 const NavBar = (props) => {
   const { auth } = props;
-  const navlinks = auth.uid ? <LoggedIn /> : <LoggedOut />
+  // const navlinks = auth.uid ? <LoggedIn /> : <LoggedOut />
   return(
     <nav className="nav-wrapper navy darken-2">
        <div className="container">
@@ -14,7 +15,9 @@ const NavBar = (props) => {
        <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" /> </header>
        </NavLink>
-        {navlinks}
+       <LoggedIn />
+       <LoggedOut />
+        {/* {navlinks} */}
        </div>
     </nav>
   )
@@ -45,8 +48,8 @@ const NavBar = (props) => {
 // };
 const mapStateToProps = (state) => {
   return{
-    auth: state.mongodb.auth
+    // auth: state.mongodb.auth
   }
 }
 
-export default NavBar;
+export default connect(mapStateToProps)(NavBar);
