@@ -1,6 +1,6 @@
 import { LOGIN_SUCCESS, LOGOUT } from '../actions/actionTypes';
 
-const initialState = { _id: null, hotel_id: null, name: '', email: '' };
+const initialState = { _id: null, hotel_id: null, email: '', name: '' };
 
 const currentUser = (state = initialState, action) => {
   switch (action.type) {
@@ -8,9 +8,11 @@ const currentUser = (state = initialState, action) => {
       return {
         _id: action.payload._id,
         hotel_id: action.payload.hotel_id,
-        name: action.payload.name,
         email: action.payload.email,
+        token: action.payload.token,
         user_type: action.payload.user_type,
+        name: action.payload.name,
+
       };
     case LOGOUT:
       return { ...initialState };

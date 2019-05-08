@@ -39,7 +39,7 @@ export const logout = () => ({
 
 export const loginSuccess = (id, hotel_id, email, token, user_type, name) => {
   const currentUser = {
-    id, hotel_id, email, name, user_type, token,
+    id, hotel_id, email, token, user_type, name,
   };
   localStorage.setItem('currentUser', JSON.stringify(currentUser));
   localStorage.setItem('token', token);
@@ -49,9 +49,9 @@ export const loginSuccess = (id, hotel_id, email, token, user_type, name) => {
       id,
       hotel_id,
       email,
-      name,
-      user_type,
       token,
+      user_type,
+      name,
     },
   };
 };
@@ -85,9 +85,10 @@ export const loginRequest = (email, password) => async dispatch => {
         jsonResult.user._id,
         jsonResult.user.hotel_id,
         jsonResult.user.email,
-        jsonResult.user.name, 
-        jsonResult.user.user_type,
         jsonResult.token,
+        jsonResult.user.user_type,
+        jsonResult.user.name,
+
       ),
     );
   } catch (error) {
