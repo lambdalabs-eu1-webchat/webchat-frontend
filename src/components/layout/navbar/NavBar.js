@@ -4,7 +4,9 @@ import { NavLink } from 'react-router-dom';
 import LoggedIn from './SignedInLink'
 import LoggedOut from './SignedOutLink'
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { auth } = props;
+  const navlinks = auth.uid ? <LoggedIn /> : <LoggedOut />
   return(
     <nav className="nav-wrapper navy darken-2">
        <div className="container">
@@ -12,8 +14,7 @@ const NavBar = () => {
        <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" /> </header>
        </NavLink>
-       <LoggedIn />
-       <LoggedOut />
+        {navlinks}
        </div>
     </nav>
   )
@@ -42,5 +43,10 @@ const NavBar = () => {
 // NavBar.propTypes = {
 //   loggedIn: PropTypes.bool.isRequired,
 // };
+const mapStateToProps = (state) => {
+  return{
+    auth: state.mongodb.auth
+  }
+}
 
 export default NavBar;
