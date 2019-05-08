@@ -21,6 +21,7 @@ import HomePage from './views/HomePage';
 import Chat from './views/Chat';
 import Login from './views/Login';
 import Register from './views/Register';
+import Billing from './views/Billing';
 import TeamMembers from './views/TeamMembers';
 import CheckInOrOut from './views/CheckInOrOut';
 import './App.css';
@@ -126,15 +127,33 @@ class App extends React.Component {
         />
 
         <Route
-          path='/team-members'
+          path='/logout'
           render={props => (
-            <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
+            <Logout
+              {...props}
+              loggedIn={Boolean(state.authToken)}
+              logout={dispatchLogout}
+            />
           )}
         />
+
+        <Route
+          path='/billing'
+          render={props => (
+            <Billing {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
+
         <Route
           path='/checkin'
           render={props => (
             <CheckInOrOut {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
+        <Route
+          path='/team-members'
+          render={props => (
+            <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
       </div>
