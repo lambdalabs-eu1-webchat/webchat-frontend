@@ -33,9 +33,6 @@ class CheckOutForm extends React.Component {
 
   checkOutGuest = async () => {
     const guest_id = this.state.selectValue;
-    const guest = this.state.currentGuests.find(
-      guest => guest._id === guest_id,
-    );
     if (this.state.selectValue) {
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
