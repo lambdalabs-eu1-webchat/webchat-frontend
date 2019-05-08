@@ -43,6 +43,7 @@ class MessageComposer extends React.Component {
 
 MessageComposer.propTypes = {
   chat_id: propTypes.string.isRequired,
+  socket: propTypes.object.isRequired,
 };
 const StyledMessageComposer = styled.div`
   display: flex;
