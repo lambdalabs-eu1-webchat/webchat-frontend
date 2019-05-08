@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchRooms } from '../store/actions/rooms';
-import CheckInForm from '../components/CheckInForm';
-import CheckOutForm from '../components/CheckOutForm';
+import CheckInForm from '../components/GuestCheckInForm';
+import CheckOutForm from '../components/GuestCheckOutForm';
 
 class CheckInOrOut extends React.Component {
   componentDidMount() {

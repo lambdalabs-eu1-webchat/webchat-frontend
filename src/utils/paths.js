@@ -3,11 +3,8 @@ export const LOGIN = 'api/auth/login';
 export const REGISTER = 'api/auth/register';
 export const USERS = 'api/users';
 export const HOTEL = 'api/hotel';
-<<<<<<< HEAD
-=======
 export const SUBSCRIPTION = 'api/subscription';
 export const METHOD = 'api/subscription/method';
->>>>>>> origin/master
 
 export const SOCKET = {
   CLOSE_TICKET: 'close_ticket',
