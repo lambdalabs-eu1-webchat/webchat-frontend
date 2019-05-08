@@ -6,19 +6,22 @@ const TicketView = ({ queuedChats }) => {
     <div>
       {queuedChats.map(chat => {
         return (
-          <div style={divStyle}>
-            <div>Guest Name: {chat.guest.name}</div>
-            <div>Room Number: {chat.room.name}</div>
-            {chat.tickets.map(ticket => {
-              return (
-                <div>
+          <div style={lineStyle}>
+            <div style={divStyle}>
+              <div>Guest Name: {chat.guest.name}</div>
+              <div>Room Number: {chat.room.name}</div>
+              {chat.tickets.map(ticket => {
+                return (
                   <div>
-                    Last message:
-                    {ticket.messages[ticket.messages.length - 1].text}
+                    <div>
+                      Last message:
+                      {ticket.messages[ticket.messages.length - 1].text}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+            <span>Icon here</span>
           </div>
         );
       })}
@@ -34,6 +37,12 @@ const divStyle = {
   border: '1px solid black',
   margin: '10px',
   padding: '10px',
+  width: '100%',
+};
+
+const lineStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
 };
 
 export default TicketView;
