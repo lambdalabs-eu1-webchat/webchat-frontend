@@ -26,9 +26,9 @@ class CompanySettings extends React.Component {
             <h3>Update company details</h3>
             <form>
               <label>Name</label>
-              <input name="name" placeholder={state.currentUser.name}/>
+              <input name="name" placeholder={state.hotel.name}  />
               <label>Company Motto</label>
-              <input name="motto" placeholder={`${state.currentUser.user_type}`}/>
+              <input name="motto" placeholder={state.hotel.motto} />
 
             </form>
           </section>
