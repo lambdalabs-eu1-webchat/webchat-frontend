@@ -26,7 +26,7 @@ class Billing extends React.Component {
 
   componentDidMount() {
     // hardcoded until merged with updated branch for get current user on login inc. hotel_id key
-    this.props.fetchSingleHotel('5ccfe730a3c45a0394b71a30');
+    this.props.fetchSingleHotel(this.props.hotel_id);
   }
 
   handleInputChange = event => {
@@ -109,6 +109,7 @@ Billing.propTypes = {
 
 const mapStateToProps = state => ({
   hotel: state.hotel,
+  hotel_id: state.currentUser.hotel_id,
 });
 
 const mapDispatchToProps = dispatch => {
