@@ -69,17 +69,17 @@ const Register = ({ loggedIn, registerUser }) => {
     <div className="register-wrapper">
       <form className="register-form">
         <h2>Register</h2>
-        <p>Name</p>
+        <label>Name</label>
         <input name="name" placeholder="Choose a name..." type="text" />
-        <p>Email</p>
+        <label>Email</label>
         <input name="email" placeholder="Your email..." type="text" />
-        <p>Password</p>
+        <label>Password</label>
         <input name="password" placeholder="Choose a password..." type="password" />
-        <p>Motto</p>
+        <label>Motto</label>
         <input name="motto" placeholder="Your motto..." type="text" />
-        <p>Hotel Name</p>
+        <label>Hotel Name</label>
         <input name="hotelName" placeholder="Your hotel name..." type="text" />
-        <p>Hotel Motto</p>
+        <label>Hotel Motto</label>
         <input name="hotelMotto" placeholder="Your hotel motto..." type="text" />
         <p id="result-message" />
         <button type="submit" onClick={(e) => handleRegister(e, registerUser)}>Register</button>
