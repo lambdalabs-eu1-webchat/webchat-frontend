@@ -127,7 +127,7 @@ class App extends React.Component {
           )}
         />
 
-        <Route
+        {/* <Route
           path="/logout"
           render={(props) => (
             <Logout
@@ -136,7 +136,7 @@ class App extends React.Component {
               logout={dispatchLogout}
             />
           )}
-        />
+        /> */}
 
         <Route
           path="/billing"
