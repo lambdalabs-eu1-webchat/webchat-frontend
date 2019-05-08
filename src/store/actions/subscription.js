@@ -1,15 +1,5 @@
 import { DOMAIN, SUBSCRIPTION, METHOD } from '../../utils/paths';
-import {
-  SWITCH_CUSTOMER_PLAN,
-  SWITCH_CUSTOMER_PLAN_SUCCESS,
-  SWITCH_CUSTOMER_PLAN_FAILURE,
-  CREATE_NEW_CUSTOMER,
-  CREATE_NEW_CUSTOMER_SUCCESS,
-  CREATE_NEW_CUSTOMER_FAILURE,
-  UPDATE_CUSTOMER_METHOD,
-  UPDATE_CUSTOMER_METHOD_SUCCESS,
-  UPDATE_CUSTOMER_METHOD_FAILURE,
-} from './actionTypes';
+import { SUBSCRIPTIONS } from './actionTypes';
 
 // Synchronous action creators
 
@@ -20,7 +10,7 @@ export const switchCustomerPlanSuccess = updatedHotel => {
     );
   }
   return {
-    type: SWITCH_CUSTOMER_PLAN_SUCCESS,
+    type: SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN_SUCCESS,
     payload: {
       updatedHotel,
     },
@@ -32,7 +22,7 @@ export const switchCustomerPlanFailure = error => {
     throw new Error('switchCustomerPlanSuccess requires an error argument');
   }
   return {
-    type: SWITCH_CUSTOMER_PLAN_FAILURE,
+    type: SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN_FAILURE,
     payload: {
       error,
     },
@@ -46,7 +36,7 @@ export const creatNewCustomerSuccess = updatedHotel => {
     );
   }
   return {
-    type: CREATE_NEW_CUSTOMER_SUCCESS,
+    type: SUBSCRIPTIONS.CREATE_NEW_CUSTOMER_SUCCESS,
     payload: {
       updatedHotel,
     },
@@ -58,7 +48,7 @@ export const createNewCustomerFailure = error => {
     throw new Error('switchCustomerPlanSuccess requires an error argument');
   }
   return {
-    type: CREATE_NEW_CUSTOMER_FAILURE,
+    type: SUBSCRIPTIONS.CREATE_NEW_CUSTOMER_FAILURE,
     payload: {
       error,
     },
@@ -72,7 +62,7 @@ export const updateCustomerMethodSuccess = updatedHotel => {
     );
   }
   return {
-    type: UPDATE_CUSTOMER_METHOD_SUCCESS,
+    type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_SUCCESS,
     payload: {
       updatedHotel,
     },
@@ -84,7 +74,7 @@ export const updateCustomerMethodFailure = error => {
     throw new Error('updateCustomerMethodFailure requires an error argument');
   }
   return {
-    type: UPDATE_CUSTOMER_METHOD_FAILURE,
+    type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_FAILURE,
     payload: {
       error,
     },
@@ -94,7 +84,7 @@ export const updateCustomerMethodFailure = error => {
 // Asynchronous action creators
 
 export const switchCustomerPlan = (hotelId, newPlan) => async dispatch => {
-  dispatch({ type: SWITCH_CUSTOMER_PLAN });
+  dispatch({ type: SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN });
   const config = {
     method: 'PUT',
     headers: {
@@ -119,7 +109,7 @@ export const createNewCustomer = (
   hotelId,
   enhancedStripeToken,
 ) => async dispatch => {
-  dispatch({ type: CREATE_NEW_CUSTOMER });
+  dispatch({ type: SUBSCRIPTIONS.CREATE_NEW_CUSTOMER });
   const config = {
     method: 'POST',
     headers: {
@@ -141,7 +131,7 @@ export const createNewCustomer = (
 };
 
 export const updateCustomerMethod = (hotelId, enhancedStripeToken) => async dispatch => {
-  dispatch({  type: UPDATE_CUSTOMER_METHOD });
+  dispatch({  type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD });
   const config = {
     method: 'PUT',
     headers: {
