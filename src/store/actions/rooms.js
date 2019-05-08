@@ -6,12 +6,9 @@ import { HOTEL, DOMAIN } from '../../utils/paths';
 export const fetchRooms = hotel_id => async dispatch => {
   dispatch({ type: ROOMS.FETCH_ROOMS_FOR_HOTEL });
   try {
-    debugger;
     const roomsRes = await axios.get(`${DOMAIN}${HOTEL}/${hotel_id}/rooms`);
-    debugger;
     dispatch(successFetchRooms(roomsRes.data));
   } catch (error) {
-    debugger;
     dispatch(failFetchRooms(error));
   }
 };
