@@ -17,6 +17,7 @@ import {
 
 import NavBar from './components/layout/navbar/NavBar';
 import Logout from './components/logout/Logout';
+import Footer from './components/layout/footer/Footer'
 import HomePage from './views/HomePage';
 import Chat from './views/Chat';
 import Login from './views/Login';
@@ -121,6 +122,7 @@ class App extends React.Component {
             />
           )}
         />
+        <Footer />
       </div>
     );
   }

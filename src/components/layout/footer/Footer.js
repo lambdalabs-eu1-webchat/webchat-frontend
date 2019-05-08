@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    marginTop:30,
   },
   paper: {
     padding: theme.spacing.unit * 2,
@@ -21,25 +22,16 @@ function Footer(props) {
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={4}> 
           <Paper className={classes.paper}>xs=12</Paper>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={4}>
           <Paper className={classes.paper}>xs=6</Paper>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={4}>
           <Paper className={classes.paper}>xs=6</Paper>
         </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} sm={4}>
           <Paper className={classes.paper}>xs=3</Paper>
         </Grid>
       </Grid>
