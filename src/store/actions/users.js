@@ -196,7 +196,7 @@ export const fetchSingleUser = id => async dispatch => {
 export const fetchHotelStaff = id => async (dispatch) => {
   dispatch({ type: FETCH_HOTEL_STAFF});
   try {
-    const result = await fetch(`${DOMAIN}users?hotel_id=${id}`);
+    const result = await fetch(`${DOMAIN}${USERS}?hotel_id=${id}`);
     const jsonResult = await result.json();
     dispatch(fetchHotelStaffSuccess(jsonResult));
   } catch (error) {
@@ -292,7 +292,7 @@ export const changeUserType = (id, newType) => async (dispatch) => {
     body: JSON.stringify(updatedUser),
   };
   try {
-    const result = await fetch(`${DOMAIN}users/${id}`, config);
+    const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
     const jsonResult = await result.json();
     if (result.ok) {
       const newUser = { ...jsonResult };
