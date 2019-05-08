@@ -1,14 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LoggedIn from '../../layout/login/SignedInLink'
-import LoggedOut from '../../layout/logout/SignedOutLink'
+import LoggedIn from './SignedInLink'
+import LoggedOut from './SignedOutLink'
+
 
 
 const NavBar = () => {
   return(
     <nav className="nav-wrapper navy darken-2">
        <div className="container">
-       <NavLink to="/" className="brand-logo">FrontDesk</NavLink>
+       <NavLink to="/" className="brand-logo">frontdesk</NavLink>
        <LoggedIn />
        <LoggedOut />
        </div>

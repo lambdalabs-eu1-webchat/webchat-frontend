@@ -56,3 +56,7 @@ button:hover {
     background: #00A56A;
 }
 
+.Logo{
+    background-image: url(./frontdesklogo.png)
+}
+
