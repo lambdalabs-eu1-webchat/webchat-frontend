@@ -8,14 +8,30 @@ import thunk from 'redux-thunk';
 
 import './index.css';
 import App from './App';
+import { loginSuccess } from './store/actions/auth';
 
 const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(thunk),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__(),
   ),
 );
+
+const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+if (currentUser) {
+  store.dispatch(
+    loginSuccess(
+      currentUser.id,
+      currentUser.hotel_id,
+      currentUser.email,
+      currentUser.name,
+      currentUser.user_type,
+      currentUser.token,
+    ),
+  );
+}
 
 ReactDOM.render(
   <Provider store={store}>
