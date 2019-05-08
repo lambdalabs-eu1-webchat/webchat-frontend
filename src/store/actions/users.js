@@ -170,7 +170,7 @@ export const createUser = (
   email,
   password,
   motto,
-  user_type,
+  user_type
 ) => async dispatch => {
   dispatch({ type: CREATE_USER });
   const user = {
@@ -207,7 +207,7 @@ export const updateUser = (
   name,
   email,
   password,
-  motto,
+  motto
 ) => async dispatch => {
   dispatch({ type: UPDATE_USER });
   const updatedUser = {
