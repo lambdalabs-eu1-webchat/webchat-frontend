@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import socketIOClient from 'socket.io-client';
 import { fetchAllUsers } from './store/actions/users';
+import socketIOClient from 'socket.io-client';
 import { loginRequest, registerUser, logout } from './store/actions/auth';
 import { DOMAIN, SOCKET } from './utils/paths';
 import {
@@ -12,6 +12,7 @@ import {
   addMessage,
   addQueuedChat,
   removeQueuedChat,
+  saveSocket,
 } from './store/actions/chat';
 
 import NavBar from './components/NavBar';
@@ -21,6 +22,7 @@ import Chat from './views/Chat';
 import Login from './views/Login';
 import Register from './views/Register';
 import Billing from './views/Billing';
+import TeamMembers from './views/TeamMembers';
 import './App.css';
 
 class App extends React.Component {
@@ -32,11 +34,12 @@ class App extends React.Component {
     socketInit: true,
   };
 
-  componentDidUpdate() {
+  componentDidMount() {
     const token = localStorage.getItem('token');
     if (token && this.state.socketInit) {
       this.setState({ socketInit: false });
       const socket = socketIOClient(DOMAIN);
+      this.props.dispatchSaveSocket(socket);
       socket.on(SOCKET.CONNECTION, () => {
         // set up listeners
         socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
@@ -68,12 +71,13 @@ class App extends React.Component {
       dispatchFetchAllUsers,
       dispatchLogout,
     } = this.props;
+
     return (
-      <div className='App'>
+      <div className="App">
         <NavBar loggedIn={Boolean(state.authToken)} />
         <Route
           exact
-          path='/'
+          path="/"
           render={props => (
             <HomePage
               {...props}
@@ -83,7 +87,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path='/login'
+          path="/login"
           render={props => (
             <Login
               {...props}
@@ -93,7 +97,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path='/register'
+          path="/register"
           render={props => (
             <Register
               {...props}
@@ -104,14 +108,25 @@ class App extends React.Component {
         />
         <Route
           exact
-          path='/chat'
+          path="/chat"
           render={props => (
             <Chat {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
         <Route
-          path='/logout'
+          path="/logout"
+          render={props => (
+            <Logout
+              {...props}
+              loggedIn={Boolean(state.authToken)}
+              logout={dispatchLogout}
+            />
+          )}
+        />
+
+        <Route
+          path="/logout"
           render={props => (
             <Logout
               {...props}
@@ -127,6 +142,13 @@ class App extends React.Component {
             <Billing {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
+
+        <Route
+          path="/team-members"
+          render={props => (
+            <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
       </div>
     );
   }
@@ -137,6 +159,12 @@ App.propTypes = {
   dispatchLoginRequest: PropTypes.func.isRequired,
   dispatchRegisterUser: PropTypes.func.isRequired,
   dispatchLogout: PropTypes.func.isRequired,
+  dispatchSaveSocket: PropTypes.func.isRequired,
+  dispatchAddActiveChats: PropTypes.func.isRequired,
+  dispatchAddQueuedChats: PropTypes.func.isRequired,
+  dispatchAddMessage: PropTypes.func.isRequired,
+  dispatchAddQueuedChat: PropTypes.func.isRequired,
+  dispatchRemoveQueuedChat: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({ state });
@@ -154,6 +182,7 @@ export default withRouter(
       dispatchAddMessage: addMessage,
       dispatchAddQueuedChat: addQueuedChat,
       dispatchRemoveQueuedChat: removeQueuedChat,
+      dispatchSaveSocket: saveSocket,
     },
   )(App),
 );

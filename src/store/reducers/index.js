@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import users from './users';
 import authToken from './auth';
+import currentUser from './currentUser';
 import chats from './chats';
 import hotel from './hotel';
 
@@ -9,4 +10,5 @@ export default combineReducers({
   authToken,
   chats,
   hotel,
+  currentUser,
 });
