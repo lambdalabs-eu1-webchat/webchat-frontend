@@ -9,6 +9,7 @@ class CheckOutForm extends React.Component {
     currentGuests: [],
     selectedGuest: null,
     selectValue: '',
+    errorRoom: false,
   };
 
   componentDidMount() {
@@ -24,7 +25,7 @@ class CheckOutForm extends React.Component {
   }
 
   setSelectValue = event => {
-    this.setState({ selectValue: event.target.value });
+    this.setState({ selectValue: event.target.value, errorRoom: false });
   };
 
   setEmailInput = emailInput => {
@@ -33,7 +34,7 @@ class CheckOutForm extends React.Component {
 
   checkOutGuest = async () => {
     const guest_id = this.state.selectValue;
-    if (this.state.selectValue) {
+    if (guest_id) {
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
         if (didDel) {
@@ -48,12 +49,19 @@ class CheckOutForm extends React.Component {
         console.error(error);
       }
     }
+    if (!guest_id) {
+      this.setState({ errorRoom: true });
+    }
   };
 
   render() {
     return (
       <StyledCheckOutForm>
-        <select onChange={this.setSelectValue} value={this.state.selectValue}>
+        <select
+          className={this.state.errorRoom ? 'error' : ''}
+          onChange={this.setSelectValue}
+          value={this.state.selectValue}
+        >
           <option value='' disabled>
             Select a Guest
           </option>
@@ -76,6 +84,10 @@ CheckOutForm.propTypes = {
   hotel_id: propTypes.string.isRequired,
 };
 
-const StyledCheckOutForm = styled.div``;
+const StyledCheckOutForm = styled.div`
+  .error {
+    background: red;
+  }
+`;
 
 export default CheckOutForm;

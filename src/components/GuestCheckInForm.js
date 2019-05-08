@@ -63,11 +63,9 @@ class CheckInForm extends React.Component {
       }
     }
     if (!name) {
-      debugger;
       this.setState({ errorName: true });
     }
     if (!room) {
-      debugger;
       this.setState({ errorRoom: true });
     }
   };
