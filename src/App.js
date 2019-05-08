@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -69,6 +70,7 @@ class App extends React.Component {
     } = this.props;
     return (
       <div className='App'>
+    
         <NavBar loggedIn={Boolean(state.authToken)} />
         <Route
           exact

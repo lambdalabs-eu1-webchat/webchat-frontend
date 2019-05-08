@@ -60,3 +60,8 @@ button:hover {
     background-image: url(./frontdesklogo.png)
 }
 
+.App-logo {
+    border-radius: 10px;
+    height: 4vmin;
+    pointer-events: none;
+  }
