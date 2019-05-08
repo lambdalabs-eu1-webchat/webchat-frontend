@@ -23,6 +23,7 @@ import HomePage from './views/HomePage';
 import Chat from './views/Chat';
 import Login from './views/Login';
 import Register from './views/Register';
+import Billing from './views/Billing';
 import TeamMembers from './views/TeamMembers';
 import './App.css';
 
@@ -97,7 +98,6 @@ class App extends React.Component {
   }
 
   render() {
-
     const {
       state,
       dispatchLoginRequest,
@@ -160,13 +160,17 @@ class App extends React.Component {
         />
 
         <Route
-            path="/team-members"
-            render={props => (
-                <TeamMembers
-                    {...props}
-                    loggedIn={Boolean(state.authToken)}
-                />
-            )}
+          path="/billing"
+          render={props => (
+            <Billing {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
+
+        <Route
+          path="/team-members"
+          render={props => (
+            <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
+          )}
         />
       </div>
     );

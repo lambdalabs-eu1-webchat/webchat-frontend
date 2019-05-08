@@ -3,6 +3,10 @@ export const LOGIN = 'api/auth/login';
 export const REGISTER = 'api/auth/register';
 export const USERS = 'api/users';
 export const CHATS_CLOSED = 'api/chats/closed';
+export const HOTEL = 'api/hotel';
+export const SUBSCRIPTION = 'api/subscription';
+export const METHOD = 'api/subscription/method';
+
 
 export const SOCKET = {
   CLOSE_TICKET: 'close_ticket',
