@@ -21,7 +21,9 @@ import Chat from './views/Chat';
 import Login from './views/Login';
 import Register from './views/Register';
 import TeamMembers from './views/TeamMembers';
+import CompanySettings from "./views/CompanySettings";
 import './App.css';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -123,9 +125,18 @@ class App extends React.Component {
         />
 
         <Route
-            path="/team-members"
+          path="/team-members"
+          render={props => (
+            <TeamMembers
+                {...props}
+                loggedIn={Boolean(state.authToken)}
+            />
+          )}
+        />
+        <Route
+            path="/company-settings"
             render={props => (
-                <TeamMembers
+                <CompanySettings
                     {...props}
                     loggedIn={Boolean(state.authToken)}
                 />
