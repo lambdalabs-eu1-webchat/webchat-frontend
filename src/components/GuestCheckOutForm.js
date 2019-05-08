@@ -34,19 +34,21 @@ class CheckOutForm extends React.Component {
   };
 
   checkOutGuest = async () => {
-    const guest_id = this.state.selectedGuest._id;
-    try {
-      const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
-      if (didDel) {
-        this.setState(cState => {
-          const newCurrentGuests = cState.currentGuests.filter(
-            guest => guest_id !== guest._id,
-          );
-          return { currentGuests: newCurrentGuests };
-        });
+    if (this.state.selectedGuest) {
+      const guest_id = this.state.selectedGuest._id;
+      try {
+        const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
+        if (didDel) {
+          this.setState(cState => {
+            const newCurrentGuests = cState.currentGuests.filter(
+              guest => guest_id !== guest._id,
+            );
+            return { currentGuests: newCurrentGuests };
+          });
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -73,12 +75,6 @@ class CheckOutForm extends React.Component {
   }
 }
 CheckOutForm.propTypes = {
-  rooms: propTypes.arrayOf(
-    propTypes.shape({
-      _id: propTypes.string.isRequired,
-      name: propTypes.string.isRequired,
-    }),
-  ).isRequired,
   hotel_id: propTypes.string.isRequired,
 };
 
