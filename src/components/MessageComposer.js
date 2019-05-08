@@ -12,8 +12,6 @@ class MessageComposer extends React.Component {
     inputValue: '',
   };
   handleSend = () => {
-    console.log('here');
-    debugger;
     this.props.socket.emit(SOCKET.MESSAGE, {
       chat_id: this.props.chat_id,
       text: this.state.inputValue,
