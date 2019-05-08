@@ -24,7 +24,7 @@ class CheckoutForm extends Component {
           value={this.props.billingEmail}
           onChange={event => this.props.handleInputChange(event)}
         />
-        <CardElement />
+        <CardElement hidePostalCode={true} />
         <Button
           variant="contained"
           color="primary"
