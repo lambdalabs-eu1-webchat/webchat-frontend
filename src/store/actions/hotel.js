@@ -94,6 +94,7 @@ export const updateHotel = (
     if (result.ok) {
       const newHotel = { ...jsonResult };
       dispatch(updateHotelSuccess(newHotel));
+      dispatch(fetchSingleHotel(id));
     } else {
       throw new Error(jsonResult.message);
     }
