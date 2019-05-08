@@ -22,6 +22,7 @@ import Chat from './views/Chat';
 import Login from './views/Login';
 import Register from './views/Register';
 import TeamMembers from './views/TeamMembers';
+import CheckInOrOut from './views/CheckInOrOut';
 import './App.css';
 
 class App extends React.Component {
@@ -63,7 +64,6 @@ class App extends React.Component {
   }
 
   render() {
-
     const {
       state,
       dispatchLoginRequest,
@@ -126,13 +126,16 @@ class App extends React.Component {
         />
 
         <Route
-            path="/team-members"
-            render={props => (
-                <TeamMembers
-                    {...props}
-                    loggedIn={Boolean(state.authToken)}
-                />
-            )}
+          path='/team-members'
+          render={props => (
+            <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
+        <Route
+          path='/checkin'
+          render={props => (
+            <CheckInOrOut {...props} loggedIn={Boolean(state.authToken)} />
+          )}
         />
       </div>
     );
