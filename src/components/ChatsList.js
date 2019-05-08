@@ -2,18 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TicketView from './TicketInList';
+import SearchInput from './SearchInput';
 
-const ChatsList = ({ queuedChats }) => {
+const ChatsList = ({ chatsArr, status }) => {
   return (
     <div style={divStyle}>
-      <input placeholder="Search queued chats" />
-      <TicketView queuedChats={queuedChats} />
+      <h3>{`${status.toUpperCase()} chats`}</h3>
+      <SearchInput status={status} />
+      <TicketView chatsArr={chatsArr} status={status} />
     </div>
   );
 };
 
 ChatsList.propTypes = {
-  queuedChats: PropTypes.array.isRequired,
+  chatsArr: PropTypes.array.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 const divStyle = {

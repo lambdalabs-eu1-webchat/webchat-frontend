@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TicketView = ({ queuedChats }) => {
+const filterTickets = (tickets, filterCond) => {
+  return tickets.filter(ticket => ticket.status === filterCond);
+};
+
+const TicketView = ({ chatsArr, status }) => {
   return (
     <div>
-      {queuedChats.map(chat => {
+      {chatsArr.map(chat => {
         return (
-          <div style={lineStyle}>
+          <div style={lineStyle} key={chat._id}>
             <div style={divStyle}>
               <div>Guest Name: {chat.guest.name}</div>
               <div>Room Number: {chat.room.name}</div>
-              {chat.tickets.map(ticket => {
+              {filterTickets(chat.tickets, status).map(ticket => {
                 return (
-                  <div>
+                  <div key={ticket._id}>
                     <div>
                       Last message:
                       {ticket.messages[ticket.messages.length - 1].text}
@@ -30,7 +34,7 @@ const TicketView = ({ queuedChats }) => {
 };
 
 TicketView.propTypes = {
-  queuedChats: PropTypes.array.isRequired,
+  chatsArr: PropTypes.array.isRequired,
 };
 
 const divStyle = {

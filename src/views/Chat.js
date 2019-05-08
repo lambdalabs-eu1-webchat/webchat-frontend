@@ -7,7 +7,8 @@ class Chat extends React.Component {
     return (
       <div>
         <h2>Welcome to the Chat page!</h2>
-        <ChatsList queuedChats={this.props.queuedChats} />
+        <ChatsList chatsArr={this.props.queuedChats} status="queued" />
+        <ChatsList chatsArr={this.props.activeChats} status="active" />
       </div>
     );
   }
