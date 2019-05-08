@@ -3,19 +3,33 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
 
-import { DOMAIN, USERS } from '../utils/paths';
+import { DOMAIN, USERS, HOTEL } from '../utils/paths';
 
 class CheckInForm extends React.Component {
   state = {
     nameInput: '',
     loginCode: '',
     currentRoom: null,
+    availableRooms: [],
   };
+  componentDidMount() {
+    axios
+      .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/rooms/available`)
+      .then(res => {
+        console.log(res.data);
+        this.setState({ availableRooms: res.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
   setNameInput = nameInput => {
     this.setState({ nameInput });
   };
   setCurrentRoom = event => {
-    const room = this.props.rooms.find(room => room._id === event.target.value);
+    const room = this.state.availableRooms.find(
+      room => room._id === event.target.value,
+    );
     this.setState({ currentRoom: room });
   };
 
@@ -30,7 +44,15 @@ class CheckInForm extends React.Component {
           id: this.state.currentRoom._id,
         },
       });
-      this.setState({ loginCode: res.data.passcode });
+      this.setState(cState => {
+        const availableRooms = cState.availableRooms.filter(
+          room => room._id !== cState.currentRoom._id,
+        );
+        return {
+          loginCode: res.data.passcode,
+          availableRooms,
+        };
+      });
     } catch (error) {
       console.error(error);
     }
@@ -41,11 +63,11 @@ class CheckInForm extends React.Component {
       <StyledCheckInForm>
         <select defaultValue={''} onChange={this.setCurrentRoom}>
           <option value='' disabled>
-            Select your option
+            Select a Room
           </option>
-          {this.props.rooms.map(room => (
+          {this.state.availableRooms.map(room => (
             <option key={room._id} value={room._id}>
-              {room.name}
+              Room: {room.name}
             </option>
           ))}
         </select>

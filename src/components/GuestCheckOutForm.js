@@ -57,7 +57,7 @@ class CheckOutForm extends React.Component {
       <StyledCheckOutForm>
         <select onChange={this.setSelectedGuest} defaultValue={''}>
           <option value='' disabled>
-            Select your option
+            Select a Guest
           </option>
           {this.state.currentGuests.map(guest => (
             <option key={guest._id} value={guest._id}>
