@@ -31,6 +31,34 @@ class App extends React.Component {
     socketInit: true,
   };
 
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (token && this.state.socketInit) {
+      this.setState({ socketInit: false });
+      const socket = socketIOClient(DOMAIN);
+      socket.on(SOCKET.CONNECTION, () => {
+        // set up listeners
+        socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
+          this.props.dispatchAddMessage(chat_id, message);
+        });
+        socket.on(SOCKET.ACTIVE_CHATS, chatLogs => {
+          this.props.dispatchAddActiveChats(chatLogs);
+        });
+        socket.on(SOCKET.QUEUED_CHATS, chatLogs => {
+          this.props.dispatchAddQueuedChats(chatLogs);
+        });
+        socket.on(SOCKET.ADD_QUEUED, chatLog => {
+          this.props.dispatchAddQueuedChat(chatLog);
+        });
+        socket.on(SOCKET.REMOVE_QUEUED, chat_id => {
+          this.props.dispatchRemoveQueuedChat(chat_id);
+        });
+        // socket.on(SOCKET.CHATLOG, chatLog => {});
+        socket.emit(SOCKET.LOGIN, token);
+      });
+    }
+  }
+
   componentDidUpdate() {
     const token = localStorage.getItem('token');
     if (token && this.state.socketInit) {
@@ -68,11 +96,11 @@ class App extends React.Component {
       dispatchLogout,
     } = this.props;
     return (
-      <div className='App'>
+      <div className="App">
         <NavBar loggedIn={Boolean(state.authToken)} />
         <Route
           exact
-          path='/'
+          path="/"
           render={props => (
             <HomePage
               {...props}
@@ -82,7 +110,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path='/login'
+          path="/login"
           render={props => (
             <Login
               {...props}
@@ -92,7 +120,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path='/register'
+          path="/register"
           render={props => (
             <Register
               {...props}
@@ -103,14 +131,14 @@ class App extends React.Component {
         />
         <Route
           exact
-          path='/chat'
+          path="/chat"
           render={props => (
             <Chat {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
         <Route
-          path='/logout'
+          path="/logout"
           render={props => (
             <Logout
               {...props}
@@ -146,6 +174,6 @@ export default withRouter(
       dispatchAddMessage: addMessage,
       dispatchAddQueuedChat: addQueuedChat,
       dispatchRemoveQueuedChat: removeQueuedChat,
-    },
-  )(App),
+    }
+  )(App)
 );
