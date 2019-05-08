@@ -14,6 +14,7 @@ import {
 import { planIds } from '../utils/plans';
 import PlanCards from '../components/PlanCards';
 import PaymentMethod from '../components/PaymentMethod';
+import SuperAdminNav from '../components/SuperAdminNav';
 
 const BillingWrapper = styled.div`
   padding: 10% 25%;
@@ -94,6 +95,7 @@ class Billing extends React.Component {
   render() {
     return (
       <BillingWrapper>
+        <SuperAdminNav />
         <h2>Billing</h2>
         <PlanCards
           hotel={this.props.hotel}
