@@ -151,6 +151,7 @@ class App extends React.Component {
             <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
+        <Footer />
       </div>
     );
   }

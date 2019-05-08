@@ -6,7 +6,7 @@ import LoggedOut from "./SignedOutLink";
 
 const NavBar = (props) => {
   const { auth } = props;
-  const navlinks = auth.uid ? <LoggedIn /> : <LoggedOut />;
+  // const navlinks = auth.uid ? <LoggedIn /> : <LoggedOut />;
   return (
     <nav className="nav-wrapper navy darken-2">
       <div className="container">
@@ -15,7 +15,9 @@ const NavBar = (props) => {
             <img src={logo} className="App-logo" alt="logo" />{" "}
           </header>
         </NavLink>
-        {navlinks}
+        <LoggedIn />
+        <LoggedOut />
+        {/* {navlinks} */}
       </div>
     </nav>
   );
