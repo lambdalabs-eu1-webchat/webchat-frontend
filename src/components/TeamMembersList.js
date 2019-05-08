@@ -13,7 +13,7 @@ const TeamMembersList = (props) => {
       </div>
       {props.users.map(user => (
         <TeamMember
-          key={`${user._id} + ${user.name}`}
+          key={user._id}
           name={user.name} email={user.email}
           currentUser={props.currentUser}
           user_type={user.user_type}
