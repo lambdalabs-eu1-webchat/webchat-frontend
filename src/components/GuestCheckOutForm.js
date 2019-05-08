@@ -8,6 +8,7 @@ class CheckOutForm extends React.Component {
     emailInput: '',
     currentGuests: [],
     selectedGuest: null,
+    selectValue: '',
   };
 
   componentDidMount() {
@@ -22,11 +23,8 @@ class CheckOutForm extends React.Component {
       });
   }
 
-  setSelectedGuest = event => {
-    const selectedGuest = this.state.currentGuests.find(
-      guest => guest._id === event.target.value,
-    );
-    this.setState({ selectedGuest });
+  setSelectValue = event => {
+    this.setState({ selectValue: event.target.value });
   };
 
   setEmailInput = emailInput => {
@@ -34,8 +32,11 @@ class CheckOutForm extends React.Component {
   };
 
   checkOutGuest = async () => {
-    if (this.state.selectedGuest) {
-      const guest_id = this.state.selectedGuest._id;
+    const guest_id = this.state.selectValue;
+    const guest = this.state.currentGuests.find(
+      guest => guest._id === guest_id,
+    );
+    if (this.state.selectValue) {
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
         if (didDel) {
@@ -43,7 +44,7 @@ class CheckOutForm extends React.Component {
             const newCurrentGuests = cState.currentGuests.filter(
               guest => guest_id !== guest._id,
             );
-            return { currentGuests: newCurrentGuests };
+            return { currentGuests: newCurrentGuests, selectValue: '' };
           });
         }
       } catch (error) {
@@ -55,7 +56,7 @@ class CheckOutForm extends React.Component {
   render() {
     return (
       <StyledCheckOutForm>
-        <select onChange={this.setSelectedGuest} defaultValue={''}>
+        <select onChange={this.setSelectValue} value={this.state.selectValue}>
           <option value='' disabled>
             Select a Guest
           </option>
