@@ -12,6 +12,7 @@ import {
   addMessage,
   addQueuedChat,
   removeQueuedChat,
+  fetchClosedChats,
 } from './store/actions/chat';
 
 import NavBar from './components/NavBar';
@@ -56,6 +57,8 @@ class App extends React.Component {
         // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
+      // temp hotel_id
+      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
     }
   }
 
@@ -84,6 +87,8 @@ class App extends React.Component {
         // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
+      // temp hotel_id
+      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
     }
   }
 
@@ -174,6 +179,7 @@ export default withRouter(
       dispatchAddMessage: addMessage,
       dispatchAddQueuedChat: addQueuedChat,
       dispatchRemoveQueuedChat: removeQueuedChat,
+      dispatchfetchClosedChats: fetchClosedChats,
     }
   )(App)
 );
