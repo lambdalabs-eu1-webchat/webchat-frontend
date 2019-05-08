@@ -26,9 +26,9 @@ const Login = ({ loggedIn, loginRequest }) => {
     <div className="login-wrapper">
       <form className="login-form">
         <h2>Login</h2>
-        <p>Email</p>
+        <label>Email</label>
         <input name="email" placeholder="Your email..." type="text" />
-        <p>Password</p>
+        <label>Password</label>
         <input name="password" placeholder="Your password..." type="password" />
         <button type="submit" onClick={handleClick(loginRequest)}>Login</button>
       </form>

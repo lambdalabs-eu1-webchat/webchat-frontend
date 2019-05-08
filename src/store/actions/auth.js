@@ -37,7 +37,11 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
-export const loginSuccess = (id, hotel_id, email, token) => {
+export const loginSuccess = (id, hotel_id, email, token, user_type, name) => {
+  const currentUser = {
+    id, hotel_id, email, token, user_type, name,
+  };
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
   localStorage.setItem('token', token);
   return {
     type: LOGIN_SUCCESS,
@@ -46,6 +50,8 @@ export const loginSuccess = (id, hotel_id, email, token) => {
       hotel_id,
       email,
       token,
+      user_type,
+      name,
     },
   };
 };
@@ -80,6 +86,9 @@ export const loginRequest = (email, password) => async dispatch => {
         jsonResult.user.hotel_id,
         jsonResult.user.email,
         jsonResult.token,
+        jsonResult.user.user_type,
+        jsonResult.user.name,
+
       ),
     );
   } catch (error) {
@@ -89,18 +98,20 @@ export const loginRequest = (email, password) => async dispatch => {
 
 export const registerUser = (
   name,
-  hotel_id,
-  password,
   email,
+  password,
   motto,
+  hotel_name,
+  hotel_motto,
 ) => async dispatch => {
   dispatch({ type: REGISTER_USER });
   const user = {
     name: String(name),
-    hotel_id: String(hotel_id),
-    password: String(password),
     email: String(email),
+    password: String(password),
     motto: String(motto),
+    hotel_name: String(hotel_name),
+    hotel_motto: String(hotel_motto),
   };
   const config = {
     method: 'POST',

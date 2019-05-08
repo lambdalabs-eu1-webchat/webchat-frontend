@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import socketIOClient from 'socket.io-client';
 import { fetchAllUsers } from './store/actions/users';
+import socketIOClient from 'socket.io-client';
 import { loginRequest, registerUser, logout } from './store/actions/auth';
 import { DOMAIN, SOCKET } from './utils/paths';
 import {
@@ -20,6 +20,7 @@ import HomePage from './views/HomePage';
 import Chat from './views/Chat';
 import Login from './views/Login';
 import Register from './views/Register';
+import TeamMembers from './views/TeamMembers';
 import './App.css';
 
 class App extends React.Component {
@@ -60,6 +61,7 @@ class App extends React.Component {
   }
 
   render() {
+
     const {
       state,
       dispatchLoginRequest,
@@ -118,6 +120,16 @@ class App extends React.Component {
               logout={dispatchLogout}
             />
           )}
+        />
+
+        <Route
+            path="/team-members"
+            render={props => (
+                <TeamMembers
+                    {...props}
+                    loggedIn={Boolean(state.authToken)}
+                />
+            )}
         />
       </div>
     );
