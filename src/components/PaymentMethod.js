@@ -21,7 +21,11 @@ const PaymentMethod = ({
   if (payment) {
     return (
       <PaymentMethodWrapper>
-        <CardDetails card={payment.card} email={payment.customer.email} handleModalSwitch={handleModalSwitch}/>
+        <CardDetails
+          card={payment.card}
+          email={payment.customer.email}
+          handleModalSwitch={handleModalSwitch}
+        />
         <EditPaymentMethodModal
           fireCreateNewCustomer={fireCreateNewCustomer}
           billingEmail={billingEmail}

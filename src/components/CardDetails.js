@@ -16,10 +16,7 @@ const CardDetails = ({ card, email, handleModalSwitch }) => {
         <ListItem>
           Exp: {card.expiration.month}/{card.expiration.year}
         </ListItem>
-        <ListItem>
-          Receipts: {email}
-        </ListItem>
-        {/* <ListItem>{email}</ListItem> */}
+        <ListItem>Receipts: {email}</ListItem>
         <Button variant="contained" color="primary" onClick={handleModalSwitch}>
           New
         </Button>
