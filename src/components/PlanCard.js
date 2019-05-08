@@ -21,6 +21,7 @@ const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
         {plan.features.map(feature => (
           <ListItem key={feature}>+ {feature}</ListItem>
         ))}
+        <ListItem>{plan.price}</ListItem>
       </List>
       {!current ? (
         <Button
@@ -41,6 +42,7 @@ PlanCard.propTypes = {
   plan: PT.shape({
     title: PT.string.isRequired,
     features: PT.arrayOf(PT.string).isRequired,
+    price: PT.string.isRequired,
     buttonText: PT.string.isRequired,
   }),
   current: PT.bool.isRequired,
