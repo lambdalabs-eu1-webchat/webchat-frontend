@@ -21,6 +21,7 @@ import HomePage from './views/HomePage';
 import Chat from './views/Chat';
 import Login from './views/Login';
 import Register from './views/Register';
+import Billing from './views/Billing';
 import TeamMembers from './views/TeamMembers';
 import './App.css';
 
@@ -63,7 +64,6 @@ class App extends React.Component {
   }
 
   render() {
-
     const {
       state,
       dispatchLoginRequest,
@@ -73,11 +73,11 @@ class App extends React.Component {
     } = this.props;
 
     return (
-      <div className='App'>
+      <div className="App">
         <NavBar loggedIn={Boolean(state.authToken)} />
         <Route
           exact
-          path='/'
+          path="/"
           render={props => (
             <HomePage
               {...props}
@@ -87,7 +87,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path='/login'
+          path="/login"
           render={props => (
             <Login
               {...props}
@@ -97,7 +97,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path='/register'
+          path="/register"
           render={props => (
             <Register
               {...props}
@@ -108,14 +108,14 @@ class App extends React.Component {
         />
         <Route
           exact
-          path='/chat'
+          path="/chat"
           render={props => (
             <Chat {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
         <Route
-          path='/logout'
+          path="/logout"
           render={props => (
             <Logout
               {...props}
@@ -126,13 +126,28 @@ class App extends React.Component {
         />
 
         <Route
-            path="/team-members"
-            render={props => (
-                <TeamMembers
-                    {...props}
-                    loggedIn={Boolean(state.authToken)}
-                />
-            )}
+          path="/logout"
+          render={props => (
+            <Logout
+              {...props}
+              loggedIn={Boolean(state.authToken)}
+              logout={dispatchLogout}
+            />
+          )}
+        />
+
+        <Route
+          path="/billing"
+          render={props => (
+            <Billing {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
+
+        <Route
+          path="/team-members"
+          render={props => (
+            <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
+          )}
         />
       </div>
     );
