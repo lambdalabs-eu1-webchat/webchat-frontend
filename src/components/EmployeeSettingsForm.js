@@ -1,6 +1,10 @@
 import React from 'react';
 
-const EmployeeSettingsForm = ({ employeeChanges, handleInputChange }) => {
+const EmployeeSettingsForm = ({
+  employeeChanges,
+  handleInputChange,
+  fireupdateEmployee,
+}) => {
   return (
     <div>
       <input
@@ -20,22 +24,23 @@ const EmployeeSettingsForm = ({ employeeChanges, handleInputChange }) => {
         type="password"
         value={employeeChanges.password}
         onChange={handleInputChange}
-        placeholder="add new password"
+        placeholder="new password"
       />
       <input
         name="passwordConf"
         type="password"
         value={employeeChanges.passwordConf}
         onChange={handleInputChange}
-        placeholder="retype your new password"
+        placeholder="retype new password"
       />
       <input
         name="motto"
         type="text"
         value={employeeChanges.motto}
         onChange={handleInputChange}
-        placeholder="add a motto"
+        placeholder="motto"
       />
+      <button onClick={fireupdateEmployee}>Update</button>
     </div>
   );
 };
