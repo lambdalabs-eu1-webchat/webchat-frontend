@@ -4,7 +4,8 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 
 import { DOMAIN, USERS, HOTEL } from '../utils/paths';
-
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 class CheckInForm extends React.Component {
   state = {
     nameInput: '',
@@ -73,7 +74,8 @@ class CheckInForm extends React.Component {
   render() {
     return (
       <StyledCheckInForm>
-        <select
+        <Select
+          displayEmpty={true}
           className={this.state.errorRoom ? 'error' : ''}
           value={this.state.selectValue}
           onChange={this.setSelectValue}
@@ -86,13 +88,13 @@ class CheckInForm extends React.Component {
               Room: {room.name}
             </option>
           ))}
-        </select>
+        </Select>
         <input
           placeholder='name'
           className={this.state.errorName ? 'error' : ''}
           onChange={event => this.setNameInput(event.target.value)}
         />
-        <button onClick={this.checkInGuest}>Check In</button>
+        <Button onClick={this.checkInGuest}>Check In</Button>
         <div>
           <h4>Login Code</h4>
           <p>{this.state.loginCode}</p>

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import { DOMAIN, HOTEL, USERS } from '../utils/paths';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 class CheckOutForm extends React.Component {
   state = {
     emailInput: '',
@@ -57,7 +59,8 @@ class CheckOutForm extends React.Component {
   render() {
     return (
       <StyledCheckOutForm>
-        <select
+        <Select
+          displayEmpty={true}
           className={this.state.errorRoom ? 'error' : ''}
           onChange={this.setSelectValue}
           value={this.state.selectValue}
@@ -70,12 +73,12 @@ class CheckOutForm extends React.Component {
               Room: {guest.room.name} Guest: {guest.name}
             </option>
           ))}
-        </select>
+        </Select>
         <input
           placeholder='email'
           onChange={event => this.setEmailInput(event.target.value)}
         />
-        <button onClick={this.checkOutGuest}>Check Out</button>
+        <Button onClick={this.checkOutGuest}>Check Out</Button>
       </StyledCheckOutForm>
     );
   }
