@@ -134,7 +134,12 @@ App.propTypes = {
   dispatchLoginRequest: PropTypes.func.isRequired,
   dispatchRegisterUser: PropTypes.func.isRequired,
   dispatchLogout: PropTypes.func.isRequired,
-  dispatchSaveSocket: saveSocket,
+  dispatchSaveSocket: PropTypes.func.isRequired,
+  dispatchAddActiveChats: PropTypes.func.isRequired,
+  dispatchAddQueuedChats: PropTypes.func.isRequired,
+  dispatchAddMessage: PropTypes.func.isRequired,
+  dispatchAddQueuedChat: PropTypes.func.isRequired,
+  dispatchRemoveQueuedChat: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({ state });
