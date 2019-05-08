@@ -7,6 +7,7 @@ const {
   ADD_QUEUED_CHATS,
   REMOVE_QUEUED_CHAT,
   UPDATE_ACTIVE_CHAT,
+  FETCH_CLOSED_CHATS_SUCCESS,
 } = CHATS;
 
 const initState = {
@@ -29,7 +30,7 @@ const chats = (state = initState, action) => {
       return {
         ...state,
         queuedChats: state.queuedChats.filter(
-          chat => chat._id !== action.target,
+          chat => chat._id !== action.target
         ),
       };
     case ADD_MESSAGE:
@@ -44,6 +45,8 @@ const chats = (state = initState, action) => {
           return chat;
         }),
       };
+    case FETCH_CLOSED_CHATS_SUCCESS:
+      return { ...state, closedChats: action.payload };
     default:
       return state;
   }
