@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TicketView from './TicketInList';
+import TicketView from './TicketView';
 import SearchInput from './SearchInput';
 
 const ChatsList = ({ chatsArr, status }) => {
