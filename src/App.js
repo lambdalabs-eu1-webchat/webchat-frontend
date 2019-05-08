@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAllUsers, fetchHotelStaff } from './store/actions/users';
+import { fetchAllUsers } from './store/actions/users';
 import socketIOClient from 'socket.io-client';
 import { loginRequest, registerUser, logout } from './store/actions/auth';
 import { DOMAIN, SOCKET } from './utils/paths';
@@ -68,7 +68,6 @@ class App extends React.Component {
       dispatchRegisterUser,
       dispatchFetchAllUsers,
       dispatchLogout,
-      dispatchFetchHotelStaff,
     } = this.props;
     return (
       <div className='App'>
@@ -129,7 +128,6 @@ class App extends React.Component {
                 <TeamMembers
                     {...props}
                     loggedIn={Boolean(state.authToken)}
-                    fetchHotelStaff={dispatchFetchHotelStaff}
                 />
             )}
         />
@@ -143,7 +141,6 @@ App.propTypes = {
   dispatchLoginRequest: PropTypes.func.isRequired,
   dispatchRegisterUser: PropTypes.func.isRequired,
   dispatchLogout: PropTypes.func.isRequired,
-  dispatchFetchHotelStaff: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({ state });
@@ -156,7 +153,6 @@ export default withRouter(
       dispatchRegisterUser: registerUser,
       dispatchFetchAllUsers: fetchAllUsers,
       dispatchLogout: logout,
-      dispatchFetchHotelStaff: fetchHotelStaff,
       dispatchAddActiveChats: addActiveChats,
       dispatchAddQueuedChats: addQueuedChats,
       dispatchAddMessage: addMessage,
