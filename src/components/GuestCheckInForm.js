@@ -11,6 +11,7 @@ class CheckInForm extends React.Component {
     loginCode: '',
     currentRoom: null,
     availableRooms: [],
+    selectValue: '',
   };
   componentDidMount() {
     axios
@@ -26,31 +27,31 @@ class CheckInForm extends React.Component {
   setNameInput = nameInput => {
     this.setState({ nameInput });
   };
-  setCurrentRoom = event => {
-    const room = this.state.availableRooms.find(
-      room => room._id === event.target.value,
-    );
-    this.setState({ currentRoom: room });
+  setSelectValue = event => {
+    this.setState({ selectValue: event.target.value });
   };
 
   checkInGuest = async () => {
+    const room_id = this.state.selectValue;
+    const room = this.state.availableRooms.find(room => room._id === room_id);
     try {
       const res = await axios.post(`${DOMAIN}${USERS}`, {
         hotel_id: this.props.hotel_id,
         user_type: 'guest',
         name: this.state.nameInput,
         room: {
-          name: this.state.currentRoom.name,
-          id: this.state.currentRoom._id,
+          name: room.name,
+          id: room._id,
         },
       });
       this.setState(cState => {
         const availableRooms = cState.availableRooms.filter(
-          room => room._id !== cState.currentRoom._id,
+          room => room._id !== room_id,
         );
         return {
           loginCode: res.data.passcode,
           availableRooms,
+          selectValue: '',
         };
       });
     } catch (error) {
@@ -61,7 +62,7 @@ class CheckInForm extends React.Component {
   render() {
     return (
       <StyledCheckInForm>
-        <select defaultValue={''} onChange={this.setCurrentRoom}>
+        <select value={this.state.selectValue} onChange={this.setSelectValue}>
           <option value='' disabled>
             Select a Room
           </option>
