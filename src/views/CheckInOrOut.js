@@ -2,25 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchRooms } from '../store/actions/rooms';
+
 import CheckInForm from '../components/GuestCheckInForm';
 import CheckOutForm from '../components/GuestCheckOutForm';
 
 class CheckInOrOut extends React.Component {
-  componentDidMount() {
-    // get the rooms
-    this.props.fetchRooms(this.props.hotel_id);
-    console.log(this.props.hotel_id);
-  }
   render() {
     return (
       <StyledCheckInOrOut>
         <div>
           check in
-          <CheckInForm
-            rooms={this.props.rooms}
-            hotel_id={this.props.hotel_id}
-          />
+          <CheckInForm hotel_id={this.props.hotel_id} />
         </div>
         <div>
           checkout
@@ -31,7 +23,9 @@ class CheckInOrOut extends React.Component {
   }
 }
 
-CheckInOrOut.propTypes = {};
+CheckInOrOut.propTypes = {
+  hotel_id: propTypes.string.isRequired,
+};
 
 const StyledCheckInOrOut = styled.div`
   display: flex;
@@ -40,14 +34,8 @@ const StyledCheckInOrOut = styled.div`
 
 function mstp(state) {
   return {
-    rooms: state.rooms.rooms,
-    fetchingRooms: state.rooms.fetching,
-    roomsError: state.rooms.error,
     hotel_id: state.currentUser.hotel_id,
   };
 }
 
-export default connect(
-  mstp,
-  { fetchRooms },
-)(CheckInOrOut);
+export default connect(mstp)(CheckInOrOut);

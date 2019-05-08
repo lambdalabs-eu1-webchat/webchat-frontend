@@ -87,12 +87,6 @@ class CheckInForm extends React.Component {
 }
 
 CheckInForm.propTypes = {
-  rooms: propTypes.arrayOf(
-    propTypes.shape({
-      _id: propTypes.string.isRequired,
-      name: propTypes.string.isRequired,
-    }),
-  ).isRequired,
   hotel_id: propTypes.string.isRequired,
 };
 
