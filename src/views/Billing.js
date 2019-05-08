@@ -122,6 +122,7 @@ Billing.propTypes = {
   switchCustomerPlan: PT.func.isRequired,
   updateCustomerMethod: PT.func.isRequired,
   fetchHotelStaff: PT.func.isRequired,
+  staff: PT.array.isRequired,
 };
 
 const mapStateToProps = state => ({
