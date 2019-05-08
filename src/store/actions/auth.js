@@ -88,7 +88,6 @@ export const loginRequest = (email, password) => async dispatch => {
         jsonResult.token,
         jsonResult.user.user_type,
         jsonResult.user.name,
-
       ),
     );
   } catch (error) {
@@ -96,22 +95,22 @@ export const loginRequest = (email, password) => async dispatch => {
   }
 };
 
-export const registerUser = (
+export const registerUser = ({
   name,
   email,
   password,
   motto,
-  hotel_name,
-  hotel_motto,
-) => async dispatch => {
+  hotelName,
+  hotelMotto,
+ }) => async dispatch => {
   dispatch({ type: REGISTER_USER });
   const user = {
     name: String(name),
     email: String(email),
     password: String(password),
     motto: String(motto),
-    hotel_name: String(hotel_name),
-    hotel_motto: String(hotel_motto),
+    hotel_name: String(hotelName),
+    hotel_motto: String(hotelMotto),
   };
   const config = {
     method: 'POST',
@@ -120,7 +119,6 @@ export const registerUser = (
     },
     body: JSON.stringify(user),
   };
-
   try {
     const result = await fetch(`${DOMAIN}${REGISTER}`, config);
     const jsonResult = await result.json();
