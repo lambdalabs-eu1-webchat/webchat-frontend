@@ -12,6 +12,8 @@ class CheckInForm extends React.Component {
     currentRoom: null,
     availableRooms: [],
     selectValue: '',
+    errorRoom: false,
+    errorName: false,
   };
   componentDidMount() {
     axios
@@ -25,45 +27,60 @@ class CheckInForm extends React.Component {
       });
   }
   setNameInput = nameInput => {
-    this.setState({ nameInput });
+    this.setState({ nameInput, errorName: false });
   };
   setSelectValue = event => {
-    this.setState({ selectValue: event.target.value });
+    this.setState({ selectValue: event.target.value, errorRoom: false });
   };
 
   checkInGuest = async () => {
     const room_id = this.state.selectValue;
     const room = this.state.availableRooms.find(room => room._id === room_id);
-    try {
-      const res = await axios.post(`${DOMAIN}${USERS}`, {
-        hotel_id: this.props.hotel_id,
-        user_type: 'guest',
-        name: this.state.nameInput,
-        room: {
-          name: room.name,
-          id: room._id,
-        },
-      });
-      this.setState(cState => {
-        const availableRooms = cState.availableRooms.filter(
-          room => room._id !== room_id,
-        );
-        return {
-          loginCode: res.data.passcode,
-          availableRooms,
-          selectValue: '',
-        };
-      });
-    } catch (error) {
-      console.error(error);
+    const name = this.state.nameInput;
+    if (name && room) {
+      try {
+        const res = await axios.post(`${DOMAIN}${USERS}`, {
+          hotel_id: this.props.hotel_id,
+          user_type: 'guest',
+          name,
+          room: {
+            name: room.name,
+            id: room._id,
+          },
+        });
+        this.setState(cState => {
+          const availableRooms = cState.availableRooms.filter(
+            room => room._id !== room_id,
+          );
+          return {
+            loginCode: res.data.passcode,
+            availableRooms,
+            selectValue: '',
+          };
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    if (!name) {
+      debugger;
+      this.setState({ errorName: true });
+    }
+    if (!room) {
+      debugger;
+      this.setState({ errorRoom: true });
     }
   };
 
   render() {
     return (
       <StyledCheckInForm>
-        <select value={this.state.selectValue} onChange={this.setSelectValue}>
-          <option value='' disabled>
+        <select
+          className={this.state.errorRoom ? 'error' : ''}
+          value={this.state.selectValue}
+          onChange={this.setSelectValue}
+        >
+          <option className='error' value='' disabled>
             Select a Room
           </option>
           {this.state.availableRooms.map(room => (
@@ -74,6 +91,7 @@ class CheckInForm extends React.Component {
         </select>
         <input
           placeholder='name'
+          className={this.state.errorName ? 'error' : ''}
           onChange={event => this.setNameInput(event.target.value)}
         />
         <button onClick={this.checkInGuest}>Check In</button>
@@ -90,6 +108,10 @@ CheckInForm.propTypes = {
   hotel_id: propTypes.string.isRequired,
 };
 
-const StyledCheckInForm = styled.div``;
+const StyledCheckInForm = styled.div`
+  .error {
+    background: red;
+  }
+`;
 
 export default CheckInForm;
