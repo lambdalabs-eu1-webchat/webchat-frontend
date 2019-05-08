@@ -5,7 +5,8 @@ import propTypes from 'prop-types';
 function ChatScreenHeader({ guest_name, room_name }) {
   return (
     <StyledChatScreenHeader>
-      {guest_name} : {room_name}
+      <p>Guest Name:{guest_name}</p>
+      <p>Room: {room_name}</p>
     </StyledChatScreenHeader>
   );
 }

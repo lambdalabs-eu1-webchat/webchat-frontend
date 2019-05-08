@@ -7,7 +7,19 @@ const {
   ADD_QUEUED_CHATS,
   REMOVE_QUEUED_CHAT,
   UPDATE_ACTIVE_CHAT,
+  SAVE_SOCKET,
 } = CHATS;
+
+export const saveSocket = socket => {
+  if (!socket) {
+    throw new Error('saveSocket requires socket');
+  } else {
+    return {
+      type: SAVE_SOCKET,
+      payload: socket,
+    };
+  }
+};
 
 export const addActiveChats = chatLogs => {
   if (!chatLogs) {

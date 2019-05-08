@@ -12,6 +12,7 @@ import {
   addMessage,
   addQueuedChat,
   removeQueuedChat,
+  saveSocket,
 } from './store/actions/chat';
 
 import NavBar from './components/NavBar';
@@ -33,11 +34,12 @@ class App extends React.Component {
     socketInit: true,
   };
 
-  componentDidUpdate() {
+  componentDidMount() {
     const token = localStorage.getItem('token');
     if (token && this.state.socketInit) {
       this.setState({ socketInit: false });
       const socket = socketIOClient(DOMAIN);
+      this.props.dispatchSaveSocket(socket);
       socket.on(SOCKET.CONNECTION, () => {
         // set up listeners
         socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
@@ -132,6 +134,7 @@ App.propTypes = {
   dispatchLoginRequest: PropTypes.func.isRequired,
   dispatchRegisterUser: PropTypes.func.isRequired,
   dispatchLogout: PropTypes.func.isRequired,
+  dispatchSaveSocket: saveSocket,
 };
 
 const mapStateToProps = state => ({ state });
@@ -149,6 +152,7 @@ export default withRouter(
       dispatchAddMessage: addMessage,
       dispatchAddQueuedChat: addQueuedChat,
       dispatchRemoveQueuedChat: removeQueuedChat,
+      dispatchSaveSocket: saveSocket,
     },
   )(App),
 );

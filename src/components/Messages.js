@@ -54,7 +54,7 @@ Messages.propTypes = {
 };
 
 const StyledMessages = styled.div`
-  height: 95vh;
+  height: 90vh;
   overflow-y: scroll;
 `;
 
