@@ -28,7 +28,15 @@ class CheckOutForm extends React.Component {
     );
   }
 }
-CheckOutForm.propTypes = {};
+CheckOutForm.propTypes = {
+  rooms: propTypes.arrayOf(
+    propTypes.shape({
+      _id: propTypes.string.isRequired,
+      name: propTypes.string.isRequired,
+    }),
+  ).isRequired,
+  hotel_id: propTypes.string.isRequired,
+};
 
 const StyledCheckOutForm = styled.div``;
 

@@ -30,11 +30,9 @@ class CheckInForm extends React.Component {
           id: this.state.currentRoom._id,
         },
       });
-      debugger;
       this.setState({ loginCode: res.data.passcode });
     } catch (error) {
-      console.log(error);
-      debugger;
+      console.error(error);
     }
   };
 
@@ -65,7 +63,15 @@ class CheckInForm extends React.Component {
   }
 }
 
-CheckInForm.propTypes = {};
+CheckInForm.propTypes = {
+  rooms: propTypes.arrayOf(
+    propTypes.shape({
+      _id: propTypes.string.isRequired,
+      name: propTypes.string.isRequired,
+    }),
+  ).isRequired,
+  hotel_id: propTypes.string.isRequired,
+};
 
 const StyledCheckInForm = styled.div``;
 
