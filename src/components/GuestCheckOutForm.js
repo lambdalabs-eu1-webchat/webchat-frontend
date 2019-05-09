@@ -5,6 +5,7 @@ import axios from 'axios';
 import { DOMAIN, HOTEL, USERS } from '../utils/paths';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
 class CheckOutForm extends React.Component {
   state = {
     emailInput: '',
@@ -74,7 +75,7 @@ class CheckOutForm extends React.Component {
             </option>
           ))}
         </Select>
-        <input
+        <Input
           placeholder='email'
           onChange={event => this.setEmailInput(event.target.value)}
         />

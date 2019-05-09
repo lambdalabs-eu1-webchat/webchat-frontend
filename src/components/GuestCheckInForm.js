@@ -6,6 +6,7 @@ import axios from 'axios';
 import { DOMAIN, USERS, HOTEL } from '../utils/paths';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
 class CheckInForm extends React.Component {
   state = {
     nameInput: '',
@@ -89,7 +90,7 @@ class CheckInForm extends React.Component {
             </option>
           ))}
         </Select>
-        <input
+        <Input
           placeholder='name'
           className={this.state.errorName ? 'error' : ''}
           onChange={event => this.setNameInput(event.target.value)}
