@@ -11,8 +11,10 @@ const LoggedIn = ({userType}) => {
        <li> <NavLink to="/chat">Dashboard</NavLink></li>
        {userType === ADMIN ? <li><NavLink>Employees</NavLink></li>: null}
        {userType === SUPER_ADMIN ? <li><NavLink>Company Settings</NavLink></li>: null}
-       {userType === RECEPTIONIST ? <li><NavLink>Dashboard</NavLink></li>: null}
+       {userType === RECEPTIONIST ? <li><NavLink>Check In</NavLink></li>: null}
        <li> <NavLink to="/logout"  >LogOut</NavLink></li>
+
+       {/* this will be linked to the Employee settings as an icon with their Initials or img */}
        <li> <NavLink to="/" className="btn btn-floating green lighten-1">TA</NavLink></li>
     </ul>
 

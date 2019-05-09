@@ -14,7 +14,7 @@ const NavBar = (props) => {
        <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" /> </header>
        </NavLink>
-      { props.currentUser ? <LoggedIn userType={props.currentUser.user_type} /> : <LoggedOut  />}
+      { props.currentUser.name ? <LoggedIn userType={props.currentUser.user_type} /> : <LoggedOut  />}
 
        </div>
     </nav>
