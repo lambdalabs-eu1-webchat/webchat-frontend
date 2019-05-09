@@ -72,9 +72,7 @@ class EmployeeSettings extends React.Component {
           ))) &&
       this.checkEligibileUpdates()
     ) {
-      const userUpdates = {
-        ...this.state.employeeChanges,
-      };
+      const userUpdates = this.state.employeeChanges;
       this.props.updateUser(userUpdates, this.props.employee._id);
     }
   };
