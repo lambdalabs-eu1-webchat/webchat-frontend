@@ -90,4 +90,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   dispatchFetchSingleHotel: fetchSingleHotel,
   dispatchUpdateHotel: updateHotel,
+  dispatchFetchRoomsForHotel: fetchRoomsForHotel,
+  dispatchDeleteRoomForHotel: deleteRoomForHotel,
+  dispatchUpdateRoomForHotel: updateRoomForHotel,
 })(CompanySettings);
