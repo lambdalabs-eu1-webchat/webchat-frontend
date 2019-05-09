@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import CheckInForm from '../components/GuestCheckInForm';
 import CheckOutForm from '../components/GuestCheckOutForm';
 
+
 class CheckInOrOut extends React.Component {
   render() {
     return (
