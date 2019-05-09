@@ -3,7 +3,8 @@ import React from 'react';
 const EmployeeSettingsForm = ({
   employeeChanges,
   handleInputChange,
-  fireupdateEmployee,
+  fireUserUpdates,
+  clearChanges,
 }) => {
   return (
     <div>
@@ -40,7 +41,8 @@ const EmployeeSettingsForm = ({
         onChange={handleInputChange}
         placeholder="motto"
       />
-      <button onClick={fireupdateEmployee}>Update</button>
+      <button onClick={fireUserUpdates}>Update</button>
+      <button onClick={clearChanges}>Cancel</button>
     </div>
   );
 };

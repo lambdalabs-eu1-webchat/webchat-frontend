@@ -240,35 +240,20 @@ export const createUser = (
   }
 };
 
-export const updateUser = (
-  id,
-  name,
-  email,
-  password,
-  user_type,
-  motto,
-) => async dispatch => {
+export const updateUser = (userUpdates, id) => async dispatch => {
   dispatch({ type: UPDATE_USER });
-  const updatedUser = {
-    name: String(name),
-    email: String(email),
-    password: String(password),
-    user_type: String(user_type),
-    motto: String(motto),
-  };
   const config = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(updatedUser),
+    body: JSON.stringify(userUpdates),
   };
   try {
     const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
     const jsonResult = await result.json();
     if (result.ok) {
-      const newUser = { ...jsonResult };
-      dispatch(updateUserSuccess(newUser));
+      dispatch(updateUserSuccess(jsonResult));
     } else {
       throw new Error(jsonResult.message);
     }
@@ -325,25 +310,3 @@ export const deleteUser = id => async (dispatch, getState) => {
   }
 };
 
-export const updateEmployee = (employeeUpdates, id) => async dispatch => {
-  dispatch({ type: UPDATE_USER });
-  const config = {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(employeeUpdates),
-  };
-  try {
-    const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
-    const jsonResult = await result.json();
-    if (result.ok) {
-      const newUser = { ...jsonResult };
-      dispatch(updateUserSuccess(newUser));
-    } else {
-      throw new Error(jsonResult.message);
-    }
-  } catch (error) {
-    dispatch(updateUserFailure(error.message));
-  }
-};

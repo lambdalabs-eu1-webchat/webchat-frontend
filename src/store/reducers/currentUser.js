@@ -1,6 +1,17 @@
-import { LOGIN_SUCCESS, LOGOUT } from '../actions/actionTypes';
+import {
+  LOGIN_SUCCESS,
+  LOGOUT,
+  UPDATE_USER_SUCCESS,
+} from '../actions/actionTypes';
 
-const initialState = { _id: null, hotel_id: null, email: '', token: null, user_type: '', name: '' };
+const initialState = {
+  _id: null,
+  hotel_id: null,
+  email: '',
+  token: null,
+  user_type: '',
+  name: '',
+};
 
 const currentUser = (state = initialState, action) => {
   switch (action.type) {
@@ -15,6 +26,8 @@ const currentUser = (state = initialState, action) => {
       };
     case LOGOUT:
       return { ...initialState };
+    case UPDATE_USER_SUCCESS:
+      return { ...action.payload.updatedUser };
     default:
       return state;
   }

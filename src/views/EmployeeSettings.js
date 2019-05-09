@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import EmployeeSettingsForm from '../components/EmployeeSettingsForm';
-import { updateEmployee } from '../store/actions/users';
+import { updateUser } from '../store/actions/users';
 
 class EmployeeSettings extends React.Component {
   state = {
@@ -25,11 +25,58 @@ class EmployeeSettings extends React.Component {
     });
   };
 
-  fireupdateEmployee = () => {
-    const employeeUpdates = {
-      ...this.state.employeeChanges,
-    };
-    this.props.updateEmployee(employeeUpdates, this.props.employee._id);
+  clearChanges = () => {
+    this.setState({
+      employeeChanges: {
+        name: this.props.employee.name,
+        email: this.props.employee.email,
+        password: '',
+        passwordConf: '',
+        motto: this.props.employee.motto,
+      },
+    });
+  };
+
+  checkPasswordMatch = (password, passwordRetype) => {
+    if (password === passwordRetype) {
+      return true;
+    } else {
+      return alert('Both passwords must match');
+    }
+  };
+
+  checkEligibileUpdates = () => {
+    const employeeChanges = this.state.employeeChanges;
+    if (employeeChanges.name && employeeChanges.email) {
+      return true;
+    } else {
+      this.setState({
+        employeeChanges: {
+          ...this.state.employeeChanges,
+          name: this.props.employee.name,
+          email: this.props.employee.email,
+        },
+      });
+      return alert('Name and email cannot be blank');
+    }
+  };
+
+  fireUserUpdates = () => {
+    const employeeChanges = this.state.employeeChanges;
+    if (
+      (!employeeChanges.password ||
+        (employeeChanges.password &&
+          this.checkPasswordMatch(
+            employeeChanges.password,
+            employeeChanges.passwordConf,
+          ))) &&
+      this.checkEligibileUpdates()
+    ) {
+      const userUpdates = {
+        ...this.state.employeeChanges,
+      };
+      this.props.updateUser(userUpdates, this.props.employee._id);
+    }
   };
 
   render() {
@@ -40,7 +87,8 @@ class EmployeeSettings extends React.Component {
           employee={this.props.employee}
           employeeChanges={this.state.employeeChanges}
           handleInputChange={this.handleInputChange}
-          fireupdateEmployee={this.fireupdateEmployee}
+          fireUserUpdates={this.fireUserUpdates}
+          clearChanges={this.clearChanges}
         />
       </div>
     );
@@ -54,7 +102,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateEmployee,
+      updateUser,
     },
     dispatch,
   );
