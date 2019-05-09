@@ -9,11 +9,16 @@ import MessageComposer from './MessageComposer';
 import Button from '@material-ui/core/Button';
 import { SOCKET } from '../utils/paths';
 import { ACTIVE, CLOSED, QUEUED } from '../utils/ticketStatus';
-
+import { setCurrentChatId } from '../store/actions/chat';
 class ChatScreen extends React.Component {
   closeTicket = () => {
     this.props.socket.emit(SOCKET.CLOSE_TICKET, this.props.chat._id);
     // might want to have a function passed into this to stop rendering this component
+  };
+  joinChat = () => {
+    const chat_id = this.props.chat._id;
+    this.props.socket.emit(SOCKET.ASSIGN_SELF_TICKET, chat_id);
+    this.props.setCurrentChatId(chat_id, ACTIVE);
   };
   render() {
     const { chat, status } = this.props;
@@ -28,6 +33,11 @@ class ChatScreen extends React.Component {
           <React.Fragment>
             <MessageComposer chat_id={chat._id} />
             <Button onClick={this.closeTicket}>Close Ticket</Button>
+          </React.Fragment>
+        ) : null}
+        {QUEUED === status ? (
+          <React.Fragment>
+            <Button onClick={this.joinChat}>Join Chat</Button>
           </React.Fragment>
         ) : null}
       </StyledChatScreen>
@@ -72,5 +82,5 @@ const StyledChatScreen = styled.div``;
 
 export default connect(
   mapStateToProps,
-  {},
+  { setCurrentChatId },
 )(ChatScreen);

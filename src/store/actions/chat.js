@@ -58,6 +58,7 @@ export const addQueuedChat = chatLog => {
 };
 
 export const removeQueuedChat = chat_id => {
+  debugger;
   if (!chat_id) {
     throw new Error('addQueuedChat requires chatLog');
   }
