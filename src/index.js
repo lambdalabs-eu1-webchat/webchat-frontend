@@ -21,7 +21,15 @@ const store = createStore(
 
 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 if (currentUser) {
-  store.dispatch(loginSuccess(currentUser.id, currentUser.hotel_id, currentUser.email, currentUser.token, currentUser.user_type, currentUser.name));
+  store.dispatch(loginSuccess(
+    currentUser.id, 
+    currentUser.hotel_id, 
+    currentUser.email, 
+    currentUser.token, 
+    currentUser.user_type, 
+    currentUser.name, 
+    currentUser.motto
+  ));
 }
 
 ReactDOM.render(
