@@ -21,26 +21,6 @@ const NavBar = (props) => {
   )
 }
 
-// import PropTypes from 'prop-types';
-// const NavBar = ({ loggedIn }) => (
-//     <div>
-//       {!loggedIn ? (
-//           <nav>
-//             <Link to="/" className="left">logo</Link>
-//             <LoggedIn />
-//             <NavLink to="/register" className="">Register</NavLink>
-//             <NavLink to="/login" className="">Login</NavLink>
-
-//           </nav>
-//       ) : (
-//           <nav>
-//             <NavLink to="/logout">Logout</NavLink>
-//           </nav>
-//       )}
-
-//     </div>
-// );
-
 // NavBar.propTypes = {
 //   loggedIn: PropTypes.bool.isRequired,
 // };
@@ -50,4 +30,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(NavBar);
+export default NavBar;
