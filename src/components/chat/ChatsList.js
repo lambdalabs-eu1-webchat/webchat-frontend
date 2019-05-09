@@ -14,6 +14,8 @@ class ChatsList extends React.Component {
     this.setState({ inputField: input });
   };
 
+  // ready for any input field clearing (button?)
+  // will be deleted if not needed
   resetInputField = () => {
     this.setState({ inputField: '' });
   };
@@ -22,7 +24,7 @@ class ChatsList extends React.Component {
     const { chatsArr, status } = this.props;
 
     const searchResult = searchMachine(chatsArr, this.state.inputField);
-    // console.log('search result:', searchResult);
+
     return (
       <div style={divStyle}>
         <h3>{`${status.toUpperCase()} chats`}</h3>
