@@ -153,7 +153,7 @@ export const createRoomForHotel = (name, hotel_id) => async (dispatch) => {
   try {
     const result = await fetch(`${DOMAIN}${HOTEL}/${hotel_id}/rooms`, config);
     const jsonResult = await result.json();
-    const newRoom = { ...jsonResult };
+    const newRoom = [ ...jsonResult ];
     if (result.ok) {
       dispatch(createRoomForHotelSuccess(newRoom));
       dispatch(fetchRoomsForHotel(hotel_id));
@@ -165,7 +165,7 @@ export const createRoomForHotel = (name, hotel_id) => async (dispatch) => {
   }
 };
 
-export const updateRoomForHotel = (id, name, hotel_id) => async dispatch => {
+export const updateRoomForHotel = ( id, hotel_id, name) => async dispatch => {
   dispatch({ type: ROOMS.UPDATE_ROOM_FOR_HOTEL });
   const updatedRoom = {
     name: String(name),
