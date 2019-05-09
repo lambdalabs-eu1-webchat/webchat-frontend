@@ -34,6 +34,10 @@ const TicketView = ({ chatsArr, status }) => {
   );
 };
 
+TicketView.defaultProps = {
+  chatsArr: [],
+};
+
 TicketView.propTypes = {
   chatsArr: PropTypes.array.isRequired,
 };
