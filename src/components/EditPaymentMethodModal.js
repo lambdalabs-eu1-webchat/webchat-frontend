@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import PT from 'prop-types';
 import styled from 'styled-components';
 
-import CheckoutForm from './CheckoutForm';
+import PlanCheckoutForm from './PlanCheckoutForm';
 
 const EditPaymentMethodModalWrapper = styled.div`
   display: ${props => props.modalstatus};
@@ -35,7 +35,7 @@ function EditPaymentMethodModal({
           x
         </Button>
         <Elements>
-          <CheckoutForm
+          <PlanCheckoutForm
             mode={'edit'}
             fireCreateNewCustomer={fireCreateNewCustomer}
             billingEmail={billingEmail}
