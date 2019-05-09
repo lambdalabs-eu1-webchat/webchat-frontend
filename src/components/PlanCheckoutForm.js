@@ -18,16 +18,16 @@ class PlanCheckoutForm extends Component {
     return (
       <div>
         <input
-          name="billingEmail"
-          type="text"
-          placeholder="Billing Email"
+          name='billingEmail'
+          type='text'
+          placeholder='Billing Email'
           value={this.props.billingEmail}
           onChange={event => this.props.handleInputChange(event)}
         />
         <CardElement hidePostalCode={true} />
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           onClick={
             this.props.mode === 'edit'
               ? () => this.editPaymentMethod()

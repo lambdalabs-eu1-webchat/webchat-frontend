@@ -14,7 +14,6 @@ import {
   removeQueuedChat,
   fetchClosedChats,
   saveSocket,
-
 } from './store/actions/chat';
 
 import NavBar from './components/NavBar';
@@ -25,6 +24,7 @@ import Login from './views/Login';
 import Register from './views/Register';
 import Billing from './views/Billing';
 import TeamMembers from './views/TeamMembers';
+import CheckInOrOut from './views/CheckInOrOut';
 import './App.css';
 
 class App extends React.Component {
@@ -107,11 +107,11 @@ class App extends React.Component {
     } = this.props;
 
     return (
-      <div className="App">
+      <div className='App'>
         <NavBar loggedIn={Boolean(state.authToken)} />
         <Route
           exact
-          path="/"
+          path='/'
           render={props => (
             <HomePage
               {...props}
@@ -121,7 +121,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/login"
+          path='/login'
           render={props => (
             <Login
               {...props}
@@ -131,7 +131,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/register"
+          path='/register'
           render={props => (
             <Register
               {...props}
@@ -142,14 +142,14 @@ class App extends React.Component {
         />
         <Route
           exact
-          path="/chat"
+          path='/chat'
           render={props => (
             <Chat {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
         <Route
-          path="/logout"
+          path='/logout'
           render={props => (
             <Logout
               {...props}
@@ -160,14 +160,31 @@ class App extends React.Component {
         />
 
         <Route
-          path="/billing"
+          path='/logout'
+          render={props => (
+            <Logout
+              {...props}
+              loggedIn={Boolean(state.authToken)}
+              logout={dispatchLogout}
+            />
+          )}
+        />
+
+        <Route
+          path='/billing'
           render={props => (
             <Billing {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
         <Route
-          path="/team-members"
+          path='/checkin'
+          render={props => (
+            <CheckInOrOut {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
+        <Route
+          path='/team-members'
           render={props => (
             <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
           )}
@@ -207,6 +224,6 @@ export default withRouter(
       dispatchRemoveQueuedChat: removeQueuedChat,
       dispatchfetchClosedChats: fetchClosedChats,
       dispatchSaveSocket: saveSocket,
-    }
-  )(App)
+    },
+  )(App),
 );
