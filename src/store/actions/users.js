@@ -125,7 +125,6 @@ export const updateUserSuccess = updatedUser => {
   }
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const updatedCurrentUser = { ...currentUser, ...updatedUser };
-  console.log(updatedCurrentUser);
   localStorage.setItem('currentUser', JSON.stringify(updatedCurrentUser));
   return {
     type: UPDATE_USER_SUCCESS,
