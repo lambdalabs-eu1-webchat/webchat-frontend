@@ -64,3 +64,81 @@ button:hover {
     height: 4vmin;
     pointer-events: none;
   }
+/* ====== Super Admin NavBar ====== */
+
+.super-admin-nav {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+.super-admin-nav a {
+    text-decoration: none;
+    color: #213952;
+    background: #F1F1F1;
+    padding: 10px;
+    width: 150px;
+    border-radius: 3px 3px 0 0;
+    border: 1px solid lightgrey;
+}
+
+.super-admin-nav a.active {
+    background: #0CD4AF;
+}
+
+/*======== Team Members List ========= */
+
+.team-members-list {
+    width: 880px;
+    margin: 0 auto;
+    height: 200px;
+    overflow: scroll;
+}
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.list-header p {
+    width: 50px;
+}
+
+.hotel-staff {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.hotel-staff p {
+    width: 50px;
+}
+
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
+.modal {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main {
+    position:fixed;
+    background: white;
+    width: 80%;
+    height: auto;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    z-index: 1000;
+}

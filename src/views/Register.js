@@ -5,27 +5,30 @@ import PropTypes from 'prop-types';
 const handleRegister = (event, registerUser) => {
   event.preventDefault();
   let name = '';
-  let hotelId = '';
-  let password = '';
   let email = '';
+  let password = '';
   let motto = '';
+  let hotelName = '';
+  let hotelMotto = '';
 
   event.target.parentNode.childNodes.forEach((childNode) => {
     if (childNode.name === 'name') {
      name = childNode.value;
-    } else if (childNode.name === 'hotelId') {
-      hotelId = childNode.value;
-    } else if (childNode.name === 'password') {
-      password = childNode.value;
     } else if (childNode.name === 'email') {
       email = childNode.value;
+    } else if (childNode.name === 'password') {
+      password = childNode.value;
     } else if (childNode.name === 'motto') {
       motto = childNode.value;
+    } else if (childNode.name === 'hotelName') {
+      hotelName = childNode.value;
+    } else if (childNode.value === 'hotelMotto') {
+      hotelMotto = childNode.value;
     }
   });
   let blank = false;
-  if (name && hotelId && password && email && motto) {
-    registerUser(name, hotelId, password, email, motto);
+  if (name && email && password && hotelName) {
+    registerUser(name, email, password, hotelName);
   } else {
     blank = true;
   }
@@ -43,13 +46,15 @@ const handleRegister = (event, registerUser) => {
       }
       if (childNode.name === 'name') {
         childNode.value = '';
-      } else if (childNode.name === 'hotelId') {
+      } else if (childNode.name === 'email') {
         childNode.value ='';
       } else if (childNode.name === 'password') {
         childNode.value = '';
-      } else if (childNode.name === 'email') {
-        childNode.value = '';
       } else if (childNode.name === 'motto') {
+        childNode.value = '';
+      } else if (childNode.name === 'hotelName') {
+        childNode.value = '';
+      } else if (childNode.name === 'hotelMotto') {
         childNode.value = '';
       }
     });
@@ -64,16 +69,18 @@ const Register = ({ loggedIn, registerUser }) => {
     <div className="register-wrapper">
       <form className="register-form">
         <h2>Register</h2>
-        <p>Name</p>
+        <label>Name</label>
         <input name="name" placeholder="Choose a name..." type="text" />
-        <p>Hotel ID</p>
-        <input name="hotelId" placeholder="Your hotel ID..." type="text" />
-        <p>Password</p>
-        <input name="password" placeholder="Choose a password..." type="password" />
-        <p>Email</p>
+        <label>Email</label>
         <input name="email" placeholder="Your email..." type="text" />
-        <p>Motto</p>
+        <label>Password</label>
+        <input name="password" placeholder="Choose a password..." type="password" />
+        <label>Motto</label>
         <input name="motto" placeholder="Your motto..." type="text" />
+        <label>Hotel Name</label>
+        <input name="hotelName" placeholder="Your hotel name..." type="text" />
+        <label>Hotel Motto</label>
+        <input name="hotelMotto" placeholder="Your hotel motto..." type="text" />
         <p id="result-message" />
         <button type="submit" onClick={(e) => handleRegister(e, registerUser)}>Register</button>
       </form>
