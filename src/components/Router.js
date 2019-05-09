@@ -10,7 +10,7 @@ import Billing from '../views/Billing';
 import TeamMembers from '../views/TeamMembers';
 import CheckInOrOut from '../views/CheckInOrOut';
 import EmployeeSettings from '../views/EmployeeSettings';
-
+import CompanyDash from '../views/CompanyDash';
 import { APP_PATHS } from '../utils/paths';
 
 function Router({ user_type }) {
@@ -47,20 +47,20 @@ function Router({ user_type }) {
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
-        <Route exact path={APP_PATHS.TEAM_MEMBERS} component={TeamMembers} />
-        <Route exact path={APP_PATHS.BILLING} component={Billing} />
+        <Route path={APP_PATHS.COMPANY_DASH} component={CompanyDash} />
+        >
         <Route exact path={APP_PATHS.CHAT} component={Chat} />
         <Route
           exact
           path={APP_PATHS.ACCOUNT_SETTINGS}
           component={EmployeeSettings}
         />
-        <Route exact path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />;
+        <Route exact path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />
+        ;
         <Route render={() => <div>404 not found</div>} />
       </Switch>
     );
   } else if (user_type === 'receptionist') {
-    debugger;
     return (
       <Switch>
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
