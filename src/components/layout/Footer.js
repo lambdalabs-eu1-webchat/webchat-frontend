@@ -12,27 +12,22 @@ const styles = (theme) => ({
     backgroundColor: "#2f465e",
     borderTop: "solid 6px #0CD4AF",
     paddingTop: "20px",
-    overflowX: "hiden"
+    overflowX: "hiden",
+    color: "#fff",
+    fontSize: "18px",
     // borderBottom: "solid 6px #0CD4AF",
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: "center",
-    color: theme.palette.text.secondary
   },
   footerSections: {
     margin: "3px",
-    padding: "10px"
+    padding: "10px",
+    color: "rgba(255,255,255)",
   },
   subFooter:{
-
       color: "rgba(255,255,255)",
       paddingBottom:"8px",
       margin:"20px",
-  },
-  footerText: {
-    color: "#fff",
-    fontSize: "18px"
+      color: "#fff",
+      fontSize: "18px"
   }
 });
 
@@ -48,7 +43,7 @@ class Footer extends React.Component {
           <Grid container spacing={24}>
             <Grid item xs={12} sm={4}>
               <Typography
-                className={[classes.footerText, classes.footerSections]}
+                className={classes.footerSections}
               >
                 psum dolor sit amet salami ham hock ham, hamburger corned beef
                 short ribs kielbasa biltong
@@ -56,7 +51,7 @@ class Footer extends React.Component {
             </Grid>
             <Grid item xs={12} sm={4}>
               <Typography
-                className={[classes.footerText, classes.footerSections]}
+                className={classes.footerSections}
               >
                 psum dolor sit amet salami ham hock ham, hamburger corned beef
                 short ribs kielbasa biltong
@@ -64,7 +59,7 @@ class Footer extends React.Component {
             </Grid>
             <Grid item xs={12} sm={4}>
               <Typography
-                className={[classes.footerText, classes.footerSections]}
+                className={classes.footerSections}
               >
                 psum dolor sit amet salami ham hock ham, hamburger corned beef
                 short ribs kielbasa biltong
@@ -72,7 +67,7 @@ class Footer extends React.Component {
             </Grid>
 
             <Grid className={classes.subFooter} item xs={12}>
-              <Typography className={classes.footerText}>
+              <Typography className={classes.footerSections}>
                 <span> Front Desk Web Chat ©{currentYear}</span>
               </Typography>
             </Grid>
