@@ -21,10 +21,7 @@ class TeamMembers extends React.Component {
       modalShown: false,
     };
     this.props = props;
-    const {
-      state,
-      dispatchFetchHotelStaff,
-    } = this.props;
+    const { state, dispatchFetchHotelStaff } = this.props;
     dispatchFetchHotelStaff(state.currentUser.hotel_id);
   }
 
@@ -48,7 +45,7 @@ class TeamMembers extends React.Component {
       dispatchDeleteUser,
     } = this.props;
     return (
-      <div className="team-members">
+      <div className='team-members'>
         <SuperAdminNav />
         <h2>Team Members Page</h2>
         <h3>Update and Assign Team Members</h3>
@@ -72,7 +69,7 @@ class TeamMembers extends React.Component {
 }
 
 TeamMembers.propTypes = {
-  state: PropTypes.shape().isRequired,
+  state: PropTypes.object.isRequired,
   dispatchChangeUserType: PropTypes.func.isRequired,
   dispatchDeleteUser: PropTypes.func.isRequired,
 };

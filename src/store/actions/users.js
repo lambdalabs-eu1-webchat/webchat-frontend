@@ -211,6 +211,7 @@ export const createUser = (
   user_type,
   motto=""
 ) => async (dispatch, getState) => {
+
   dispatch({ type: CREATE_USER });
   const user = {
     hotel_id: getState().currentUser.hotel_id,
@@ -249,6 +250,7 @@ export const updateUser = (
   password,
   user_type,
   motto,
+
 ) => async dispatch => {
   dispatch({ type: UPDATE_USER });
   const updatedUser = {
