@@ -10,4 +10,5 @@ export default combineReducers({
   chats,
   hotel,
   currentUser,
+  rooms,
 });
