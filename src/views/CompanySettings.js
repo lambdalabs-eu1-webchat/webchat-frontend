@@ -12,6 +12,7 @@ class CompanySettings extends React.Component {
     this.props = props;
     const { hotel, currentUser, state, dispatchFetchSingleHotel, dispatchFetchRoomsForHotel } = this.props;
     this.state = { companyName: hotel.name, companyMotto: hotel.motto };
+    };
     dispatchFetchSingleHotel(currentUser.hotel_id);
   }
 
@@ -74,8 +75,11 @@ class CompanySettings extends React.Component {
 
 CompanySettings.propTypes = {
   hotel: PropTypes.object.isRequired,
+  rooms: PropTypes.array.isRequired,
   dispatchFetchSingleHotel: PropTypes.func.isRequired,
   dispatchUpdateHotel: PropTypes.func.isRequired,
+  dispatchDeleteRoomForHotel: PropTypes.func.isRequired,
+  dispatchUpdateRoomForHotel: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
