@@ -3,6 +3,7 @@ import SuperAdminNav from '../components/SuperAdminNav';
 import { Route, Switch } from 'react-router-dom';
 import Billing from '../views/Billing';
 import TeamMembers from '../views/TeamMembers';
+import CompanySettings from '../views/CompanySettings';
 import { APP_PATHS } from '../utils/paths';
 function CompanyDash() {
   return (
@@ -19,7 +20,7 @@ function CompanyDash() {
       />
       <Route
         path={`${APP_PATHS.COMPANY_DASH}${APP_PATHS.COMPANY_SETTINGS}`}
-        component={TeamMembers}
+        component={CompanySettings}
       />
     </div>
   );
