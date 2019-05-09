@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import Button from '@material-ui/core/Button';
-import PT, { shape } from 'prop-types';
+import PT from 'prop-types';
 
 class CheckoutForm extends Component {
   createCustomer = async () => {
@@ -24,7 +24,7 @@ class CheckoutForm extends Component {
           value={this.props.billingEmail}
           onChange={event => this.props.handleInputChange(event)}
         />
-        <CardElement />
+        <CardElement hidePostalCode={true} />
         <Button
           variant="contained"
           color="primary"
