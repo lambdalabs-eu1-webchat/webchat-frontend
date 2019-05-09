@@ -1,10 +1,10 @@
 nav {
-    background: #213952;
-    padding: 20px;
+    background: rgb(47, 70, 94);
+    padding: 10px 10px 30px;
+    margin: 0px;
     display: flex;
     justify-content: flex-end;
 }
-
 nav a {
     padding: 0 10px;
     color: #0B9FEC;
@@ -55,6 +55,15 @@ button:hover {
     background: #00A56A;
 }
 
+.Logo{
+    background-image: url(./frontdesklogo.png)
+}
+
+.App-logo {
+    border-radius: 10px;
+    height: 4vmin;
+    pointer-events: none;
+  }
 /* ====== Super Admin NavBar ====== */
 
 .super-admin-nav {

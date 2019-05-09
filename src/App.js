@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -16,8 +17,9 @@ import {
   saveSocket,
 } from './store/actions/chat';
 
-import NavBar from './components/NavBar';
+import NavBar from './components/layout/navbar/NavBar';
 import Logout from './components/Logout';
+import Footer from './components/layout/Footer'
 import HomePage from './views/HomePage';
 import Chat from './views/Chat';
 import Login from './views/Login';
@@ -108,8 +110,8 @@ class App extends React.Component {
     } = this.props;
 
     return (
-      <div className='App'>
-        <NavBar loggedIn={Boolean(state.authToken)} />
+      <div className="App">
+        <NavBar currentUser={state.currentUser} />
         <Route
           exact
           path='/'
@@ -159,7 +161,7 @@ class App extends React.Component {
             />
           )}
         />
-
+      
         <Route
           path='/logout'
           render={props => (
@@ -191,12 +193,14 @@ class App extends React.Component {
           )}
         />
 
+  
         <Route
           path="/employee-settings"
           render={props => (
             <EmployeeSettings {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
+      <Footer />
       </div>
     );
   }

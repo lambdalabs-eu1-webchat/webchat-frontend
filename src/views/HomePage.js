@@ -12,7 +12,7 @@ class HomePage extends React.Component {
   render() {
     const { state } = this.props;
     return (
-      <div className="home-page">
+      <div className="home-page container">
         <h2>Users</h2>
         {state.users.map(user => (
             <p key={user._id}> {user.name} </p>
