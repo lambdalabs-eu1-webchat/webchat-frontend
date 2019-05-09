@@ -5,7 +5,6 @@ import { ADMIN,SUPER_ADMIN, RECEPTIONIST  } from '../../../utils/userTypes'
 
 
 const LoggedIn = ({userType}) => {
-  console.log(userType)
   return (
     <ul className="">
        <li> <NavLink to="/chat">Chat Dash</NavLink></li>
