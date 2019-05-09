@@ -1,5 +1,4 @@
 import React from 'react';
-import { updateRoomForHotel } from "../store/actions/rooms";
 
 const getRoomNameFromInput = (parentNode) => {
   let roomName = '';
