@@ -26,6 +26,7 @@ import Login from './views/Login';
 import Register from './views/Register';
 import Billing from './views/Billing';
 import TeamMembers from './views/TeamMembers';
+import EmployeeSettings from './views/EmployeeSettings';
 import CheckInOrOut from './views/CheckInOrOut';
 import './App.css';
 
@@ -192,7 +193,14 @@ class App extends React.Component {
           )}
         />
 
-     <Footer />
+  
+        <Route
+          path="/employee-settings"
+          render={props => (
+            <EmployeeSettings {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
+      <Footer />
       </div>
     );
   }
