@@ -8,16 +8,10 @@ const NavBar = ({ loggedIn }) => (
       <nav>
         <NavLink to="/register">Register</NavLink>
         <NavLink to="/login">Login</NavLink>
-        {/* temporary links */}
-        <NavLink to="/chat">Chat</NavLink>
-        <NavLink to="/">Home</NavLink>
       </nav>
     ) : (
       <nav>
         <NavLink to="/logout">Logout</NavLink>
-        {/* temporary links */}
-        <NavLink to="/chat">Chat</NavLink>
-        <NavLink to="/">Home</NavLink>
       </nav>
     )}
   </div>
