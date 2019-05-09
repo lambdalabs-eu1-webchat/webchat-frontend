@@ -98,11 +98,11 @@ class App extends React.Component {
       dispatchFetchAllUsers,
       dispatchLogout,
     } = this.props;
-
+    console.log(this.props.currentUser);
     return (
       <div className='App'>
-        <NavBar loggedIn={Boolean(state.authToken)} />
-        <Router />
+        <NavBar />
+        <Router user_type={this.props.currentUser.user_type} />
       </div>
     );
   }
@@ -121,7 +121,7 @@ App.propTypes = {
   dispatchRemoveQueuedChat: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({ state });
+const mapStateToProps = state => ({ currentUser: state.currentUser });
 
 export default withRouter(
   connect(

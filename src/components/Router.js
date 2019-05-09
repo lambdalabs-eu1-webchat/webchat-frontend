@@ -10,8 +10,9 @@ import Register from '../views/Register';
 import Billing from '../views/Billing';
 import TeamMembers from '../views/TeamMembers';
 
-function Router({ user }) {
-  if (!user) {
+function Router({ user_type }) {
+  debugger;
+  if (!user_type) {
     return (
       <Switch>
         <Route exact path='/' component={HomePage} />
@@ -20,7 +21,7 @@ function Router({ user }) {
         <Route render={() => <div>404 not found</div>} />
       </Switch>
     );
-  } else if (user.user_type === 'admin') {
+  } else if (user_type === 'admin') {
     return (
       <Switch>
         <Route path='/logout' component={Logout} />
@@ -33,7 +34,7 @@ function Router({ user }) {
         <Route render={() => <div>404 not found</div>} />
       </Switch>
     );
-  } else if (user.user_type === 'super admin') {
+  } else if (user_type === 'super admin') {
     return (
       <Switch>
         <Route path='/logout' component={Logout} />
@@ -46,7 +47,7 @@ function Router({ user }) {
         />
       </Switch>
     );
-  } else if (user.user_type === 'receptionist') {
+  } else if (user_type === 'receptionist') {
     return (
       <Switch>
         <Route path='/logout' component={Logout} />
