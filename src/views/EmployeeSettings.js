@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import styled from 'styled-components';
 
 import EmployeeSettingsForm from '../components/EmployeeSettingsForm';
 import { updateUser } from '../store/actions/users';
+
+const EmployeeSettingsWrapper = styled.div`
+  padding: 10% 25%;
+`;
 
 class EmployeeSettings extends React.Component {
   state = {
@@ -79,7 +84,7 @@ class EmployeeSettings extends React.Component {
 
   render() {
     return (
-      <div>
+      <EmployeeSettingsWrapper>
         <h1>Employee Settings</h1>
         <EmployeeSettingsForm
           employee={this.props.employee}
@@ -88,7 +93,7 @@ class EmployeeSettings extends React.Component {
           fireUserUpdates={this.fireUserUpdates}
           clearChanges={this.clearChanges}
         />
-      </div>
+      </EmployeeSettingsWrapper>
     );
   }
 }
