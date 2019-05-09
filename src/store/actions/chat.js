@@ -1,4 +1,5 @@
 import { CHATS } from './actionTypes';
+import { DOMAIN, CHATS_CLOSED } from '../../utils/paths';
 
 const {
   ADD_ACTIVE_CHATS,
@@ -7,6 +8,9 @@ const {
   ADD_QUEUED_CHATS,
   REMOVE_QUEUED_CHAT,
   UPDATE_ACTIVE_CHAT,
+  FETCH_CLOSED_CHATS,
+  FETCH_CLOSED_CHATS_SUCCESS,
+  FETCH_CLOSED_CHATS_FAILURE,
   SAVE_SOCKET,
 } = CHATS;
 
@@ -69,5 +73,38 @@ export const addMessage = (chat_id, message) => {
     type: ADD_MESSAGE,
     payload: message,
     target: chat_id,
+  };
+};
+
+export const fetchClosedChats = id => async dispatch => {
+  dispatch({ type: FETCH_CLOSED_CHATS });
+  try {
+    const result = await fetch(`${DOMAIN}${CHATS_CLOSED}?hotel_id=${id}`);
+    const jsonResult = await result.json();
+    dispatch(fetchAllClosedChatsSuccess(jsonResult));
+  } catch (error) {
+    dispatch(fetchAllClosedChatsFailure(error));
+  }
+};
+
+export const fetchAllClosedChatsSuccess = chats => {
+  if (!chats) {
+    throw new Error('fetchAllClosedChatsSuccess requires a chats argument');
+  }
+  return {
+    type: FETCH_CLOSED_CHATS_SUCCESS,
+    payload: chats,
+  };
+};
+
+export const fetchAllClosedChatsFailure = error => {
+  if (!error) {
+    throw new Error('fetchAllClosedChatsFailure requires an error argument');
+  }
+  return {
+    type: FETCH_CLOSED_CHATS_FAILURE,
+    payload: {
+      error,
+    },
   };
 };

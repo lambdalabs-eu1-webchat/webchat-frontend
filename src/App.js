@@ -12,6 +12,7 @@ import {
   addMessage,
   addQueuedChat,
   removeQueuedChat,
+  fetchClosedChats,
   saveSocket,
 } from './store/actions/chat';
 
@@ -24,6 +25,7 @@ import Register from './views/Register';
 import Billing from './views/Billing';
 import TeamMembers from './views/TeamMembers';
 import EmployeeSettings from './views/EmployeeSettings';
+import CheckInOrOut from './views/CheckInOrOut';
 import './App.css';
 
 class App extends React.Component {
@@ -36,6 +38,36 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (token && this.state.socketInit) {
+      this.setState({ socketInit: false });
+      const socket = socketIOClient(DOMAIN);
+      socket.on(SOCKET.CONNECTION, () => {
+        // set up listeners
+        socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
+          this.props.dispatchAddMessage(chat_id, message);
+        });
+        socket.on(SOCKET.ACTIVE_CHATS, chatLogs => {
+          this.props.dispatchAddActiveChats(chatLogs);
+        });
+        socket.on(SOCKET.QUEUED_CHATS, chatLogs => {
+          this.props.dispatchAddQueuedChats(chatLogs);
+        });
+        socket.on(SOCKET.ADD_QUEUED, chatLog => {
+          this.props.dispatchAddQueuedChat(chatLog);
+        });
+        socket.on(SOCKET.REMOVE_QUEUED, chat_id => {
+          this.props.dispatchRemoveQueuedChat(chat_id);
+        });
+        // socket.on(SOCKET.CHATLOG, chatLog => {});
+        socket.emit(SOCKET.LOGIN, token);
+      });
+      // temp hotel_id
+      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
+    }
+  }
+
+  componentDidUpdate() {
     const token = localStorage.getItem('token');
     if (token && this.state.socketInit) {
       this.setState({ socketInit: false });
@@ -61,6 +93,8 @@ class App extends React.Component {
         // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
+      // temp hotel_id
+      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
     }
   }
 
@@ -74,11 +108,11 @@ class App extends React.Component {
     } = this.props;
 
     return (
-      <div className="App">
+      <div className='App'>
         <NavBar loggedIn={Boolean(state.authToken)} />
         <Route
           exact
-          path="/"
+          path='/'
           render={props => (
             <HomePage
               {...props}
@@ -88,7 +122,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/login"
+          path='/login'
           render={props => (
             <Login
               {...props}
@@ -98,7 +132,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/register"
+          path='/register'
           render={props => (
             <Register
               {...props}
@@ -109,14 +143,14 @@ class App extends React.Component {
         />
         <Route
           exact
-          path="/chat"
+          path='/chat'
           render={props => (
             <Chat {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
         <Route
-          path="/logout"
+          path='/logout'
           render={props => (
             <Logout
               {...props}
@@ -127,7 +161,7 @@ class App extends React.Component {
         />
 
         <Route
-          path="/logout"
+          path='/logout'
           render={props => (
             <Logout
               {...props}
@@ -138,14 +172,20 @@ class App extends React.Component {
         />
 
         <Route
-          path="/billing"
+          path='/billing'
           render={props => (
             <Billing {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
         <Route
-          path="/team-members"
+          path='/checkin'
+          render={props => (
+            <CheckInOrOut {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
+        <Route
+          path='/team-members'
           render={props => (
             <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
           )}
@@ -190,6 +230,7 @@ export default withRouter(
       dispatchAddMessage: addMessage,
       dispatchAddQueuedChat: addQueuedChat,
       dispatchRemoveQueuedChat: removeQueuedChat,
+      dispatchfetchClosedChats: fetchClosedChats,
       dispatchSaveSocket: saveSocket,
     },
   )(App),
