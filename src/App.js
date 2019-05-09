@@ -73,8 +73,7 @@ class App extends React.Component {
       dispatchFetchAllUsers,
       dispatchLogout,
     } = this.props;
-console.log('gththt')
- console.log(this.props)
+
     return (
       <div className="App">
         <NavBar currentUser={state.currentUser} />
