@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ChatsList from '../components/ChatsList';
+import ChatsList from '../components/chat/ChatsList';
 import { QUEUED, ACTIVE, CLOSED } from '../utils/ticketStatus';
 
 class Chat extends React.Component {
