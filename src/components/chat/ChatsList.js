@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import TicketView from './TicketView';
 import SearchInput from './SearchInput';
+import searchMachine from './searchMachine';
 
 class ChatsList extends React.Component {
   state = {
@@ -13,13 +14,20 @@ class ChatsList extends React.Component {
     this.setState({ inputField: input });
   };
 
+  resetInputField = () => {
+    this.setState({ inputField: '' });
+  };
+
   render() {
     const { chatsArr, status } = this.props;
+
+    const searchResult = searchMachine(chatsArr, this.state.inputField);
+    // console.log('search result:', searchResult);
     return (
       <div style={divStyle}>
         <h3>{`${status.toUpperCase()} chats`}</h3>
         <SearchInput status={status} searchInputField={this.searchInputField} />
-        <TicketView chatsArr={chatsArr} status={status} />
+        <TicketView chatsArr={searchResult} status={status} />
       </div>
     );
   }
