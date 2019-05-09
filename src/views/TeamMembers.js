@@ -10,7 +10,6 @@ import {
 } from '../store/actions/users';
 import { fetchSingleHotel } from '../store/actions/hotel';
 
-import SuperAdminNav from '../components/SuperAdminNav';
 import TeamMembersList from '../components/TeamMembersList';
 import TeamMembersAddNewMemberModal from '../components/TeamMembersAddNewMemberModal';
 
@@ -47,7 +46,6 @@ class TeamMembers extends React.Component {
     } = this.props;
     return (
       <div className='team-members'>
-        <SuperAdminNav />
         <h2>Team Members Page</h2>
         <h3>Update and Assign Team Members</h3>
         <TeamMembersList

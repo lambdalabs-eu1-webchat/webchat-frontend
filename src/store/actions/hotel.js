@@ -1,5 +1,8 @@
 import { DOMAIN, HOTEL } from '../../utils/paths';
 import {
+  UPDATE_HOTEL_SUCCESS,
+  UPDATE_HOTEL_FAILURE,
+  UPDATE_HOTEL,
   FETCH_SINGLE_HOTEL,
   FETCH_SINGLE_HOTEL_SUCCESS,
   FETCH_SINGLE_HOTEL_FAILURE,
@@ -31,6 +34,30 @@ export const fetchSingleHotelFailure = error => {
   };
 };
 
+export const updateHotelSuccess = updatedHotel => {
+  if (!updatedHotel) {
+    throw new Error('updateHotelSuccess requires an updatedHotel argument');
+  }
+  return {
+    type: UPDATE_HOTEL_SUCCESS,
+    payload: {
+      updatedHotel,
+    },
+  };
+};
+
+export const updateHotelFailure = error => {
+  if (!error) {
+    throw new Error('updateHotelFailure requires an error argument');
+  }
+  return {
+    type: UPDATE_HOTEL_FAILURE,
+    payload: {
+      error,
+    },
+  };
+};
+
 // Asynchronous action creators
 
 export const fetchSingleHotel = id => async dispatch => {
@@ -41,5 +68,37 @@ export const fetchSingleHotel = id => async dispatch => {
     dispatch(fetchSingleHotelSuccess(jsonResult));
   } catch (error) {
     dispatch(fetchSingleHotelFailure(error));
+  }
+};
+
+export const updateHotel = (
+    id,
+    name,
+    motto,
+) => async dispatch => {
+  dispatch({ type: UPDATE_HOTEL });
+  const updatedHotel = {
+    name: String(name),
+    motto: String(motto)
+  };
+  const config = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedHotel),
+  };
+  try {
+    const result = await fetch(`${DOMAIN}${HOTEL}/${id}`, config);
+    const jsonResult = await result.json();
+    if (result.ok) {
+      const newHotel = { ...jsonResult };
+      dispatch(updateHotelSuccess(newHotel));
+      dispatch(fetchSingleHotel(id));
+    } else {
+      throw new Error(jsonResult.message);
+    }
+  } catch (error) {
+    dispatch(updateHotelFailure(error.message));
   }
 };

@@ -37,9 +37,9 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
-export const loginSuccess = (id, hotel_id, email, token, user_type, name) => {
+export const loginSuccess = (id, hotel_id, email, token, user_type, name, motto) => {
   const currentUser = {
-    id, hotel_id, email, token, user_type, name,
+    id, hotel_id, email, token, user_type, name, motto
   };
   localStorage.setItem('currentUser', JSON.stringify(currentUser));
   localStorage.setItem('token', token);
@@ -52,6 +52,7 @@ export const loginSuccess = (id, hotel_id, email, token, user_type, name) => {
       token,
       user_type,
       name,
+      motto
     },
   };
 };
@@ -88,7 +89,7 @@ export const loginRequest = (email, password) => async dispatch => {
         jsonResult.token,
         jsonResult.user.user_type,
         jsonResult.user.name,
-
+        jsonResult.user.motto,
       ),
     );
   } catch (error) {
@@ -96,22 +97,22 @@ export const loginRequest = (email, password) => async dispatch => {
   }
 };
 
-export const registerUser = (
+export const registerUser = ({
   name,
   email,
   password,
   motto,
-  hotel_name,
-  hotel_motto,
-) => async dispatch => {
+  hotelName,
+  hotelMotto,
+ }) => async dispatch => {
   dispatch({ type: REGISTER_USER });
   const user = {
     name: String(name),
     email: String(email),
     password: String(password),
     motto: String(motto),
-    hotel_name: String(hotel_name),
-    hotel_motto: String(hotel_motto),
+    hotel_name: String(hotelName),
+    hotel_motto: String(hotelMotto),
   };
   const config = {
     method: 'POST',
@@ -120,7 +121,6 @@ export const registerUser = (
     },
     body: JSON.stringify(user),
   };
-
   try {
     const result = await fetch(`${DOMAIN}${REGISTER}`, config);
     const jsonResult = await result.json();

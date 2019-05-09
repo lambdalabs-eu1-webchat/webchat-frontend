@@ -24,13 +24,13 @@ const handleRegister = (event, registerUser) => {
       motto = childNode.value;
     } else if (childNode.name === 'hotelName') {
       hotelName = childNode.value;
-    } else if (childNode.value === 'hotelMotto') {
+    } else if (childNode.name === 'hotelMotto') {
       hotelMotto = childNode.value;
     }
   });
   let blank = false;
   if (name && email && password && hotelName) {
-    registerUser(name, email, password, motto, hotelName, hotelMotto);
+    registerUser({ name, email, password, motto, hotelName, hotelMotto });
   } else {
     blank = true;
   }
