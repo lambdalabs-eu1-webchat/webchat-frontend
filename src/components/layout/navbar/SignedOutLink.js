@@ -7,7 +7,6 @@ const LoggedOut = () => {
   return (
     <ul className="right">
       <li>
-        {' '}
         <NavLink to="/register">Register</NavLink>
       </li>
       <li>
