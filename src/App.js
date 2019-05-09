@@ -26,9 +26,11 @@ import Login from './views/Login';
 import Register from './views/Register';
 import Billing from './views/Billing';
 import TeamMembers from './views/TeamMembers';
+import CompanySettings from "./views/CompanySettings";
 import EmployeeSettings from './views/EmployeeSettings';
 import CheckInOrOut from './views/CheckInOrOut';
 import './App.css';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -109,6 +111,8 @@ class App extends React.Component {
       dispatchLogout
     } = this.props;
 
+    const isLoggedIn = Boolean(state.currentUser.token);
+
     return (
       <div className="App">
         <NavBar currentUser={state.currentUser} />
@@ -118,7 +122,7 @@ class App extends React.Component {
           render={props => (
             <HomePage
               {...props}
-              loggedIn={Boolean(state.authToken)}
+              loggedIn={isLoggedIn}
               fetchAllUsers={dispatchFetchAllUsers}
             />
           )}
@@ -128,7 +132,7 @@ class App extends React.Component {
           render={props => (
             <Login
               {...props}
-              loggedIn={Boolean(state.authToken)}
+              loggedIn={isLoggedIn}
               loginRequest={dispatchLoginRequest}
             />
           )}
@@ -138,7 +142,7 @@ class App extends React.Component {
           render={props => (
             <Register
               {...props}
-              loggedIn={Boolean(state.authToken)}
+              loggedIn={isLoggedIn}
               registerUser={dispatchRegisterUser}
             />
           )}
@@ -147,7 +151,7 @@ class App extends React.Component {
           exact
           path='/chat'
           render={props => (
-            <Chat {...props} loggedIn={Boolean(state.authToken)} />
+            <Chat {...props} loggedIn={isLoggedIn} />
           )}
         />
 
@@ -156,7 +160,7 @@ class App extends React.Component {
           render={props => (
             <Logout
               {...props}
-              loggedIn={Boolean(state.authToken)}
+              loggedIn={isLoggedIn}
               logout={dispatchLogout}
             />
           )}
@@ -167,29 +171,41 @@ class App extends React.Component {
           render={props => (
             <Logout
               {...props}
-              loggedIn={Boolean(state.authToken)}
+              loggedIn={isLoggedIn}
               logout={dispatchLogout}
             />
           )}
         /> */}
 
         <Route
-          path='/billing'
+          path="/team-members"
           render={props => (
-            <Billing {...props} loggedIn={Boolean(state.authToken)} />
+            <TeamMembers
+                {...props}
+                loggedIn={isLoggedIn}
+            />
           )}
         />
-
+        <Route
+          path="/company-settings"
+          render={props => (
+              <CompanySettings
+                  {...props}
+                  loggedIn={isLoggedIn}
+              />
+            )}
+        />
+          
         <Route
           path='/checkin'
           render={props => (
-            <CheckInOrOut {...props} loggedIn={Boolean(state.authToken)} />
+            <CheckInOrOut {...props} loggedIn={isLoggedIn} />
           )}
         />
         <Route
-          path='/team-members'
+          path='/billing'
           render={props => (
-            <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
+            <Billing {...props} loggedIn={isLoggedIn} />
           )}
         />
 

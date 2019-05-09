@@ -4,14 +4,7 @@ import {
   UPDATE_USER_SUCCESS,
 } from '../actions/actionTypes';
 
-const initialState = {
-  _id: null,
-  hotel_id: null,
-  email: '',
-  token: null,
-  user_type: '',
-  name: '',
-};
+const initialState = { _id: '', hotel_id: '', email: '', token: '', user_type: '', name: '', hotel_name: '', hotel_motto: '', motto: '' };
 
 const currentUser = (state = initialState, action) => {
   switch (action.type) {
@@ -23,6 +16,9 @@ const currentUser = (state = initialState, action) => {
         token: action.payload.token,
         user_type: action.payload.user_type,
         name: action.payload.name,
+        hotel_name: action.payload.hotel_name,
+        hotel_motto: action.payload.hotel_motto,
+        motto: action.payload.motto,
       };
     case LOGOUT:
       return { ...initialState };
