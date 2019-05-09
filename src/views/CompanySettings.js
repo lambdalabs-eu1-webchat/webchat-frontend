@@ -53,6 +53,7 @@ class CompanySettings extends React.Component {
   }
 
   render() {
+    const { hotel, rooms, dispatchUpdateHotel, dispatchDeleteRoomForHotel, currentUser, dispatchUpdateRoomForHotel, dispatchCreateRoomForHotel } = this.props;
 
     return (
         <div className="company-settings" >
