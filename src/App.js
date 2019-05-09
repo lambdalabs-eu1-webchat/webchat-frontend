@@ -12,6 +12,7 @@ import {
   addMessage,
   addQueuedChat,
   removeQueuedChat,
+  fetchClosedChats,
   saveSocket,
 } from './store/actions/chat';
 
@@ -40,6 +41,36 @@ class App extends React.Component {
     if (token && this.state.socketInit) {
       this.setState({ socketInit: false });
       const socket = socketIOClient(DOMAIN);
+      socket.on(SOCKET.CONNECTION, () => {
+        // set up listeners
+        socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
+          this.props.dispatchAddMessage(chat_id, message);
+        });
+        socket.on(SOCKET.ACTIVE_CHATS, chatLogs => {
+          this.props.dispatchAddActiveChats(chatLogs);
+        });
+        socket.on(SOCKET.QUEUED_CHATS, chatLogs => {
+          this.props.dispatchAddQueuedChats(chatLogs);
+        });
+        socket.on(SOCKET.ADD_QUEUED, chatLog => {
+          this.props.dispatchAddQueuedChat(chatLog);
+        });
+        socket.on(SOCKET.REMOVE_QUEUED, chat_id => {
+          this.props.dispatchRemoveQueuedChat(chat_id);
+        });
+        // socket.on(SOCKET.CHATLOG, chatLog => {});
+        socket.emit(SOCKET.LOGIN, token);
+      });
+      // temp hotel_id
+      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
+    }
+  }
+
+  componentDidUpdate() {
+    const token = localStorage.getItem('token');
+    if (token && this.state.socketInit) {
+      this.setState({ socketInit: false });
+      const socket = socketIOClient(DOMAIN);
       this.props.dispatchSaveSocket(socket);
       socket.on(SOCKET.CONNECTION, () => {
         // set up listeners
@@ -61,6 +92,8 @@ class App extends React.Component {
         // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
+      // temp hotel_id
+      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
     }
   }
 
@@ -189,6 +222,7 @@ export default withRouter(
       dispatchAddMessage: addMessage,
       dispatchAddQueuedChat: addQueuedChat,
       dispatchRemoveQueuedChat: removeQueuedChat,
+      dispatchfetchClosedChats: fetchClosedChats,
       dispatchSaveSocket: saveSocket,
     },
   )(App),
