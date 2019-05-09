@@ -3,7 +3,7 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 
 import CardDetails from './CardDetails';
-import Checkout from './Checkout';
+import PlanCheckout from './PlanCheckout';
 import EditPaymentMethodModal from './EditPaymentMethodModal';
 
 const PaymentMethodWrapper = styled.div`
@@ -40,7 +40,7 @@ const PaymentMethod = ({
   } else {
     return (
       <PaymentMethodWrapper>
-        <Checkout
+        <PlanCheckout
           fireCreateNewCustomer={fireCreateNewCustomer}
           billingEmail={billingEmail}
           handleInputChange={handleInputChange}

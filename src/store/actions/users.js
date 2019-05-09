@@ -84,15 +84,15 @@ export const createUserSuccess = newUser => {
 };
 
 export const fetchHotelStaffSuccess = hotelStaff => {
-  if(!hotelStaff) {
+  if (!hotelStaff) {
     throw new Error('fetchHotelStaffSuccess requires a hotelStaff argument');
   }
   return {
     type: FETCH_HOTEL_STAFF_SUCCESS,
     payload: {
       hotelStaff,
-    }
-  }
+    },
+  };
 };
 
 export const fetchHotelStaffFailure = error => {
@@ -103,12 +103,11 @@ export const fetchHotelStaffFailure = error => {
     type: FETCH_HOTEL_STAFF_FAILURE,
     payload: {
       error,
-    }
-  }
+    },
+  };
 };
 
 export const createUserFailure = error => {
-
   if (!error) {
     throw new Error('createUserFailure requires an error argument');
   }
@@ -124,6 +123,9 @@ export const updateUserSuccess = updatedUser => {
   if (!updatedUser) {
     throw new Error('updateUserSuccess requires an updatedUser argument');
   }
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const updatedCurrentUser = { ...currentUser, ...updatedUser };
+  localStorage.setItem('currentUser', JSON.stringify(updatedCurrentUser));
   return {
     type: UPDATE_USER_SUCCESS,
     payload: {
@@ -192,9 +194,8 @@ export const fetchSingleUser = id => async dispatch => {
   }
 };
 
-
-export const fetchHotelStaff = id => async (dispatch) => {
-  dispatch({ type: FETCH_HOTEL_STAFF});
+export const fetchHotelStaff = id => async dispatch => {
+  dispatch({ type: FETCH_HOTEL_STAFF });
   try {
     const result = await fetch(`${DOMAIN}${USERS}?hotel_id=${id}`);
     const jsonResult = await result.json();
@@ -209,7 +210,7 @@ export const createUser = (
   email,
   password,
   user_type,
-  motto=""
+  motto = '',
 ) => async (dispatch, getState) => {
 
   dispatch({ type: CREATE_USER });
@@ -243,36 +244,20 @@ export const createUser = (
   }
 };
 
-export const updateUser = (
-  id,
-  name,
-  email,
-  password,
-  user_type,
-  motto,
-
-) => async dispatch => {
+export const updateUser = (userUpdates, id) => async dispatch => {
   dispatch({ type: UPDATE_USER });
-  const updatedUser = {
-    name: String(name),
-    email: String(email),
-    password: String(password),
-    user_type: String(user_type),
-    motto: String(motto)
-  };
   const config = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(updatedUser),
+    body: JSON.stringify(userUpdates),
   };
   try {
     const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
     const jsonResult = await result.json();
     if (result.ok) {
-      const newUser = { ...jsonResult };
-      dispatch(updateUserSuccess(newUser));
+      dispatch(updateUserSuccess(jsonResult));
     } else {
       throw new Error(jsonResult.message);
     }
@@ -281,7 +266,7 @@ export const updateUser = (
   }
 };
 
-export const changeUserType = (id, newType) => async (dispatch) => {
+export const changeUserType = (id, newType) => async dispatch => {
   dispatch({ type: UPDATE_USER });
   const updatedUser = {
     user_type: String(newType),
@@ -308,7 +293,6 @@ export const changeUserType = (id, newType) => async (dispatch) => {
 };
 
 export const deleteUser = id => async (dispatch, getState) => {
-
   dispatch({ type: DELETE_USER });
   const config = {
     method: 'DELETE',

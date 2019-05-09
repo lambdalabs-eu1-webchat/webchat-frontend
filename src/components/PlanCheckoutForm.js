@@ -3,7 +3,7 @@ import { CardElement, injectStripe } from 'react-stripe-elements';
 import Button from '@material-ui/core/Button';
 import PT from 'prop-types';
 
-class CheckoutForm extends Component {
+class PlanCheckoutForm extends Component {
   createCustomer = async () => {
     const { token } = await this.props.stripe.createToken();
     this.props.fireCreateNewCustomer(token);
@@ -18,16 +18,16 @@ class CheckoutForm extends Component {
     return (
       <div>
         <input
-          name="billingEmail"
-          type="text"
-          placeholder="Billing Email"
+          name='billingEmail'
+          type='text'
+          placeholder='Billing Email'
           value={this.props.billingEmail}
           onChange={event => this.props.handleInputChange(event)}
         />
         <CardElement hidePostalCode={true} />
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           onClick={
             this.props.mode === 'edit'
               ? () => this.editPaymentMethod()
@@ -41,7 +41,7 @@ class CheckoutForm extends Component {
   }
 }
 
-CheckoutForm.propTypes = {
+PlanCheckoutForm.propTypes = {
   stripe: PT.shape({
     createToken: PT.func.isRequired,
   }).isRequired,
@@ -51,4 +51,4 @@ CheckoutForm.propTypes = {
   buttonText: PT.string.isRequired,
 };
 
-export default injectStripe(CheckoutForm);
+export default injectStripe(PlanCheckoutForm);
