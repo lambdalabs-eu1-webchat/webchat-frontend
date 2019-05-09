@@ -15,7 +15,7 @@ Logout.propTypes = {
   logout: PropTypes.func.isRequired,
 };
 
-function mstp(state) {
+function mstp() {
   return {};
 }
 

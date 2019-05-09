@@ -21,15 +21,12 @@ class TeamMembers extends React.Component {
       modalShown: false,
     };
     this.props = props;
-    const {
-      state,
-      dispatchFetchHotelStaff,
-    } = this.props;
-    dispatchFetchHotelStaff(state.currentUser.hotel_id);
+    const { currentUser, dispatchFetchHotelStaff } = this.props;
+    dispatchFetchHotelStaff(currentUser.hotel_id);
   }
 
   componentDidMount() {
-    this.props.dispatchFetchSingleHotel(this.props.state.currentUser.hotel_id);
+    this.props.dispatchFetchSingleHotel(this.props.currentUser.hotel_id);
   }
 
   handleShowModal = () => {
@@ -42,19 +39,20 @@ class TeamMembers extends React.Component {
 
   render() {
     const {
-      state,
+      users,
+      currentUser,
       dispatchCreateUser,
       dispatchChangeUserType,
       dispatchDeleteUser,
     } = this.props;
     return (
-      <div className="team-members">
+      <div className='team-members'>
         <SuperAdminNav />
         <h2>Team Members Page</h2>
         <h3>Update and Assign Team Members</h3>
         <TeamMembersList
-          users={state.users}
-          currentUser={state.currentUser}
+          users={users}
+          currentUser={currentUser}
           changeUserType={dispatchChangeUserType}
           deleteUser={dispatchDeleteUser}
         />
@@ -62,8 +60,8 @@ class TeamMembers extends React.Component {
           createUser={dispatchCreateUser}
           handleHideModal={this.handleHideModal}
           modalShown={this.state.modalShown}
-          plan={this.props.state.hotel.plan}
-          staffAmount={state.users.length}
+          plan={this.props.hotel.plan}
+          staffAmount={users.length}
         />
         <button onClick={this.handleShowModal}>Add Team Members</button>
       </div>
@@ -72,12 +70,21 @@ class TeamMembers extends React.Component {
 }
 
 TeamMembers.propTypes = {
-  state: PropTypes.shape().isRequired,
+  users: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  hotel: PropTypes.object.isRequired,
   dispatchChangeUserType: PropTypes.func.isRequired,
   dispatchDeleteUser: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({ state });
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    users: state.users,
+    currentUser: state.currentUser,
+    hotel: state.hotel,
+  };
+};
 
 export default connect(
   mapStateToProps,
