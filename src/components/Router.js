@@ -9,63 +9,70 @@ import Register from '../views/Register';
 import Billing from '../views/Billing';
 import TeamMembers from '../views/TeamMembers';
 import CheckInOrOut from '../views/CheckInOrOut';
+import EmployeeSettings from '../views/EmployeeSettings';
+
+import { APP_PATHS } from '../utils/paths';
 
 function Router({ user_type }) {
   if (!user_type) {
     return (
       <Switch>
         <Route exact path='/' component={HomePage} />
-        <Route path='/login' component={Login} />
-        <Route path='/register' component={Register} />
+        <Route exact path={APP_PATHS.LOGIN} component={Login} />
+        <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route render={() => <div>404 not found</div>} />
-        <Route path='/checkin' component={CheckInOrOut} />;
       </Switch>
     );
   } else if (user_type === 'admin') {
     return (
       <Switch>
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/register' component={Register} />
-        <Route exact path='/logout' component={Logout} />
-        <Route exact path='/team-members' component={TeamMembers} />
-        <Route exact path='/chat' component={Chat} />
+        <Route exact path={APP_PATHS.LOGIN} component={Login} />
+        <Route exact path={APP_PATHS.REGISTER} component={Register} />
+        <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
+        <Route exact path={APP_PATHS.TEAM_MEMBERS} component={TeamMembers} />
+        <Route exact path={APP_PATHS.CHAT} component={Chat} />
         <Route
-          path='/account-settings'
-          render={() => <div>account settings</div>}
+          exact
+          path={APP_PATHS.ACCOUNT_SETTINGS}
+          component={EmployeeSettings}
         />
-        <Route path='/checkin' component={CheckInOrOut} />; ;
+        <Route exact path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />;
+        ;
         <Route render={() => <div>404 not found</div>} />
       </Switch>
     );
   } else if (user_type === 'super admin') {
     return (
       <Switch>
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/register' component={Register} />
-        <Route exact path='/logout' component={Logout} />
-        <Route exact path='/team-members' component={TeamMembers} />
-        <Route exact path='/billing' component={Billing} />
-        <Route exact path='/chat' component={Chat} />
+        <Route exact path={APP_PATHS.LOGIN} component={Login} />
+        <Route exact path={APP_PATHS.REGISTER} component={Register} />
+        <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
+        <Route exact path={APP_PATHS.TEAM_MEMBERS} component={TeamMembers} />
+        <Route exact path={APP_PATHS.BILLING} component={Billing} />
+        <Route exact path={APP_PATHS.CHAT} component={Chat} />
         <Route
-          path='/account-settings'
-          render={() => <div>account settings</div>}
+          exact
+          path={APP_PATHS.ACCOUNT_SETTINGS}
+          component={EmployeeSettings}
         />
-        <Route path='/checkin' component={CheckInOrOut} />;
+        <Route exact path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />;
         <Route render={() => <div>404 not found</div>} />
       </Switch>
     );
   } else if (user_type === 'receptionist') {
+    debugger;
     return (
       <Switch>
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/register' component={Register} />
-        <Route exact path='/logout' component={Logout} />
-        <Route exact path='/chat' component={Chat} />
+        <Route exact path={APP_PATHS.LOGIN} component={Login} />
+        <Route exact path={APP_PATHS.REGISTER} component={Register} />
+        <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
+        <Route exact path={APP_PATHS.CHAT} component={Chat} />
         <Route
-          path='/account-settings'
-          render={() => <div>account settings</div>}
+          exact
+          path={APP_PATHS.ACCOUNT_SETTINGS}
+          component={EmployeeSettings}
         />
-        <Route path='/checkin' component={CheckInOrOut} />;
+        <Route path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />;
         <Route render={() => <div>404 not found</div>} />
       </Switch>
     );

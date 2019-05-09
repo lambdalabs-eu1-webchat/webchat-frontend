@@ -7,7 +7,6 @@ export const HOTEL = 'api/hotel';
 export const SUBSCRIPTION = 'api/subscription';
 export const METHOD = 'api/subscription/method';
 
-
 export const SOCKET = {
   CLOSE_TICKET: 'close_ticket',
   ASSIGN_SELF_TICKET: 'assign_self_ticket',
@@ -20,4 +19,16 @@ export const SOCKET = {
   CONNECTION: 'connection',
   REMOVE_QUEUED: 'remove_queued',
   ADD_QUEUED: 'add_queued',
+};
+
+export const APP_PATHS = {
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+  REGISTER: '/register',
+  TEAM_MEMBERS: '/team-members',
+  BILLING: '/billing',
+  CHAT: '/chat',
+  ACCOUNT_SETTINGS: '/account-settings',
+  CHECK_IN_OUT: '/check-in-out',
+  COMPANY_DASH: '/company-dash',
 };
