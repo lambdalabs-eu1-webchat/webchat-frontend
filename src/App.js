@@ -17,7 +17,7 @@ import {
 } from './store/actions/chat';
 
 import NavBar from './components/layout/navbar/NavBar';
-import Logout from './components/logout/Logout';
+import Logout from './components/Logout';
 import Footer from './components/layout/Footer'
 import HomePage from './views/HomePage';
 import Chat from './views/Chat';
