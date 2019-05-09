@@ -42,7 +42,6 @@ ChatsList.defaultProps = {
 ChatsList.propTypes = {
   chatsArr: PropTypes.array.isRequired,
   status: PropTypes.string.isRequired,
-  setCurrentChatId: PropTypes.func.isRequired,
 };
 
 const divStyle = {
