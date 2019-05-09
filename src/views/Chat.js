@@ -28,7 +28,7 @@ class Chat extends React.Component {
           />
         </div>
         {this.props.currentChat ? (
-          <ChatScreen chat={this.state.currentChat} />
+          <ChatScreen chat={this.props.currentChat} />
         ) : null}
       </div>
     );
@@ -36,10 +36,24 @@ class Chat extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const chats = state.chats;
+  let currentChat = null;
+  if (chats.currentChatIdAndStatus) {
+    const status = chats.currentChatIdAndStatus.status;
+    const chat_id = chats.currentChatIdAndStatus.chat_id;
+    if (ACTIVE === status) {
+      currentChat = chats.activeChats.find(chat => chat._id === chat_id);
+    } else if (QUEUED === status) {
+      currentChat = chats.queuedChats.find(chat => chat._id === chat_id);
+    } else if (CLOSED === status) {
+      currentChat = chats.closedChats.find(chat => chat._id === chat_id);
+    }
+  }
   return {
-    queuedChats: state.chats.queuedChats,
-    activeChats: state.chats.activeChats,
-    closedChats: state.chats.closedChats,
+    queuedChats: chats.queuedChats,
+    activeChats: chats.activeChats,
+    closedChats: chats.closedChats,
+    currentChat,
   };
 };
 
