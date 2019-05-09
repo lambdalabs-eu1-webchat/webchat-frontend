@@ -1,11 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { fetchSingleHotel, updateHotel } from '../store/actions/hotel';
 import {deleteRoomForHotel, updateRoomForHotel, fetchRoomsForHotel, createRoomForHotel} from '../store/actions/rooms';
 
 import SuperAdminNav from '../components/SuperAdminNav';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
+
+const CompanySettingsWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    margin: 0 auto 100px;
+    @media (max-width: 500px) {
+        flex-direction: column;
+        max-width: 100%;
+        border: red;
+    }
+`;
 
 class CompanySettings extends React.Component {
   constructor(props) {
@@ -56,10 +69,10 @@ class CompanySettings extends React.Component {
     const { hotel, rooms, dispatchUpdateHotel, dispatchDeleteRoomForHotel, currentUser, dispatchUpdateRoomForHotel, dispatchCreateRoomForHotel } = this.props;
 
     return (
-        <div className="company-settings" >
+        <div className="company-settings">
           <SuperAdminNav/>
           <h2>Company Settings</h2>
-          <div className="company-settings-wrapper">
+          <CompanySettingsWrapper>
             <section className="company-details">
               <h3>Update company details</h3>
               <form>
@@ -82,7 +95,7 @@ class CompanySettings extends React.Component {
               handleInputChange={this.handleInputChange.bind(this)}
               createRoomForHotel={dispatchCreateRoomForHotel}
             />
-          </div>
+          </CompanySettingsWrapper>
         </div>
     );
   };
