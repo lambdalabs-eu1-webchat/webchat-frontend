@@ -94,7 +94,7 @@ CompanySettings.propTypes = {
 const mapStateToProps = state => ({
   hotel: state.hotel,
   currentUser: state.currentUser,
-  rooms: state.rooms.rooms.rooms,
+  rooms: state.rooms,
 });
 
 export default connect(mapStateToProps, {

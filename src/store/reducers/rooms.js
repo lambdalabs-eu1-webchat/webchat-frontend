@@ -1,17 +1,13 @@
 import { ROOMS } from '../actions/actionTypes';
 
-const initState = { fetching: false, rooms: [], error: null };
+const initState = [];
 
 const rooms = (state = initState, action) => {
   switch (action.type) {
-    case ROOMS.FETCH_ROOMS_FOR_HOTEL:
-      return { ...state, fetching: true };
     case ROOMS.FETCH_ROOMS_FOR_HOTEL_SUCCESS:
-      return { ...state, fetching: false, rooms: action.payload };
-    case ROOMS.FETCH_ROOMS_FOR_HOTEL_FAILURE:
-      return { ...state, fetching: false, error: action.payload };
+      return [ ...action.payload.rooms ];
       case ROOMS.CREATE_ROOM_FOR_HOTEL_SUCCESS:
-      return [...state, [ ...action.payload.newRoom ]];
+      return [...action.payload.newRoom ];
     case ROOMS.UPDATE_ROOM_FOR_HOTEL_SUCCESS:
       return state.map((room) => {
         if (room._id === action.payload.updatedRoom._id) {
