@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import styled from 'styled-components';
 import ChatScreen from '../components/ChatScreen';
 import ChatsList from '../components/chat/ChatsList';
 import { QUEUED, ACTIVE, CLOSED } from '../utils/ticketStatus';
@@ -8,7 +8,7 @@ import { QUEUED, ACTIVE, CLOSED } from '../utils/ticketStatus';
 class Chat extends React.Component {
   render() {
     return (
-      <div>
+      <StyledChat>
         <div>
           <h2>Welcome to the Chat page!</h2>
           <ChatsList
@@ -27,19 +27,33 @@ class Chat extends React.Component {
             status={CLOSED}
           />
         </div>
-        {this.props.currentChat ? (
-          <ChatScreen chat={this.props.currentChat} />
-        ) : null}
-      </div>
+        <div className='chat-screen'>
+          {this.props.currentChat ? (
+            <ChatScreen
+              status={this.props.status}
+              chat={this.props.currentChat}
+            />
+          ) : null}
+        </div>
+      </StyledChat>
     );
   }
 }
 
+const StyledChat = styled.div`
+  display: flex;
+  justify-content: space-around;
+  .chat-screen {
+    width: 700px;
+  }
+`;
+
 const mapStateToProps = state => {
   const chats = state.chats;
   let currentChat = null;
+  let status = null;
   if (chats.currentChatIdAndStatus) {
-    const status = chats.currentChatIdAndStatus.status;
+    status = chats.currentChatIdAndStatus.status;
     const chat_id = chats.currentChatIdAndStatus.chat_id;
     if (ACTIVE === status) {
       currentChat = chats.activeChats.find(chat => chat._id === chat_id);
@@ -54,6 +68,7 @@ const mapStateToProps = state => {
     activeChats: chats.activeChats,
     closedChats: chats.closedChats,
     currentChat,
+    status,
   };
 };
 

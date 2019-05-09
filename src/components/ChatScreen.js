@@ -8,6 +8,7 @@ import ChatScreenHeader from './ChatScreenHeader';
 import MessageComposer from './MessageComposer';
 import Button from '@material-ui/core/Button';
 import { SOCKET } from '../utils/paths';
+import { ACTIVE, CLOSED, QUEUED } from '../utils/ticketStatus';
 
 class ChatScreen extends React.Component {
   closeTicket = () => {
@@ -15,7 +16,7 @@ class ChatScreen extends React.Component {
     // might want to have a function passed into this to stop rendering this component
   };
   render() {
-    const { chat } = this.props;
+    const { chat, status } = this.props;
     return (
       <StyledChatScreen>
         <ChatScreenHeader
@@ -23,8 +24,12 @@ class ChatScreen extends React.Component {
           room_name={chat.room.name}
         />
         <Messages tickets={chat.tickets} guest_id={chat.guest.id} />
-        <MessageComposer chat_id={chat._id} />
-        <Button onClick={this.closeTicket}>Close Ticket</Button>
+        {ACTIVE === status ? (
+          <React.Fragment>
+            <MessageComposer chat_id={chat._id} />
+            <Button onClick={this.closeTicket}>Close Ticket</Button>
+          </React.Fragment>
+        ) : null}
       </StyledChatScreen>
     );
   }
@@ -54,6 +59,7 @@ ChatScreen.propTypes = {
     _id: propTypes.string.isRequired,
   }),
   socket: propTypes.object.isRequired,
+  status: propTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {

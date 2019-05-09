@@ -21,7 +21,6 @@ const handleClick = loginRequest => event => {
 };
 
 const Login = ({ loggedIn, loginRequest }) => {
-  debugger;
   if (loggedIn) {
     return <Redirect to='/chat' />;
   }
