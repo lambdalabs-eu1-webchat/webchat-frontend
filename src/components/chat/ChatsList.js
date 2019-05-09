@@ -33,6 +33,11 @@ class ChatsList extends React.Component {
   }
 }
 
+ChatsList.defaultProps = {
+  chatsArr: [],
+  status: '',
+};
+
 ChatsList.propTypes = {
   chatsArr: PropTypes.array.isRequired,
   status: PropTypes.string.isRequired,
