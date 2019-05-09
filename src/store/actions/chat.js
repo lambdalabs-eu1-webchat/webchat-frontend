@@ -12,6 +12,8 @@ const {
   FETCH_CLOSED_CHATS_SUCCESS,
   FETCH_CLOSED_CHATS_FAILURE,
   SAVE_SOCKET,
+  SET_CURRENT_CHAT_ID,
+  CLEAR_CURRENT_CHAT_ID,
 } = CHATS;
 
 export const saveSocket = socket => {
@@ -106,5 +108,18 @@ export const fetchAllClosedChatsFailure = error => {
     payload: {
       error,
     },
+  };
+};
+
+export const setCurrentChatId = chat_id => {
+  return {
+    type: SET_CURRENT_CHAT_ID,
+    payload: chat_id,
+  };
+};
+
+export const clearCurrentChatId = () => {
+  return {
+    type: CLEAR_CURRENT_CHAT_ID,
   };
 };

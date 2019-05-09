@@ -9,12 +9,15 @@ const {
   UPDATE_ACTIVE_CHAT,
   FETCH_CLOSED_CHATS_SUCCESS,
   SAVE_SOCKET,
+  SET_CURRENT_CHAT_ID,
+  CLEAR_CURRENT_CHAT_ID,
 } = CHATS;
 
 const initState = {
   queuedChats: [],
   activeChats: [],
   socket: null,
+  currentChatId: null,
 };
 
 const chats = (state = initState, action) => {
@@ -34,7 +37,7 @@ const chats = (state = initState, action) => {
       return {
         ...state,
         queuedChats: state.queuedChats.filter(
-          chat => chat._id !== action.target
+          chat => chat._id !== action.target,
         ),
       };
     case ADD_MESSAGE:
@@ -51,6 +54,10 @@ const chats = (state = initState, action) => {
       };
     case FETCH_CLOSED_CHATS_SUCCESS:
       return { ...state, closedChats: action.payload };
+    case CLEAR_CURRENT_CHAT_ID:
+      return { ...state, currentChatId: null };
+    case SET_CURRENT_CHAT_ID:
+      return { ...state, currentChatId: action.payload };
     default:
       return state;
   }

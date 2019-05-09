@@ -19,7 +19,6 @@ class ChatsList extends React.Component {
   resetInputField = () => {
     this.setState({ inputField: '' });
   };
-
   render() {
     const { chatsArr, status } = this.props;
 
@@ -43,6 +42,7 @@ ChatsList.defaultProps = {
 ChatsList.propTypes = {
   chatsArr: PropTypes.array.isRequired,
   status: PropTypes.string.isRequired,
+  setCurrentChatId: PropTypes.func.isRequired,
 };
 
 const divStyle = {
