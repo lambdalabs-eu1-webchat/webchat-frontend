@@ -14,7 +14,6 @@ import {
   removeQueuedChat,
   fetchClosedChats,
   saveSocket,
-
 } from './store/actions/chat';
 
 import NavBar from './components/NavBar';
@@ -26,6 +25,7 @@ import Register from './views/Register';
 import Billing from './views/Billing';
 import TeamMembers from './views/TeamMembers';
 import CompanySettings from "./views/CompanySettings";
+import CheckInOrOut from './views/CheckInOrOut';
 import './App.css';
 
 
@@ -115,7 +115,7 @@ class App extends React.Component {
         <NavBar loggedIn={isLoggedIn} />
         <Route
           exact
-          path="/"
+          path='/'
           render={props => (
             <HomePage
               {...props}
@@ -125,7 +125,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/login"
+          path='/login'
           render={props => (
             <Login
               {...props}
@@ -135,7 +135,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/register"
+          path='/register'
           render={props => (
             <Register
               {...props}
@@ -146,14 +146,14 @@ class App extends React.Component {
         />
         <Route
           exact
-          path="/chat"
+          path='/chat'
           render={props => (
             <Chat {...props} loggedIn={isLoggedIn} />
           )}
         />
 
         <Route
-          path="/logout"
+          path='/logout'
           render={props => (
             <Logout
               {...props}
@@ -164,7 +164,17 @@ class App extends React.Component {
         />
 
         <Route
+          path='/logout'
+          render={props => (
+            <Logout
+              {...props}
+              loggedIn={isLoggedIn}
+              logout={dispatchLogout}
+            />
+          )}
+        />
 
+        <Route
           path="/team-members"
           render={props => (
             <TeamMembers
@@ -176,16 +186,21 @@ class App extends React.Component {
         <Route
           path="/company-settings"
           render={props => (
-            <CompanySettings
-                {...props}
-                loggedIn={isLoggedIn}
-            />
-          )}
-
+              <CompanySettings
+                  {...props}
+                  loggedIn={isLoggedIn}
+              />
+            )}
         />
-
+          
         <Route
-          path="/billing"
+          path='/checkin'
+          render={props => (
+            <CheckInOrOut {...props} loggedIn={isLoggedIn} />
+          )}
+        />
+        <Route
+          path='/billing'
           render={props => (
             <Billing {...props} loggedIn={isLoggedIn} />
           )}
@@ -225,6 +240,6 @@ export default withRouter(
       dispatchRemoveQueuedChat: removeQueuedChat,
       dispatchfetchClosedChats: fetchClosedChats,
       dispatchSaveSocket: saveSocket,
-    }
-  )(App)
+    },
+  )(App),
 );
