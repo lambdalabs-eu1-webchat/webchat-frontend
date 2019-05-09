@@ -6,7 +6,7 @@ const currentUser = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
-        _id: action.payload._id,
+        _id: action.payload.id,
         hotel_id: action.payload.hotel_id,
         email: action.payload.email,
         token: action.payload.token,
