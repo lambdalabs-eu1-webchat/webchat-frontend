@@ -108,7 +108,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  state: PropTypes.shape().isRequired,
+  currentUser: PropTypes.object.isRequired,
   dispatchLoginRequest: PropTypes.func.isRequired,
   dispatchRegisterUser: PropTypes.func.isRequired,
   dispatchLogout: PropTypes.func.isRequired,
