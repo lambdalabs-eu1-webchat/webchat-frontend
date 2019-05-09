@@ -18,7 +18,9 @@ const LoggedIn = ({ userType }) => {
       ) : null}
       {userType === SUPER_ADMIN ? (
         <li>
-          <NavLink to={APP_PATHS.COMPANY_DASH}>Company Dash</NavLink>
+          <NavLink to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS}>
+            Company Dash
+          </NavLink>
         </li>
       ) : null}
       <li>
