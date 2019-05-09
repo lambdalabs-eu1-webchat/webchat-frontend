@@ -21,13 +21,4 @@ const NavBar = (props) => {
   )
 }
 
-// NavBar.propTypes = {
-//   loggedIn: PropTypes.bool.isRequired,
-// };
-const mapStateToProps = (state) => {
-  return{
-    // auth: state.mongodb.auth
-  }
-}
-
 export default NavBar;
