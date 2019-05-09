@@ -1,7 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
-
 import Logout from './Logout';
 import HomePage from '../views/HomePage';
 import Chat from '../views/Chat';
@@ -9,6 +8,7 @@ import Login from '../views/Login';
 import Register from '../views/Register';
 import Billing from '../views/Billing';
 import TeamMembers from '../views/TeamMembers';
+import CheckInOrOut from '../views/CheckInOrOut';
 
 function Router({ user_type }) {
   if (!user_type) {
@@ -18,6 +18,7 @@ function Router({ user_type }) {
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route render={() => <div>404 not found</div>} />
+        <Route path='/checkin' component={CheckInOrOut} />;
       </Switch>
     );
   } else if (user_type === 'admin') {
@@ -32,6 +33,7 @@ function Router({ user_type }) {
           path='/account-settings'
           render={() => <div>account settings</div>}
         />
+        <Route path='/checkin' component={CheckInOrOut} />; ;
         <Route render={() => <div>404 not found</div>} />
       </Switch>
     );
@@ -48,6 +50,7 @@ function Router({ user_type }) {
           path='/account-settings'
           render={() => <div>account settings</div>}
         />
+        <Route path='/checkin' component={CheckInOrOut} />;
         <Route render={() => <div>404 not found</div>} />
       </Switch>
     );
@@ -62,6 +65,7 @@ function Router({ user_type }) {
           path='/account-settings'
           render={() => <div>account settings</div>}
         />
+        <Route path='/checkin' component={CheckInOrOut} />;
         <Route render={() => <div>404 not found</div>} />
       </Switch>
     );
