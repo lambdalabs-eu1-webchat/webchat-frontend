@@ -7,15 +7,17 @@ import { ADMIN,SUPER_ADMIN, RECEPTIONIST  } from '../../../utils/userTypes'
 const LoggedIn = ({userType}) => {
   console.log(userType)
   return (
-    <ul className="right">
-       <li> <NavLink to="/chat">Dashboard</NavLink></li>
-       {userType === ADMIN ? <li><NavLink>Employees</NavLink></li>: null}
-       {userType === SUPER_ADMIN ? <li><NavLink>Company Settings</NavLink></li>: null}
-       {userType === RECEPTIONIST ? <li><NavLink>Check In</NavLink></li>: null}
+    <ul className="">
+       <li> <NavLink to="/chat">Chat Dash</NavLink></li>
+       {userType === ADMIN ? <li><NavLink>Team Members</NavLink></li>: null}
+       {userType === SUPER_ADMIN ? <li><NavLink>Company Dash</NavLink></li>: null}
+       {userType === RECEPTIONIST ? <li><NavLink>some</NavLink></li>: null}
+      
+       <li> <NavLink to="/checkin"  >Check In</NavLink></li>
        <li> <NavLink to="/logout"  >LogOut</NavLink></li>
 
        {/* this will be linked to the Employee settings as an icon with their Initials or img */}
-       <li> <NavLink to="/" className="btn btn-floating green lighten-1">TA</NavLink></li>
+       <li> <NavLink to="/" className="btn btn-floating green lighten-1">TA / Employee Settings</NavLink></li>
     </ul>
 
    )
