@@ -1,5 +1,10 @@
 import {
-  FETCH_ALL_USERS_SUCCESS, FETCH_SINGLE_USER_SUCCESS, FETCH_HOTEL_STAFF_SUCCESS, CREATE_USER_SUCCESS, UPDATE_USER_SUCCESS, DELETE_USER_SUCCESS,
+  FETCH_ALL_USERS_SUCCESS,
+  FETCH_SINGLE_USER_SUCCESS,
+  FETCH_HOTEL_STAFF_SUCCESS,
+  CREATE_USER_SUCCESS,
+  UPDATE_USER_SUCCESS,
+  DELETE_USER_SUCCESS,
 } from '../actions/actionTypes';
 
 const initialState = [];
@@ -15,7 +20,7 @@ const users = (state = initialState, action) => {
     case CREATE_USER_SUCCESS:
       return [...state, { ...action.payload.newUser }];
     case UPDATE_USER_SUCCESS:
-      return state.map((user) => {
+      return state.map(user => {
         if (user._id === action.payload.updatedUser._id) {
           return { ...action.payload.updatedUser };
         }
