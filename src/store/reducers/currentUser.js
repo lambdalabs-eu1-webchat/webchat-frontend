@@ -1,4 +1,8 @@
-import { LOGIN_SUCCESS, LOGOUT } from '../actions/actionTypes';
+import {
+  LOGIN_SUCCESS,
+  LOGOUT,
+  UPDATE_USER_SUCCESS,
+} from '../actions/actionTypes';
 
 const initialState = { _id: '', hotel_id: '', email: '', token: '', user_type: '', name: '', hotel_name: '', hotel_motto: '', motto: '' };
 
@@ -18,6 +22,10 @@ const currentUser = (state = initialState, action) => {
       };
     case LOGOUT:
       return { ...initialState };
+    case UPDATE_USER_SUCCESS:
+      if (state._id === action.payload.updatedUser._id) {
+        return action.payload.updatedUser;
+      }
     default:
       return state;
   }
