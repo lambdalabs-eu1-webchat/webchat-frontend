@@ -23,7 +23,6 @@ export const fetchSingleHotelSuccess = hotel => {
   };
 
 export const fetchSingleHotelFailure = error => {
-
   if (!error) {
     throw new Error('fetchSingleHotelFailure requires an error argument');
   }
