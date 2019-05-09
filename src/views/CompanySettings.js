@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import { fetchSingleHotel, updateHotel } from '../store/actions/hotel';
 
 import SuperAdminNav from '../components/SuperAdminNav';
+import CompanySettingsRoomsList from "../components/CompanySettingsRoomsList";
+import {deleteRoomForHotel, updateRoomForHotel, fetchRoomsForHotel} from "../store/actions/rooms";
+
 
 class CompanySettings extends React.Component {
   constructor(props) {
