@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "axios": "^0.18.0",
+    "match-sorter": "^3.0.0",
     "polished": "^3.3.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -27,6 +28,9 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "resolutions": {
+    "babel-jest": "24.7.1"
   },
   "browserslist": {
     "production": [
