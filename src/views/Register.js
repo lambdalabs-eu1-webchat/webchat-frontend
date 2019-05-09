@@ -2,6 +2,8 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import { registerUser } from '../store/actions/auth.js';
 const handleRegister = (event, registerUser) => {
   event.preventDefault();
   let name = '';
@@ -11,9 +13,9 @@ const handleRegister = (event, registerUser) => {
   let hotelName = '';
   let hotelMotto = '';
 
-  event.target.parentNode.childNodes.forEach((childNode) => {
+  event.target.parentNode.childNodes.forEach(childNode => {
     if (childNode.name === 'name') {
-     name = childNode.value;
+      name = childNode.value;
     } else if (childNode.name === 'email') {
       email = childNode.value;
     } else if (childNode.name === 'password') {
@@ -34,20 +36,21 @@ const handleRegister = (event, registerUser) => {
   }
 
   if (blank) {
-    event.target.parentNode.childNodes.forEach((childNode) => {
+    event.target.parentNode.childNodes.forEach(childNode => {
       if (childNode.getAttribute('id') === 'result-message') {
         childNode.textContent = 'Please fill in all the required fields.';
       }
     });
   } else {
-    event.target.parentNode.childNodes.forEach((childNode) => {
+    event.target.parentNode.childNodes.forEach(childNode => {
       if (childNode.getAttribute('id') === 'result-message') {
-        childNode.textContent = 'Successfully registered. Please log in to continue.';
+        childNode.textContent =
+          'Successfully registered. Please log in to continue.';
       }
       if (childNode.name === 'name') {
         childNode.value = '';
       } else if (childNode.name === 'email') {
-        childNode.value ='';
+        childNode.value = '';
       } else if (childNode.name === 'password') {
         childNode.value = '';
       } else if (childNode.name === 'motto') {
@@ -63,29 +66,39 @@ const handleRegister = (event, registerUser) => {
 
 const Register = ({ loggedIn, registerUser }) => {
   if (loggedIn) {
-    return <Redirect to ="/" />
+    return <Redirect to='/' />;
   }
   return (
-    <div className="register-wrapper">
-      <form className="register-form">
+    <div className='register-wrapper'>
+      <form className='register-form'>
         <h2>Register</h2>
         <label>Name</label>
-        <input name="name" placeholder="Choose a name..." type="text" />
+        <input name='name' placeholder='Choose a name...' type='text' />
         <label>Email</label>
-        <input name="email" placeholder="Your email..." type="text" />
+        <input name='email' placeholder='Your email...' type='text' />
         <label>Password</label>
-        <input name="password" placeholder="Choose a password..." type="password" />
+        <input
+          name='password'
+          placeholder='Choose a password...'
+          type='password'
+        />
         <label>Motto</label>
-        <input name="motto" placeholder="Your motto..." type="text" />
+        <input name='motto' placeholder='Your motto...' type='text' />
         <label>Hotel Name</label>
-        <input name="hotelName" placeholder="Your hotel name..." type="text" />
+        <input name='hotelName' placeholder='Your hotel name...' type='text' />
         <label>Hotel Motto</label>
-        <input name="hotelMotto" placeholder="Your hotel motto..." type="text" />
-        <p id="result-message" />
-        <button type="submit" onClick={(e) => handleRegister(e, registerUser)}>Register</button>
+        <input
+          name='hotelMotto'
+          placeholder='Your hotel motto...'
+          type='text'
+        />
+        <p id='result-message' />
+        <button type='submit' onClick={e => handleRegister(e, registerUser)}>
+          Register
+        </button>
       </form>
     </div>
-  )
+  );
 };
 
 Register.propTypes = {
@@ -93,4 +106,11 @@ Register.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
 };
 
-export default Register;
+function mstp(state) {
+  return { loggedIn: !!state.currentUser._id };
+}
+
+export default connect(
+  mstp,
+  { registerUser },
+)(Register);

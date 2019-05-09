@@ -11,7 +11,6 @@ import Billing from '../views/Billing';
 import TeamMembers from '../views/TeamMembers';
 
 function Router({ user_type }) {
-  debugger;
   if (!user_type) {
     return (
       <Switch>
@@ -24,6 +23,8 @@ function Router({ user_type }) {
   } else if (user_type === 'admin') {
     return (
       <Switch>
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
         <Route path='/logout' component={Logout} />
         <Route path='/team-members' component={TeamMembers} />
         <Route exact path='/chat' component={Chat} />
@@ -37,6 +38,8 @@ function Router({ user_type }) {
   } else if (user_type === 'super admin') {
     return (
       <Switch>
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
         <Route path='/logout' component={Logout} />
         <Route path='/team-members' component={TeamMembers} />
         <Route path='/billing' component={Billing} />
@@ -50,6 +53,8 @@ function Router({ user_type }) {
   } else if (user_type === 'receptionist') {
     return (
       <Switch>
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
         <Route path='/logout' component={Logout} />
         <Route exact path='/chat' component={Chat} />
         <Route
