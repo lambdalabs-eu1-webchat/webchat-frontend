@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { ADMIN, SUPER_ADMIN, RECEPTIONIST } from '../../../utils/userTypes';
+import { ADMIN, SUPER_ADMIN } from '../../../utils/userTypes';
 
 import { APP_PATHS } from '../../../utils/paths';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import SuperAdminNav from '../components/SuperAdminNav';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Billing from '../views/Billing';
 import TeamMembers from '../views/TeamMembers';
 import CompanySettings from '../views/CompanySettings';

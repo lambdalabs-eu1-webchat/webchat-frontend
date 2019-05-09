@@ -16,7 +16,7 @@ class CompanySettings extends React.Component {
     this.props = props;
     const {
       hotel,
-      rooms,
+      // rooms,
       currentUser,
       dispatchFetchSingleHotel,
       dispatchFetchRoomsForHotel,
