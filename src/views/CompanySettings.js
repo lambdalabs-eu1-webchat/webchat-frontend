@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchSingleHotel, updateHotel } from '../store/actions/hotel';
+import {deleteRoomForHotel, updateRoomForHotel, fetchRoomsForHotel, createRoomForHotel} from '../store/actions/rooms';
 
 import SuperAdminNav from '../components/SuperAdminNav';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
-
 
 class CompanySettings extends React.Component {
   constructor(props) {
     super(props);
 
     this.props = props;
-    const { hotel, rooms, currentUser, dispatchFetchSingleHotel, dispatchFetchRoomsForHotel } = this.props;
+    const { hotel, currentUser, dispatchFetchSingleHotel, dispatchFetchRoomsForHotel } = this.props;
     this.state = {
       companyName: hotel.name,
       companyMotto: hotel.motto,
@@ -35,7 +35,6 @@ class CompanySettings extends React.Component {
   handleSubmit(hotelId, dispatchUpdateHotel) {
 
     return (event) => {
-      console.log(event);
       event.preventDefault();
       const { companyName, companyMotto } = this.state;
       if (!companyMotto || !companyName) {
@@ -54,13 +53,12 @@ class CompanySettings extends React.Component {
   }
 
   render() {
-    const { hotel, rooms, dispatchUpdateHotel, dispatchDeleteRoomForHotel, currentUser, dispatchUpdateRoomForHotel } = this.props;
 
     return (
         <div className="company-settings" >
           <SuperAdminNav/>
-          <div>
-            <h2>Company Settings</h2>
+          <h2>Company Settings</h2>
+          <div className="company-settings-wrapper">
             <section className="company-details">
               <h3>Update company details</h3>
               <form>
@@ -74,7 +72,15 @@ class CompanySettings extends React.Component {
                 </div>
               </form>
             </section>
-            <CompanySettingsRoomsList rooms={rooms} currentUser={currentUser} deleteRoomForHotel={dispatchDeleteRoomForHotel} updateRoomForHotel={dispatchUpdateRoomForHotel} handleInputChange={this.handleInputChange} />
+            <CompanySettingsRoomsList
+              rooms={rooms}
+              hotelId={hotel.id}
+              currentUser={currentUser}
+              deleteRoomForHotel={dispatchDeleteRoomForHotel}
+              updateRoomForHotel={dispatchUpdateRoomForHotel}
+              handleInputChange={this.handleInputChange.bind(this)}
+              createRoomForHotel={dispatchCreateRoomForHotel}
+            />
           </div>
         </div>
     );
@@ -88,6 +94,7 @@ CompanySettings.propTypes = {
   dispatchUpdateHotel: PropTypes.func.isRequired,
   dispatchDeleteRoomForHotel: PropTypes.func.isRequired,
   dispatchUpdateRoomForHotel: PropTypes.func.isRequired,
+  dispatchCreateRoomForHotel: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -102,4 +109,5 @@ export default connect(mapStateToProps, {
   dispatchFetchRoomsForHotel: fetchRoomsForHotel,
   dispatchDeleteRoomForHotel: deleteRoomForHotel,
   dispatchUpdateRoomForHotel: updateRoomForHotel,
+  dispatchCreateRoomForHotel: createRoomForHotel,
 })(CompanySettings);
