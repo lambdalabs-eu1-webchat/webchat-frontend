@@ -111,10 +111,10 @@ export const fetchAllClosedChatsFailure = error => {
   };
 };
 
-export const setCurrentChatId = chat_id => {
+export const setCurrentChatId = (chat_id, status) => {
   return {
     type: SET_CURRENT_CHAT_ID,
-    payload: chat_id,
+    payload: { chat_id, status },
   };
 };
 

@@ -17,7 +17,7 @@ const initState = {
   queuedChats: [],
   activeChats: [],
   socket: null,
-  currentChatId: null,
+  currentChatIdAndStatus: null,
 };
 
 const chats = (state = initState, action) => {
@@ -55,9 +55,9 @@ const chats = (state = initState, action) => {
     case FETCH_CLOSED_CHATS_SUCCESS:
       return { ...state, closedChats: action.payload };
     case CLEAR_CURRENT_CHAT_ID:
-      return { ...state, currentChatId: null };
+      return { ...state, currentChatIdAndStatus: null };
     case SET_CURRENT_CHAT_ID:
-      return { ...state, currentChatId: action.payload };
+      return { ...state, currentChatIdAndStatus: action.payload };
     default:
       return state;
   }

@@ -8,7 +8,7 @@ const filterTickets = (tickets, filterCond) => {
 
 const TicketView = ({ chatsArr, status, setCurrentChatId }) => {
   const handleChatSelect = chat_id => {
-    setCurrentChatId(chat_id);
+    setCurrentChatId(chat_id, status);
   };
   return (
     <div>
