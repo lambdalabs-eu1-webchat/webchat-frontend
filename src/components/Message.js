@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 
 function Message({ message, guest_id }) {
-  if (!message.sender) debugger;
   return (
     <StyledMessage left={guest_id === message.sender.id}>
       <span>{message.sender.name} : </span>

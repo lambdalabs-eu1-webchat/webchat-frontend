@@ -11,7 +11,19 @@ const {
   FETCH_CLOSED_CHATS,
   FETCH_CLOSED_CHATS_SUCCESS,
   FETCH_CLOSED_CHATS_FAILURE,
+  SAVE_SOCKET,
 } = CHATS;
+
+export const saveSocket = socket => {
+  if (!socket) {
+    throw new Error('saveSocket requires socket');
+  } else {
+    return {
+      type: SAVE_SOCKET,
+      payload: socket,
+    };
+  }
+};
 
 export const addActiveChats = chatLogs => {
   if (!chatLogs) {

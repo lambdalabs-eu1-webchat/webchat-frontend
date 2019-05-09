@@ -1,28 +1,48 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 
+import { SOCKET } from '../utils/paths';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
-function MessageComposer({ messageInput, setMessageInput, sendMessage }) {
-  function updateInput(event) {
-    setMessageInput(event.target.value);
+class MessageComposer extends React.Component {
+  state = {
+    inputValue: '',
+  };
+  handleSend = () => {
+    this.props.socket.emit(SOCKET.MESSAGE, {
+      chat_id: this.props.chat_id,
+      text: this.state.inputValue,
+    });
+    this.setInputValue('');
+  };
+
+  handleInput = event => {
+    this.setInputValue(event.target.value);
+  };
+  setInputValue = value => {
+    this.setState({ inputValue: value });
+  };
+  render() {
+    return (
+      <StyledMessageComposer>
+        <Input
+          value={this.state.inputValue}
+          onChange={this.handleInput}
+          className='flex'
+        />
+        <Button onClick={this.handleSend}>Send</Button>
+      </StyledMessageComposer>
+    );
   }
-  return (
-    <StyledMessageComposer>
-      <Input className='flex' onChange={updateInput} value={messageInput} />
-      <Button onClick={sendMessage}>Send</Button>
-    </StyledMessageComposer>
-  );
 }
 
 MessageComposer.propTypes = {
-  messageInput: propTypes.string.isRequired,
-  sendMessage: propTypes.func.isRequired,
-  setMessageInput: propTypes.func.isRequired,
+  chat_id: propTypes.string.isRequired,
+  socket: propTypes.object.isRequired,
 };
-
 const StyledMessageComposer = styled.div`
   display: flex;
   width: 100%;
@@ -31,5 +51,15 @@ const StyledMessageComposer = styled.div`
     flex: 1;
   }
 `;
+// need to get the socket here to emit connect props
 
-export default MessageComposer;
+const mapStateToProps = state => {
+  return {
+    socket: state.chats.socket,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {},
+)(MessageComposer);
