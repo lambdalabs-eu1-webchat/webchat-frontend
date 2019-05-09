@@ -33,6 +33,7 @@ class App extends React.Component {
     if (token && this.state.socketInit) {
       this.setState({ socketInit: false });
       const socket = socketIOClient(DOMAIN);
+      this.props.dispatchSaveSocket(socket);
       socket.on(SOCKET.CONNECTION, () => {
         // set up listeners
         socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
