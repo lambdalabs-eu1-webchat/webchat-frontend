@@ -46,7 +46,14 @@ class EmployeeSettings extends React.Component {
     if (password === passwordRetype) {
       return true;
     } else {
-      return alert('Both passwords must match');
+      this.setState({
+        employeeChanges: {
+          ...this.state.employeeChanges,
+          password: '',
+          passwordConf: '',
+        }
+      })
+      return alert('Passwords must match');
     }
   };
 
