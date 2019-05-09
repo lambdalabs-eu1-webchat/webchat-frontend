@@ -1,71 +1,63 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
-function Router({ user_type }) {
-  if (!user_type) {
+import Logout from './Logout';
+import HomePage from '../views/HomePage';
+import Chat from '../views/Chat';
+import Login from '../views/Login';
+import Register from '../views/Register';
+import Billing from '../views/Billing';
+import TeamMembers from '../views/TeamMembers';
+
+function Router({ user }) {
+  if (!user) {
     return (
-      <React.Fragment>
+      <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/login' component={Login} />
-      </React.Fragment>
+        <Route path='/register' component={Register} />
+        <Route render={() => <div>404 not found</div>} />
+      </Switch>
+    );
+  } else if (user.user_type === 'admin') {
+    return (
+      <Switch>
+        <Route path='/logout' component={Logout} />
+        <Route path='/team-members' component={TeamMembers} />
+        <Route exact path='/chat' component={Chat} />
+        <Route
+          path='/account-settings'
+          render={() => <div>account settings</div>}
+        />
+        <Route render={() => <div>404 not found</div>} />
+      </Switch>
+    );
+  } else if (user.user_type === 'super admin') {
+    return (
+      <Switch>
+        <Route path='/logout' component={Logout} />
+        <Route path='/team-members' component={TeamMembers} />
+        <Route path='/billing' component={Billing} />
+        <Route exact path='/chat' component={Chat} />
+        <Route
+          path='/account-settings'
+          render={() => <div>account settings</div>}
+        />
+      </Switch>
+    );
+  } else if (user.user_type === 'receptionist') {
+    return (
+      <Switch>
+        <Route path='/logout' component={Logout} />
+        <Route exact path='/chat' component={Chat} />
+        <Route
+          path='/account-settings'
+          render={() => <div>account settings</div>}
+        />
+      </Switch>
     );
   }
-  else if (user_type ==== 'admin'){
-    return <React.Fragment><Route
-        path='/logout'
-        render={
-          Logout
-           
-          
-        }
-      /></React.Fragment>
-  } else if (user_type ==='super admin'){
-
-  }else if(user_type === 'receptionist'){
-  }
-    // <Route
-    //     exact
-    //     path='/chat'
-    //     render={props => (
-    //       <Chat  />
-    //     )}
-    //   />
-  // } return (
-  //   <React.Fragment>
-  //     <Route
-  //       path='/register'
-  //       render={props => (
-  //         <Register
-  //           {...props}
-  //           loggedIn={Boolean(state.authToken)}
-  //           registerUser={dispatchRegisterUser}
-  //         />
-  //       )}
-  //     />
-      
-  //     <Route
-  //       path='/logout'
-  //       render={props => (
-  //         <Logout
-  //           {...props}
-  //           loggedIn={Boolean(state.authToken)}
-  //           logout={dispatchLogout}
-  //         />
-  //       )}
-  //     />
-  //     <Route
-  //       path='/billing'
-  //       render={props => (
-  //         <Billing {...props} loggedIn={Boolean(state.authToken)} />
-  //       )}
-  //     />
-  //     <Route
-  //       path='/team-members'
-  //       render={props => (
-  //         <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
-  //       )}
-  //     />
-  //   </React.Fragment>
-  // );
 }
+
+export default Router;
