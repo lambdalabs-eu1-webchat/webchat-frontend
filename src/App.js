@@ -1,10 +1,8 @@
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAllUsers } from './store/actions/users';
 import socketIOClient from 'socket.io-client';
-import { loginRequest, registerUser, logout } from './store/actions/auth';
 import { DOMAIN, SOCKET } from './utils/paths';
 import {
   addActiveChats,
@@ -91,16 +89,9 @@ class App extends React.Component {
   }
 
   render() {
-    const {
-      state,
-      dispatchLoginRequest,
-      dispatchRegisterUser,
-      dispatchFetchAllUsers,
-      dispatchLogout,
-    } = this.props;
     return (
       <div className='App'>
-        <NavBar />
+        <NavBar loggedIn={!!this.props.currentUser.user_type} />
         <Router user_type={this.props.currentUser.user_type} />
       </div>
     );
@@ -109,9 +100,6 @@ class App extends React.Component {
 
 App.propTypes = {
   currentUser: PropTypes.object.isRequired,
-  dispatchLoginRequest: PropTypes.func.isRequired,
-  dispatchRegisterUser: PropTypes.func.isRequired,
-  dispatchLogout: PropTypes.func.isRequired,
   dispatchSaveSocket: PropTypes.func.isRequired,
   dispatchAddActiveChats: PropTypes.func.isRequired,
   dispatchAddQueuedChats: PropTypes.func.isRequired,
@@ -126,10 +114,6 @@ export default withRouter(
   connect(
     mapStateToProps,
     {
-      dispatchLoginRequest: loginRequest,
-      dispatchRegisterUser: registerUser,
-      dispatchFetchAllUsers: fetchAllUsers,
-      dispatchLogout: logout,
       dispatchAddActiveChats: addActiveChats,
       dispatchAddQueuedChats: addQueuedChats,
       dispatchAddMessage: addMessage,

@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import propTypes from 'prop-types';
+import { Route, Switch } from 'react-router-dom';
 
 import Logout from './Logout';
 import HomePage from '../views/HomePage';
@@ -68,4 +68,7 @@ function Router({ user_type }) {
   }
 }
 
+Router.propTypes = {
+  user_type: propTypes.string.isRequired,
+};
 export default Router;

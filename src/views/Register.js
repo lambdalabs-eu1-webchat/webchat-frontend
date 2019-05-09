@@ -30,7 +30,7 @@ const handleRegister = (event, registerUser) => {
   });
   let blank = false;
   if (name && email && password && hotelName) {
-    registerUser(name, email, password, hotelName);
+    registerUser(name, email, password, motto, hotelName, hotelMotto);
   } else {
     blank = true;
   }

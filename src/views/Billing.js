@@ -127,7 +127,7 @@ Billing.propTypes = {
 
 const mapStateToProps = state => ({
   hotel: state.hotel,
-  hotel_id: state.currentUser.hotel_id,
+  hotel_id: state.currentUser.hotel_id, // do we need to bring this and the hotel object in
   staff: state.users,
 });
 
