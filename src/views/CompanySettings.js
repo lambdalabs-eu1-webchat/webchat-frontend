@@ -10,13 +10,17 @@ class CompanySettings extends React.Component {
     super(props);
 
     this.props = props;
-    const { hotel, currentUser, state, dispatchFetchSingleHotel, dispatchFetchRoomsForHotel } = this.props;
-    this.state = { companyName: hotel.name, companyMotto: hotel.motto };
+    const { hotel, rooms, currentUser, dispatchFetchSingleHotel, dispatchFetchRoomsForHotel } = this.props;
+    this.state = {
+      companyName: hotel.name,
+      companyMotto: hotel.motto,
     };
     dispatchFetchSingleHotel(currentUser.hotel_id);
+    dispatchFetchRoomsForHotel(currentUser.hotel_id);
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
+
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -24,10 +28,12 @@ class CompanySettings extends React.Component {
     this.setState({
       [name]: value
     });
-  }
+  };
 
   handleSubmit(hotelId, dispatchUpdateHotel) {
+
     return (event) => {
+      console.log(event);
       event.preventDefault();
       const { companyName, companyMotto } = this.state;
       if (!companyMotto || !companyName) {
@@ -46,10 +52,10 @@ class CompanySettings extends React.Component {
   }
 
   render() {
-    const { hotel, state, dispatchUpdateHotel, dispatchFetchSingleHotel } = this.props;
+    const { hotel, rooms, dispatchUpdateHotel, dispatchDeleteRoomForHotel, currentUser, dispatchUpdateRoomForHotel } = this.props;
 
     return (
-        <div className="company-settings">
+        <div className="company-settings" >
           <SuperAdminNav/>
           <div>
             <h2>Company Settings</h2>
@@ -66,8 +72,8 @@ class CompanySettings extends React.Component {
                 </div>
               </form>
             </section>
+            <CompanySettingsRoomsList rooms={rooms} currentUser={currentUser} deleteRoomForHotel={dispatchDeleteRoomForHotel} updateRoomForHotel={dispatchUpdateRoomForHotel} handleInputChange={this.handleInputChange} />
           </div>
-
         </div>
     );
   };
