@@ -45,25 +45,27 @@ class CompanySettings extends React.Component {
   }
 
   render() {
-    const { state, dispatchUpdateHotel, dispatchFetchSingleHotel } = this.props;
+    const { hotel, state, dispatchUpdateHotel, dispatchFetchSingleHotel } = this.props;
+
     return (
         <div className="company-settings">
           <SuperAdminNav/>
-          <h2>Company Settings</h2>
-          <section className="company-details">
-            <h3>Update company details</h3>
-            <form>
-              <label>Name</label>
-              <input name="companyName" className="form-input" placeholder={state.hotel.name} onChange={this.handleInputChange.bind(this)}  />
-              <label>Company Motto</label>
-              <input name="companyMotto" className="form-input" placeholder={state.hotel.motto} onChange={this.handleInputChange.bind(this)} />
-              <div className="action-buttons">
-                <button onClick={this.handleClear().bind(this)}>Clear</button>
-                <button onClick={this.handleSubmit(state.hotel._id, dispatchUpdateHotel).bind(this)}>Save</button>
-              </div>
-            </form>
-          </section>
-
+          <div>
+            <h2>Company Settings</h2>
+            <section className="company-details">
+              <h3>Update company details</h3>
+              <form>
+                <label>Name</label>
+                <input name="companyName" className="form-input" placeholder={hotel.name} onChange={this.handleInputChange.bind(this)}  />
+                <label>Company Motto</label>
+                <input name="companyMotto" className="form-input" placeholder={hotel.motto} onChange={this.handleInputChange.bind(this)} />
+                <div className="action-buttons">
+                  <Button variant="contained" color="primary" onClick={this.handleClear().bind(this)}>Clear</Button>
+                  <Button variant="contained" color="primary" onClick={this.handleSubmit(hotel._id, dispatchUpdateHotel).bind(this)}>Save</Button>
+                </div>
+              </form>
+            </section>
+          </div>
 
         </div>
     );
@@ -71,12 +73,15 @@ class CompanySettings extends React.Component {
 }
 
 CompanySettings.propTypes = {
-  state: PropTypes.shape().isRequired,
+  hotel: PropTypes.object.isRequired,
   dispatchFetchSingleHotel: PropTypes.func.isRequired,
   dispatchUpdateHotel: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({ state });
+const mapStateToProps = state => ({
+  hotel: state.hotel,
+  currentUser: state.currentUser,
+});
 
 export default connect(mapStateToProps, {
   dispatchFetchSingleHotel: fetchSingleHotel,
