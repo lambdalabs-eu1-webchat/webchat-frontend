@@ -108,16 +108,18 @@ class App extends React.Component {
       dispatchLogout,
     } = this.props;
 
+    const isLoggedIn = Boolean(state.currentUser.token);
+
     return (
       <div className="App">
-        <NavBar loggedIn={Boolean(state.authToken)} />
+        <NavBar loggedIn={isLoggedIn} />
         <Route
           exact
           path="/"
           render={props => (
             <HomePage
               {...props}
-              loggedIn={Boolean(state.authToken)}
+              loggedIn={isLoggedIn}
               fetchAllUsers={dispatchFetchAllUsers}
             />
           )}
@@ -127,7 +129,7 @@ class App extends React.Component {
           render={props => (
             <Login
               {...props}
-              loggedIn={Boolean(state.authToken)}
+              loggedIn={isLoggedIn}
               loginRequest={dispatchLoginRequest}
             />
           )}
@@ -137,7 +139,7 @@ class App extends React.Component {
           render={props => (
             <Register
               {...props}
-              loggedIn={Boolean(state.authToken)}
+              loggedIn={isLoggedIn}
               registerUser={dispatchRegisterUser}
             />
           )}
@@ -146,7 +148,7 @@ class App extends React.Component {
           exact
           path="/chat"
           render={props => (
-            <Chat {...props} loggedIn={Boolean(state.authToken)} />
+            <Chat {...props} loggedIn={isLoggedIn} />
           )}
         />
 
@@ -155,7 +157,7 @@ class App extends React.Component {
           render={props => (
             <Logout
               {...props}
-              loggedIn={Boolean(state.authToken)}
+              loggedIn={isLoggedIn}
               logout={dispatchLogout}
             />
           )}
@@ -167,7 +169,7 @@ class App extends React.Component {
           render={props => (
             <TeamMembers
                 {...props}
-                loggedIn={Boolean(state.authToken)}
+                loggedIn={isLoggedIn}
             />
           )}
         />
@@ -176,7 +178,7 @@ class App extends React.Component {
           render={props => (
             <CompanySettings
                 {...props}
-                loggedIn={Boolean(state.authToken)}
+                loggedIn={isLoggedIn}
             />
           )}
 
@@ -185,7 +187,7 @@ class App extends React.Component {
         <Route
           path="/billing"
           render={props => (
-            <Billing {...props} loggedIn={Boolean(state.authToken)} />
+            <Billing {...props} loggedIn={isLoggedIn} />
           )}
         />
       </div>

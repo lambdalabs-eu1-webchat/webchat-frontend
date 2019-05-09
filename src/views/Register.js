@@ -82,7 +82,7 @@ const Register = ({ loggedIn, registerUser }) => {
         <label>Hotel Motto</label>
         <input name="hotelMotto" placeholder="Your hotel motto..." type="text" />
         <p id="result-message" />
-        <button type="submit" onClick={(e) => {handleRegister(e, registerUser)}}>Register</button>
+        <button type="submit" onClick={(e) => handleRegister(e, registerUser)}>Register</button>
       </form>
     </div>
   )

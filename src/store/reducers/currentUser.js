@@ -1,6 +1,6 @@
 import { LOGIN_SUCCESS, LOGOUT } from '../actions/actionTypes';
 
-const initialState = { _id: null, hotel_id: null, email: '', token: null, user_type: '', name: '', hotel_name: '', hotel_motto: '', motto: '' };
+const initialState = { _id: '', hotel_id: '', email: '', token: '', user_type: '', name: '', hotel_name: '', hotel_motto: '', motto: '' };
 
 const currentUser = (state = initialState, action) => {
   switch (action.type) {
