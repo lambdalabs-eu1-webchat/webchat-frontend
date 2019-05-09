@@ -17,7 +17,7 @@ import {
 } from "./store/actions/chat";
 
 import NavBar from "./components/layout/navbar/NavBar";
-import Logout from "./components/logout/Logout";
+// import Logout from "./components/logout/Logout";
 import Footer from "./components/layout/Footer";
 import HomePage from "./views/HomePage";
 import Chat from "./views/Chat";
@@ -116,16 +116,16 @@ class App extends React.Component {
           )}
         />
 
-        <Route
+        {/* <Route
           path="/logout"
           render={(props) => (
-            <Logout
-              {...props}
-              loggedIn={Boolean(state.authToken)}
-              logout={dispatchLogout}
-            />
+            // <Logout
+            //   {...props}
+            //   loggedIn={Boolean(state.authToken)}
+            //   logout={dispatchLogout}
+            // />
           )}
-        />
+        /> */}
 
         {/* <Route
           path="/logout"
