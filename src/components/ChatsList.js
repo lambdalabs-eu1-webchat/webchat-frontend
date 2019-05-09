@@ -9,12 +9,16 @@ class ChatsList extends React.Component {
     inputField: '',
   };
 
+  searchInputField = input => {
+    this.setState({ inputField: input });
+  };
+
   render() {
     const { chatsArr, status } = this.props;
     return (
       <div style={divStyle}>
         <h3>{`${status.toUpperCase()} chats`}</h3>
-        <SearchInput status={status} />
+        <SearchInput status={status} searchInputField={this.searchInputField} />
         <TicketView chatsArr={chatsArr} status={status} />
       </div>
     );
