@@ -10,9 +10,9 @@ class CompanySettings extends React.Component {
     super(props);
 
     this.props = props;
-    const { state, dispatchFetchSingleHotel } = this.props;
-    this.state = { companyName: state.hotel.name, companyMotto: state.hotel.motto };
-    dispatchFetchSingleHotel(state.currentUser.hotel_id);
+    const { hotel, currentUser, state, dispatchFetchSingleHotel, dispatchFetchRoomsForHotel } = this.props;
+    this.state = { companyName: hotel.name, companyMotto: hotel.motto };
+    dispatchFetchSingleHotel(currentUser.hotel_id);
   }
 
   handleInputChange(event) {
