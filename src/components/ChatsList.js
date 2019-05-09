@@ -4,15 +4,22 @@ import PropTypes from 'prop-types';
 import TicketView from './TicketView';
 import SearchInput from './SearchInput';
 
-const ChatsList = ({ chatsArr, status }) => {
-  return (
-    <div style={divStyle}>
-      <h3>{`${status.toUpperCase()} chats`}</h3>
-      <SearchInput status={status} />
-      <TicketView chatsArr={chatsArr} status={status} />
-    </div>
-  );
-};
+class ChatsList extends React.Component {
+  state = {
+    inputField: '',
+  };
+
+  render() {
+    const { chatsArr, status } = this.props;
+    return (
+      <div style={divStyle}>
+        <h3>{`${status.toUpperCase()} chats`}</h3>
+        <SearchInput status={status} />
+        <TicketView chatsArr={chatsArr} status={status} />
+      </div>
+    );
+  }
+}
 
 ChatsList.propTypes = {
   chatsArr: PropTypes.array.isRequired,
