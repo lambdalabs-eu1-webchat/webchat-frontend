@@ -5,6 +5,7 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 
 import { fetchSingleHotel } from '../store/actions/hotel';
+import { fetchHotelStaff } from '../store/actions/users';
 import {
   switchCustomerPlan,
   createNewCustomer,
@@ -13,6 +14,7 @@ import {
 import { planIds } from '../utils/plans';
 import PlanCards from '../components/PlanCards';
 import PaymentMethod from '../components/PaymentMethod';
+import SuperAdminNav from '../components/SuperAdminNav';
 
 const BillingWrapper = styled.div`
   padding: 10% 25%;
@@ -25,8 +27,8 @@ class Billing extends React.Component {
   };
 
   componentDidMount() {
-    // hardcoded until merged with updated branch for get current user on login inc. hotel_id key
-    this.props.fetchSingleHotel('5ccfe730a3c45a0394b71a30');
+    this.props.fetchSingleHotel(this.props.hotel_id);
+    this.props.fetchHotelStaff(this.props.hotel_id);
   }
 
   handleInputChange = event => {
@@ -47,9 +49,22 @@ class Billing extends React.Component {
     });
   };
 
+  checkPlanSwitchEligibility = plan => {
+    if (plan === 'free' && this.props.staff.length > 5) {
+      return false;
+    } else if (plan === 'pro' && this.props.staff.length > 15) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   fireSwitchCustomerPlan = plan => {
+    const checkSwitchEligibility = this.checkPlanSwitchEligibility(plan);
     if (!this.props.hotel.billing) {
       return alert('Please add a payment method before switching plan');
+    } else if (!checkSwitchEligibility) {
+      return alert('You have too many staff accounts to switch to this plan');
     } else {
       const newPlan = { newPlan: planIds[plan] };
       this.props.switchCustomerPlan(this.props.hotel._id, newPlan);
@@ -80,6 +95,7 @@ class Billing extends React.Component {
   render() {
     return (
       <BillingWrapper>
+        <SuperAdminNav />
         <h2>Billing</h2>
         <PlanCards
           hotel={this.props.hotel}
@@ -105,10 +121,14 @@ Billing.propTypes = {
   createNewCustomer: PT.func.isRequired,
   switchCustomerPlan: PT.func.isRequired,
   updateCustomerMethod: PT.func.isRequired,
+  fetchHotelStaff: PT.func.isRequired,
+  staff: PT.array.isRequired,
 };
 
 const mapStateToProps = state => ({
   hotel: state.hotel,
+  hotel_id: state.currentUser.hotel_id,
+  staff: state.users,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -118,6 +138,7 @@ const mapDispatchToProps = dispatch => {
       createNewCustomer,
       switchCustomerPlan,
       updateCustomerMethod,
+      fetchHotelStaff,
     },
     dispatch,
   );
