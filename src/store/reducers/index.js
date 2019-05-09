@@ -9,6 +9,7 @@ export default combineReducers({
   users,
   authToken,
   chats,
+  hotel,
   currentUser,
   hotel,
 });

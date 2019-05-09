@@ -1,6 +1,7 @@
 import {
   FETCH_SINGLE_HOTEL_SUCCESS,
-  UPDATE_HOTEL_SUCCESS,
+  UPDATE_HOTEL_SUCCESS, 
+  SUBSCRIPTIONS,
 } from '../actions/actionTypes';
 
 const initialState = { plan: '', _id: '', name: '', motto: '', rooms: [], _v: 0 };
@@ -15,6 +16,12 @@ const hotel = (state = initialState, action) => {
       }
       return hotel;
     }
+    case SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN_SUCCESS:
+      return action.payload.updatedHotel;
+    case SUBSCRIPTIONS.CREATE_NEW_CUSTOMER_SUCCESS:
+      return action.payload.updatedHotel;
+    case SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_SUCCESS:
+      return action.payload.updatedHotel;
     default:
       return state;
   }

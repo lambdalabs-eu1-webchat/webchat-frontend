@@ -1,28 +1,29 @@
 import { DOMAIN, HOTEL } from '../../utils/paths';
 import {
-  FETCH_SINGLE_HOTEL_SUCCESS,
-  FETCH_SINGLE_HOTEL_FAILURE,
-  FETCH_SINGLE_HOTEL,
   UPDATE_HOTEL_SUCCESS,
   UPDATE_HOTEL_FAILURE,
   UPDATE_HOTEL,
+  FETCH_SINGLE_HOTEL,
+  FETCH_SINGLE_HOTEL_SUCCESS,
+  FETCH_SINGLE_HOTEL_FAILURE,
 } from './actionTypes';
 
 // Synchronous action creators
 
 export const fetchSingleHotelSuccess = hotel => {
-  if (!hotel) {
-    throw new Error('fetchSingleHotelSuccess requires a hotel argument');
-  }
-  return {
-    type: FETCH_SINGLE_HOTEL_SUCCESS,
-    payload: {
-      hotel,
-    },
+    if (!hotel) {
+      throw new Error('fetchSingleHotelSuccess requires a hotel argument');
+    }
+    return {
+      type: FETCH_SINGLE_HOTEL_SUCCESS,
+      payload: {
+        hotel,
+      },
+    };
   };
-};
 
 export const fetchSingleHotelFailure = error => {
+
   if (!error) {
     throw new Error('fetchSingleHotelFailure requires an error argument');
   }
