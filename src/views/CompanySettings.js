@@ -60,8 +60,8 @@ class CompanySettings extends React.Component {
                 <label>Company Motto</label>
                 <input name="companyMotto" className="form-input" placeholder={hotel.motto} onChange={this.handleInputChange.bind(this)} />
                 <div className="action-buttons">
-                  <Button variant="contained" color="primary" onClick={this.handleClear().bind(this)}>Clear</Button>
-                  <Button variant="contained" color="primary" onClick={this.handleSubmit(hotel._id, dispatchUpdateHotel).bind(this)}>Save</Button>
+                  <button onClick={this.handleClear().bind(this)}>Clear</button>
+                  <button onClick={this.handleSubmit(hotel._id, dispatchUpdateHotel).bind(this)}>Save</button>
                 </div>
               </form>
             </section>
