@@ -14,8 +14,9 @@ import {
   saveSocket,
 } from './store/actions/chat';
 
-import NavBar from './components/NavBar';
+import NavBar from './components/layout/navbar/NavBar';
 import Router from './components/Router';
+import Footer from './components/layout/Footer';
 import './App.css';
 
 class App extends React.Component {
@@ -91,8 +92,9 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <NavBar loggedIn={!!this.props.currentUser.user_type} />
+        <NavBar currentUser={this.props.currentUser} />
         <Router user_type={this.props.currentUser.user_type} />
+        <Footer />
       </div>
     );
   }
