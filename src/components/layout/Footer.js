@@ -3,31 +3,29 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-
 const styles = (theme) => ({
   root: {
     flexGrow: 1,
     marginTop: 10,
-    textColor: "ffffff",
-    backgroundColor: "#2f465e",
-    borderTop: "solid 6px #0CD4AF",
-    paddingTop: "20px",
-    overflowX: "hiden",
-    color: "#fff",
-    fontSize: "18px",
+    textColor: 'ffffff',
+    backgroundColor: '#2f465e',
+    borderTop: 'solid 6px #0CD4AF',
+    paddingTop: '20px',
+    overflowX: 'hiden',
+    color: '#fff',
+    fontSize: '18px'
     // borderBottom: "solid 6px #0CD4AF",
   },
   footerSections: {
-    margin: "3px",
-    padding: "10px",
-    color: "rgba(255,255,255)",
+    margin: '3px',
+    padding: '10px',
+    color: 'rgba(255,255,255)'
   },
-  subFooter:{
-      color: "rgba(255,255,255)",
-      paddingBottom:"8px",
-      margin:"20px",
-      color: "#fff",
-      fontSize: "18px"
+  subFooter: {
+    paddingBottom: '8px',
+    margin: '20px',
+    color: '#fff',
+    fontSize: '18px'
   }
 });
 
@@ -42,25 +40,19 @@ class Footer extends React.Component {
         <div className={classes.root}>
           <Grid container spacing={24}>
             <Grid item xs={12} sm={4}>
-              <Typography
-                className={classes.footerSections}
-              >
+              <Typography className={classes.footerSections}>
                 psum dolor sit amet salami ham hock ham, hamburger corned beef
                 short ribs kielbasa biltong
               </Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Typography
-                className={classes.footerSections}
-              >
+              <Typography className={classes.footerSections}>
                 psum dolor sit amet salami ham hock ham, hamburger corned beef
                 short ribs kielbasa biltong
               </Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Typography
-                className={classes.footerSections}
-              >
+              <Typography className={classes.footerSections}>
                 psum dolor sit amet salami ham hock ham, hamburger corned beef
                 short ribs kielbasa biltong
               </Typography>

@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import { Route, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { fetchAllUsers } from "./store/actions/users";
-import socketIOClient from "socket.io-client";
-import { loginRequest, registerUser, logout } from "./store/actions/auth";
-import { DOMAIN, SOCKET } from "./utils/paths";
+import { Route, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchAllUsers } from './store/actions/users';
+import socketIOClient from 'socket.io-client';
+import { loginRequest, registerUser, logout } from './store/actions/auth';
+import { DOMAIN, SOCKET } from './utils/paths';
 import {
   addActiveChats,
   addQueuedChats,
@@ -14,12 +14,12 @@ import {
   addQueuedChat,
   removeQueuedChat,
   fetchClosedChats,
-  saveSocket,
+  saveSocket
 } from './store/actions/chat';
 
 import NavBar from './components/layout/navbar/NavBar';
 import Logout from './components/Logout';
-import Footer from './components/layout/Footer'
+import Footer from './components/layout/Footer';
 import HomePage from './views/HomePage';
 import Chat from './views/Chat';
 import Login from './views/Login';
@@ -40,7 +40,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (token && this.state.socketInit) {
       this.setState({ socketInit: false });
       const socket = socketIOClient(DOMAIN);
@@ -49,16 +49,16 @@ class App extends React.Component {
         socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
           this.props.dispatchAddMessage(chat_id, message);
         });
-        socket.on(SOCKET.ACTIVE_CHATS, chatLogs => {
+        socket.on(SOCKET.ACTIVE_CHATS, (chatLogs) => {
           this.props.dispatchAddActiveChats(chatLogs);
         });
-        socket.on(SOCKET.QUEUED_CHATS, chatLogs => {
+        socket.on(SOCKET.QUEUED_CHATS, (chatLogs) => {
           this.props.dispatchAddQueuedChats(chatLogs);
         });
-        socket.on(SOCKET.ADD_QUEUED, chatLog => {
+        socket.on(SOCKET.ADD_QUEUED, (chatLog) => {
           this.props.dispatchAddQueuedChat(chatLog);
         });
-        socket.on(SOCKET.REMOVE_QUEUED, chat_id => {
+        socket.on(SOCKET.REMOVE_QUEUED, (chat_id) => {
           this.props.dispatchRemoveQueuedChat(chat_id);
         });
         // socket.on(SOCKET.CHATLOG, chatLog => {});
@@ -114,8 +114,8 @@ class App extends React.Component {
         <NavBar currentUser={state.currentUser} />
         <Route
           exact
-          path='/'
-          render={props => (
+          path="/"
+          render={(props) => (
             <HomePage
               {...props}
               loggedIn={Boolean(state.authToken)}
@@ -124,8 +124,8 @@ class App extends React.Component {
           )}
         />
         <Route
-          path='/login'
-          render={props => (
+          path="/login"
+          render={(props) => (
             <Login
               {...props}
               loggedIn={Boolean(state.authToken)}
@@ -134,8 +134,8 @@ class App extends React.Component {
           )}
         />
         <Route
-          path='/register'
-          render={props => (
+          path="/register"
+          render={(props) => (
             <Register
               {...props}
               loggedIn={Boolean(state.authToken)}
@@ -145,15 +145,15 @@ class App extends React.Component {
         />
         <Route
           exact
-          path='/chat'
-          render={props => (
+          path="/chat"
+          render={(props) => (
             <Chat {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
         <Route
-          path='/logout'
-          render={props => (
+          path="/logout"
+          render={(props) => (
             <Logout
               {...props}
               loggedIn={Boolean(state.authToken)}
@@ -161,46 +161,45 @@ class App extends React.Component {
             />
           )}
         />
-      
+
         <Route
-          path='/logout'
-          render={props => (
+          path="/logout"
+          render={(props) => (
             <Logout
               {...props}
               loggedIn={Boolean(state.authToken)}
               logout={dispatchLogout}
             />
           )}
-        /> 
+        />
 
         <Route
-          path='/billing'
-          render={props => (
+          path="/billing"
+          render={(props) => (
             <Billing {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
         <Route
-          path='/checkin'
-          render={props => (
+          path="/checkin"
+          render={(props) => (
             <CheckInOrOut {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
         <Route
-          path='/team-members'
-          render={props => (
+          path="/team-members"
+          render={(props) => (
             <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
-  
         <Route
           path="/employee-settings"
-          render={props => (
+          render={(props) => (
             <EmployeeSettings {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
-      <Footer />
+        <Footer />
       </div>
     );
   }
@@ -235,7 +234,7 @@ export default withRouter(
       dispatchAddQueuedChat: addQueuedChat,
       dispatchRemoveQueuedChat: removeQueuedChat,
       dispatchfetchClosedChats: fetchClosedChats,
-      dispatchSaveSocket: saveSocket,
-    },
-  )(App),
+      dispatchSaveSocket: saveSocket
+    }
+  )(App)
 );
