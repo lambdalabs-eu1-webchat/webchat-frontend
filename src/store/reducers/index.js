@@ -3,6 +3,7 @@ import users from './users';
 import authToken from './auth';
 import currentUser from './currentUser';
 import chats from './chats';
+import rooms from './rooms';
 import hotel from './hotel';
 
 export default combineReducers({
@@ -11,4 +12,5 @@ export default combineReducers({
   chats,
   hotel,
   currentUser,
+  rooms,
 });

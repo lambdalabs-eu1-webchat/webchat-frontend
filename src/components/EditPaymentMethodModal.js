@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import PT from 'prop-types';
 import styled from 'styled-components';
 
-import CheckoutForm from './CheckoutForm';
+import PlanCheckoutForm from './PlanCheckoutForm';
 
 const EditPaymentMethodModalWrapper = styled.div`
   display: ${props => props.modalstatus};
@@ -27,15 +27,15 @@ function EditPaymentMethodModal({
 }) {
   return (
     // move this test key into dotenv
-    <StripeProvider apiKey="pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF">
+    <StripeProvider apiKey='pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF'>
       <EditPaymentMethodModalWrapper
         modalstatus={editPaymentMethodModal ? 'block' : 'none'}
       >
-        <Button variant="contained" color="primary" onClick={handleModalSwitch}>
+        <Button variant='contained' color='primary' onClick={handleModalSwitch}>
           x
         </Button>
         <Elements>
-          <CheckoutForm
+          <PlanCheckoutForm
             mode={'edit'}
             fireCreateNewCustomer={fireCreateNewCustomer}
             billingEmail={billingEmail}
@@ -56,6 +56,6 @@ EditPaymentMethodModal.propTypes = {
   editPaymentMethodModal: PT.bool.isRequired,
   handleModalSwitch: PT.func.isRequired,
   fireUpdateCustomerMethod: PT.func.isRequired,
-}
+};
 
 export default EditPaymentMethodModal;

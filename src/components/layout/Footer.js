@@ -1,10 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+
 
 const styles = (theme) => ({
   root: {
@@ -26,12 +24,11 @@ const styles = (theme) => ({
     margin: "3px",
     padding: "10px"
   },
-  subFooter: {
-    //   backgroundColor: "rgb(255, 255, 255)",
-    color: theme.palette.text.secondary,
-    color: "rgba(255,255,255)",
-    paddingBottom: "8px",
-    margin: "20px"
+  subFooter:{
+
+      color: "rgba(255,255,255)",
+      paddingBottom:"8px",
+      margin:"20px",
   },
   footerText: {
     color: "#fff",

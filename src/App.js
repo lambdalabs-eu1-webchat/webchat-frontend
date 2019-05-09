@@ -13,19 +13,22 @@ import {
   addMessage,
   addQueuedChat,
   removeQueuedChat,
-  saveSocket
-} from "./store/actions/chat";
+  fetchClosedChats,
+  saveSocket,
+} from './store/actions/chat';
 
-import NavBar from "./components/layout/navbar/NavBar";
-// import Logout from "./components/logout/Logout";
-import Footer from "./components/layout/Footer";
-import HomePage from "./views/HomePage";
-import Chat from "./views/Chat";
-import Login from "./views/Login";
-import Register from "./views/Register";
-import Billing from "./views/Billing";
-import TeamMembers from "./views/TeamMembers";
-import "./App.css";
+import NavBar from './components/layout/navbar/NavBar';
+import Logout from './components/Logout';
+import Footer from './components/layout/Footer'
+import HomePage from './views/HomePage';
+import Chat from './views/Chat';
+import Login from './views/Login';
+import Register from './views/Register';
+import Billing from './views/Billing';
+import TeamMembers from './views/TeamMembers';
+import EmployeeSettings from './views/EmployeeSettings';
+import CheckInOrOut from './views/CheckInOrOut';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -38,6 +41,36 @@ class App extends React.Component {
 
   componentDidMount() {
     const token = localStorage.getItem("token");
+    if (token && this.state.socketInit) {
+      this.setState({ socketInit: false });
+      const socket = socketIOClient(DOMAIN);
+      socket.on(SOCKET.CONNECTION, () => {
+        // set up listeners
+        socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
+          this.props.dispatchAddMessage(chat_id, message);
+        });
+        socket.on(SOCKET.ACTIVE_CHATS, chatLogs => {
+          this.props.dispatchAddActiveChats(chatLogs);
+        });
+        socket.on(SOCKET.QUEUED_CHATS, chatLogs => {
+          this.props.dispatchAddQueuedChats(chatLogs);
+        });
+        socket.on(SOCKET.ADD_QUEUED, chatLog => {
+          this.props.dispatchAddQueuedChat(chatLog);
+        });
+        socket.on(SOCKET.REMOVE_QUEUED, chat_id => {
+          this.props.dispatchRemoveQueuedChat(chat_id);
+        });
+        // socket.on(SOCKET.CHATLOG, chatLog => {});
+        socket.emit(SOCKET.LOGIN, token);
+      });
+      // temp hotel_id
+      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
+    }
+  }
+
+  componentDidUpdate() {
+    const token = localStorage.getItem('token');
     if (token && this.state.socketInit) {
       this.setState({ socketInit: false });
       const socket = socketIOClient(DOMAIN);
@@ -62,6 +95,8 @@ class App extends React.Component {
         // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
+      // temp hotel_id
+      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
     }
   }
 
@@ -76,11 +111,11 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <NavBar loggedIn={Boolean(state.authToken)} />
+        <NavBar currentUser={state.currentUser} />
         <Route
           exact
-          path="/"
-          render={(props) => (
+          path='/'
+          render={props => (
             <HomePage
               {...props}
               loggedIn={Boolean(state.authToken)}
@@ -89,8 +124,8 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/login"
-          render={(props) => (
+          path='/login'
+          render={props => (
             <Login
               {...props}
               loggedIn={Boolean(state.authToken)}
@@ -99,8 +134,8 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/register"
-          render={(props) => (
+          path='/register'
+          render={props => (
             <Register
               {...props}
               loggedIn={Boolean(state.authToken)}
@@ -110,26 +145,26 @@ class App extends React.Component {
         />
         <Route
           exact
-          path="/chat"
-          render={(props) => (
+          path='/chat'
+          render={props => (
             <Chat {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
-        {/* <Route
-          path="/logout"
-          render={(props) => (
-            // <Logout
-            //   {...props}
-            //   loggedIn={Boolean(state.authToken)}
-            //   logout={dispatchLogout}
-            // />
+        <Route
+          path='/logout'
+          render={props => (
+            <Logout
+              {...props}
+              loggedIn={Boolean(state.authToken)}
+              logout={dispatchLogout}
+            />
           )}
-        /> */}
-
-        {/* <Route
-          path="/logout"
-          render={(props) => (
+        />
+      
+        <Route
+          path='/logout'
+          render={props => (
             <Logout
               {...props}
               loggedIn={Boolean(state.authToken)}
@@ -139,19 +174,33 @@ class App extends React.Component {
         /> */}
 
         <Route
-          path="/billing"
-          render={(props) => (
+          path='/billing'
+          render={props => (
             <Billing {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
 
         <Route
-          path="/team-members"
-          render={(props) => (
+          path='/checkin'
+          render={props => (
+            <CheckInOrOut {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
+        <Route
+          path='/team-members'
+          render={props => (
             <TeamMembers {...props} loggedIn={Boolean(state.authToken)} />
           )}
         />
-        <Footer />
+
+  
+        <Route
+          path="/employee-settings"
+          render={props => (
+            <EmployeeSettings {...props} loggedIn={Boolean(state.authToken)} />
+          )}
+        />
+      <Footer />
       </div>
     );
   }
@@ -185,7 +234,8 @@ export default withRouter(
       dispatchAddMessage: addMessage,
       dispatchAddQueuedChat: addQueuedChat,
       dispatchRemoveQueuedChat: removeQueuedChat,
-      dispatchSaveSocket: saveSocket
-    }
-  )(App)
+      dispatchfetchClosedChats: fetchClosedChats,
+      dispatchSaveSocket: saveSocket,
+    },
+  )(App),
 );

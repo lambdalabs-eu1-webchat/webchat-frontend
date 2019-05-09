@@ -55,6 +55,15 @@ button:hover {
     background: #00A56A;
 }
 
+.Logo{
+    background-image: url(./frontdesklogo.png)
+}
+
+.App-logo {
+    border-radius: 10px;
+    height: 4vmin;
+    pointer-events: none;
+  }
 /* ====== Super Admin NavBar ====== */
 
 .super-admin-nav {
