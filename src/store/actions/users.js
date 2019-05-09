@@ -123,6 +123,10 @@ export const updateUserSuccess = updatedUser => {
   if (!updatedUser) {
     throw new Error('updateUserSuccess requires an updatedUser argument');
   }
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const updatedCurrentUser = { ...currentUser, ...updatedUser };
+  console.log(updatedCurrentUser);
+  localStorage.setItem('currentUser', JSON.stringify(updatedCurrentUser));
   return {
     type: UPDATE_USER_SUCCESS,
     payload: {
@@ -309,4 +313,3 @@ export const deleteUser = id => async (dispatch, getState) => {
     dispatch(deleteUserFailure(error));
   }
 };
-
