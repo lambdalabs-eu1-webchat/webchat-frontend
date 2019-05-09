@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 
 const NavBar = (props) => {
   const { auth } = props;
-  // const navlinks = auth.uid ? <LoggedIn /> : <LoggedOut />
+ 
   return(
     <nav className="nav-wrapper navy darken-2">
        <div className="container">
@@ -15,9 +15,8 @@ const NavBar = (props) => {
        <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" /> </header>
        </NavLink>
-       <LoggedIn />
-       <LoggedOut />
-        {/* {navlinks} */}
+      { props.currentUser ? <LoggedIn usertype={props.currentUser.user_type} /> : <LoggedOut  />}
+
        </div>
     </nav>
   )

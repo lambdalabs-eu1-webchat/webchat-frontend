@@ -73,10 +73,11 @@ class App extends React.Component {
       dispatchFetchAllUsers,
       dispatchLogout,
     } = this.props;
-
+console.log('gththt')
+ console.log(this.props)
     return (
       <div className="App">
-        <NavBar loggedIn={Boolean(state.authToken)} />
+        <NavBar currentUser={state.currentUser} />
         <Route
           exact
           path="/"
