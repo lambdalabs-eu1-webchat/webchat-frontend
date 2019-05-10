@@ -108,6 +108,11 @@ class CheckInForm extends React.Component {
   }
 }
 
+CheckInForm.propTypes = {
+  hotel_id: propTypes.string.isRequired,
+};
+
+
 const CheckInFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -131,9 +136,5 @@ const CheckInFormWrapper = styled.div`
     }
   }
 `;
-
-CheckInForm.propTypes = {
-  hotel_id: propTypes.string.isRequired,
-};
 
 export default CheckInForm;

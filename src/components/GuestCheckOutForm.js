@@ -93,6 +93,10 @@ class CheckOutForm extends React.Component {
   }
 }
 
+CheckOutForm.propTypes = {
+  hotel_id: propTypes.string.isRequired,
+};
+
 const CheckOutFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -106,9 +110,5 @@ const CheckOutFormWrapper = styled.div`
     margin-bottom: 5%;
   }
 `;
-
-CheckOutForm.propTypes = {
-  hotel_id: propTypes.string.isRequired,
-};
 
 export default CheckOutForm;
