@@ -1,11 +1,8 @@
 import React from 'react';
-
-import { Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAllUsers } from './store/actions/users';
 import socketIOClient from 'socket.io-client';
-import { loginRequest, registerUser, logout } from './store/actions/auth';
 import { DOMAIN, SOCKET } from './utils/paths';
 import {
   addActiveChats,
@@ -14,23 +11,13 @@ import {
   addQueuedChat,
   removeQueuedChat,
   fetchClosedChats,
-  saveSocket
+  saveSocket,
 } from './store/actions/chat';
 
 import NavBar from './components/layout/navbar/NavBar';
-import Logout from './components/Logout';
+import Router from './components/Router';
 import Footer from './components/layout/Footer';
-import HomePage from './views/HomePage';
-import Chat from './views/Chat';
-import Login from './views/Login';
-import Register from './views/Register';
-import Billing from './views/Billing';
-import TeamMembers from './views/TeamMembers';
-import CompanySettings from "./views/CompanySettings";
-import EmployeeSettings from './views/EmployeeSettings';
-import CheckInOrOut from './views/CheckInOrOut';
 import './App.css';
-
 
 class App extends React.Component {
   constructor(props) {
@@ -38,7 +25,7 @@ class App extends React.Component {
     this.props = props;
   }
   state = {
-    socketInit: true
+    socketInit: true,
   };
 
   componentDidMount() {
@@ -51,16 +38,16 @@ class App extends React.Component {
         socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
           this.props.dispatchAddMessage(chat_id, message);
         });
-        socket.on(SOCKET.ACTIVE_CHATS, (chatLogs) => {
+        socket.on(SOCKET.ACTIVE_CHATS, chatLogs => {
           this.props.dispatchAddActiveChats(chatLogs);
         });
-        socket.on(SOCKET.QUEUED_CHATS, (chatLogs) => {
+        socket.on(SOCKET.QUEUED_CHATS, chatLogs => {
           this.props.dispatchAddQueuedChats(chatLogs);
         });
-        socket.on(SOCKET.ADD_QUEUED, (chatLog) => {
+        socket.on(SOCKET.ADD_QUEUED, chatLog => {
           this.props.dispatchAddQueuedChat(chatLog);
         });
-        socket.on(SOCKET.REMOVE_QUEUED, (chat_id) => {
+        socket.on(SOCKET.REMOVE_QUEUED, chat_id => {
           this.props.dispatchRemoveQueuedChat(chat_id);
         });
         // socket.on(SOCKET.CHATLOG, chatLog => {});
@@ -82,16 +69,16 @@ class App extends React.Component {
         socket.on(SOCKET.MESSAGE, ({ chat_id, message }) => {
           this.props.dispatchAddMessage(chat_id, message);
         });
-        socket.on(SOCKET.ACTIVE_CHATS, (chatLogs) => {
+        socket.on(SOCKET.ACTIVE_CHATS, chatLogs => {
           this.props.dispatchAddActiveChats(chatLogs);
         });
-        socket.on(SOCKET.QUEUED_CHATS, (chatLogs) => {
+        socket.on(SOCKET.QUEUED_CHATS, chatLogs => {
           this.props.dispatchAddQueuedChats(chatLogs);
         });
-        socket.on(SOCKET.ADD_QUEUED, (chatLog) => {
+        socket.on(SOCKET.ADD_QUEUED, chatLog => {
           this.props.dispatchAddQueuedChat(chatLog);
         });
-        socket.on(SOCKET.REMOVE_QUEUED, (chat_id) => {
+        socket.on(SOCKET.REMOVE_QUEUED, chat_id => {
           this.props.dispatchRemoveQueuedChat(chat_id);
         });
         // socket.on(SOCKET.CHATLOG, chatLog => {});
@@ -103,118 +90,10 @@ class App extends React.Component {
   }
 
   render() {
-    const {
-      state,
-      dispatchLoginRequest,
-      dispatchRegisterUser,
-      dispatchFetchAllUsers,
-      dispatchLogout
-    } = this.props;
-
-    const isLoggedIn = Boolean(state.currentUser.token);
-
     return (
-      <div className="App">
-        <NavBar currentUser={state.currentUser} />
-        <Route
-          exact
-          path="/"
-          render={(props) => (
-            <HomePage
-              {...props}
-              loggedIn={isLoggedIn}
-              fetchAllUsers={dispatchFetchAllUsers}
-            />
-          )}
-        />
-        <Route
-          path="/login"
-          render={(props) => (
-            <Login
-              {...props}
-              loggedIn={isLoggedIn}
-              loginRequest={dispatchLoginRequest}
-            />
-          )}
-        />
-        <Route
-          path="/register"
-          render={(props) => (
-            <Register
-              {...props}
-              loggedIn={isLoggedIn}
-              registerUser={dispatchRegisterUser}
-            />
-          )}
-        />
-        <Route
-          exact
-          path='/chat'
-          render={props => (
-            <Chat {...props} loggedIn={isLoggedIn} />
-          )}
-        />
-
-        <Route
-          path="/logout"
-          render={(props) => (
-            <Logout
-              {...props}
-              loggedIn={isLoggedIn}
-              logout={dispatchLogout}
-            />
-          )}
-        />
-
-        <Route
-          path="/logout"
-          render={(props) => (
-            <Logout
-              {...props}
-              loggedIn={isLoggedIn}
-              logout={dispatchLogout}
-            />
-          )}
-        />
-
-        <Route
-          path="/team-members"
-          render={props => (
-            <TeamMembers
-                {...props}
-                loggedIn={isLoggedIn}
-            />
-          )}
-        />
-        <Route
-          path="/company-settings"
-          render={props => (
-              <CompanySettings
-                  {...props}
-                  loggedIn={isLoggedIn}
-              />
-            )}
-        />
-          
-        <Route
-          path='/checkin'
-          render={props => (
-            <CheckInOrOut {...props} loggedIn={isLoggedIn} />
-          )}
-        />
-        <Route
-          path='/billing'
-          render={props => (
-            <Billing {...props} loggedIn={isLoggedIn} />
-          )}
-        />
-
-        <Route
-          path="/employee-settings"
-          render={(props) => (
-            <EmployeeSettings {...props} loggedIn={Boolean(state.authToken)} />
-          )}
-        />
+      <div className='App'>
+        <NavBar currentUser={this.props.currentUser} />
+        <Router user_type={this.props.currentUser.user_type} />
         <Footer />
       </div>
     );
@@ -222,35 +101,28 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  state: PropTypes.shape().isRequired,
-  dispatchLoginRequest: PropTypes.func.isRequired,
-  dispatchRegisterUser: PropTypes.func.isRequired,
-  dispatchLogout: PropTypes.func.isRequired,
+  currentUser: PropTypes.object.isRequired,
   dispatchSaveSocket: PropTypes.func.isRequired,
   dispatchAddActiveChats: PropTypes.func.isRequired,
   dispatchAddQueuedChats: PropTypes.func.isRequired,
   dispatchAddMessage: PropTypes.func.isRequired,
   dispatchAddQueuedChat: PropTypes.func.isRequired,
-  dispatchRemoveQueuedChat: PropTypes.func.isRequired
+  dispatchRemoveQueuedChat: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({ state });
+const mapStateToProps = state => ({ currentUser: state.currentUser });
 
 export default withRouter(
   connect(
     mapStateToProps,
     {
-      dispatchLoginRequest: loginRequest,
-      dispatchRegisterUser: registerUser,
-      dispatchFetchAllUsers: fetchAllUsers,
-      dispatchLogout: logout,
       dispatchAddActiveChats: addActiveChats,
       dispatchAddQueuedChats: addQueuedChats,
       dispatchAddMessage: addMessage,
       dispatchAddQueuedChat: addQueuedChat,
       dispatchRemoveQueuedChat: removeQueuedChat,
       dispatchfetchClosedChats: fetchClosedChats,
-      dispatchSaveSocket: saveSocket
-    }
-  )(App)
+      dispatchSaveSocket: saveSocket,
+    },
+  )(App),
 );
