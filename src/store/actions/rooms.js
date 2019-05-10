@@ -34,9 +34,7 @@ export const fetchRoomsForHotelSuccess = rooms => {
   }
   return {
     type: ROOMS.FETCH_ROOMS_FOR_HOTEL_SUCCESS,
-    payload: {
-      rooms,
-    },
+    payload: rooms
   };
 };
 
@@ -85,9 +83,8 @@ export const updateRoomForHotelSuccess = updatedRoom => {
   }
   return {
     type: ROOMS.UPDATE_ROOM_FOR_HOTEL_SUCCESS,
-    payload: {
-      updatedRoom,
-    },
+    payload:
+      updatedRoom
   };
 };
 
