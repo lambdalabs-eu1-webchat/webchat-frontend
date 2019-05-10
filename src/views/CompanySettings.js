@@ -9,15 +9,14 @@ import SuperAdminNav from '../components/SuperAdminNav';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
 
 const CompanySettingsWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 800px;
-    margin: 0 auto 100px;
-    @media (max-width: 500px) {
-        flex-direction: column;
-        max-width: 100%;
-        border: red;
-    }
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
+  margin: 0 auto 100px;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    max-width: 100%;
+  }
 `;
 
 class CompanySettings extends React.Component {
@@ -66,37 +65,50 @@ class CompanySettings extends React.Component {
   }
 
   render() {
-    const { hotel, rooms, dispatchUpdateHotel, dispatchDeleteRoomForHotel, currentUser, dispatchUpdateRoomForHotel, dispatchCreateRoomForHotel } = this.props;
+    const {
+      hotel, rooms, dispatchUpdateHotel, dispatchDeleteRoomForHotel, currentUser, dispatchUpdateRoomForHotel,
+      dispatchCreateRoomForHotel
+    } = this.props;
 
     return (
-        <div className="company-settings">
-          <SuperAdminNav/>
-          <h2>Company Settings</h2>
-          <CompanySettingsWrapper>
-            <section className="company-details">
-              <h3>Update company details</h3>
-              <form>
-                <label>Name</label>
-                <input name="companyName" className="form-input" placeholder={hotel.name} onChange={this.handleInputChange.bind(this)}  />
-                <label>Company Motto</label>
-                <input name="companyMotto" className="form-input" placeholder={hotel.motto} onChange={this.handleInputChange.bind(this)} />
-                <div className="action-buttons">
-                  <button onClick={this.handleClear().bind(this)}>Clear</button>
-                  <button onClick={this.handleSubmit(hotel._id, dispatchUpdateHotel).bind(this)}>Save</button>
-                </div>
-              </form>
-            </section>
-            <CompanySettingsRoomsList
-              rooms={rooms}
-              hotelId={hotel.id}
-              currentUser={currentUser}
-              deleteRoomForHotel={dispatchDeleteRoomForHotel}
-              updateRoomForHotel={dispatchUpdateRoomForHotel}
-              handleInputChange={this.handleInputChange.bind(this)}
-              createRoomForHotel={dispatchCreateRoomForHotel}
-            />
-          </CompanySettingsWrapper>
-        </div>
+      <div className="company-settings">
+        <SuperAdminNav/>
+        <h2>Company Settings</h2>
+        <CompanySettingsWrapper>
+          <section className="company-details">
+            <h3>Update company details</h3>
+            <form>
+              <label>Name</label>
+              <input
+                name="companyName"
+                className="form-input"
+                placeholder={hotel.name}
+                onChange={this.handleInputChange.bind(this)}
+              />
+              <label>Company Motto</label>
+              <input
+                name="companyMotto"
+                className="form-input"
+                placeholder={hotel.motto}
+                onChange={this.handleInputChange.bind(this)}
+              />
+              <div className="action-buttons">
+                <button onClick={this.handleClear().bind(this)}>Clear</button>
+                <button onClick={this.handleSubmit(hotel._id, dispatchUpdateHotel).bind(this)}>Save</button>
+              </div>
+            </form>
+          </section>
+          <CompanySettingsRoomsList
+            rooms={rooms}
+            hotelId={hotel.id}
+            currentUser={currentUser}
+            deleteRoomForHotel={dispatchDeleteRoomForHotel}
+            updateRoomForHotel={dispatchUpdateRoomForHotel}
+            handleInputChange={this.handleInputChange.bind(this)}
+            createRoomForHotel={dispatchCreateRoomForHotel}
+          />
+        </CompanySettingsWrapper>
+      </div>
     );
   };
 }

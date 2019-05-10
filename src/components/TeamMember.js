@@ -2,18 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const HotelStaffWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    @media (max-width: 500px) {
-      flex-direction: column;
-      max-width: 100%;
-      text-align: left;
-      padding: 20px;
-    }
-    p {
-        width: 50px;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    max-width: 100%;
+    text-align: left;
+    padding: 20px;
+  }
+  p {
+      width: 50px;
+  }
 `;
 
 const handleAdminPromotion = (changeUserType, id, currentUser, user_type) => {
