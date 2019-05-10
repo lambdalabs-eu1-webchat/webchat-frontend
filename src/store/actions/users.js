@@ -16,6 +16,9 @@ import {
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
+  CHANGE_USER_TYPE,
+  CHANGE_USER_TYPE_SUCCESS,
+  CHANGE_USER_TYPE_FAILURE,
   DELETE_USER,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILURE,
@@ -146,6 +149,30 @@ export const updateUserFailure = error => {
   };
 };
 
+export const changeUserTypeSuccess = promotedUser => {
+  if (!promotedUser) {
+    throw new Error('changeUserTypeSuccess requires an promotedUser argument');
+  }
+  return {
+    type: CHANGE_USER_TYPE_SUCCESS,
+    payload: {
+      promotedUser,
+    },
+  };
+};
+
+export const changeUserTypeFailure = error => {
+  if (!error) {
+    throw new Error('changeUserTypeFailure requires an error argument');
+  }
+  return {
+    type: CHANGE_USER_TYPE_FAILURE,
+    payload: {
+      error,
+    },
+  };
+};
+
 export const deleteUserSuccess = id => {
   if (!id) {
     throw new Error('deleteUserSuccess requires a userId argument');
@@ -267,8 +294,8 @@ export const updateUser = (userUpdates, id) => async dispatch => {
 };
 
 export const changeUserType = (id, newType) => async dispatch => {
-  dispatch({ type: UPDATE_USER });
-  const updatedUser = {
+  dispatch({ type: CHANGE_USER_TYPE });
+  const promotedUser = {
     user_type: String(newType),
   };
   const config = {
@@ -276,19 +303,19 @@ export const changeUserType = (id, newType) => async dispatch => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(updatedUser),
+    body: JSON.stringify(promotedUser),
   };
   try {
     const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
     const jsonResult = await result.json();
     if (result.ok) {
       const newUser = { ...jsonResult };
-      dispatch(updateUserSuccess(newUser));
+      dispatch(changeUserTypeSuccess(newUser));
     } else {
       throw new Error(jsonResult.message);
     }
   } catch (error) {
-    dispatch(updateUserFailure(error.message));
+    dispatch(changeUserTypeFailure(error.message));
   }
 };
 

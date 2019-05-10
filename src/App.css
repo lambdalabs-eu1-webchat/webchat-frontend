@@ -14,7 +14,7 @@ nav a {
 
 h2 {
     font-size: 30px;
-    padding: 15px 0;
+    padding: 15px;
     color: #213952;
 }
 
@@ -45,6 +45,7 @@ button {
     border: none;
     text-transform: uppercase;
     color: #213952;
+    margin: 5px;
 }
 
 p {
@@ -87,30 +88,8 @@ button:hover {
 
 /*======== Team Members List ========= */
 
-.team-members-list {
-    width: 880px;
-    margin: 0 auto;
-    height: 200px;
-    overflow: scroll;
-}
-.list-header {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-}
 
 .list-header p {
-    width: 50px;
-}
-
-.hotel-staff {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-.hotel-staff p {
     width: 50px;
 }
 
@@ -142,3 +121,21 @@ button:hover {
     transform: translate(-50%,-50%);
     z-index: 1000;
 }
+
+.rooms-list {
+    padding-top: 20px;
+    height: 300px;
+    overflow: scroll
+}
+
+.room {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.far, .fas {
+    font-size: 25px;
+    padding: 0 5px;
+}
+

@@ -1,4 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const HotelStaffWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    max-width: 100%;
+    text-align: left;
+    padding: 20px;
+  }
+  p {
+      width: 50px;
+  }
+`;
 
 const handleAdminPromotion = (changeUserType, id, currentUser, user_type) => {
   if (currentUser.user_type !== 'super admin') {
@@ -38,7 +54,7 @@ const handleDeleteClick = (deleteUser, id, currentUser, user_type) => {
 const TeamMember = ({ name, email, user_type, currentUser, changeUserType, userId, deleteUser }) => {
   const isAdmin = user_type === 'admin' || user_type === 'super admin';
   return (
-    <div className="hotel-staff">
+    <HotelStaffWrapper>
       <p>{ name }</p>
       <p>{ email }</p>
       <input
@@ -48,7 +64,7 @@ const TeamMember = ({ name, email, user_type, currentUser, changeUserType, userI
         onChange={handleAdminPromotion(changeUserType, userId, currentUser, user_type)}
       />
       <i className="fas fa-trash-alt" onClick={handleDeleteClick(deleteUser, userId, currentUser, user_type)}/>
-    </div>
+      </HotelStaffWrapper>
   );
 };
 

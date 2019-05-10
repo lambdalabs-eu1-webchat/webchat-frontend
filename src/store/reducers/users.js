@@ -2,6 +2,7 @@ import {
   FETCH_ALL_USERS_SUCCESS,
   FETCH_SINGLE_USER_SUCCESS,
   FETCH_HOTEL_STAFF_SUCCESS,
+  CHANGE_USER_TYPE_SUCCESS,
   CREATE_USER_SUCCESS,
   UPDATE_USER_SUCCESS,
   DELETE_USER_SUCCESS,
@@ -23,6 +24,13 @@ const users = (state = initialState, action) => {
       return state.map(user => {
         if (user._id === action.payload.updatedUser._id) {
           return { ...action.payload.updatedUser };
+        }
+        return user;
+      });
+    case CHANGE_USER_TYPE_SUCCESS:
+      return state.map(user => {
+        if (user._id === action.payload.promotedUser._id) {
+          return { ...action.payload.promotedUser };
         }
         return user;
       });
