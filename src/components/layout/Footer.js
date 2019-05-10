@@ -13,7 +13,9 @@ const styles = (theme) => ({
     paddingTop: '20px',
     overflowX: 'hiden',
     color: '#fff',
-    fontSize: '18px'
+    fontSize: '18px',
+    bottom:'0',
+    position:'absolute'
     // borderBottom: "solid 6px #0CD4AF",
   },
   footerSections: {
