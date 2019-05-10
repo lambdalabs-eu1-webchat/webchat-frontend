@@ -21,7 +21,6 @@ const handleClick = loginRequest => event => {
 };
 
 const Login = ({ loggedIn, loginRequest }) => {
-  debugger;
   if (loggedIn) {
     return <Redirect to='/chat' />;
   }
@@ -46,12 +45,11 @@ Login.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
 };
 
-function mstp(state) {
-  console.log('here', state.currentUser.user_type);
+function mapStateToProps(state) {
   return { loggedIn: !!state.currentUser.user_type };
 }
 
 export default connect(
-  mstp,
+  mapStateToProps,
   { loginRequest },
 )(Login);

@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import CheckInForm from '../components/GuestCheckInForm';
 import CheckOutForm from '../components/GuestCheckOutForm';
 
-
 class CheckInOrOut extends React.Component {
   render() {
     return (
@@ -33,10 +32,10 @@ const StyledCheckInOrOut = styled.div`
   justify-content: space-around;
 `;
 
-function mstp(state) {
+function mapStateToProps(state) {
   return {
     hotel_id: state.currentUser.hotel_id,
   };
 }
 
-export default connect(mstp)(CheckInOrOut);
+export default connect(mapStateToProps)(CheckInOrOut);

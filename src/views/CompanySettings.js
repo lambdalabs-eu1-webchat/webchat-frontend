@@ -41,7 +41,6 @@ class CompanySettings extends React.Component {
 
   handleSubmit(hotelId, dispatchUpdateHotel) {
     return event => {
-      console.log(event);
       event.preventDefault();
       const { companyName, companyMotto } = this.state;
       if (!companyMotto || !companyName) {

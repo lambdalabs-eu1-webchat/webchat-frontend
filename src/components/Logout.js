@@ -15,11 +15,11 @@ Logout.propTypes = {
   logout: PropTypes.func.isRequired,
 };
 
-function mstp() {
+function mapStateToProps() {
   return {};
 }
 
 export default connect(
-  mstp,
+  mapStateToProps,
   { logout },
 )(Logout);

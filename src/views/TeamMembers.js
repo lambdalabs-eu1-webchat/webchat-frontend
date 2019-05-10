@@ -76,7 +76,6 @@ TeamMembers.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     users: state.users,
     currentUser: state.currentUser,
