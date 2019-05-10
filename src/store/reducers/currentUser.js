@@ -26,6 +26,7 @@ const currentUser = (state = initialState, action) => {
       if (state._id === action.payload.updatedUser._id) {
         return action.payload.updatedUser;
       }
+      return state;
       // break;
     default:
       return state;
