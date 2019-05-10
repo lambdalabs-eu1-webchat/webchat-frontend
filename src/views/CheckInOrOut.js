@@ -11,11 +11,11 @@ class CheckInOrOut extends React.Component {
     return (
       <StyledCheckInOrOut>
         <div>
-          check in
+          <h1>Check-in</h1>
           <CheckInForm hotel_id={this.props.hotel_id} />
         </div>
         <div>
-          checkout
+          <h1>Check-out</h1>
           <CheckOutForm hotel_id={this.props.hotel_id} />
         </div>
       </StyledCheckInOrOut>
@@ -28,8 +28,18 @@ CheckInOrOut.propTypes = {
 };
 
 const StyledCheckInOrOut = styled.div`
+width: 70%;
+  padding: 5% 0;
   display: flex;
   justify-content: space-around;
+  margin: auto;
+  h1 {
+    padding: 10% 0;
+    font-size: 1.5rem;
+  }
+  div {
+    width: 95%;
+  }
 `;
 
 function mapStateToProps(state) {

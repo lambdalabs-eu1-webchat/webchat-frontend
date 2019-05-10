@@ -5,7 +5,8 @@ import axios from 'axios';
 import { DOMAIN, HOTEL, USERS } from '../utils/paths';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
+
 class CheckOutForm extends React.Component {
   state = {
     emailInput: '',
@@ -59,14 +60,14 @@ class CheckOutForm extends React.Component {
 
   render() {
     return (
-      <StyledCheckOutForm>
+      <CheckOutFormWrapper>
         <Select
           displayEmpty={true}
           className={this.state.errorRoom ? 'error' : ''}
           onChange={this.setSelectValue}
           value={this.state.selectValue}
         >
-          <option value='' disabled>
+          <option value="" disabled>
             Select a Guest
           </option>
           {this.state.currentGuests.map(guest => (
@@ -75,22 +76,38 @@ class CheckOutForm extends React.Component {
             </option>
           ))}
         </Select>
-        <Input
-          placeholder='email'
+        <TextField
+          placeholder="Email"
           onChange={event => this.setEmailInput(event.target.value)}
+          margin="normal"
         />
-        <Button onClick={this.checkOutGuest}>Check Out</Button>
-      </StyledCheckOutForm>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.checkOutGuest}
+        >
+          Check Out
+        </Button>
+      </CheckOutFormWrapper>
     );
   }
 }
+
 CheckOutForm.propTypes = {
   hotel_id: propTypes.string.isRequired,
 };
 
-const StyledCheckOutForm = styled.div`
+const CheckOutFormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  button {
+    margin-top: 10%;
+  }
   .error {
     background: red;
+  }
+  button {
+    margin-bottom: 5%;
   }
 `;
 
