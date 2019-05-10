@@ -23,6 +23,10 @@ class CheckInOrOut extends React.Component {
   }
 }
 
+CheckInOrOut.propTypes = {
+  hotel_id: propTypes.string.isRequired,
+};
+
 const StyledCheckInOrOut = styled.div`
 width: 70%;
   padding: 5% 0;
@@ -38,14 +42,10 @@ width: 70%;
   }
 `;
 
-CheckInOrOut.propTypes = {
-  hotel_id: propTypes.string.isRequired,
-};
-
-function mstp(state) {
+function mapStateToProps(state) {
   return {
     hotel_id: state.currentUser.hotel_id,
   };
 }
 
-export default connect(mstp)(CheckInOrOut);
+export default connect(mapStateToProps)(CheckInOrOut);

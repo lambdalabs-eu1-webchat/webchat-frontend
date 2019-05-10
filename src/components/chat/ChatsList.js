@@ -19,7 +19,6 @@ class ChatsList extends React.Component {
   resetInputField = () => {
     this.setState({ inputField: '' });
   };
-
   render() {
     const { chatsArr, status } = this.props;
 

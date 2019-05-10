@@ -106,11 +106,11 @@ Register.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
 };
 
-function mstp(state) {
+function mapStateToProps(state) {
   return { loggedIn: !!state.currentUser._id };
 }
 
 export default connect(
-  mstp,
+  mapStateToProps,
   { registerUser },
 )(Register);
