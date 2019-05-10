@@ -21,7 +21,6 @@ class CheckInForm extends React.Component {
     axios
       .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/rooms/available`)
       .then(res => {
-        console.log(res.data);
         this.setState({ availableRooms: res.data });
       })
       .catch(error => {

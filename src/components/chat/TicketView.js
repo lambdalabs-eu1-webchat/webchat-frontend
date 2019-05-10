@@ -62,11 +62,11 @@ const lineStyle = {
   display: 'flex',
   justifyContent: 'space-between',
 };
-function mstp(state) {
+function mapStateToProps(state) {
   return {};
 }
 
 export default connect(
-  mstp,
+  mapStateToProps,
   { setCurrentChatId },
 )(TicketView);
