@@ -19,6 +19,7 @@ export const SOCKET = {
   CONNECTION: 'connection',
   REMOVE_QUEUED: 'remove_queued',
   ADD_QUEUED: 'add_queued',
+  QUEUED_MESSAGE: 'queued_message',
 };
 
 export const APP_PATHS = {

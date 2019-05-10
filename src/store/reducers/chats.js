@@ -11,6 +11,7 @@ const {
   SAVE_SOCKET,
   SET_CURRENT_CHAT_ID,
   CLEAR_CURRENT_CHAT_ID,
+  ADD_QUEUE_MESSAGE,
 } = CHATS;
 
 const initState = {
@@ -58,6 +59,18 @@ const chats = (state = initState, action) => {
       return { ...state, currentChatIdAndStatus: null };
     case SET_CURRENT_CHAT_ID:
       return { ...state, currentChatIdAndStatus: action.payload };
+    case ADD_QUEUE_MESSAGE:
+      return {
+        ...state,
+        queuedChats: state.queuedChats.map(chat => {
+          if (chat._id === action.target) {
+            const newTickets = JSON.parse(JSON.stringify(chat.tickets));
+            newTickets[newTickets.length - 1].messages.push(action.payload);
+            return { ...chat, tickets: newTickets };
+          }
+          return chat;
+        }),
+      };
     default:
       return state;
   }

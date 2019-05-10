@@ -12,6 +12,7 @@ import {
   removeQueuedChat,
   fetchClosedChats,
   saveSocket,
+  addQueueMessage,
 } from './store/actions/chat';
 
 import NavBar from './components/layout/navbar/NavBar';
@@ -51,6 +52,9 @@ class App extends React.Component {
         socket.on(SOCKET.REMOVE_QUEUED, chat_id => {
           this.props.dispatchRemoveQueuedChat(chat_id);
         });
+        socket.on(SOCKET.QUEUED_MESSAGE, ({ message, chat_id }) => {
+          this.props.dispatchAddQueueMessage({ message, chat_id });
+        });
         // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
@@ -82,6 +86,9 @@ class App extends React.Component {
         socket.on(SOCKET.REMOVE_QUEUED, chat_id => {
           this.props.dispatchRemoveQueuedChat(chat_id);
         });
+        socket.on(SOCKET.QUEUED_MESSAGE, ({ message, chat_id }) => {
+          this.props.dispatchAddQueueMessage({ message, chat_id });
+        });
         // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
@@ -109,6 +116,7 @@ App.propTypes = {
   dispatchAddMessage: PropTypes.func.isRequired,
   dispatchAddQueuedChat: PropTypes.func.isRequired,
   dispatchRemoveQueuedChat: PropTypes.func.isRequired,
+  dispatchAddQueueMessage: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({ currentUser: state.currentUser });
@@ -124,6 +132,7 @@ export default withRouter(
       dispatchRemoveQueuedChat: removeQueuedChat,
       dispatchfetchClosedChats: fetchClosedChats,
       dispatchSaveSocket: saveSocket,
+      dispatchAddQueueMessage: addQueueMessage,
     },
   )(App),
 );
