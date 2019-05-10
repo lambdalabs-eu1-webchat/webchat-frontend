@@ -64,7 +64,7 @@ const TeamMember = ({ name, email, user_type, currentUser, changeUserType, userI
         onChange={handleAdminPromotion(changeUserType, userId, currentUser, user_type)}
       />
       <i className="fas fa-trash-alt" onClick={handleDeleteClick(deleteUser, userId, currentUser, user_type)}/>
-    </HotelStaffWrapper>
+      </HotelStaffWrapper>
   );
 };
 
