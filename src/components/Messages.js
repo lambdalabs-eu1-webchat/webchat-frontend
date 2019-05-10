@@ -21,7 +21,7 @@ class Messages extends React.Component {
         {tickets.map(ticket =>
           ticket.messages.map(message => (
             <Message key={message._id} message={message} guest_id={guest_id} />
-          )),
+          ))
         )}
         <div
           ref={el => {
@@ -45,10 +45,10 @@ Messages.propTypes = {
             name: propTypes.string.isRequired,
           }).isRequired,
           text: propTypes.string.isRequired,
-        }),
+        })
       ),
       status: propTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
   guest_id: propTypes.string.isRequired,
 };

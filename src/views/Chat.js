@@ -9,7 +9,7 @@ class Chat extends React.Component {
   render() {
     return (
       <StyledChat>
-        <div>
+        <ChatListWrapper>
           <h2>Welcome to the Chat page!</h2>
           <ChatsList
             setSelectedChat={this.setSelectedChat}
@@ -26,15 +26,15 @@ class Chat extends React.Component {
             chatsArr={this.props.closedChats}
             status={CLOSED}
           />
-        </div>
-        <div className='chat-screen'>
+        </ChatListWrapper>
+        <ChatScreenWrapper>
           {this.props.currentChat ? (
             <ChatScreen
               status={this.props.status}
               chat={this.props.currentChat}
             />
           ) : null}
-        </div>
+        </ChatScreenWrapper>
       </StyledChat>
     );
   }
@@ -43,8 +43,26 @@ class Chat extends React.Component {
 const StyledChat = styled.div`
   display: flex;
   justify-content: space-around;
-  .chat-screen {
-    width: 700px;
+  flex-direction: row;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
+`;
+
+const ChatListWrapper = styled.div`
+  width: 50%;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+`;
+
+const ChatScreenWrapper = styled.div`
+  width: 50%;
+
+  @media (max-width: 800px) {
+    width: 100%;
   }
 `;
 

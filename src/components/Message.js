@@ -6,8 +6,8 @@ function Message({ message, guest_id }) {
   return (
     <StyledMessage left={guest_id === message.sender.id}>
       <span>{message.sender.name} : </span>
-      <div className='bubble-container'>
-        <span className='bubble me'>{message.text}</span>
+      <div className="bubble-container">
+        <span className="bubble me">{message.text}</span>
       </div>
     </StyledMessage>
   );
@@ -27,10 +27,14 @@ Message.propTypes = {
 const StyledMessage = styled.div`
   margin: 10px;
   position: relative;
+  max-width: 50%;
 
   border-radius: 0.4em;
   padding: 10px;
+
   ${props => (props.left ? `background: green;` : 'background: #00aabb;')}
+  ${props => (props.left ? `text-align: left;` : 'text-align: right;')}
+  ${props => (props.left ? `margin-right:auto;` : 'margin-left:auto;')}
   &:after {
     content: '';
     position: absolute;
