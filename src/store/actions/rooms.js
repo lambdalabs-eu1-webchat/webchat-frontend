@@ -78,7 +78,6 @@ export const createRoomForHotelFailure = error => {
 };
 
 export const updateRoomForHotelSuccess = updatedRoom => {
-  debugger
   if (!updatedRoom) {
     throw new Error('updateRoomForHotelSuccess requires an updatedRoom argument');
   }
