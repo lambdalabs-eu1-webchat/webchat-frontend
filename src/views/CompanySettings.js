@@ -10,7 +10,6 @@ import {
   createRoomForHotel,
 } from '../store/actions/rooms';
 
-import SuperAdminNav from '../components/SuperAdminNav';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
 
 const CompanySettingsWrapper = styled.div`
@@ -150,11 +149,14 @@ CompanySettings.propTypes = {
   dispatchCreateRoomForHotel: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  hotel: state.hotel,
-  currentUser: state.currentUser,
-  rooms: state.rooms,
-});
+const mapStateToProps = state => {
+  return {
+    hotel: state.hotel,
+    currentUser: state.currentUser,
+    rooms: state.rooms.rooms,
+  }
+
+};
 
 export default connect(
   mapStateToProps,

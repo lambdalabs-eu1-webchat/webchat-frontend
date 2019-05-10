@@ -34,9 +34,7 @@ export const fetchRoomsForHotelSuccess = rooms => {
   }
   return {
     type: ROOMS.FETCH_ROOMS_FOR_HOTEL_SUCCESS,
-    payload: {
-      rooms,
-    },
+    payload: rooms
   };
 };
 
@@ -80,14 +78,14 @@ export const createRoomForHotelFailure = error => {
 };
 
 export const updateRoomForHotelSuccess = updatedRoom => {
+  debugger
   if (!updatedRoom) {
     throw new Error('updateRoomForHotelSuccess requires an updatedRoom argument');
   }
   return {
     type: ROOMS.UPDATE_ROOM_FOR_HOTEL_SUCCESS,
-    payload: {
-      updatedRoom,
-    },
+    payload:
+      updatedRoom
   };
 };
 
