@@ -6,7 +6,8 @@ import axios from 'axios';
 import { DOMAIN, USERS, HOTEL } from '../utils/paths';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
+
 class CheckInForm extends React.Component {
   state = {
     nameInput: '',
@@ -74,14 +75,14 @@ class CheckInForm extends React.Component {
 
   render() {
     return (
-      <StyledCheckInForm>
+      <CheckInFormWrapper>
         <Select
           displayEmpty={true}
           className={this.state.errorRoom ? 'error' : ''}
           value={this.state.selectValue}
           onChange={this.setSelectValue}
         >
-          <option className='error' value='' disabled>
+          <option className="error" value="" disabled>
             Select a Room
           </option>
           {this.state.availableRooms.map(room => (
@@ -90,29 +91,50 @@ class CheckInForm extends React.Component {
             </option>
           ))}
         </Select>
-        <Input
-          placeholder='name'
+        <TextField
+          placeholder="Name"
           className={this.state.errorName ? 'error' : ''}
           onChange={event => this.setNameInput(event.target.value)}
+          margin="normal"
         />
-        <Button onClick={this.checkInGuest}>Check In</Button>
-        <div>
+        <Button variant="contained" color="primary" onClick={this.checkInGuest}>
+          Check In
+        </Button>
+        <div className="passcode">
           <h4>Login Code</h4>
           <p>{this.state.loginCode}</p>
         </div>
-      </StyledCheckInForm>
+      </CheckInFormWrapper>
     );
   }
 }
 
-CheckInForm.propTypes = {
-  hotel_id: propTypes.string.isRequired,
-};
-
-const StyledCheckInForm = styled.div`
+const CheckInFormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  button {
+    margin-top: 10%;
+  }
   .error {
     background: red;
   }
+  button {
+    margin-bottom: 5%;
+  }
+  .passcode {
+    width: 90%;
+    background-color: #aed581;
+    height: 50px;
+    border-radius: 1%;
+    padding: 5%;
+    p {
+      text-align: center;
+    }
+  }
 `;
+
+CheckInForm.propTypes = {
+  hotel_id: propTypes.string.isRequired,
+};
 
 export default CheckInForm;
