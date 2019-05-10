@@ -12,14 +12,19 @@ import EmployeeSettings from '../views/EmployeeSettings';
 import CompanyDash from '../views/CompanyDash';
 import { APP_PATHS } from '../utils/paths';
 
+// temp fix
+const style404 = {
+  minHeight: 'calc(100vh - 236px)',
+};
+
 function Router({ user_type }) {
   if (!user_type) {
     return (
       <Switch>
-        <Route exact path='/' component={HomePage} />
+        <Route exact path="/" component={HomePage} />
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
-        <Route render={() => <div>404 not found</div>} />
+        <Route render={() => <div style={style404}>404 not found</div>} />
       </Switch>
     );
   } else if (user_type === 'admin') {
@@ -37,7 +42,7 @@ function Router({ user_type }) {
         />
         <Route exact path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />;
         ;
-        <Route render={() => <div>404 not found</div>} />
+        <Route render={() => <div style={style404}>404 not found</div>} />
       </Switch>
     );
   } else if (user_type === 'super admin') {
@@ -56,7 +61,7 @@ function Router({ user_type }) {
         />
         <Route exact path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />
         ;
-        <Route render={() => <div>404 not found</div>} />
+        <Route render={() => <div style={style404}>404 not found</div>} />
       </Switch>
     );
   } else if (user_type === 'receptionist') {
@@ -72,7 +77,7 @@ function Router({ user_type }) {
           component={EmployeeSettings}
         />
         <Route path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />;
-        <Route render={() => <div>404 not found</div>} />
+        <Route render={() => <div style={style404}>404 not found</div>} />
       </Switch>
     );
   }
