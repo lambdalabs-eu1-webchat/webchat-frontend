@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-const styles = (theme) => ({
+const styles = theme => ({
   root: {
     flexGrow: 1,
     marginTop: 10,
@@ -14,21 +14,21 @@ const styles = (theme) => ({
     overflowX: 'hiden',
     color: '#fff',
     fontSize: '18px',
-    bottom:'0',
-    position:'absolute'
+    // bottom:'0',
+    // position:'absolute'
     // borderBottom: "solid 6px #0CD4AF",
   },
   footerSections: {
     margin: '3px',
     padding: '10px',
-    color: 'rgba(255,255,255)'
+    color: 'rgba(255,255,255)',
   },
   subFooter: {
     paddingBottom: '8px',
     margin: '20px',
     color: '#fff',
-    fontSize: '18px'
-  }
+    fontSize: '18px',
+  },
 });
 
 class Footer extends React.Component {
