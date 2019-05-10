@@ -4,13 +4,13 @@ import { NavLink } from 'react-router-dom';
 import LoggedIn from './SignedInLink';
 import LoggedOut from './SignedOutLink';
 
-const NavBar = (props) => {
+const NavBar = props => {
   return (
-    <nav className="nav-wrapper navy darken-2">
-      <div className="container">
-        <NavLink to="/" className="brand-logo">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />{' '}
+    <nav className='nav-wrapper navy darken-2'>
+      <div className='container'>
+        <NavLink to='/' className='brand-logo'>
+          <header className='App-header'>
+            <img src={logo} className='App-logo' alt='logo' />{' '}
           </header>
         </NavLink>
         {props.currentUser.name ? (
