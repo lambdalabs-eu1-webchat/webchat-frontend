@@ -14,6 +14,7 @@ const {
   SAVE_SOCKET,
   SET_CURRENT_CHAT_ID,
   CLEAR_CURRENT_CHAT_ID,
+  ADD_QUEUE_MESSAGE,
 } = CHATS;
 
 export const saveSocket = socket => {
@@ -115,6 +116,14 @@ export const setCurrentChatId = (chat_id, status) => {
   return {
     type: SET_CURRENT_CHAT_ID,
     payload: { chat_id, status },
+  };
+};
+
+export const addQueueMessage = ({ chat_id, message }) => {
+  return {
+    type: ADD_QUEUE_MESSAGE,
+    payload: message,
+    target: chat_id,
   };
 };
 
