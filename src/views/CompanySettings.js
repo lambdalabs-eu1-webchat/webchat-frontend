@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { fetchSingleHotel, updateHotel } from '../store/actions/hotel';
-import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
 import {
   deleteRoomForHotel,
   updateRoomForHotel,
@@ -85,6 +84,7 @@ class CompanySettings extends React.Component {
       rooms,
       dispatchUpdateHotel,
       dispatchDeleteRoomForHotel,
+      dispatchCreateRoomForHotel,
       currentUser,
       dispatchUpdateRoomForHotel,
     } = this.props;
