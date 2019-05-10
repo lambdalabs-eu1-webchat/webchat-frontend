@@ -54,7 +54,6 @@ class CompanySettings extends React.Component {
   };
 
   handleSubmit(hotelId, dispatchUpdateHotel) {
-
     return event => {
       event.preventDefault();
       const { companyName, companyMotto } = this.state;
@@ -71,6 +70,7 @@ class CompanySettings extends React.Component {
   handleClear() {
     return event => {
       event.preventDefault();
+      // you shouldn't need this in react
       document
         .querySelectorAll('.form-input')
         .forEach(input => (input.value = ''));
@@ -89,10 +89,10 @@ class CompanySettings extends React.Component {
     } = this.props;
 
     return (
-      <div className="company-settings">
+      <div className='company-settings'>
         <h2>Company Settings</h2>
         <CompanySettingsWrapper>
-          <section className="company-details">
+          <section className='company-details'>
             <h3>Update company details</h3>
             <form>
               <label>Name</label>
@@ -124,7 +124,6 @@ class CompanySettings extends React.Component {
           </section>
           <CompanySettingsRoomsList
             rooms={rooms}
-
             hotelId={hotel.id}
             currentUser={currentUser}
             handleInputChange={this.handleInputChange.bind(this)}
