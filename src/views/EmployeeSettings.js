@@ -7,7 +7,7 @@ import EmployeeSettingsForm from '../components/EmployeeSettingsForm';
 import { updateUser } from '../store/actions/users';
 
 const EmployeeSettingsWrapper = styled.div`
-  padding: 10% 25%;
+  padding: 5% 25%;
 `;
 
 class EmployeeSettings extends React.Component {
@@ -51,8 +51,8 @@ class EmployeeSettings extends React.Component {
           ...this.state.employeeChanges,
           password: '',
           passwordConf: '',
-        }
-      })
+        },
+      });
       return alert('Passwords must match');
     }
   };
