@@ -28,11 +28,13 @@ CheckInOrOut.propTypes = {
 };
 
 const StyledCheckInOrOut = styled.div`
-width: 70%;
-  padding: 5% 0;
+  width: 70%;
   display: flex;
   justify-content: space-around;
   margin: auto;
+  @media (max-width: 1200px) {
+    margin-top: 4%;
+  }
   h1 {
     padding: 10% 0;
     font-size: 1.5rem;
