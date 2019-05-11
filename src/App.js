@@ -55,6 +55,8 @@ class App extends React.Component {
         socket.on(SOCKET.QUEUED_MESSAGE, ({ message, chat_id }) => {
           this.props.dispatchAddQueueMessage({ message, chat_id });
         });
+        socket.on(SOCKET.TYPING, ({ user, chat_id }) => {});
+        socket.on(SOCKET.STOPPED_TYPING, ({ user, chat_id }) => {});
         // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
@@ -99,7 +101,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className="App">
         <NavBar currentUser={this.props.currentUser} />
         <Router user_type={this.props.currentUser.user_type} />
         <Footer />
