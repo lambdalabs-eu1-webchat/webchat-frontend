@@ -13,6 +13,8 @@ import {
   fetchClosedChats,
   saveSocket,
   addQueueMessage,
+  addCurrentTyper,
+  clearCurrentTyper,
 } from './store/actions/chat';
 
 import NavBar from './components/layout/navbar/NavBar';
@@ -57,10 +59,12 @@ class App extends React.Component {
         });
         socket.on(SOCKET.TYPING, ({ user, chat_id }) => {
           if (user._id !== this.props.currentUser._id) {
+            this.props.dispatchAddCurrentTyper({ chat_id, user });
           }
         });
         socket.on(SOCKET.STOPPED_TYPING, ({ user, chat_id }) => {
           if (user._id !== this.props.currentUser._id) {
+            this.props.dispatchClearCurrentTyper(chat_id);
           }
         });
         // socket.on(SOCKET.CHATLOG, chatLog => {});
@@ -141,6 +145,8 @@ export default withRouter(
       dispatchfetchClosedChats: fetchClosedChats,
       dispatchSaveSocket: saveSocket,
       dispatchAddQueueMessage: addQueueMessage,
+      dispatchAddCurrentTyper: addCurrentTyper,
+      dispatchClearCurrentTyper: clearCurrentTyper,
     },
   )(App),
 );

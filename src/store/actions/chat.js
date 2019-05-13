@@ -145,7 +145,7 @@ export const addCurrentTyper = ({ chat_id, user }) => {
 
 export const clearCurrentTyper = chat_id => {
   return {
-    type: ADD_CURRENT_TYPER,
+    type: CLEAR_CURRENT_TYPER,
     target: chat_id,
   };
 };

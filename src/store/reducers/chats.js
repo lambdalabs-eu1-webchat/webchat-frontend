@@ -80,9 +80,25 @@ const chats = (state = initState, action) => {
         }),
       };
     case ADD_CURRENT_TYPER:
-      return { ...state };
+      return {
+        ...state,
+        activeChats: state.activeChats.map(chat => {
+          if (chat._id === action.target) {
+            return { ...chat, typingUser: action.payload };
+          }
+          return chat;
+        }),
+      };
     case CLEAR_CURRENT_TYPER:
-      return { ...state };
+      return {
+        ...state,
+        activeChats: state.activeChats.map(chat => {
+          if (chat._id === action.target) {
+            return { ...chat, typingUser: null };
+          }
+          return chat;
+        }),
+      };
     default:
       return state;
   }

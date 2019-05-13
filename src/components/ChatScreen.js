@@ -29,6 +29,7 @@ class ChatScreen extends React.Component {
           room_name={chat.room.name}
         />
         <Messages tickets={chat.tickets} guest_id={chat.guest.id} />
+        {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
         {ACTIVE === status ? (
           <React.Fragment>
             <MessageComposer chat_id={chat._id} />
