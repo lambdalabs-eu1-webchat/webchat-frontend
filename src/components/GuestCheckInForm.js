@@ -2,11 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
-<<<<<<< HEAD
 import jwt from 'jsonwebtoken';
-=======
 import QRCode from 'qrcode.react';
->>>>>>> origin/master
 
 import { DOMAIN, USERS, HOTEL } from '../utils/paths';
 import Select from '@material-ui/core/Select';
@@ -60,7 +57,7 @@ class CheckInForm extends React.Component {
 
         this.setState(cState => {
           const availableRooms = cState.availableRooms.filter(
-            room => room._id !== room_id
+            room => room._id !== room_id,
           );
           return {
             loginCode: data.passcode,
