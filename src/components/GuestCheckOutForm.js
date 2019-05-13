@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import { DOMAIN, HOTEL, USERS } from '../utils/paths';
+import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -36,8 +36,26 @@ class CheckOutForm extends React.Component {
     this.setState({ emailInput });
   };
 
+  sendGuestEmail = async () => {
+    const emailDetails = {
+      guestEmail: this.state.emailInput,
+      guestId: this.state.selectValue,
+      hotelId: this.props.hotel_id,
+    };
+    try {
+      await axios.post(`${DOMAIN}${EMAIL}`, emailDetails);
+      this.setState({ emailInput: '' });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   checkOutGuest = async () => {
+    const guestEmail = this.state.emailInput;
     const guest_id = this.state.selectValue;
+    if (guestEmail) {
+      this.sendGuestEmail();
+    }
     if (guest_id) {
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
@@ -46,7 +64,10 @@ class CheckOutForm extends React.Component {
             const newCurrentGuests = cState.currentGuests.filter(
               guest => guest_id !== guest._id,
             );
-            return { currentGuests: newCurrentGuests, selectValue: '' };
+            return {
+              currentGuests: newCurrentGuests,
+              selectValue: '',
+            };
           });
         }
       } catch (error) {
@@ -78,6 +99,7 @@ class CheckOutForm extends React.Component {
         </Select>
         <TextField
           placeholder="Email"
+          value={this.state.emailInput}
           onChange={event => this.setEmailInput(event.target.value)}
           margin="normal"
         />
