@@ -5,8 +5,11 @@ import propTypes from 'prop-types';
 import Message from './Message';
 
 class Messages extends React.Component {
-  scrollToBottom = scrollParams => {
-    this.messagesEnd.scrollIntoView(scrollParams); //{ behavior: 'smooth' }
+  // pass in 'smooth' for smooth scroll
+  scrollToBottom = behavior => {
+    const scrollObject = { top: this.component.scrollHeight };
+    if (behavior) scrollObject.behavior = behavior;
+    this.component.scrollTo(scrollObject);
   };
   componentDidMount = () => {
     this.scrollToBottom();
@@ -17,17 +20,16 @@ class Messages extends React.Component {
   render() {
     const { tickets, guest_id } = this.props;
     return (
-      <StyledMessages>
+      <StyledMessages
+        ref={el => {
+          this.component = el;
+        }}
+      >
         {tickets.map(ticket =>
           ticket.messages.map(message => (
             <Message key={message._id} message={message} guest_id={guest_id} />
-          ))
+          )),
         )}
-        <div
-          ref={el => {
-            this.messagesEnd = el;
-          }}
-        />
       </StyledMessages>
     );
   }
@@ -45,16 +47,16 @@ Messages.propTypes = {
             name: propTypes.string.isRequired,
           }).isRequired,
           text: propTypes.string.isRequired,
-        })
+        }),
       ),
       status: propTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
   guest_id: propTypes.string.isRequired,
 };
 
 const StyledMessages = styled.div`
-  height: 90vh;
+  height: 70vh;
   overflow-y: scroll;
 `;
 

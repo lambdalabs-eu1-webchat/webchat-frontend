@@ -22,6 +22,8 @@ export const SOCKET = {
   REMOVE_QUEUED: 'remove_queued',
   ADD_QUEUED: 'add_queued',
   QUEUED_MESSAGE: 'queued_message',
+  TYPING: 'typing',
+  STOPPED_TYPING: 'stopped_typing',
 };
 
 export const APP_PATHS = {
