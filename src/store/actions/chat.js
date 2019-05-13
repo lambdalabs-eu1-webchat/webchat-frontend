@@ -15,6 +15,8 @@ const {
   SET_CURRENT_CHAT_ID,
   CLEAR_CURRENT_CHAT_ID,
   ADD_QUEUE_MESSAGE,
+  ADD_CURRENT_TYPER,
+  CLEAR_CURRENT_TYPER,
 } = CHATS;
 
 export const saveSocket = socket => {
@@ -130,5 +132,20 @@ export const addQueueMessage = ({ chat_id, message }) => {
 export const clearCurrentChatId = () => {
   return {
     type: CLEAR_CURRENT_CHAT_ID,
+  };
+};
+
+export const addCurrentTyper = ({ chat_id, user }) => {
+  return {
+    type: ADD_CURRENT_TYPER,
+    target: chat_id,
+    payload: user,
+  };
+};
+
+export const clearCurrentTyper = chat_id => {
+  return {
+    type: ADD_CURRENT_TYPER,
+    target: chat_id,
   };
 };
