@@ -3,28 +3,38 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ChatScreen from '../components/ChatScreen';
 import ChatsList from '../components/chat/ChatsList';
+import Tabs from '../components/reusable/Tabs';
 import { QUEUED, ACTIVE, CLOSED } from '../utils/ticketStatus';
 
 class Chat extends React.Component {
+  state = {
+    selectedTab: ACTIVE,
+  };
+  setSelectedTab = option => {
+    this.setState({ selectedTab: option });
+  };
   render() {
+    let chatsArr = [];
+    const { selectedTab } = this.state;
+    if (selectedTab === ACTIVE) {
+      chatsArr = this.props.activeChats;
+    } else if (selectedTab === QUEUED) {
+      chatsArr = this.props.queuedChats;
+    } else if (selectedTab === CLOSED) {
+    }
     return (
       <StyledChat>
         <ChatListWrapper>
           <h2>Welcome to the Chat page!</h2>
-          <ChatsList
-            setSelectedChat={this.setSelectedChat}
-            chatsArr={this.props.queuedChats}
-            status={QUEUED}
+          <Tabs
+            options={[QUEUED, ACTIVE, CLOSED]}
+            selected={this.state.selectedTab}
+            setSelected={this.setSelectedTab}
           />
           <ChatsList
             setSelectedChat={this.setSelectedChat}
-            chatsArr={this.props.activeChats}
-            status={ACTIVE}
-          />
-          <ChatsList
-            setSelectedChat={this.setSelectedChat}
-            chatsArr={this.props.closedChats}
-            status={CLOSED}
+            chatsArr={chatsArr}
+            status={this.state.selectedTab}
           />
         </ChatListWrapper>
         <ChatScreenWrapper>

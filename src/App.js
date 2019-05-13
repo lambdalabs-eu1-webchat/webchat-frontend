@@ -71,7 +71,7 @@ class App extends React.Component {
         socket.emit(SOCKET.LOGIN, token);
       });
       // temp hotel_id
-      // this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
+      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
     }
   }
 
