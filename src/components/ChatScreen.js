@@ -38,7 +38,7 @@ class ChatScreen extends React.Component {
         ) : null}
         {QUEUED === status ? (
           <React.Fragment>
-            <Button onClick={this.joinChat}>Join Chat</Button>
+            <Button style={btn} onClick={this.joinChat}>Join Chat</Button>
           </React.Fragment>
         ) : null}
       </StyledChatScreen>
@@ -79,7 +79,17 @@ function mapStateToProps(state) {
   };
 }
 
-const StyledChatScreen = styled.div``;
+const StyledChatScreen = styled.div`
+color:#545959;
+font-family:Montserrat;
+font-size:14px;
+`;
+
+const btn = {
+  margin:'20px',
+  color: 'aliceblue',
+  backgroundColor:'#4D9F60',
+}
 
 export default connect(
   mapStateToProps,

@@ -44,7 +44,7 @@ const StyledChat = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  background-color: pink;
+  background-color: #;
 
 
   @media (max-width: 800px) {
