@@ -9,9 +9,9 @@ class Chat extends React.Component {
   render() {
     return (
       <StyledChat>
-        <ChatListWrapper>
+        <ChatListWrapper >
           <h2>Welcome to the Chat page!</h2>
-          <ChatsList
+          <ChatsList 
             setSelectedChat={this.setSelectedChat}
             chatsArr={this.props.queuedChats}
             status={QUEUED}
@@ -27,7 +27,7 @@ class Chat extends React.Component {
             status={CLOSED}
           />
         </ChatListWrapper>
-        <ChatScreenWrapper>
+        <ChatScreenWrapper >
           {this.props.currentChat ? (
             <ChatScreen
               status={this.props.status}
@@ -44,6 +44,8 @@ const StyledChat = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: row;
+  background-color: pink;
+
 
   @media (max-width: 800px) {
     flex-direction: column;
@@ -52,6 +54,7 @@ const StyledChat = styled.div`
 
 const ChatListWrapper = styled.div`
   width: 50%;
+  border-radius: 20px;
 
   @media (max-width: 800px) {
     width: 100%;

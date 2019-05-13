@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import TicketView from './TicketView';
 import SearchInput from './SearchInput';
 import searchMachine from './searchMachine';
+import { borderRadius } from 'polished';
 
 class ChatsList extends React.Component {
   state = {
@@ -45,9 +46,10 @@ ChatsList.propTypes = {
 };
 
 const divStyle = {
-  border: '1px solid black',
+  border: '',
   margin: '10px',
   padding: '10px',
+  
 };
 
 export default ChatsList;

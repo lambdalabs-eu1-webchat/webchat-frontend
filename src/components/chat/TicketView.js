@@ -44,7 +44,10 @@ const TicketView = ({
                   );
                 })}
               </div>
-              <span>Icon here</span>
+             <div>
+             <span style={icon} className="fa fa-comments icon-5x"></span>
+              <span style={icons}>chat</span>
+             </div>
             </div>
           );
         })}
@@ -62,10 +65,28 @@ TicketView.propTypes = {
 };
 
 const divStyle = {
-  border: '1px solid black',
+  border: '1px solid #4D9F60',
+  backgroundColor:'#E5EDED',
   margin: '10px',
   padding: '10px',
   width: '100%',
+  borderRadius:'10px',
+  color:'',
+  fontWeight:'light',
+  fontSize:'13px',
+  fontFamily: 'Kanit',
+  // fontFamily:'Ubuntu',
+
+};
+const icon = {
+  marginTop:'50px',
+  color:'#4D9F60',
+  height:'',
+};
+const icons = {
+  marginTop:'50px',
+  color:'#4D9F60',
+  height:'',
 };
 
 const lineStyle = {

@@ -139,3 +139,9 @@ button:hover {
     padding: 0 5px;
 }
 
+.chat1{
+    border-radius: 30px;
+    text-emphasis-color: green;
+    font-size: 20px;
+
+}
