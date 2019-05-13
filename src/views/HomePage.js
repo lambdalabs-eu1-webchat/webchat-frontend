@@ -79,6 +79,55 @@ class HomePage extends React.Component {
               </div>
             </div>
           </section>
+
+          <section className="pricing-plan">
+            <h1>Our pricing plans</h1>
+              <p>
+                No hotel is to big or too small for FrontDesk.<br/> Our services can be customized to suit any need you may have.
+              </p>
+            <div className="pricing-cards">
+              <div className="pricing-card">
+                <h2>FREE</h2>
+                <ul>
+                  <li><i className="fas fa-check"></i>Live chat with guests</li>
+                  <li><i className="fas fa-check"></i>Check guests in and out</li>
+                  <li><i className="fas fa-check"></i>Track ticket status</li>
+                  <li><i className="fas fa-check"></i>Up to 5 users</li>
+                </ul>
+                <h3>Free</h3>
+                <button>
+                  <Link to="/register">Register Now</Link>
+                </button>
+              </div>
+
+              <div className="pricing-card">
+                <h2>PLUS</h2>
+                <ul>
+                  <li><i className="fas fa-check"></i>Live chat with guests</li>
+                  <li><i className="fas fa-check"></i>Check guests in and out</li>
+                  <li><i className="fas fa-check"></i>Track ticket status</li>
+                  <li><i className="fas fa-check"></i>Up to 15 users</li>
+                </ul>
+                <h3>£59 /month</h3>
+                <button>
+                  <Link to="/register">Register Now</Link>
+                </button>
+              </div>
+
+              <div className="pricing-card">
+                <h2>PRO</h2>
+                <ul>
+                  <li><i className="fas fa-check"></i>Live chat with guests</li>
+                  <li><i className="fas fa-check"></i>Check guests in and out</li>
+                  <li><i className="fas fa-check"></i>Track ticket status</li>
+                  <li><i className="fas fa-check"></i>Unlimited users</li>
+                </ul>
+                <h3>£119 /month</h3>
+                <button>
+                  <Link to="/register">Register Now</Link>
+                </button>
+              </div>
+            </div>
           </section>
         </HomePageContainer>
       </HomePageOuter>
