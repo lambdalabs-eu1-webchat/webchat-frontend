@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
+import QRCode from 'qrcode.react';
 
 import { DOMAIN, USERS, HOTEL } from '../utils/paths';
 import Select from '@material-ui/core/Select';
@@ -17,6 +18,7 @@ class CheckInForm extends React.Component {
     selectValue: '',
     errorRoom: false,
     errorName: false,
+    guestToken: '',
   };
   componentDidMount() {
     axios
@@ -50,14 +52,16 @@ class CheckInForm extends React.Component {
             id: room._id,
           },
         });
+
         this.setState(cState => {
           const availableRooms = cState.availableRooms.filter(
-            room => room._id !== room_id,
+            room => room._id !== room_id
           );
           return {
             loginCode: res.data.passcode,
             availableRooms,
             selectValue: '',
+            guestToken: res.data.token,
           };
         });
       } catch (error) {
@@ -103,6 +107,7 @@ class CheckInForm extends React.Component {
           <h4>Login Code</h4>
           <p>{this.state.loginCode}</p>
         </div>
+        <QRCode value={`${DOMAIN}#${this.state.guestToken}`} />
       </CheckInFormWrapper>
     );
   }
@@ -111,7 +116,6 @@ class CheckInForm extends React.Component {
 CheckInForm.propTypes = {
   hotel_id: propTypes.string.isRequired,
 };
-
 
 const CheckInFormWrapper = styled.div`
   display: flex;
@@ -134,6 +138,9 @@ const CheckInFormWrapper = styled.div`
     p {
       text-align: center;
     }
+  }
+  canvas {
+    margin: 1rem auto;
   }
 `;
 
