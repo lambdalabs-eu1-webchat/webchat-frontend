@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 import QRCode from 'qrcode.react';
 
 import { DOMAIN, USERS, HOTEL } from '../utils/paths';
@@ -52,13 +53,14 @@ class CheckInForm extends React.Component {
             id: room._id,
           },
         });
+        const data = jwt.decode(res.data.token);
 
         this.setState(cState => {
           const availableRooms = cState.availableRooms.filter(
-            room => room._id !== room_id
+            room => room._id !== room_id,
           );
           return {
-            loginCode: res.data.passcode,
+            loginCode: data.passcode,
             availableRooms,
             selectValue: '',
             guestToken: res.data.token,
