@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { validate } from 'email-validator';
+
+import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
 
 class CheckOutForm extends React.Component {
   state = {
@@ -43,8 +45,18 @@ class CheckOutForm extends React.Component {
       hotelId: this.props.hotel_id,
     };
     try {
-      await axios.post(`${DOMAIN}${EMAIL}`, emailDetails);
-      this.setState({ emailInput: '' });
+      if (validate(emailDetails.guestEmail)) {
+        const res = await axios.post(`${DOMAIN}${EMAIL}`, emailDetails);
+        if (res.data.message.includes('sucessfully')) {
+          this.setState({ emailInput: '' });
+        } else {
+          return alert(
+            'This guest had no chats during their stay, please remove their email',
+          );
+        }
+      } else {
+        return alert('Please provide a valid email address');
+      }
     } catch (error) {
       console.error(error);
     }
@@ -54,9 +66,9 @@ class CheckOutForm extends React.Component {
     const guestEmail = this.state.emailInput;
     const guest_id = this.state.selectValue;
     if (guestEmail) {
-      this.sendGuestEmail();
+      await this.sendGuestEmail();
     }
-    if (guest_id) {
+    if (guest_id && !this.state.emailInput) {
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
         if (didDel) {
