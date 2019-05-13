@@ -58,6 +58,27 @@ class HomePage extends React.Component {
           <section className="image-divider">
             <img src={ReceptionStaff} alt="staff"/>
           </section>
+
+          <section className="home-feedback">
+            <h1>FrontDesk is changing the way hotel staff interact with their guests.</h1>
+            <p>Here is some of the feedback we have received since starting FrontDesk:</p>
+            <div className="feedback-cards">
+              <div className="feedback-card">
+                <p>
+                  “Our team has seen significant improvements from using FrontDesk and our reception duties are much less chaotic.“
+                </p>
+                <p className="feedback-name"> - Fiona Mulligan, Receptionist</p>
+              </div>
+              <div className="feedback-card">
+                <p>“I have thoroughly enjoyed using FrontDesk. I can communicate with the hotel anytime and from wherever I happen to be.“</p>
+                <p className="feedback-name"> - Richard Stamos, Guest</p>
+              </div>
+              <div className="feedback-card">
+                <p>“FrontDesk has changed the way in which I conduct my business. My reception is now clear and my guests are happy.“ </p>
+                <p className="feedback-name"> - Michelle Matthews, Hotel Manager</p>
+              </div>
+            </div>
+          </section>
           </section>
         </HomePageContainer>
       </HomePageOuter>
