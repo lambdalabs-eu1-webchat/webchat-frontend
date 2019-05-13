@@ -19,6 +19,7 @@ const {
 const initState = {
   queuedChats: [],
   activeChats: [],
+  closedChats: [],
   socket: null,
   currentChatIdAndStatus: null,
 };
