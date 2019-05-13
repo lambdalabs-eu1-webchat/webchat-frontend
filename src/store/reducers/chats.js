@@ -88,12 +88,25 @@ const chats = (state = initState, action) => {
           }
           return chat;
         }),
+        queuedChats: state.queuedChats.map(chat => {
+          if (chat._id === action.target) {
+            return { ...chat, typingUser: action.payload };
+          }
+          return chat;
+        }),
       };
     case CLEAR_CURRENT_TYPER:
       return {
         ...state,
         activeChats: state.activeChats.map(chat => {
           if (chat._id === action.target) {
+            return { ...chat, typingUser: null };
+          }
+          return chat;
+        }),
+        queuedChats: state.queuedChats.map(chat => {
+          if (chat._id === action.target) {
+            debugger;
             return { ...chat, typingUser: null };
           }
           return chat;
