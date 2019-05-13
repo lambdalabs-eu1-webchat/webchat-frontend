@@ -5,12 +5,17 @@ import ChatScreen from '../components/ChatScreen';
 import ChatsList from '../components/chat/ChatsList';
 import Tabs from '../components/reusable/Tabs';
 import { QUEUED, ACTIVE, CLOSED } from '../utils/ticketStatus';
+import { fetchClosedChats } from '../store/actions/chat';
 
 class Chat extends React.Component {
   state = {
     selectedTab: ACTIVE,
   };
   setSelectedTab = option => {
+    if (option === CLOSED) {
+      // fetch closed chats
+      this.props.fetchClosedChats(this.props.currentUser.hotel_id);
+    }
     this.setState({ selectedTab: option });
   };
   render() {
@@ -21,6 +26,7 @@ class Chat extends React.Component {
     } else if (selectedTab === QUEUED) {
       chatsArr = this.props.queuedChats;
     } else if (selectedTab === CLOSED) {
+      chatsArr = this.props.closedChats;
     }
     return (
       <StyledChat>
@@ -91,13 +97,18 @@ const mapStateToProps = state => {
       currentChat = chats.closedChats.find(chat => chat._id === chat_id);
     }
   }
+  console.log(state.currentUser);
   return {
     queuedChats: chats.queuedChats,
     activeChats: chats.activeChats,
     closedChats: chats.closedChats,
     currentChat,
     status,
+    currentUser: state.currentUser,
   };
 };
 
-export default connect(mapStateToProps)(Chat);
+export default connect(
+  mapStateToProps,
+  { fetchClosedChats },
+)(Chat);

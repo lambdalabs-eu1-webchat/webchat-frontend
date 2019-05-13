@@ -101,6 +101,19 @@ class App extends React.Component {
         socket.on(SOCKET.QUEUED_MESSAGE, ({ message, chat_id }) => {
           this.props.dispatchAddQueueMessage({ message, chat_id });
         });
+        socket.on(SOCKET.TYPING, ({ user, chat_id }) => {
+          if (user._id !== this.props.currentUser._id) {
+            this.props.dispatchAddCurrentTyper({
+              chat_id,
+              user,
+            });
+          }
+        });
+        socket.on(SOCKET.STOPPED_TYPING, ({ user, chat_id }) => {
+          if (user._id !== this.props.currentUser._id) {
+            this.props.dispatchClearCurrentTyper(chat_id);
+          }
+        });
         // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
