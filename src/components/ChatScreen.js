@@ -8,7 +8,7 @@ import ChatScreenHeader from './ChatScreenHeader';
 import MessageComposer from './MessageComposer';
 import Button from '@material-ui/core/Button';
 import { SOCKET } from '../utils/paths';
-import { ACTIVE, CLOSED, QUEUED } from '../utils/ticketStatus';
+import { ACTIVE, QUEUED } from '../utils/ticketStatus';
 import { setCurrentChatId } from '../store/actions/chat';
 class ChatScreen extends React.Component {
   closeTicket = () => {
