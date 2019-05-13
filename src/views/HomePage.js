@@ -1,29 +1,42 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { fetchAllUsers } from '../store/actions/users';
+import { Link } from 'react-router-dom';
+
+import styled from 'styled-components';
+import theme from '../theme/styledTheme';
+import HeaderImage from '../assets/chatting.svg';
+import ReceptionStaff from '../assets/staff.svg';
 
 class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
-    const {dispatchFetchAllUsers} = this.props;
-    dispatchFetchAllUsers();
-  };
   render() {
-    const { state } = this.props;
     return (
-      <div className="home-page container">
-        <h2>Users</h2>
-        {state.users.map(user => (
-            <p key={user._id}> {user.name} </p>
-        ))}
-      </div>
+      <HomePageOuter>
+        <HomePageContainer>
+          <section className="home">
+            <section className="home-header">
+              <h1>Cater to your guests requests at the touch of a button.</h1>
+              <p>
+                FrontDesk is an easy to use hotel chat application which allows hotels to manage all of their guests needs in one place.
+              </p>
+              <p>
+                Whether it's room service, restaurant recommendations, or noise complaints, guests can use FrontDesk to readily talk with hotel staff and get their issues resolved.
+                Offer your guests the customer experience they deserve.
+              </p>
+              <button>
+                <Link to="/register">Register Now</Link>
+              </button>
+            </section>
+            <img src={HeaderImage} alt="chat"/>
+          </section>
+          </section>
+        </HomePageContainer>
+      </HomePageOuter>
     );
   };
 }
 
-const mapStateToProps = state => ({ state });
+export default HomePage;
 
-export default connect(mapStateToProps, {
-  dispatchFetchAllUsers: fetchAllUsers,
-})(HomePage);
+const HomePageOuter = styled.div`
+  background: ${theme.color.offWhite};
+`;
+
