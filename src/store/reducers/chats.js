@@ -12,6 +12,8 @@ const {
   SET_CURRENT_CHAT_ID,
   CLEAR_CURRENT_CHAT_ID,
   ADD_QUEUE_MESSAGE,
+  ADD_CURRENT_TYPER,
+  CLEAR_CURRENT_TYPER,
 } = CHATS;
 
 const initState = {
@@ -58,7 +60,13 @@ const chats = (state = initState, action) => {
     case CLEAR_CURRENT_CHAT_ID:
       return { ...state, currentChatIdAndStatus: null };
     case SET_CURRENT_CHAT_ID:
-      return { ...state, currentChatIdAndStatus: action.payload };
+      return {
+        ...state,
+        currentChatIdAndStatus: {
+          chat_id: action.payload.chat_id,
+          status: action.payload.status,
+        },
+      };
     case ADD_QUEUE_MESSAGE:
       return {
         ...state,
@@ -67,6 +75,39 @@ const chats = (state = initState, action) => {
             const newTickets = JSON.parse(JSON.stringify(chat.tickets));
             newTickets[newTickets.length - 1].messages.push(action.payload);
             return { ...chat, tickets: newTickets };
+          }
+          return chat;
+        }),
+      };
+    case ADD_CURRENT_TYPER:
+      return {
+        ...state,
+        activeChats: state.activeChats.map(chat => {
+          if (chat._id === action.target) {
+            return { ...chat, typingUser: action.payload };
+          }
+          return chat;
+        }),
+        queuedChats: state.queuedChats.map(chat => {
+          if (chat._id === action.target) {
+            return { ...chat, typingUser: action.payload };
+          }
+          return chat;
+        }),
+      };
+    case CLEAR_CURRENT_TYPER:
+      return {
+        ...state,
+        activeChats: state.activeChats.map(chat => {
+          if (chat._id === action.target) {
+            return { ...chat, typingUser: null };
+          }
+          return chat;
+        }),
+        queuedChats: state.queuedChats.map(chat => {
+          if (chat._id === action.target) {
+            debugger;
+            return { ...chat, typingUser: null };
           }
           return chat;
         }),

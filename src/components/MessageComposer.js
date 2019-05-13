@@ -12,10 +12,12 @@ class MessageComposer extends React.Component {
     inputValue: '',
   };
   handleSend = () => {
-    this.props.socket.emit(SOCKET.MESSAGE, {
+    const { socket, chat_id } = this.props;
+    socket.emit(SOCKET.MESSAGE, {
       chat_id: this.props.chat_id,
       text: this.state.inputValue,
     });
+    socket.emit(SOCKET.STOPPED_TYPING, chat_id);
     this.setInputValue('');
   };
 
@@ -26,7 +28,7 @@ class MessageComposer extends React.Component {
     if (value.length === 0) {
       socket.emit(SOCKET.STOPPED_TYPING, chat_id);
       // if typing
-    } else if (value.length < 0) {
+    } else if (value.length > 0) {
       socket.emit(SOCKET.TYPING, chat_id);
     }
     this.setInputValue(event.target.value);
@@ -65,7 +67,6 @@ const StyledMessageComposer = styled.div`
 const mapStateToProps = state => {
   return {
     socket: state.chats.socket,
-    chat_id: state.currentChatIdAndStatus.chat_id,
   };
 };
 

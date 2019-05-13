@@ -13,6 +13,8 @@ import {
   fetchClosedChats,
   saveSocket,
   addQueueMessage,
+  addCurrentTyper,
+  clearCurrentTyper,
 } from './store/actions/chat';
 
 import NavBar from './components/layout/navbar/NavBar';
@@ -55,11 +57,21 @@ class App extends React.Component {
         socket.on(SOCKET.QUEUED_MESSAGE, ({ message, chat_id }) => {
           this.props.dispatchAddQueueMessage({ message, chat_id });
         });
+        socket.on(SOCKET.TYPING, ({ user, chat_id }) => {
+          if (user._id !== this.props.currentUser._id) {
+            this.props.dispatchAddCurrentTyper({ chat_id, user });
+          }
+        });
+        socket.on(SOCKET.STOPPED_TYPING, ({ user, chat_id }) => {
+          if (user._id !== this.props.currentUser._id) {
+            this.props.dispatchClearCurrentTyper(chat_id);
+          }
+        });
         // socket.on(SOCKET.CHATLOG, chatLog => {});
         socket.emit(SOCKET.LOGIN, token);
       });
       // temp hotel_id
-      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
+      // this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
     }
   }
 
@@ -93,13 +105,13 @@ class App extends React.Component {
         socket.emit(SOCKET.LOGIN, token);
       });
       // temp hotel_id
-      this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
+      // this.props.dispatchfetchClosedChats('5cc74ab1f16ec37bc8cc4cdb');
     }
   }
 
   render() {
     return (
-      <div className='App'>
+      <div className="App">
         <NavBar currentUser={this.props.currentUser} />
         <Router user_type={this.props.currentUser.user_type} />
         <Footer />
@@ -133,6 +145,8 @@ export default withRouter(
       dispatchfetchClosedChats: fetchClosedChats,
       dispatchSaveSocket: saveSocket,
       dispatchAddQueueMessage: addQueueMessage,
+      dispatchAddCurrentTyper: addCurrentTyper,
+      dispatchClearCurrentTyper: clearCurrentTyper,
     },
   )(App),
 );
