@@ -20,6 +20,15 @@ class MessageComposer extends React.Component {
   };
 
   handleInput = event => {
+    const value = event.target.value;
+    const { socket, chat_id } = this.props;
+    // if not typing
+    if (value.length === 0) {
+      socket.emit(SOCKET.STOPPED_TYPING, chat_id);
+      // if typing
+    } else if (value.length < 0) {
+      socket.emit(SOCKET.TYPING, chat_id);
+    }
     this.setInputValue(event.target.value);
   };
   setInputValue = value => {
@@ -31,7 +40,7 @@ class MessageComposer extends React.Component {
         <Input
           value={this.state.inputValue}
           onChange={this.handleInput}
-          className='flex'
+          className="flex"
         />
         <Button onClick={this.handleSend}>Send</Button>
       </StyledMessageComposer>
@@ -56,6 +65,7 @@ const StyledMessageComposer = styled.div`
 const mapStateToProps = state => {
   return {
     socket: state.chats.socket,
+    chat_id: state.currentChatIdAndStatus.chat_id,
   };
 };
 
