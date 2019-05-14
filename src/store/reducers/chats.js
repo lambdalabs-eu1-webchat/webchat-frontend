@@ -41,7 +41,7 @@ const chats = (state = initState, action) => {
       return {
         ...state,
         queuedChats: state.queuedChats.filter(
-          chat => chat._id !== action.target,
+          chat => chat._id !== action.target
         ),
       };
     case ADD_MESSAGE:
@@ -107,7 +107,6 @@ const chats = (state = initState, action) => {
         }),
         queuedChats: state.queuedChats.map(chat => {
           if (chat._id === action.target) {
-            debugger;
             return { ...chat, typingUser: null };
           }
           return chat;
