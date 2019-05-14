@@ -35,7 +35,7 @@ class ChatScreen extends React.Component {
           userType={currentUser.user_type}
           status={status}
           tickets={chat.tickets}
-          guest_id={chat.guest.id}
+          guest={chat.guest}
         />
         {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
         {ACTIVE === status ? (

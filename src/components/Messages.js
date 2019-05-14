@@ -21,27 +21,30 @@ class Messages extends React.Component {
     this.scrollToBottom();
   };
   render() {
-    const { tickets, guest_id, userType, status } = this.props;
+    const { tickets, guest, userType, status } = this.props;
+    const guestName = guest.name;
+    const GuestId = guest.id;
     return (
       <StyledMessages
         ref={el => {
           this.component = el;
         }}
       >
-        {tickets.map(ticket => (
+        {tickets.map((ticket, i) => (
           <div>
-            {ticket.messages.map(message => (
-              <Message
-                key={message._id}
-                message={message}
-                guest_id={guest_id}
-              />
-            ))}
-            {ticket.rating &&
-            status === CLOSED &&
+            <p>{`${guestName}'s ticket # ${i}`}</p>
+            <p>{`Status: ${status}`}</p>
+            {status === CLOSED &&
             (userType === ADMIN || userType === SUPER_ADMIN) ? (
-              <RatingMessage rating={ticket.rating} />
+              ticket.rating ? (
+                <RatingMessage rating={ticket.rating} />
+              ) : (
+                <p>No Rating given</p>
+              )
             ) : null}
+            {ticket.messages.map(message => (
+              <Message key={message._id} message={message} guest_id={GuestId} />
+            ))}
           </div>
         ))}
       </StyledMessages>
