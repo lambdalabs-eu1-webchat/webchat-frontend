@@ -74,8 +74,6 @@ const divStyle = {
   color:'',
   fontWeight:'light',
   fontSize:'13px',
-  fontFamily: 'Kanit',
-  // fontFamily:'Ubuntu',
 
 };
 const icon = {
