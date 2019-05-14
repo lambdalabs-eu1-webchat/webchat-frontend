@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import Logout from './Logout';
 import HomePage from '../views/HomePage';
@@ -14,7 +13,7 @@ import CheckInOrOut from '../views/CheckInOrOut';
 import EmployeeSettings from '../views/EmployeeSettings';
 import CompanyDash from '../views/CompanyDash';
 import { APP_PATHS } from '../utils/paths';
-
+import { Redirect } from 'react-router-dom';
 import { fetchRooms } from '../store/actions/rooms';
 
 // temp fix
@@ -57,18 +56,25 @@ function Router({ user_type, fetchRooms, rooms, currentUser }) {
       setGotRooms(true);
       fetchRooms(currentUser.hotel_id);
     }
-    console.log(rooms);
+
     if (rooms.length === 0) {
       // if no rooms make only route a route to make rooms
       return (
-        <React.Fragment>
+        <Switch>
           <Route
             path={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS}
             component={CompanyDash}
           />
-          <Route exact path={APP_PATHS.LOGIN} component={Login} />
           <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
-        </React.Fragment>
+          <Route
+            path="/"
+            render={() => (
+              <Redirect
+                to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS}
+              />
+            )}
+          />
+        </Switch>
       );
 
       // redirect to that route
@@ -80,7 +86,6 @@ function Router({ user_type, fetchRooms, rooms, currentUser }) {
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
         <Route path={APP_PATHS.COMPANY_DASH} component={CompanyDash} />
-        >
         <Route exact path={APP_PATHS.CHAT} component={Chat} />
         <Route
           exact
