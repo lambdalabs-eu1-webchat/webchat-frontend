@@ -7,7 +7,6 @@ const {
   ADD_QUEUED_CHAT,
   ADD_QUEUED_CHATS,
   REMOVE_QUEUED_CHAT,
-  UPDATE_ACTIVE_CHAT,
   FETCH_CLOSED_CHATS,
   FETCH_CLOSED_CHATS_SUCCESS,
   FETCH_CLOSED_CHATS_FAILURE,
@@ -148,4 +147,24 @@ export const clearCurrentTyper = chat_id => {
     type: CLEAR_CURRENT_TYPER,
     target: chat_id,
   };
+};
+
+export const translate = async (text, ticket_id, language) => {
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: language
+      ? JSON.stringify({ text, ticket_id, language })
+      : JSON.stringify({ text, ticket_id }),
+  };
+
+  try {
+    const response = await fetch(`${DOMAIN}api/chats/translate`, config);
+    const jsonResponse = await response.json();
+    return jsonResponse;
+  } catch (error) {
+    console.error(error);
+  }
 };
