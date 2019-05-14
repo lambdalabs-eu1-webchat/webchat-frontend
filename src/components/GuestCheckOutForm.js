@@ -46,8 +46,8 @@ class CheckOutForm extends React.Component {
     };
     try {
       if (validate(emailDetails.guestEmail)) {
-        const res = await axios.post(`${DOMAIN}${EMAIL}`, emailDetails);
-        if (res.data.message.includes('sucessfully')) {
+        const didSend = await axios.post(`${DOMAIN}${EMAIL}`, emailDetails);
+        if (didSend.data) {
           this.setState({ emailInput: '' });
         } else {
           return alert(
