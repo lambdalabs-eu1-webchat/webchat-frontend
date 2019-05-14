@@ -8,8 +8,8 @@ import ChatScreenHeader from './ChatScreenHeader';
 import MessageComposer from './MessageComposer';
 import Button from '@material-ui/core/Button';
 import { SOCKET } from '../utils/paths';
-import { ACTIVE, CLOSED, QUEUED } from '../utils/ticketStatus';
-import { setCurrentChatId } from '../store/actions/chat';
+import { ACTIVE, QUEUED } from '../utils/ticketStatus';
+import { setCurrentChatId, translate } from '../store/actions/chat';
 class ChatScreen extends React.Component {
   closeTicket = () => {
     const chat_id = this.props.chat._id;
@@ -23,8 +23,26 @@ class ChatScreen extends React.Component {
     this.props.socket.emit(SOCKET.ASSIGN_SELF_TICKET, chat_id);
     this.props.setCurrentChatId(chat_id, ACTIVE);
   };
+
+  translateMessage = async () => {
+    const lastTicket = this.props.chat.tickets[
+      this.props.chat.tickets.length - 1
+    ];
+
+    const ticket_id = lastTicket._id;
+
+    const textToTranslate = lastTicket.messages.map(msg => {
+      return msg.text;
+    });
+    const translatedText = await translate(textToTranslate, ticket_id);
+    // change state of the last ticket in chat, so that the language
+    // is translatedText.inputLanguage
+  };
+
   render() {
     const { chat, status } = this.props;
+    const lastTicket = chat.tickets[this.props.chat.tickets.length - 1];
+    console.log('render chatscreen: ', lastTicket.language);
     return (
       <StyledChatScreen>
         <ChatScreenHeader
@@ -35,8 +53,13 @@ class ChatScreen extends React.Component {
         {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
         {ACTIVE === status ? (
           <React.Fragment>
-            <MessageComposer chat_id={chat._id} />
+            <MessageComposer
+              chat_id={chat._id}
+              last_ticket_id={lastTicket._id}
+              language={lastTicket.language}
+            />
             <Button onClick={this.closeTicket}>Close Ticket</Button>
+            <Button onClick={this.translateMessage}>Translate</Button>
           </React.Fragment>
         ) : null}
         {QUEUED === status ? (
@@ -61,10 +84,10 @@ ChatScreen.propTypes = {
               name: propTypes.string.isRequired,
             }).isRequired,
             text: propTypes.string.isRequired,
-          }),
+          })
         ),
         status: propTypes.string.isRequired,
-      }),
+      })
     ).isRequired,
     guest: propTypes.shape({
       id: propTypes.string.isRequired,
@@ -86,5 +109,5 @@ const StyledChatScreen = styled.div``;
 
 export default connect(
   mapStateToProps,
-  { setCurrentChatId },
+  { setCurrentChatId }
 )(ChatScreen);
