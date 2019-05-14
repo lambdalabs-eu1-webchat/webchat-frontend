@@ -26,7 +26,7 @@ class MessageComposer extends React.Component {
     try {
       const { socket, chat_id, last_ticket_id, language } = this.props;
 
-      console.log('translate to this language: ', language);
+      // translate hotel staff message based on language from guest message
       const translatedInputValue = await translate(
         this.state.inputValue,
         last_ticket_id,
@@ -35,7 +35,8 @@ class MessageComposer extends React.Component {
 
       socket.emit(SOCKET.MESSAGE, {
         chat_id: this.props.chat_id,
-        text: translatedInputValue, // send translated text here
+        // emit the translated message to chat
+        text: translatedInputValue,
       });
       socket.emit(SOCKET.STOPPED_TYPING, chat_id);
       this.setInputValue('');

@@ -29,19 +29,23 @@ class ChatScreen extends React.Component {
   };
 
   translateMessage = async () => {
+    // get last ticket in current active chat
     const lastTicket = this.props.chat.tickets[
       this.props.chat.tickets.length - 1
     ];
 
     const ticket_id = lastTicket._id;
 
+    // take out all messages from last ticket
     const textToTranslate = lastTicket.messages.map(msg => {
       return msg.text;
     });
+    // translate message from guest
     const translatedText = await translate(textToTranslate, ticket_id);
     const lastTranslatedText = translatedText[translatedText.length - 1];
 
     const chat_id = this.props.chat._id;
+    // get language from last translated message to state
     this.props.updateTicketLanguage(chat_id, lastTranslatedText.inputLang);
   };
 
