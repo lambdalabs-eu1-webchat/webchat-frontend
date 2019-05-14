@@ -55,7 +55,7 @@ class ChatScreen extends React.Component {
   render() {
     const { chat, status } = this.props;
     const lastTicket = chat.tickets[this.props.chat.tickets.length - 1];
-    console.log('render chatscreen: ', lastTicket.language);
+
     return (
       <StyledChatScreen>
         <ChatScreenHeader
