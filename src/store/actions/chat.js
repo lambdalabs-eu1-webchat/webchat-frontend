@@ -16,6 +16,7 @@ const {
   ADD_QUEUE_MESSAGE,
   ADD_CURRENT_TYPER,
   CLEAR_CURRENT_TYPER,
+  UPDATE_TICKET_LANGUAGE,
 } = CHATS;
 
 export const saveSocket = socket => {
@@ -167,4 +168,12 @@ export const translate = async (text, ticket_id, language) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const updateTicketLanguage = (chat_id, language) => {
+  return {
+    type: UPDATE_TICKET_LANGUAGE,
+    target: chat_id,
+    payload: language,
+  };
 };
