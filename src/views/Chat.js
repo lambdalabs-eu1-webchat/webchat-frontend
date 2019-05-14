@@ -110,5 +110,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchClosedChats },
+  { fetchClosedChats }
 )(Chat);

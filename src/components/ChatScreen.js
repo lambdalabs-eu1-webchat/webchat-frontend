@@ -9,7 +9,11 @@ import MessageComposer from './MessageComposer';
 import Button from '@material-ui/core/Button';
 import { SOCKET } from '../utils/paths';
 import { ACTIVE, QUEUED } from '../utils/ticketStatus';
-import { setCurrentChatId, translate } from '../store/actions/chat';
+import {
+  setCurrentChatId,
+  translate,
+  updateTicketLanguage,
+} from '../store/actions/chat';
 class ChatScreen extends React.Component {
   closeTicket = () => {
     const chat_id = this.props.chat._id;
@@ -35,8 +39,10 @@ class ChatScreen extends React.Component {
       return msg.text;
     });
     const translatedText = await translate(textToTranslate, ticket_id);
-    // change state of the last ticket in chat, so that the language
-    // is translatedText.inputLanguage
+    const lastTranslatedText = translatedText[translatedText.length - 1];
+
+    const chat_id = this.props.chat._id;
+    this.props.updateTicketLanguage(chat_id, lastTranslatedText.inputLang);
   };
 
   render() {
@@ -109,5 +115,5 @@ const StyledChatScreen = styled.div``;
 
 export default connect(
   mapStateToProps,
-  { setCurrentChatId }
+  { setCurrentChatId, updateTicketLanguage }
 )(ChatScreen);
