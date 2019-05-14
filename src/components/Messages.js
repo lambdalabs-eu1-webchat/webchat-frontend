@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 
 import Message from './Message';
+import RatingMessage from './RatingMessage';
+import { ADMIN, SUPER_ADMIN } from '../utils/userTypes';
+import { CLOSED } from '../utils/ticketStatus';
 
 class Messages extends React.Component {
   // pass in 'smooth' for smooth scroll
@@ -18,18 +21,25 @@ class Messages extends React.Component {
     this.scrollToBottom();
   };
   render() {
-    const { tickets, guest_id } = this.props;
+    const { tickets, guest_id, userType, status } = this.props;
     return (
       <StyledMessages
         ref={el => {
           this.component = el;
         }}
       >
-        {tickets.map(ticket =>
-          ticket.messages.map(message => (
-            <Message key={message._id} message={message} guest_id={guest_id} />
-          )),
-        )}
+        {tickets.map(ticket => (
+          <div>
+            {ticket.messages.map(message => (
+              <Message
+                key={message._id}
+                message={message}
+                guest_id={guest_id}
+              />
+            ))}
+            {ticket.rating ? <RatingMessage rating={ticket.rating} /> : null}
+          </div>
+        ))}
       </StyledMessages>
     );
   }
