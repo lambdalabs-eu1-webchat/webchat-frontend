@@ -37,7 +37,11 @@ class Messages extends React.Component {
                 guest_id={guest_id}
               />
             ))}
-            {ticket.rating ? <RatingMessage rating={ticket.rating} /> : null}
+            {ticket.rating &&
+            status === CLOSED &&
+            (userType === ADMIN || userType === SUPER_ADMIN) ? (
+              <RatingMessage rating={ticket.rating} />
+            ) : null}
           </div>
         ))}
       </StyledMessages>
