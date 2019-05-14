@@ -45,7 +45,7 @@ const TicketView = ({
                 })}
               </div>
              <div>
-             <span style={icon} className="fa fa-comments icon-5x"></span>
+             {/* <span style={icon} className="fa fa-comments icon-5x"></span> */}
               <span style={icons}>chat</span>
              </div>
             </div>
@@ -75,11 +75,6 @@ const divStyle = {
   fontWeight:'light',
   fontSize:'13px',
 
-};
-const icon = {
-  marginTop:'50px',
-  color:'#4D9F60',
-  height:'',
 };
 const icons = {
   marginTop:'50px',
