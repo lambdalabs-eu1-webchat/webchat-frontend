@@ -196,7 +196,7 @@ const HomePageContainer = styled.div`
     padding: 10% 2.5%;
     width:50%;
     @media (max-width: 1000px) {
-      width: 95%;
+      width: 100%;
     }
 
     button {
@@ -217,7 +217,7 @@ const HomePageContainer = styled.div`
     padding: 10% 2.5%;
     background: ${theme.color.lightPurple};
     @media (max-width: 1000px) {
-      width: 95%;
+      width: 100%;
     }
     .feature-cards {
       display: flex;
@@ -233,7 +233,7 @@ const HomePageContainer = styled.div`
         box-shadow: ${theme.shadow.cardShadow};
         @media (max-width: 1000px) {
         padding: 10% 5%;
-        width: 85%;
+        width: 95%;
       }
 
         h2 {
@@ -266,7 +266,7 @@ const HomePageContainer = styled.div`
   .home-feedback {
     padding: 6% 2.5%;
     @media (max-width: 1000px) {
-      width: 95%;
+      width: 100%;
     }
     
     .feedback-cards {
@@ -285,7 +285,7 @@ const HomePageContainer = styled.div`
         box-shadow: 0 16px 48px rgba(32, 41, 50, 0.21);
         @media (max-width: 1000px) {
           padding: 10% 5%;
-          width: 85%;
+          width: 95%;
         }
         
         p {
@@ -315,9 +315,11 @@ const HomePageContainer = styled.div`
       margin: 0 2.5%;
       @media (max-width: 1000px) {
         flex-direction: column;
-        margin: 0 15%;
+        width: 90%;
+        margin: 0 5%;
       }
     }
+    
     .pricing-card {
       background: ${theme.color.lightPurple};
       border-radius: 3px;
@@ -328,8 +330,8 @@ const HomePageContainer = styled.div`
       box-shadow: 0 16px 48px rgba(32, 41, 50, 0.21);
       @media (max-width: 1000px) {
         padding: 10%;
-        margin: 10% 0;
-        width: 85%;
+        margin: 10% auto;
+        width: 100%;
       }
       
       h2 {
