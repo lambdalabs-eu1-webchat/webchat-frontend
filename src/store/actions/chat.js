@@ -151,7 +151,8 @@ export const clearCurrentTyper = chat_id => {
   };
 };
 
-export const translate = (text, ticket_id, language) => async dispatch => {
+export const translate = async (text, ticket_id, language) => {
+  debugger;
   const config = {
     method: 'POST',
     headers: {
@@ -167,7 +168,8 @@ export const translate = (text, ticket_id, language) => async dispatch => {
     const jsonResponse = await response.json();
     return jsonResponse;
   } catch (error) {
-    dispatch(translateChatFailure(error));
+    // dispatch(translateChatFailure(error));
+    console.error(error);
   }
 };
 
