@@ -11,6 +11,7 @@ const theme = {
     darkContrast: '',
     textColor: '#333', //main text color
     accentText: '#6876CB',
+    footerText: '#c7ccec',
     white: '#FFFFFF',
     offWhite: '#F2F2F2',
   },
@@ -27,8 +28,10 @@ const theme = {
   },
 
   fontSize: {
+    xxs: '1.2rem',
     xs: '1.6rem',
     s: '1.8rem',
+    sm: '2rem',
     m: '2.4rem',
     l: '3rem',
     xl: '3.5rem',
