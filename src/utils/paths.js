@@ -7,6 +7,7 @@ export const CHATS_CLOSED = 'api/chats/closed';
 export const HOTEL = 'api/hotel';
 export const SUBSCRIPTION = 'api/subscription';
 export const METHOD = 'api/subscription/method';
+export const TRANSLATE_CHAT = 'api/chats/translate';
 
 export const SOCKET = {
   CLOSE_TICKET: 'close_ticket',
