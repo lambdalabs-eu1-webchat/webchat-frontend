@@ -152,7 +152,6 @@ export const clearCurrentTyper = chat_id => {
 };
 
 export const translate = async (text, ticket_id, language) => {
-  debugger;
   const config = {
     method: 'POST',
     headers: {
