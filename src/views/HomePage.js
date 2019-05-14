@@ -343,9 +343,9 @@ const HomePageContainer = styled.div`
         padding: 0 5%;
         
         li {
-        font-size: ${theme.fontSize.xs};
-        padding: 5% 0;
-        text-align: left;
+          font-size: ${theme.fontSize.xs};
+          padding: 5% 0;
+          text-align: left;
         }
       }
       
@@ -374,13 +374,13 @@ const HomePageContainer = styled.div`
       }
       
       .fa-check {
-      background: #e2fdf8;
-      border: 1px solid white;
-      border-radius: 50%;
-      padding: 2.5%;
-      color: ${theme.color.accentGreen};
-      font-size: 1rem;
-      margin-right: 2.5%;
+        background: #e2fdf8;
+        border: 1px solid white;
+        border-radius: 50%;
+        padding: 2.5%;
+        color: ${theme.color.accentGreen};
+        font-size: 1rem;
+        margin-right: 2.5%;
       }
     }
   }
