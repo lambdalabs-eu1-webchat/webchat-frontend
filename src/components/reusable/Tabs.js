@@ -8,6 +8,7 @@ function Tabs({ options, selected, setSelected }) {
         <span
           className={option === selected ? 'selected tab' : 'tab'}
           onClick={() => setSelected(option)}
+          key={options.indexOf(option)}
         >
           {option}
         </span>

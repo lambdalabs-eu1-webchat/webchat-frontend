@@ -42,8 +42,11 @@ class ChatScreen extends React.Component {
     });
     // translate message from guest
     const translatedText = await translate(textToTranslate, ticket_id);
-    const lastTranslatedText = translatedText[translatedText.length - 1];
+    /**
+     * @todo - Render translated text in a Modal
+     */
 
+    const lastTranslatedText = translatedText[translatedText.length - 1];
     const chat_id = this.props.chat._id;
     // get language from last translated message to state
     this.props.updateTicketLanguage(chat_id, lastTranslatedText.inputLang);
