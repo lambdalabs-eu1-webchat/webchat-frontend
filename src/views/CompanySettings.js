@@ -37,10 +37,26 @@ class CompanySettings extends React.Component {
     } = this.props;
     this.state = {
       companyName: hotel.name,
+      currentCompanyName: '',
       companyMotto: hotel.motto,
+      currentCompanyMotto: '',
     };
     dispatchFetchSingleHotel(currentUser.hotel_id);
     dispatchFetchRoomsForHotel(currentUser.hotel_id);
+  }
+
+  componentDidUpdate() {
+    if (
+      this.state.currentCompanyName !== this.props.hotel.name &&
+      this.state.currentCompanyMotto !== this.props.hotel.motto
+    ) {
+      this.setState({
+        companyName: this.props.hotel.name,
+        currentCompanyName: this.props.hotel.name,
+        companyMotto: this.props.hotel.motto,
+        currentCompanyMotto: this.props.hotel.motto,
+      });
+    }
   }
 
   handleInputChange = event => {
@@ -61,19 +77,16 @@ class CompanySettings extends React.Component {
         return;
       }
       dispatchUpdateHotel(hotelId, companyName, companyMotto);
-      document
-        .querySelectorAll('.form-input')
-        .forEach(input => (input.value = ''));
     };
   }
 
-  handleClear() {
+  handleRevert() {
     return event => {
       event.preventDefault();
-      // you shouldn't need this in react
-      document
-        .querySelectorAll('.form-input')
-        .forEach(input => (input.value = ''));
+      this.setState({
+        companyName: this.props.hotel.name,
+        companyMotto: this.props.hotel.motto,
+      });
     };
   }
 
@@ -95,26 +108,26 @@ class CompanySettings extends React.Component {
           <section className="company-details">
             <h3>Update company details</h3>
             <form>
-              <label>Name</label>
               <input
                 name="companyName"
                 className="form-input"
-                placeholder={hotel.name}
+                value={this.state.companyName}
+                placeholder="hotel motto"
                 onChange={this.handleInputChange.bind(this)}
               />
-              <label>Company Motto</label>
               <input
                 name="companyMotto"
                 className="form-input"
-                placeholder={hotel.motto}
+                value={this.state.companyMotto}
+                placeholder="hotel motto"
                 onChange={this.handleInputChange.bind(this)}
               />
               <div className="action-buttons">
-                <button onClick={this.handleClear().bind(this)}>Clear</button>
+                <button onClick={this.handleRevert().bind(this)}>Revert</button>
                 <button
                   onClick={this.handleSubmit(
                     hotel._id,
-                    dispatchUpdateHotel
+                    dispatchUpdateHotel,
                   ).bind(this)}
                 >
                   Save
@@ -164,5 +177,5 @@ export default connect(
     dispatchDeleteRoomForHotel: deleteRoomForHotel,
     dispatchUpdateRoomForHotel: updateRoomForHotel,
     dispatchCreateRoomForHotel: createRoomForHotel,
-  }
+  },
 )(CompanySettings);
