@@ -23,9 +23,7 @@ const handleClick = loginRequest => event => {
 };
 
 const Login = ({ loggedIn, loginRequest, numberRooms }) => {
-  debugger;
   if (numberRooms === 0 && loggedIn) {
-    debugger;
     return (
       <Redirect to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS} />
     );
