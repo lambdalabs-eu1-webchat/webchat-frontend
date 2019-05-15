@@ -16,7 +16,7 @@ class CheckInForm extends React.Component {
     nameInput: '',
     loginCode: '',
     currentRoom: null,
-    selectValue: '',
+    selectValue: 'DEFAULT',
     errorRoom: false,
     errorName: false,
     guestToken: '',
@@ -52,7 +52,7 @@ class CheckInForm extends React.Component {
         this.props.addCurrentGuest(res.data.user);
         this.setState({
           loginCode: data.passcode,
-          selectValue: '',
+          selectValue: 'DEFAULT',
           nameInput: '',
           guestToken: res.data.token,
           isCheckingIn: false,
@@ -80,7 +80,7 @@ class CheckInForm extends React.Component {
           value={this.state.selectValue}
           onChange={this.setSelectValue}
         >
-          <option className="error" value="" disabled>
+          <option className="error" value="DEFAULT" disabled>
             Select a Room
           </option>
           {this.props.availableRooms.map(room => (

@@ -14,7 +14,7 @@ class CheckOutForm extends React.Component {
   state = {
     emailInput: '',
     selectedGuest: null,
-    selectValue: '',
+    selectValue: 'DEFAULT',
     errorRoom: false,
     isCheckingOut: false,
   };
@@ -69,7 +69,7 @@ class CheckOutForm extends React.Component {
           this.props.filterCurrentGuests(guest_id);
           this.props.addAvailableRoom(room);
           this.setState({
-            selectValue: '',
+            selectValue: 'DEFAULT',
             isCheckingOut: false,
           });
         }
@@ -93,7 +93,7 @@ class CheckOutForm extends React.Component {
           onChange={this.setSelectValue}
           value={this.state.selectValue}
         >
-          <option value="" disabled>
+          <option value="DEFAULT" disabled>
             Select a Guest
           </option>
           {this.props.currentGuests.map(guest => (
