@@ -24,22 +24,7 @@ const LoggedOutList = styled.ul`
   a {
     font-size: ${theme.fontSize.xs};
     color: ${theme.color.white};
+    padding-left: 20px;
   }
 `;
 
-// //  const LoggedOut = () => {
-// // return(
-
-// // )
-// //  }
-// // // const Logout = ({ logout }) => {
-// // //   localStorage.clear();
-// // //   logout();
-// // //   return <Redirect to="/" />;
-// // // };
-
-// // // Logout.propTypes = {
-// // //   logout: PropTypes.func.isRequired,
-// // // };
-
-// export default Logout;
