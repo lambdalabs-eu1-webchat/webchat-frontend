@@ -31,7 +31,6 @@ class Chat extends React.Component {
     return (
       <StyledChat>
         <ChatListWrapper >
-          <h2>Welcome to the Chat page!</h2>
           <Tabs 
             options={[QUEUED, ACTIVE, CLOSED]}
             selected={this.state.selectedTab}
@@ -58,6 +57,7 @@ class Chat extends React.Component {
 
 const StyledChat = styled.div`
   display: flex;
+  border:1px solid #0CD4AF;
   justify-content: space-around;
   flex-direction: row;
 
@@ -69,7 +69,7 @@ const StyledChat = styled.div`
 `;
 const ChatListWrapper = styled.div`
   width: 50%;
-  border-radius: 20px;
+  background-color:#0CD4AF;
   align:center;
 
   @media (max-width: 800px) {
@@ -79,6 +79,7 @@ const ChatListWrapper = styled.div`
 
 const ChatScreenWrapper = styled.div`
   width: 50%;
+  border:1px solid #0CD4AF;
   
   @media (max-width: 800px) {
     width: 100%;

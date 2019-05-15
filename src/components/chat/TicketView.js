@@ -61,6 +61,7 @@ TicketView.propTypes = {
 };
 
 const divStyle = {
+  border:'1px solid #0CD4AF',
   backgroundColor:'#c7ccec',
   margin: '10px',
   padding: '10px',
