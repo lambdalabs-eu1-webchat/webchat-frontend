@@ -100,8 +100,8 @@ class CompanySettings extends React.Component {
   clearNewRooms = () => {
     this.setState({
       newRooms: '',
-    })
-  }
+    });
+  };
 
   addRooms = () => {
     const rooms = this.state.newRooms;
@@ -109,11 +109,9 @@ class CompanySettings extends React.Component {
       return alert('Please add at least one room name');
     } else {
       const roomsToAdd = [];
-      rooms
-        .split(',')
-        .forEach(room => roomsToAdd.push({ name: room.trim() }));
-        this.props.dispatchCreateRoomForHotel(roomsToAdd, this.props.hotel._id);
-        this.clearNewRooms();
+      rooms.split(',').forEach(room => roomsToAdd.push({ name: room.trim() }));
+      this.props.dispatchCreateRoomForHotel(roomsToAdd, this.props.hotel._id);
+      this.clearNewRooms();
     }
   };
 
