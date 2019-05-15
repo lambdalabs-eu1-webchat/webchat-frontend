@@ -53,7 +53,8 @@ class ChatScreen extends React.Component {
   };
 
   render() {
-    const { chat, status } = this.props;
+
+    const { chat, status, currentUser } = this.props;
     const lastTicket = chat.tickets[this.props.chat.tickets.length - 1];
 
     return (
@@ -62,7 +63,12 @@ class ChatScreen extends React.Component {
           guest_name={chat.guest.name}
           room_name={chat.room.name}
         />
-        <Messages tickets={chat.tickets} guest_id={chat.guest.id} />
+        <Messages
+          userType={currentUser.user_type}
+          status={status}
+          tickets={chat.tickets}
+          guest={chat.guest}
+        />
         {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
         {ACTIVE === status ? (
           <React.Fragment>
@@ -115,6 +121,7 @@ ChatScreen.propTypes = {
 function mapStateToProps(state) {
   return {
     socket: state.chats.socket,
+    currentUser: state.currentUser,
   };
 }
 

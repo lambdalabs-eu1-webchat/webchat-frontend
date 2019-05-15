@@ -63,6 +63,7 @@ class CheckInForm extends React.Component {
             loginCode: data.passcode,
             availableRooms,
             selectValue: '',
+            nameInput: '',
             guestToken: res.data.token,
           };
         });
@@ -100,6 +101,7 @@ class CheckInForm extends React.Component {
           placeholder="Name"
           className={this.state.errorName ? 'error' : ''}
           onChange={event => this.setNameInput(event.target.value)}
+          value={this.state.nameInput}
           margin="normal"
         />
         <Button variant="contained" color="primary" onClick={this.checkInGuest}>
