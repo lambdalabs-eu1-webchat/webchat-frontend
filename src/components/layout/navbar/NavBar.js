@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import logo from './logo2.svg';
 import { NavLink } from 'react-router-dom';
 import LoggedIn from './SignedInLink';
 import LoggedOut from './SignedOutLink';
 import { connect } from 'react-redux';
+import theme from '../../../theme/styledTheme';
 
 const NavBar = props => {
   return (
@@ -43,14 +45,14 @@ const NavBar = props => {
   );
 };
 
-const StyledNav = styled.nav`
-  .tickets {
-    color: #0b9fec;
-  }
-  .active {
-    color: white;
-  }
-`;
+// const StyledNav = styled.nav`
+//   .tickets {
+//     color: #0b9fec;
+//   }
+//   .active {
+//     color: white;
+//   }
+// `;
 
 function mapStateToProps(state) {
   return {
@@ -61,3 +63,31 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(NavBar);
+
+const StyledNav = styled.nav`
+  background: ${theme.color.secondaryPurple};
+  padding: 1rem 2.5rem;
+  text-transform: uppercase;
+  a {
+    text-decoration: none;
+    font-size: ${theme.fontSize.xs};
+    color: ${theme.color.white};
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+    img {
+      border-radius: 0;
+      width: 60%;
+    }
+  }
+  .tickets {
+    color: ${theme.color.accentGreen};
+  }
+  .active {
+    color: white;
+  }
+`;
