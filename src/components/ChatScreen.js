@@ -14,7 +14,22 @@ import {
   translate,
   updateTicketLanguage,
 } from '../store/actions/chat';
+import TranslateModal from './TranslateModal';
+
 class ChatScreen extends React.Component {
+  state = {
+    isTranslateModalOpen: false,
+    translatedMessages: [],
+  };
+
+  openTranslateModal = () => {
+    this.setState({ isTranslateModalOpen: true });
+  };
+
+  closeTranslateModal = () => {
+    this.setState({ isTranslateModalOpen: false });
+  };
+
   closeTicket = () => {
     const chat_id = this.props.chat._id;
     this.props.socket.emit(SOCKET.STOPPED_TYPING, chat_id);
@@ -42,18 +57,18 @@ class ChatScreen extends React.Component {
     });
     // translate message from guest
     const translatedText = await translate(textToTranslate, ticket_id);
-    /**
-     * @todo - Render translated text in a Modal
-     */
+
+    this.setState({ translatedMessages: translatedText });
 
     const lastTranslatedText = translatedText[translatedText.length - 1];
     const chat_id = this.props.chat._id;
     // get language from last translated message to state
     this.props.updateTicketLanguage(chat_id, lastTranslatedText.inputLang);
+    // open modal with translated messages
+    this.openTranslateModal();
   };
 
   render() {
-
     const { chat, status, currentUser } = this.props;
     const lastTicket = chat.tickets[this.props.chat.tickets.length - 1];
 
@@ -86,6 +101,14 @@ class ChatScreen extends React.Component {
             <Button onClick={this.joinChat}>Join Chat</Button>
           </React.Fragment>
         ) : null}
+
+        {this.state.isTranslateModalOpen && (
+          <TranslateModal
+            translations={this.state.translatedMessages}
+            isTranslateModalOpen={this.state.isTranslateModalOpen}
+            closeTranslateModal={this.closeTranslateModal}
+          />
+        )}
       </StyledChatScreen>
     );
   }
