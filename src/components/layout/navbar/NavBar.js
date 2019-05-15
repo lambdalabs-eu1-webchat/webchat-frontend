@@ -45,15 +45,6 @@ const NavBar = props => {
   );
 };
 
-// const StyledNav = styled.nav`
-//   .tickets {
-//     color: #0b9fec;
-//   }
-//   .active {
-//     color: white;
-//   }
-// `;
-
 function mapStateToProps(state) {
   return {
     numberActiveTickets: state.chats.activeChats.length,
