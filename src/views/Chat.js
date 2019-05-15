@@ -3,44 +3,28 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ChatScreen from '../components/ChatScreen';
 import ChatsList from '../components/chat/ChatsList';
-import Tabs from '../components/reusable/Tabs';
 import { QUEUED, ACTIVE, CLOSED } from '../utils/ticketStatus';
-import { fetchClosedChats } from '../store/actions/chat';
 
 class Chat extends React.Component {
-  state = {
-    selectedTab: ACTIVE,
-  };
-  setSelectedTab = option => {
-    if (option === CLOSED) {
-      // fetch closed chats
-      this.props.fetchClosedChats(this.props.currentUser.hotel_id);
-    }
-    this.setState({ selectedTab: option });
-  };
   render() {
-    let chatsArr = [];
-    const { selectedTab } = this.state;
-    if (selectedTab === ACTIVE) {
-      chatsArr = this.props.activeChats;
-    } else if (selectedTab === QUEUED) {
-      chatsArr = this.props.queuedChats;
-    } else if (selectedTab === CLOSED) {
-      chatsArr = this.props.closedChats;
-    }
     return (
       <StyledChat>
         <ChatListWrapper>
           <h2>Welcome to the Chat page!</h2>
-          <Tabs
-            options={[QUEUED, ACTIVE, CLOSED]}
-            selected={this.state.selectedTab}
-            setSelected={this.setSelectedTab}
+          <ChatsList
+            setSelectedChat={this.setSelectedChat}
+            chatsArr={this.props.queuedChats}
+            status={QUEUED}
           />
           <ChatsList
             setSelectedChat={this.setSelectedChat}
-            chatsArr={chatsArr}
-            status={this.state.selectedTab}
+            chatsArr={this.props.activeChats}
+            status={ACTIVE}
+          />
+          <ChatsList
+            setSelectedChat={this.setSelectedChat}
+            chatsArr={this.props.closedChats}
+            status={CLOSED}
           />
         </ChatListWrapper>
         <ChatScreenWrapper>
@@ -97,18 +81,13 @@ const mapStateToProps = state => {
       currentChat = chats.closedChats.find(chat => chat._id === chat_id);
     }
   }
-  console.log(state.currentUser);
   return {
     queuedChats: chats.queuedChats,
     activeChats: chats.activeChats,
     closedChats: chats.closedChats,
     currentChat,
     status,
-    currentUser: state.currentUser,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { fetchClosedChats },
-)(Chat);
+export default connect(mapStateToProps)(Chat);

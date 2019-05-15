@@ -2,12 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
+import { DOMAIN, HOTEL, USERS } from '../utils/paths';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { validate } from 'email-validator';
-
-import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
 
 class CheckOutForm extends React.Component {
   state = {
@@ -38,37 +36,9 @@ class CheckOutForm extends React.Component {
     this.setState({ emailInput });
   };
 
-  sendGuestEmail = async () => {
-    const emailDetails = {
-      guestEmail: this.state.emailInput,
-      guestId: this.state.selectValue,
-      hotelId: this.props.hotel_id,
-    };
-    try {
-      if (validate(emailDetails.guestEmail)) {
-        const didSend = await axios.post(`${DOMAIN}${EMAIL}`, emailDetails);
-        if (didSend.data) {
-          this.setState({ emailInput: '' });
-        } else {
-          return alert(
-            'This guest had no chats during their stay, please remove their email',
-          );
-        }
-      } else {
-        return alert('Please provide a valid email address');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   checkOutGuest = async () => {
-    const guestEmail = this.state.emailInput;
     const guest_id = this.state.selectValue;
-    if (guestEmail) {
-      await this.sendGuestEmail();
-    }
-    if (guest_id && !this.state.emailInput) {
+    if (guest_id) {
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
         if (didDel) {
@@ -76,10 +46,7 @@ class CheckOutForm extends React.Component {
             const newCurrentGuests = cState.currentGuests.filter(
               guest => guest_id !== guest._id,
             );
-            return {
-              currentGuests: newCurrentGuests,
-              selectValue: '',
-            };
+            return { currentGuests: newCurrentGuests, selectValue: '' };
           });
         }
       } catch (error) {
@@ -111,7 +78,6 @@ class CheckOutForm extends React.Component {
         </Select>
         <TextField
           placeholder="Email"
-          value={this.state.emailInput}
           onChange={event => this.setEmailInput(event.target.value)}
           margin="normal"
         />

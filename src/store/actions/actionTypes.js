@@ -1,3 +1,6 @@
+// export default 'https://web-chat-labs.herokuapp.com/api/';
+export default 'http://localhost:7000/api/';
+
 // =============== Auth ==================//
 
 export const REGISTER_USER = 'REGISTER_USER';
@@ -100,6 +103,4 @@ export const CHATS = {
   SET_CURRENT_CHAT_ID: 'SET_CURRENT_CHAT_ID',
   CLEAR_CURRENT_CHAT_ID: 'CLEAR_CURRENT_CHAT_ID',
   ADD_QUEUE_MESSAGE: 'ADD_QUEUE_MESSAGE',
-  ADD_CURRENT_TYPER: 'ADD_CURRENT_TYPER',
-  CLEAR_CURRENT_TYPER: 'CLEAR_CURRENT_TYPER',
 };

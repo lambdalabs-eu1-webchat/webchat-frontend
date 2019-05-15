@@ -19,13 +19,13 @@ const LoggedIn = ({ userType }) => {
           <NavLink to={APP_PATHS.CHAT}>Chat Dash</NavLink>
         </li>
         {userType === ADMIN ? (
-        <li>
-          <NavLink to={APP_PATHS.TEAM_MEMBERS}>Team Members</NavLink>
-        </li>
+          <li>
+            <NavLink to={APP_PATHS.TEAM_MEMBERS}>Team Members</NavLink>
+          </li>
         ) : null}
         {userType === SUPER_ADMIN ? (
           <li>
-            <NavLink to={APP_PATHS.COMPANY_DASH}>
+            <NavLink to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS}>
               Company Dash
             </NavLink>
           </li>
@@ -39,18 +39,18 @@ const LoggedIn = ({ userType }) => {
           <NavLink to={APP_PATHS.LOGOUT}>LogOut</NavLink>
         </li>
 
-      {/* this will be linked to the Employee settings as an icon with their Initials or img */}
-      <li>
-        {' '}
-        <NavLink
-          to={APP_PATHS.ACCOUNT_SETTINGS}
-          className="btn btn-floating green lighten-1"
-        >
-          Account settings
-        </NavLink>
-      </li>
-    </ul>
-  </MenuToggle>
+        {/* this will be linked to the Employee settings as an icon with their Initials or img */}
+        <li>
+          {' '}
+          <NavLink
+            to={APP_PATHS.ACCOUNT_SETTINGS}
+            className='btn btn-floating green lighten-1'
+          >
+            Account settings
+          </NavLink>
+        </li>
+      </ul>
+    </MenuToggle>
   );
 };
 export default LoggedIn;

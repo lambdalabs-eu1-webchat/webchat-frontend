@@ -1,15 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-
 import { APP_PATHS } from '../utils/paths';
 
-const SuperAdminNav = ({ numberRooms }) => {
-  if (numberRooms === 0) {
-    return null;
-  }
+const SuperAdminNav = () => {
   return (
-    <div className="super-admin-nav">
+    <div className='super-admin-nav'>
       <NavLink to={`${APP_PATHS.COMPANY_DASH}${APP_PATHS.TEAM_MEMBERS}`}>
         Team Members
       </NavLink>
@@ -23,10 +18,4 @@ const SuperAdminNav = ({ numberRooms }) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    numberRooms: state.rooms.rooms.length,
-  };
-}
-
-export default connect(mapStateToProps)(SuperAdminNav);
+export default SuperAdminNav;

@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
-import QRCode from 'qrcode.react';
 
 import { DOMAIN, USERS, HOTEL } from '../utils/paths';
 import Select from '@material-ui/core/Select';
@@ -19,7 +17,6 @@ class CheckInForm extends React.Component {
     selectValue: '',
     errorRoom: false,
     errorName: false,
-    guestToken: '',
   };
   componentDidMount() {
     axios
@@ -53,18 +50,14 @@ class CheckInForm extends React.Component {
             id: room._id,
           },
         });
-        const data = jwt.decode(res.data.token);
-
         this.setState(cState => {
           const availableRooms = cState.availableRooms.filter(
             room => room._id !== room_id,
           );
           return {
-            loginCode: data.passcode,
+            loginCode: res.data.passcode,
             availableRooms,
             selectValue: '',
-            nameInput: '',
-            guestToken: res.data.token,
           };
         });
       } catch (error) {
@@ -101,7 +94,6 @@ class CheckInForm extends React.Component {
           placeholder="Name"
           className={this.state.errorName ? 'error' : ''}
           onChange={event => this.setNameInput(event.target.value)}
-          value={this.state.nameInput}
           margin="normal"
         />
         <Button variant="contained" color="primary" onClick={this.checkInGuest}>
@@ -111,7 +103,6 @@ class CheckInForm extends React.Component {
           <h4>Login Code</h4>
           <p>{this.state.loginCode}</p>
         </div>
-        <QRCode value={`${DOMAIN}#${this.state.guestToken}`} />
       </CheckInFormWrapper>
     );
   }
@@ -120,6 +111,7 @@ class CheckInForm extends React.Component {
 CheckInForm.propTypes = {
   hotel_id: propTypes.string.isRequired,
 };
+
 
 const CheckInFormWrapper = styled.div`
   display: flex;
@@ -142,9 +134,6 @@ const CheckInFormWrapper = styled.div`
     p {
       text-align: center;
     }
-  }
-  canvas {
-    margin: 1rem auto;
   }
 `;
 

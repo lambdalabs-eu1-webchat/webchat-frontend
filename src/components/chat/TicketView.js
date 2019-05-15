@@ -2,22 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setCurrentChatId } from '../../store/actions/chat';
-import { SOCKET } from '../../utils/paths';
 const filterTickets = (tickets, filterCond) => {
   return tickets.filter(ticket => ticket.status === filterCond);
 };
 
-const TicketView = ({
-  chatsArr,
-  status,
-  setCurrentChatId,
-  socket,
-  currentChatId,
-}) => {
+const TicketView = ({ chatsArr, status, setCurrentChatId }) => {
   const handleChatSelect = chat_id => {
-    // need to stop typing in current chat
-    socket.emit(SOCKET.STOPPED_TYPING, currentChatId);
-    // switch chats
     setCurrentChatId(chat_id, status);
   };
   return (
@@ -73,12 +63,7 @@ const lineStyle = {
   justifyContent: 'space-between',
 };
 function mapStateToProps(state) {
-  return {
-    socket: state.chats.socket,
-    currentChatId: state.chats.currentChatIdAndStatus
-      ? state.chats.currentChatIdAndStatus.chat_id
-      : null,
-  };
+  return {};
 }
 
 export default connect(

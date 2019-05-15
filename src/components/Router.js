@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-
 import Logout from './Logout';
 import HomePage from '../views/HomePage';
 import Chat from '../views/Chat';
@@ -13,16 +11,13 @@ import CheckInOrOut from '../views/CheckInOrOut';
 import EmployeeSettings from '../views/EmployeeSettings';
 import CompanyDash from '../views/CompanyDash';
 import { APP_PATHS } from '../utils/paths';
-import { Redirect } from 'react-router-dom';
-import { fetchRooms } from '../store/actions/rooms';
 
 // temp fix
 const style404 = {
   minHeight: 'calc(100vh - 236px)',
 };
 
-function Router({ user_type, fetchRooms, rooms, currentUser }) {
-  const [gotRooms, setGotRooms] = useState(false);
+function Router({ user_type }) {
   if (!user_type) {
     return (
       <Switch>
@@ -51,41 +46,13 @@ function Router({ user_type, fetchRooms, rooms, currentUser }) {
       </Switch>
     );
   } else if (user_type === 'super admin') {
-    // if havent gotten rooms yet get them
-    if (!gotRooms) {
-      setGotRooms(true);
-      fetchRooms(currentUser.hotel_id);
-    }
-
-    if (rooms.length === 0) {
-      // if no rooms make only route a route to make rooms
-      return (
-        <Switch>
-          <Route
-            path={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS}
-            component={CompanyDash}
-          />
-          <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
-          <Route
-            path="/"
-            render={() => (
-              <Redirect
-                to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS}
-              />
-            )}
-          />
-        </Switch>
-      );
-
-      // redirect to that route
-    }
-
     return (
       <Switch>
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
         <Route path={APP_PATHS.COMPANY_DASH} component={CompanyDash} />
+        >
         <Route exact path={APP_PATHS.CHAT} component={Chat} />
         <Route
           exact
@@ -119,15 +86,4 @@ function Router({ user_type, fetchRooms, rooms, currentUser }) {
 Router.propTypes = {
   user_type: propTypes.string.isRequired,
 };
-
-function mapStateToProps(state) {
-  return {
-    rooms: state.rooms.rooms,
-    currentUser: state.currentUser,
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  { fetchRooms },
-)(Router);
+export default Router;
