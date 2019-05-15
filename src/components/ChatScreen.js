@@ -135,6 +135,8 @@ const btn = {
   backgroundColor:'#4D9F60',
   color:'white',
   fontWeight:'bold',
+  width:'95%',
+ alignItem:'center',
 }
 const name = {
   backgroundColor:'#6876CB',
