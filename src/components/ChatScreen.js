@@ -24,14 +24,19 @@ class ChatScreen extends React.Component {
     this.props.setCurrentChatId(chat_id, ACTIVE);
   };
   render() {
-    const { chat, status } = this.props;
+    const { chat, status, currentUser } = this.props;
     return (
       <StyledChatScreen>
         <ChatScreenHeader
           guest_name={chat.guest.name}
           room_name={chat.room.name}
         />
-        <Messages tickets={chat.tickets} guest_id={chat.guest.id} />
+        <Messages
+          userType={currentUser.user_type}
+          status={status}
+          tickets={chat.tickets}
+          guest={chat.guest}
+        />
         {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
         {ACTIVE === status ? (
           <React.Fragment>
@@ -79,6 +84,7 @@ ChatScreen.propTypes = {
 function mapStateToProps(state) {
   return {
     socket: state.chats.socket,
+    currentUser: state.currentUser,
   };
 }
 

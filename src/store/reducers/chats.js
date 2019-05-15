@@ -107,7 +107,6 @@ const chats = (state = initState, action) => {
         }),
         queuedChats: state.queuedChats.map(chat => {
           if (chat._id === action.target) {
-            debugger;
             return { ...chat, typingUser: null };
           }
           return chat;

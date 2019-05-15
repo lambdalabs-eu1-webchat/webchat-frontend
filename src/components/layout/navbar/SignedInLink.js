@@ -6,7 +6,7 @@ import { APP_PATHS } from '../../../utils/paths';
 
 const LoggedIn = ({ userType }) => {
   return (
-    <ul className=''>
+    <ul className="">
       <li>
         {' '}
         <NavLink to={APP_PATHS.CHAT}>Chat Dash</NavLink>
@@ -18,9 +18,7 @@ const LoggedIn = ({ userType }) => {
       ) : null}
       {userType === SUPER_ADMIN ? (
         <li>
-          <NavLink to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS}>
-            Company Dash
-          </NavLink>
+          <NavLink to={APP_PATHS.COMPANY_DASH}>Company Dash</NavLink>
         </li>
       ) : null}
       <li>
@@ -37,7 +35,7 @@ const LoggedIn = ({ userType }) => {
         {' '}
         <NavLink
           to={APP_PATHS.ACCOUNT_SETTINGS}
-          className='btn btn-floating green lighten-1'
+          className="btn btn-floating green lighten-1"
         >
           Account settings
         </NavLink>
