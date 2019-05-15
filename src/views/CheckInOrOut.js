@@ -73,7 +73,7 @@ class CheckInOrOut extends React.Component {
     return (
       <StyledCheckInOrOut>
         <div>
-          <h1>Check-in</h1>
+          <h1 className="hide-on-print">Check-in</h1>
           <CheckInForm
             availableRooms={this.state.availableRooms}
             filterAvailableRoom={this.filterAvailableRoom}
@@ -81,7 +81,7 @@ class CheckInOrOut extends React.Component {
             hotel_id={this.props.hotel_id}
           />
         </div>
-        <div>
+        <div className="hide-on-print">
           <h1>Check-out</h1>
           <CheckOutForm
             hotel_id={this.props.hotel_id}

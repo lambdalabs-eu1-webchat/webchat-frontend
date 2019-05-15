@@ -7,9 +7,9 @@ import Logo from '../layout/navbar/logo2.svg';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <FooterWrapper>
+    <FooterWrapper className="hide-on-print">
       <div className="footer-company">
-        <img src={Logo} alt="company-logo"/>
+        <img src={Logo} alt="company-logo" />
         <span>© {currentYear} FrontDesk</span>
         <div className="social-icons">
           <i className="fab fa-github" />
@@ -23,9 +23,8 @@ const Footer = () => {
         <Link>Terms</Link>
         <Link>Privacy</Link>
       </nav>
-
     </FooterWrapper>
-  )
+  );
 };
 
 export default Footer;
@@ -42,20 +41,20 @@ const FooterWrapper = styled.div`
     flex-direction: column-reverse;
     padding-top: 0;
   }
-  
+
   nav {
     background: none;
     padding: 0;
     width: 30%;
     display: flex;
     justify-content: space-between;
-    @media(max-width: 1000px) {
+    @media (max-width: 1000px) {
       width: 85%;
       justify-content: space-between;
       border-bottom: 1px solid ${theme.color.footerText};
       padding: 20px 0;
     }
-    
+
     a {
       font-size: ${theme.fontSize.xxs};
       color: ${theme.color.lightPurple};
@@ -69,36 +68,37 @@ const FooterWrapper = styled.div`
       }
     }
   }
-  
+
   .footer-company {
     display: flex;
     flex-direction: column;
-    
+
     img {
       width: 60%;
-      @media(max-width: 1000px) {
+      @media (max-width: 1000px) {
         padding-top: 20px;
         margin: 0 auto;
       }
     }
 
-     span {
+    span {
       color: ${theme.color.footerText};
       font-size: ${theme.fontSize.xxs};
       font-weight: bold;
       padding: 20px 0;
-      @media(max-width: 1000px) {
+      @media (max-width: 1000px) {
         text-align: center;
       }
     }
-    
+
     .social-icons {
-      @media(max-width: 1000px) {
+      @media (max-width: 1000px) {
         text-align: center;
         padding-bottom: 20px;
       }
-      
-      .fab, .far {
+
+      .fab,
+      .far {
         font-size: ${theme.fontSize.xs};
         padding: 4%;
         background: ${theme.color.accentPurple};

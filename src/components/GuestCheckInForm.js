@@ -76,11 +76,13 @@ class CheckInForm extends React.Component {
       <CheckInFormWrapper>
         <Select
           displayEmpty={true}
-          className={this.state.errorRoom ? 'error' : ''}
+          className={
+            this.state.errorRoom ? 'error hide-on-print' : 'hide-on-print'
+          }
           value={this.state.selectValue}
           onChange={this.setSelectValue}
         >
-          <option className="error" value="DEFAULT" disabled>
+          <option className="error hide-on-print" value="DEFAULT" disabled>
             Select a Room
           </option>
           {this.props.availableRooms.map(room => (
@@ -91,7 +93,9 @@ class CheckInForm extends React.Component {
         </Select>
         <TextField
           placeholder="Name"
-          className={this.state.errorName ? 'error' : ''}
+          className={
+            this.state.errorName ? 'error hide-on-print' : 'hide-on-print'
+          }
           onChange={event => this.setNameInput(event.target.value)}
           value={this.state.nameInput}
           margin="normal"
@@ -100,6 +104,7 @@ class CheckInForm extends React.Component {
           <CircularProgress />
         ) : (
           <Button
+            className="hide-on-print"
             variant="contained"
             color="primary"
             onClick={this.checkInGuest}
@@ -107,7 +112,7 @@ class CheckInForm extends React.Component {
             Check In
           </Button>
         )}
-
+        <p className="show-on-print">https://webchatlabs-guest.netlify.com</p>
         <div className="passcode">
           <h4>Login Code</h4>
           <p>{this.state.loginCode}</p>
