@@ -141,7 +141,7 @@ class Register extends React.Component {
               value={this.state.newUser.hotelMotto}
               onChange={this.handleInput}
             />
-            <p>{this.state.flashMessage}</p>
+            <p>{this.props.loading ? 'Registration in progress' : this.state.flashMessage}</p>
             <button type="submit" onClick={this.handleRegister}>
               Register
             </button>
@@ -158,7 +158,7 @@ Register.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { loggedIn: !!state.currentUser._id };
+  return { loggedIn: !!state.currentUser._id, loading: state.loading };
 }
 
 export default connect(
