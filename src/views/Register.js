@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import theme from './../theme/styledTheme';
 
 import { connect } from 'react-redux';
 import { registerUser } from '../store/actions/auth.js';
@@ -69,27 +71,26 @@ const Register = ({ loggedIn, registerUser }) => {
     return <Redirect to='/' />;
   }
   return (
-    <div className='register-wrapper'>
+      <RegisterOuterWrapper>
+    <RegisterWrapper>
       <form className='register-form'>
         <h2>Register</h2>
-        <label>Name</label>
-        <input name='name' placeholder='Choose a name...' type='text' />
-        <label>Email</label>
-        <input name='email' placeholder='Your email...' type='text' />
-        <label>Password</label>
+        <label>Name*</label>
+        <input name='name' type='text' />
+        <label>Email*</label>
+        <input name='email' type='text' />
+        <label>Password*</label>
         <input
           name='password'
-          placeholder='Choose a password...'
           type='password'
         />
         <label>Motto</label>
-        <input name='motto' placeholder='Your motto...' type='text' />
+        <input name='motto' type='text' />
         <label>Hotel Name</label>
-        <input name='hotelName' placeholder='Your hotel name...' type='text' />
+        <input name='hotelName' type='text' />
         <label>Hotel Motto</label>
         <input
           name='hotelMotto'
-          placeholder='Your hotel motto...'
           type='text'
         />
         <p id='result-message' />
@@ -97,7 +98,8 @@ const Register = ({ loggedIn, registerUser }) => {
           Register
         </button>
       </form>
-    </div>
+    </RegisterWrapper>
+      </RegisterOuterWrapper>
   );
 };
 
@@ -114,3 +116,72 @@ export default connect(
   mapStateToProps,
   { registerUser },
 )(Register);
+
+const RegisterOuterWrapper = styled.div`
+background: ${theme.color.offWhite};
+`;
+
+const RegisterWrapper = styled.div`
+  padding: 4% 0;
+  @media (max-width: 600px) {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  form {
+    margin: 0 auto;
+    background: ${theme.color.white};
+    padding: 30px;
+    box-shadow: ${theme.shadow.cardShadow};
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    @media (max-width: 600px) {
+      width: 100%;
+      margin: 0;
+      padding-bottom: 65px; 
+    }
+    h2 {
+      font-size: ${theme.fontSize.xl};
+      padding: 20px 0;
+      color: ${theme.color.textColor};
+    }
+    label {
+      font-size: ${theme.fontSize.xxs};
+      color: ${theme.color.accentPurple};
+      font-weight: bold;
+    }
+  
+    input {
+      border: none;
+      border-bottom: 1px solid ${theme.color.footerText};
+      margin-bottom: 20px;
+      height: ${theme.input.height};
+      font-size: ${theme.fontSize.xs};
+      padding: 20px 0;
+      border-radius: 0;
+      &:focus {
+        outline: none;
+      }
+    }
+  
+    button {
+      width: 100%;
+      height: ${theme.button.height};
+      font-size: ${theme.fontSize.s};
+      border-radius: ${theme.border.radius};
+      background:${theme.color.accentGreen};
+      border: none;
+      text-transform: ${theme.textTransform.uppercase};
+      color: ${theme.color.white};
+      font-weight: ${theme.fontWeight.bold};
+      margin: 15px 0;
+      box-shadow: ${theme.shadow.buttonShadow};
+      &:hover {
+      box-shadow: ${theme.shadow.buttonHover};
+      cursor: pointer;
+      }
+    }
+  }
+`;
