@@ -12,23 +12,32 @@ import { ACTIVE, CLOSED, QUEUED } from '../utils/ticketStatus';
 import { setCurrentChatId } from '../store/actions/chat';
 class ChatScreen extends React.Component {
   closeTicket = () => {
-    this.props.socket.emit(SOCKET.CLOSE_TICKET, this.props.chat._id);
-    // might want to have a function passed into this to stop rendering this component
+    const chat_id = this.props.chat._id;
+    this.props.socket.emit(SOCKET.STOPPED_TYPING, chat_id);
+
+    this.props.socket.emit(SOCKET.CLOSE_TICKET, chat_id);
   };
   joinChat = () => {
     const chat_id = this.props.chat._id;
+    this.props.socket.emit(SOCKET.STOPPED_TYPING, chat_id);
     this.props.socket.emit(SOCKET.ASSIGN_SELF_TICKET, chat_id);
     this.props.setCurrentChatId(chat_id, ACTIVE);
   };
   render() {
-    const { chat, status } = this.props;
+    const { chat, status, currentUser } = this.props;
     return (
       <StyledChatScreen>
         <ChatScreenHeader
           guest_name={chat.guest.name}
           room_name={chat.room.name}
         />
-        <Messages tickets={chat.tickets} guest_id={chat.guest.id} />
+        <Messages
+          userType={currentUser.user_type}
+          status={status}
+          tickets={chat.tickets}
+          guest={chat.guest}
+        />
+        {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
         {ACTIVE === status ? (
           <React.Fragment>
             <MessageComposer chat_id={chat._id} />
@@ -75,6 +84,7 @@ ChatScreen.propTypes = {
 function mapStateToProps(state) {
   return {
     socket: state.chats.socket,
+    currentUser: state.currentUser,
   };
 }
 
