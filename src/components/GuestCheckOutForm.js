@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import { validate } from 'email-validator';
 
 import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
+import Restricted from './reusable/RestrictedModal';
 
 class CheckOutForm extends React.Component {
   state = {
@@ -16,6 +17,8 @@ class CheckOutForm extends React.Component {
     selectedGuest: null,
     selectValue: '',
     errorRoom: false,
+    emailModalOpen: false,
+    noChatModalOpen: false,
   };
 
   componentDidMount() {
@@ -38,6 +41,19 @@ class CheckOutForm extends React.Component {
     this.setState({ emailInput });
   };
 
+  openEmailModal = () => {
+    this.setState({ emailModalOpen: true });
+  };
+
+  openNoChatModal = () => {
+    this.setState({ noChatModalOpen: true });
+  };
+
+  closeRestrictedModal = () => {
+    this.setState({ emailModalOpen: false });
+    this.setState({ noChatModalOpen: false });
+  };
+
   sendGuestEmail = async () => {
     const emailDetails = {
       guestEmail: this.state.emailInput,
@@ -50,12 +66,10 @@ class CheckOutForm extends React.Component {
         if (didSend.data) {
           this.setState({ emailInput: '' });
         } else {
-          return alert(
-            'This guest had no chats during their stay, please remove their email',
-          );
+          this.openNoChatModal();
         }
       } else {
-        return alert('Please provide a valid email address');
+        this.openEmailModal();
       }
     } catch (error) {
       console.error(error);
@@ -74,7 +88,7 @@ class CheckOutForm extends React.Component {
         if (didDel) {
           this.setState(cState => {
             const newCurrentGuests = cState.currentGuests.filter(
-              guest => guest_id !== guest._id,
+              guest => guest_id !== guest._id
             );
             return {
               currentGuests: newCurrentGuests,
@@ -122,6 +136,22 @@ class CheckOutForm extends React.Component {
         >
           Check Out
         </Button>
+
+        {this.state.emailModalOpen && (
+          <Restricted
+            alert="Please provide a valid email address"
+            isRestrictedModalOpen={this.state.emailModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
+          />
+        )}
+
+        {this.state.noChatModalOpen && (
+          <Restricted
+            alert="This guest had no chats during their stay, please remove their email"
+            isRestrictedModalOpen={this.state.noChatModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
+          />
+        )}
       </CheckOutFormWrapper>
     );
   }
