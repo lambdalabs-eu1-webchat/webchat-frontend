@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import theme from './../theme/styledTheme';
 
 import { connect } from 'react-redux';
-import { registerUser } from '../store/actions/auth.js';
+import { registerUser, loginRequest } from '../store/actions/auth.js';
 
 class Register extends React.Component {
   state = {
@@ -51,8 +51,11 @@ class Register extends React.Component {
     });
   };
 
-  handleLogin = token => {
-    console.log(token);
+  handleLogin = () => {
+    this.props.loginRequest(
+      this.state.newUser.email,
+      this.state.newUser.password,
+    );
   };
 
   handleRegister = async event => {
@@ -70,9 +73,9 @@ class Register extends React.Component {
               ...this.state.newUser,
             });
             if (res) {
-              const token = res.token;
-              this.handleLogin(token);
-              this.clearInputs();
+              // const token = res.token;
+              this.handleLogin();
+              // this.clearInputs();
             } else {
               this.setFlashMessage(
                 'Registration unsucessful, please try again',
@@ -141,7 +144,11 @@ class Register extends React.Component {
               value={this.state.newUser.hotelMotto}
               onChange={this.handleInput}
             />
-            <p>{this.props.loading ? 'Registration in progress' : this.state.flashMessage}</p>
+            <p>
+              {this.props.loading
+                ? 'Registration in progress'
+                : this.state.flashMessage}
+            </p>
             <button type="submit" onClick={this.handleRegister}>
               Register
             </button>
@@ -163,7 +170,7 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { registerUser },
+  { registerUser, loginRequest },
 )(Register);
 
 const RegisterOuterWrapper = styled.div`
