@@ -5,6 +5,7 @@ import axios from 'axios';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { validate } from 'email-validator';
 
 import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
@@ -15,6 +16,7 @@ class CheckOutForm extends React.Component {
     selectedGuest: null,
     selectValue: '',
     errorRoom: false,
+    isCheckingOut: false,
   };
 
   setSelectValue = event => {
@@ -60,6 +62,7 @@ class CheckOutForm extends React.Component {
       await this.sendGuestEmail();
     }
     if (guest_id && !this.state.emailInput) {
+      this.setState({ isCheckingOut: true });
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
         if (didDel) {
@@ -67,9 +70,12 @@ class CheckOutForm extends React.Component {
           this.props.addAvailableRoom(room);
           this.setState({
             selectValue: '',
+            isCheckingOut: false,
           });
         }
       } catch (error) {
+        this.setState({ isCheckingOut: false });
+
         console.error(error);
       }
     }
@@ -102,13 +108,17 @@ class CheckOutForm extends React.Component {
           onChange={event => this.setEmailInput(event.target.value)}
           margin="normal"
         />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.checkOutGuest}
-        >
-          Check Out
-        </Button>
+        {this.state.isCheckingOut ? (
+          <CircularProgress />
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.checkOutGuest}
+          >
+            Check Out
+          </Button>
+        )}
       </CheckOutFormWrapper>
     );
   }

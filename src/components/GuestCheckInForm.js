@@ -58,6 +58,8 @@ class CheckInForm extends React.Component {
           isCheckingIn: false,
         });
       } catch (error) {
+        this.setState({ isCheckingIn: false });
+
         console.error(error);
       }
     }
