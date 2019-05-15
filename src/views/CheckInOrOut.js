@@ -2,17 +2,44 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { DOMAIN, USERS, HOTEL } from '../utils/paths';
 
 import CheckInForm from '../components/GuestCheckInForm';
 import CheckOutForm from '../components/GuestCheckOutForm';
 
 class CheckInOrOut extends React.Component {
+  state = {
+    availableRooms: [],
+  };
+  componentDidMount() {
+    axios
+      .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/rooms/available`)
+      .then(res => {
+        this.setState({ availableRooms: res.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  filterAvaliableRoom = room_id => {
+    this.setState(cState => {
+      const availableRooms = cState.availableRooms.filter(
+        room => room._id !== room_id,
+      );
+      return { availableRooms };
+    });
+  };
   render() {
     return (
       <StyledCheckInOrOut>
         <div>
           <h1>Check-in</h1>
-          <CheckInForm hotel_id={this.props.hotel_id} />
+          <CheckInForm
+            availableRooms={this.state.availableRooms}
+            filterAvaliableRoom={this.filterAvaliableRoom}
+            hotel_id={this.props.hotel_id}
+          />
         </div>
         <div>
           <h1>Check-out</h1>

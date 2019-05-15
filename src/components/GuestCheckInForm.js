@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
-import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import QRCode from 'qrcode.react';
+import axios from 'axios';
 
 import { DOMAIN, USERS, HOTEL } from '../utils/paths';
 import Select from '@material-ui/core/Select';
@@ -15,22 +15,13 @@ class CheckInForm extends React.Component {
     nameInput: '',
     loginCode: '',
     currentRoom: null,
-    availableRooms: [],
+
     selectValue: '',
     errorRoom: false,
     errorName: false,
     guestToken: '',
   };
-  componentDidMount() {
-    axios
-      .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/rooms/available`)
-      .then(res => {
-        this.setState({ availableRooms: res.data });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+
   setNameInput = nameInput => {
     this.setState({ nameInput, errorName: false });
   };
@@ -40,7 +31,7 @@ class CheckInForm extends React.Component {
 
   checkInGuest = async () => {
     const room_id = this.state.selectValue;
-    const room = this.state.availableRooms.find(room => room._id === room_id);
+    const room = this.props.availableRooms.find(room => room._id === room_id);
     const name = this.state.nameInput;
     if (name && room) {
       try {
@@ -54,18 +45,12 @@ class CheckInForm extends React.Component {
           },
         });
         const data = jwt.decode(res.data.token);
-
-        this.setState(cState => {
-          const availableRooms = cState.availableRooms.filter(
-            room => room._id !== room_id,
-          );
-          return {
-            loginCode: data.passcode,
-            availableRooms,
-            selectValue: '',
-            nameInput: '',
-            guestToken: res.data.token,
-          };
+        this.props.filterAvaliableRoom(room_id);
+        this.setState({
+          loginCode: data.passcode,
+          selectValue: '',
+          nameInput: '',
+          guestToken: res.data.token,
         });
       } catch (error) {
         console.error(error);
@@ -91,7 +76,7 @@ class CheckInForm extends React.Component {
           <option className="error" value="" disabled>
             Select a Room
           </option>
-          {this.state.availableRooms.map(room => (
+          {this.props.availableRooms.map(room => (
             <option key={room._id} value={room._id}>
               Room: {room.name}
             </option>
