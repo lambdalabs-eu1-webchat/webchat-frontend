@@ -97,7 +97,6 @@ const mapStateToProps = state => {
       currentChat = chats.closedChats.find(chat => chat._id === chat_id);
     }
   }
-  console.log(state.currentUser);
   return {
     queuedChats: chats.queuedChats,
     activeChats: chats.activeChats,
@@ -110,5 +109,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchClosedChats },
+  { fetchClosedChats }
 )(Chat);

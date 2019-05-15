@@ -89,32 +89,32 @@ class CompanySettings extends React.Component {
     } = this.props;
 
     return (
-      <div className='company-settings'>
+      <div className="company-settings">
         <h2>Company Settings</h2>
         <CompanySettingsWrapper>
-          <section className='company-details'>
+          <section className="company-details">
             <h3>Update company details</h3>
             <form>
               <label>Name</label>
               <input
-                name='companyName'
-                className='form-input'
+                name="companyName"
+                className="form-input"
                 placeholder={hotel.name}
                 onChange={this.handleInputChange.bind(this)}
               />
               <label>Company Motto</label>
               <input
-                name='companyMotto'
-                className='form-input'
+                name="companyMotto"
+                className="form-input"
                 placeholder={hotel.motto}
                 onChange={this.handleInputChange.bind(this)}
               />
-              <div className='action-buttons'>
+              <div className="action-buttons">
                 <button onClick={this.handleClear().bind(this)}>Clear</button>
                 <button
                   onClick={this.handleSubmit(
                     hotel._id,
-                    dispatchUpdateHotel,
+                    dispatchUpdateHotel
                   ).bind(this)}
                 >
                   Save
@@ -128,7 +128,6 @@ class CompanySettings extends React.Component {
             currentUser={currentUser}
             handleInputChange={this.handleInputChange.bind(this)}
             createRoomForHotel={dispatchCreateRoomForHotel}
-            currentUser={currentUser}
             deleteRoomForHotel={dispatchDeleteRoomForHotel}
             updateRoomForHotel={dispatchUpdateRoomForHotel}
           />
@@ -153,8 +152,7 @@ const mapStateToProps = state => {
     hotel: state.hotel,
     currentUser: state.currentUser,
     rooms: state.rooms.rooms,
-  }
-
+  };
 };
 
 export default connect(
@@ -166,5 +164,5 @@ export default connect(
     dispatchDeleteRoomForHotel: deleteRoomForHotel,
     dispatchUpdateRoomForHotel: updateRoomForHotel,
     dispatchCreateRoomForHotel: createRoomForHotel,
-  },
+  }
 )(CompanySettings);

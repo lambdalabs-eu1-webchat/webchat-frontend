@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { SOCKET } from '../utils/paths';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+import { translate } from '../store/actions/chat';
 
 class MessageComposer extends React.Component {
   state = {
@@ -19,6 +20,29 @@ class MessageComposer extends React.Component {
     });
     socket.emit(SOCKET.STOPPED_TYPING, chat_id);
     this.setInputValue('');
+  };
+
+  translateSend = async () => {
+    try {
+      const { socket, chat_id, last_ticket_id, language } = this.props;
+
+      // translate hotel staff message based on language from guest message
+      const translatedInputValue = await translate(
+        this.state.inputValue,
+        last_ticket_id,
+        language
+      );
+
+      socket.emit(SOCKET.MESSAGE, {
+        chat_id: this.props.chat_id,
+        // emit the translated message to chat
+        text: translatedInputValue,
+      });
+      socket.emit(SOCKET.STOPPED_TYPING, chat_id);
+      this.setInputValue('');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   handleInput = event => {
@@ -45,6 +69,7 @@ class MessageComposer extends React.Component {
           className="flex"
         />
         <Button onClick={this.handleSend}>Send</Button>
+        <Button onClick={() => this.translateSend()}>Translate & Send</Button>
       </StyledMessageComposer>
     );
   }
@@ -53,7 +78,10 @@ class MessageComposer extends React.Component {
 MessageComposer.propTypes = {
   chat_id: propTypes.string.isRequired,
   socket: propTypes.object.isRequired,
+  last_ticket_id: propTypes.string.isRequired,
+  language: propTypes.string.isRequired,
 };
+
 const StyledMessageComposer = styled.div`
   display: flex;
   width: 100%;
@@ -72,5 +100,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {},
+  {}
 )(MessageComposer);

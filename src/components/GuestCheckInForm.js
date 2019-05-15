@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import QRCode from 'qrcode.react';
 import axios from 'axios';
 
-import { DOMAIN, USERS, HOTEL } from '../utils/paths';
+import { DOMAIN, USERS, HOTEL, GUEST_CLIENT_DOMAIN } from '../utils/paths';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -112,7 +112,7 @@ class CheckInForm extends React.Component {
           <h4>Login Code</h4>
           <p>{this.state.loginCode}</p>
         </div>
-        <QRCode value={`${DOMAIN}#${this.state.guestToken}`} />
+        <QRCode value={`${GUEST_CLIENT_DOMAIN}#${this.state.guestToken}`} />
       </CheckInFormWrapper>
     );
   }
