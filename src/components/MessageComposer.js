@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { SOCKET } from '../utils/paths';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-import color from '@material-ui/core/colors/indigo';
 import { translate } from '../store/actions/chat';
 
 class MessageComposer extends React.Component {
