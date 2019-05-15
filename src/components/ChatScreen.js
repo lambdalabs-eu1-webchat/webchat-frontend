@@ -136,9 +136,9 @@ const btn = {
   backgroundColor:'#4D9F60',
 }
 const name = {
-  // backgroundColor:'#F4F6FF',
+  backgroundColor:'#6876CB',
   color:'#333',
-  // margin:'20px',
+  margin:'20px',
   };
 
 
