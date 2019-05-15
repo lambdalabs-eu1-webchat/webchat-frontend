@@ -88,6 +88,7 @@ class CheckOutForm extends React.Component {
     return (
       <CheckOutFormWrapper>
         <Select
+          native={true}
           displayEmpty={true}
           className={this.state.errorRoom ? 'error' : ''}
           onChange={this.setSelectValue}

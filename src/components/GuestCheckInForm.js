@@ -75,6 +75,7 @@ class CheckInForm extends React.Component {
     return (
       <CheckInFormWrapper>
         <Select
+          native={true}
           displayEmpty={true}
           className={
             this.state.errorRoom ? 'error hide-on-print' : 'hide-on-print'
