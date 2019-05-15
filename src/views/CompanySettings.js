@@ -205,7 +205,6 @@ export default connect(
     dispatchFetchSingleHotel: fetchSingleHotel,
     dispatchUpdateHotel: updateHotel,
     dispatchFetchRoomsForHotel: fetchRoomsForHotel,
-    dispatchFetchRoomsForHotel: fetchRoomsForHotel,
     dispatchDeleteRoomForHotel: deleteRoomForHotel,
     dispatchUpdateRoomForHotel: updateRoomForHotel,
     dispatchCreateRoomForHotel: createRoomForHotel,
