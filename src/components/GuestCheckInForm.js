@@ -16,11 +16,11 @@ class CheckInForm extends React.Component {
     nameInput: '',
     loginCode: '',
     currentRoom: null,
-
     selectValue: '',
     errorRoom: false,
     errorName: false,
     guestToken: '',
+    isCheckingIn: false,
   };
 
   setNameInput = nameInput => {
@@ -35,6 +35,8 @@ class CheckInForm extends React.Component {
     const room = this.props.availableRooms.find(room => room._id === room_id);
     const name = this.state.nameInput;
     if (name && room) {
+      // turn on spinner
+      this.setState({ isCheckingIn: true });
       try {
         const res = await axios.post(`${DOMAIN}${USERS}`, {
           hotel_id: this.props.hotel_id,
@@ -53,6 +55,7 @@ class CheckInForm extends React.Component {
           selectValue: '',
           nameInput: '',
           guestToken: res.data.token,
+          isCheckingIn: false,
         });
       } catch (error) {
         console.error(error);
@@ -91,9 +94,18 @@ class CheckInForm extends React.Component {
           value={this.state.nameInput}
           margin="normal"
         />
-        <Button variant="contained" color="primary" onClick={this.checkInGuest}>
-          Check In
-        </Button>
+        {this.state.isCheckingIn ? (
+          <CircularProgress />
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.checkInGuest}
+          >
+            Check In
+          </Button>
+        )}
+
         <div className="passcode">
           <h4>Login Code</h4>
           <p>{this.state.loginCode}</p>
