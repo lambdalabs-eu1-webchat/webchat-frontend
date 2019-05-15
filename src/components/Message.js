@@ -28,22 +28,22 @@ const StyledMessage = styled.div`
   margin: 20px;
   position: relative;
   max-width: 85%;
-  border-radius: 0.4em;
+  border-radius: 2em;
   padding: 15px;
 
-  ${props => (props.left ? `background:lightgray;` : 'background:royalblue;')}
+  ${props => (props.left ? `background:lightgray;` : 'background:#6876CB;')}
   ${props => (props.left ? `text-align: left;` : 'text-align: right;')}
   ${props => (props.left ? `margin-right:auto;` : 'margin-left:auto;')}
   &:after {
     content: '';
     position: absolute;
     bottom: 0;
-    width: 20;
-    height: 0;
-    border: 0.563em solid transparent;
+    width: 25;
+    height: -0.5em;
+    border: 1em solid transparent ;
     border-top-color: #00aabb;
     border-bottom: 0;
-    margin-left: -0.481em;
+    margin-left: -0.1em;
     margin-bottom: -0.562em;
     ${props =>
       props.left
@@ -55,9 +55,9 @@ const StyledMessage = styled.div`
         : `
         border-right:0;
         right:3%;
-        border-top-color: royalblue;
+        border-top-color: #6876CB;
   `}
   }
 `;
-// border-right: 0;
+// need a MediaQuery when the chat hits 616px and below for the little loopy thing
 export default Message;
