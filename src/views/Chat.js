@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ChatScreen from '../components/ChatScreen';
 import ChatsList from '../components/chat/ChatsList';
 import { QUEUED, ACTIVE, CLOSED } from '../utils/ticketStatus';
+import { fetchClosedChats } from '../store/actions/chat';
 
 class Chat extends React.Component {
   render() {

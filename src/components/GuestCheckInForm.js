@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
+import QRCode from 'qrcode.react';
 
 import { DOMAIN, USERS, HOTEL, GUEST_CLIENT_DOMAIN } from '../utils/paths';
 import Select from '@material-ui/core/Select';
