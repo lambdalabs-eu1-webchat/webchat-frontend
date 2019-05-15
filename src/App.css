@@ -1,16 +1,16 @@
-nav {
-    background: rgb(47, 70, 94);
-    padding: 10px 10px 30px;
-    margin: 0px;
-    display: flex;
-    justify-content: flex-end;
-}
-nav a {
-    padding: 0 10px;
-    color: #0B9FEC;
-    text-decoration: none;
-    text-transform: uppercase;
-}
+/*nav {*/
+/*    background: rgb(47, 70, 94);*/
+/*    padding: 10px 10px 30px;*/
+/*    margin: 0px;*/
+/*    display: flex;*/
+/*    justify-content: flex-end;*/
+/*}*/
+/*nav a {*/
+/*    padding: 0 10px;*/
+/*    color: #0B9FEC;*/
+/*    text-decoration: none;*/
+/*    text-transform: uppercase;*/
+/*}*/
 
 h2 {
     font-size: 30px;
