@@ -25,39 +25,37 @@ Message.propTypes = {
 };
 
 const StyledMessage = styled.div`
-  margin: 10px;
+  margin: 20px;
   position: relative;
-  max-width: 50%;
-
+  max-width: 85%;
   border-radius: 0.4em;
-  padding: 10px;
+  padding: 15px;
 
-  ${props => (props.left ? `background: green;` : 'background: #00aabb;')}
+  ${props => (props.left ? `background:lightgray;` : 'background:royalblue;')}
   ${props => (props.left ? `text-align: left;` : 'text-align: right;')}
   ${props => (props.left ? `margin-right:auto;` : 'margin-left:auto;')}
   &:after {
     content: '';
     position: absolute;
     bottom: 0;
-
-    width: 0;
+    width: 20;
     height: 0;
     border: 0.563em solid transparent;
     border-top-color: #00aabb;
     border-bottom: 0;
-    margin-left: -0.281em;
+    margin-left: -0.481em;
     margin-bottom: -0.562em;
     ${props =>
       props.left
         ? `
     border-left:0;
     left: 3%;
-    border-top-color: green;
+    border-top-color: lightgray;
     `
         : `
         border-right:0;
         right:3%;
-        border-top-color: #00aabb;
+        border-top-color: royalblue;
   `}
   }
 `;

@@ -26,8 +26,8 @@ class ChatScreen extends React.Component {
   render() {
     const { chat, status } = this.props;
     return (
-      <StyledChatScreen>
-        <ChatScreenHeader
+      <StyledChatScreen style={name}>
+        <ChatScreenHeader 
           guest_name={chat.guest.name}
           room_name={chat.room.name}
         />
@@ -89,9 +89,14 @@ font-size:14px;
 
 const btn = {
   margin:'20px',
-  color: 'aliceblue',
   backgroundColor:'#4D9F60',
 }
+const name = {
+  fontWeight:'bolder',
+  color:'white',
+  // margin:'20px',
+  };
+
 
 export default connect(
   mapStateToProps,

@@ -32,7 +32,7 @@ class Chat extends React.Component {
       <StyledChat>
         <ChatListWrapper >
           <h2>Welcome to the Chat page!</h2>
-          <Tabs
+          <Tabs 
             options={[QUEUED, ACTIVE, CLOSED]}
             selected={this.state.selectedTab}
             setSelected={this.setSelectedTab}
@@ -45,7 +45,7 @@ class Chat extends React.Component {
         </ChatListWrapper>
         <ChatScreenWrapper >
           {this.props.currentChat ? (
-            <ChatScreen
+            <ChatScreen 
               status={this.props.status}
               chat={this.props.currentChat}
             />
@@ -67,10 +67,10 @@ const StyledChat = styled.div`
     flex-direction: column;
   }
 `;
-
 const ChatListWrapper = styled.div`
   width: 50%;
   border-radius: 20px;
+  align:center;
 
   @media (max-width: 800px) {
     width: 100%;
@@ -79,7 +79,7 @@ const ChatListWrapper = styled.div`
 
 const ChatScreenWrapper = styled.div`
   width: 50%;
-
+  
   @media (max-width: 800px) {
     width: 100%;
   }

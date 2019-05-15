@@ -31,8 +31,8 @@ const TicketView = ({
               key={chat._id}
             >
               <div style={divStyle}>
-                <div>Guest Name: {chat.guest.name}</div>
-                <div>Room Number: {chat.room.name}</div>
+                <div style={name}>Guest Name: {chat.guest.name}</div>
+                <div style={name}>Room Number: {chat.room.name}</div>
                 {filterTickets(chat.tickets, status).map(ticket => {
                   return (
                     <div key={ticket._id}>
@@ -45,8 +45,8 @@ const TicketView = ({
                 })}
               </div>
              <div>
-             {/* <span style={icon} className="fa fa-comments icon-5x"></span> */}
-              <span style={icons}>chat</span>
+             <span style={icons} className="fas fa-comment icon-5x"></span>
+              {/* <span style={icons}>chat</span> */}
              </div>
             </div>
           );
@@ -65,21 +65,24 @@ TicketView.propTypes = {
 };
 
 const divStyle = {
-  border: '1px solid #4D9F60',
-  backgroundColor:'#E5EDED',
+  backgroundColor:'pink',
   margin: '10px',
   padding: '10px',
   width: '100%',
   borderRadius:'10px',
-  color:'',
+  color:'white',
   fontWeight:'light',
   fontSize:'13px',
 
 };
+const name = {
+fontWeight:'bolder',
+color:'white',
+};
 const icons = {
-  marginTop:'50px',
-  color:'#4D9F60',
-  height:'',
+
+  color:'pink',
+  left: '100px',
 };
 
 const lineStyle = {
