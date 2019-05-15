@@ -33,28 +33,26 @@ class CompanySettings extends React.Component {
       hotel,
       currentUser,
       dispatchFetchSingleHotel,
-      dispatchFetchRoomsForHotel,
     } = this.props;
     this.state = {
+      currentHotel: {},
       companyName: hotel.name,
-      currentCompanyName: '',
       companyMotto: hotel.motto,
-      currentCompanyMotto: '',
+      rooms: hotel.rooms,
     };
     dispatchFetchSingleHotel(currentUser.hotel_id);
-    dispatchFetchRoomsForHotel(currentUser.hotel_id);
   }
 
   componentDidUpdate() {
     if (
-      this.state.currentCompanyName !== this.props.hotel.name &&
-      this.state.currentCompanyMotto !== this.props.hotel.motto
+      this.state.currentHotel !== this.props.hotel
     ) {
       this.setState({
+        currentHotel: this.props.hotel,
         companyName: this.props.hotel.name,
-        currentCompanyName: this.props.hotel.name,
         companyMotto: this.props.hotel.motto,
-        currentCompanyMotto: this.props.hotel.motto,
+        rooms: this.props.hotel.rooms,
+        roomName: this.props.hotel.rooms,
       });
     }
   }
@@ -68,6 +66,13 @@ class CompanySettings extends React.Component {
       [name]: value,
     });
   };
+
+  handleRoomInputChange = (event, index) => {
+    const newRoomName = event.target.value;
+    this.setState(cState => ({
+      rooms: [...cState.rooms, cState.rooms[index].name = newRoomName],
+    }))
+  }
 
   handleSubmit(hotelId, dispatchUpdateHotel) {
     return event => {
@@ -93,7 +98,6 @@ class CompanySettings extends React.Component {
   render() {
     const {
       hotel,
-      rooms,
       dispatchUpdateHotel,
       dispatchDeleteRoomForHotel,
       dispatchCreateRoomForHotel,
@@ -136,10 +140,11 @@ class CompanySettings extends React.Component {
             </form>
           </section>
           <CompanySettingsRoomsList
-            rooms={rooms}
+            rooms={hotel.rooms}
             hotelId={hotel.id}
             currentUser={currentUser}
             handleInputChange={this.handleInputChange.bind(this)}
+            handleRoomInputChange={this.handleRoomInputChange.bind(this)}
             createRoomForHotel={dispatchCreateRoomForHotel}
             deleteRoomForHotel={dispatchDeleteRoomForHotel}
             updateRoomForHotel={dispatchUpdateRoomForHotel}
@@ -152,7 +157,6 @@ class CompanySettings extends React.Component {
 
 CompanySettings.propTypes = {
   hotel: PropTypes.object.isRequired,
-  rooms: PropTypes.array.isRequired,
   dispatchFetchSingleHotel: PropTypes.func.isRequired,
   dispatchUpdateHotel: PropTypes.func.isRequired,
   dispatchDeleteRoomForHotel: PropTypes.func.isRequired,
@@ -164,7 +168,6 @@ const mapStateToProps = state => {
   return {
     hotel: state.hotel,
     currentUser: state.currentUser,
-    rooms: state.rooms.rooms,
   };
 };
 

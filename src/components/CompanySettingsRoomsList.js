@@ -48,7 +48,7 @@ const handleClick = (
 
 
 const CompanySettingsRoomsList = (props) => {
-  const { rooms, deleteRoomForHotel, updateRoomForHotel, currentUser, handleInputChange, createRoomForHotel } = props;
+  const { rooms, deleteRoomForHotel, updateRoomForHotel, currentUser, handleRoomInputChange, createRoomForHotel } = props;
   return (
     <div className="company-rooms-list">
       <AddRooms>
@@ -56,16 +56,18 @@ const CompanySettingsRoomsList = (props) => {
         <button type="submit" onClick={handleClick(createRoomForHotel, currentUser.hotel_id)}>ADD ROOMS</button>
       </AddRooms>
       <section className="rooms-list">
-        {rooms && rooms.map(room => (
+        {rooms && rooms.map((room, idx) => (
             <CompanySettingsRoom
                 key={room._id}
+                index={idx}
                 name={room.name}
                 room={room._id}
+                rooms={rooms}
                 hotelId={currentUser.hotel_id}
                 currentUser={currentUser}
                 updateRoomForHotel={updateRoomForHotel}
                 deleteRoomForHotel={deleteRoomForHotel}
-                handleInputChange={handleInputChange}
+                handleRoomInputChange={handleRoomInputChange}
             />
         ))}
       </section>
