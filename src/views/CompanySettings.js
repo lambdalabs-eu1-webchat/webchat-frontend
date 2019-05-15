@@ -40,6 +40,7 @@ class CompanySettings extends React.Component {
       companyName: hotel.name,
       companyMotto: hotel.motto,
       rooms: hotel.rooms,
+      newRooms: '',
     };
     dispatchFetchSingleHotel(currentUser.hotel_id);
     dispatchFetchRoomsForHotel(currentUser.hotel_id);
@@ -51,7 +52,6 @@ class CompanySettings extends React.Component {
         currentHotel: this.props.hotel,
         companyName: this.props.hotel.name,
         companyMotto: this.props.hotel.motto,
-        roomName: this.props.hotel.rooms,
       });
     }
     if (this.state.rooms !== this.props.rooms) {
@@ -96,6 +96,26 @@ class CompanySettings extends React.Component {
       });
     };
   }
+
+  clearNewRooms = () => {
+    this.setState({
+      newRooms: '',
+    })
+  }
+
+  addRooms = () => {
+    const rooms = this.state.newRooms;
+    if (!rooms.length) {
+      return alert('Please add at least one room name');
+    } else {
+      const roomsToAdd = [];
+      rooms
+        .split(',')
+        .forEach(room => roomsToAdd.push({ name: room.trim() }));
+        this.props.dispatchCreateRoomForHotel(roomsToAdd, this.props.hotel._id);
+        this.clearNewRooms();
+    }
+  };
 
   render() {
     const {
@@ -146,11 +166,13 @@ class CompanySettings extends React.Component {
             rooms={rooms}
             hotelId={hotel.id}
             currentUser={currentUser}
+            newRooms={this.state.newRooms}
             handleInputChange={this.handleInputChange.bind(this)}
             handleRoomInputChange={this.handleRoomInputChange.bind(this)}
             createRoomForHotel={dispatchCreateRoomForHotel}
             deleteRoomForHotel={dispatchDeleteRoomForHotel}
             updateRoomForHotel={dispatchUpdateRoomForHotel}
+            addRooms={this.addRooms}
           />
         </CompanySettingsWrapper>
       </div>

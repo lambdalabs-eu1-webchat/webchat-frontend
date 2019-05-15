@@ -135,19 +135,14 @@ export const fetchRoomsForHotel = hotel_id => async dispatch => {
   }
 };
 
-export const createRoomForHotel = (name, hotel_id) => async dispatch => {
+export const createRoomForHotel = (newRoomArray, hotel_id) => async dispatch => {
   dispatch({ type: ROOMS.CREATE_ROOM_FOR_HOTEL });
-  const rooms = [
-    {
-      name: String(name),
-    },
-  ];
   const config = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(rooms),
+    body: JSON.stringify(newRoomArray),
   };
   try {
     const result = await fetch(`${DOMAIN}${HOTEL}/${hotel_id}/rooms`, config);

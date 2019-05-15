@@ -13,53 +13,28 @@ const AddRooms = styled.section`
   }
 `;
 
-const handleClick = (createRoomForHotel, id) => event => {
-  event.preventDefault();
-  let roomName = '';
-  event.target.parentNode.childNodes.forEach(childNode => {
-    if (childNode.name === 'roomName') {
-      roomName = childNode.value;
-    }
-  });
-  let blank = false;
-  if (roomName) {
-    createRoomForHotel(roomName, id);
-  } else {
-    blank = true;
-  }
-
-  if (blank) {
-    event.target.parentNode.childNodes.forEach(childNode => {
-      if (childNode.getAttribute('id') === 'add-room-message') {
-        childNode.textContent = 'Please fill in all the required fields.';
-      }
-    });
-  } else {
-    event.target.parentNode.childNodes.forEach(childNode => {
-      if (childNode.name === 'roomName') {
-        childNode.value = '';
-      }
-    });
-  }
-};
-
 const CompanySettingsRoomsList = props => {
   const {
     rooms,
+    newRooms,
     deleteRoomForHotel,
     updateRoomForHotel,
     currentUser,
+    handleInputChange,
     handleRoomInputChange,
-    createRoomForHotel,
+    addRooms,
   } = props;
   return (
     <div className="company-rooms-list">
+      <h3>To add multiple rooms, separate each room name with a comma</h3>
       <AddRooms>
-        <input placeholder="Add rooms..." name="roomName" />
-        <button
-          type="submit"
-          onClick={handleClick(createRoomForHotel, currentUser.hotel_id)}
-        >
+        <input
+          placeholder="Add rooms..."
+          name="newRooms"
+          value={newRooms}
+          onChange={handleInputChange}
+        />
+        <button type="submit" onClick={addRooms}>
           ADD ROOMS
         </button>
       </AddRooms>
