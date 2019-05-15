@@ -1,5 +1,5 @@
-// export const DOMAIN = 'http://localhost:7000/';
-export const DOMAIN = 'https://web-chat-labs.herokuapp.com/';
+export const DOMAIN = 'http://localhost:7000/';
+// export const DOMAIN = 'https://web-chat-labs.herokuapp.com/';
 export const GUEST_CLIENT_DOMAIN = 'https://webchatlabs-guest.netlify.com/';
 export const LOGIN = 'api/auth/login';
 export const REGISTER = 'api/auth/register';
@@ -15,6 +15,7 @@ export const SOCKET = {
   CLOSE_TICKET: 'close_ticket',
   ASSIGN_SELF_TICKET: 'assign_self_ticket',
   LOGIN: 'login',
+  LOGOUT: 'logout',
   FAILED_LOGIN: 'failed_login',
   QUEUED_CHATS: 'queued_chats',
   ACTIVE_CHATS: 'active_chats',
