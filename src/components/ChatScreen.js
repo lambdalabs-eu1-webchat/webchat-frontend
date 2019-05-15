@@ -132,14 +132,14 @@ font-size:14px;
 
 const btn = {
   margin:'20px',
-  backgroundColor:'#4D9F60',
+  backgroundColor:'#0CD4AF',
   color:'white',
   fontWeight:'bold',
   width:'95%',
  alignItem:'center',
 }
 const name = {
-  backgroundColor:'#6876CB',
+  // backgroundColor:'#6876CB',
   color:'#333',
   margin:'20px',
   };
