@@ -6,102 +6,122 @@ import theme from './../theme/styledTheme';
 
 import { connect } from 'react-redux';
 import { registerUser } from '../store/actions/auth.js';
-const handleRegister = (event, registerUser) => {
-  event.preventDefault();
-  let name = '';
-  let email = '';
-  let password = '';
-  let motto = '';
-  let hotelName = '';
-  let hotelMotto = '';
 
-  event.target.parentNode.childNodes.forEach(childNode => {
-    if (childNode.name === 'name') {
-      name = childNode.value;
-    } else if (childNode.name === 'email') {
-      email = childNode.value;
-    } else if (childNode.name === 'password') {
-      password = childNode.value;
-    } else if (childNode.name === 'motto') {
-      motto = childNode.value;
-    } else if (childNode.name === 'hotelName') {
-      hotelName = childNode.value;
-    } else if (childNode.name === 'hotelMotto') {
-      hotelMotto = childNode.value;
+class Register extends React.Component {
+  state = {
+    newUser: {
+      name: '',
+      email: '',
+      password: '',
+      motto: '',
+      hotelName: '',
+      hotelMotto: '',
+    },
+    flashMessage: '',
+  };
+
+  clearInputs = () => {
+    this.setState({
+      newUser: {
+        name: '',
+        email: '',
+        password: '',
+        motto: '',
+        hotelName: '',
+        hotelMotto: '',
+      },
+    });
+  };
+
+  handleInput = event => {
+    const input = event.target;
+    this.setState(cState => ({
+      newUser: {
+        ...cState.newUser,
+        [input.name]: input.value,
+      },
+    }));
+  };
+
+  handleRegister = async event => {
+    event.preventDefault();
+    try {
+      if (
+        this.state.newUser.name &&
+        this.state.newUser.email &&
+        this.state.newUser.password &&
+        this.state.newUser.hotelName
+      ) {
+        await this.props.registerUser({ ...this.state.newUser });
+      } else {
+        return alert('Please fill in all required fields');
+      }
+    } catch (error) {
+      console.error(error);
     }
-  });
-  let blank = false;
-  if (name && email && password && hotelName) {
-    registerUser({ name, email, password, motto, hotelName, hotelMotto });
-  } else {
-    blank = true;
-  }
+  };
 
-  if (blank) {
-    event.target.parentNode.childNodes.forEach(childNode => {
-      if (childNode.getAttribute('id') === 'result-message') {
-        childNode.textContent = 'Please fill in all the required fields.';
-      }
-    });
-  } else {
-    event.target.parentNode.childNodes.forEach(childNode => {
-      if (childNode.getAttribute('id') === 'result-message') {
-        childNode.textContent =
-          'Successfully registered. Please log in to continue.';
-      }
-      if (childNode.name === 'name') {
-        childNode.value = '';
-      } else if (childNode.name === 'email') {
-        childNode.value = '';
-      } else if (childNode.name === 'password') {
-        childNode.value = '';
-      } else if (childNode.name === 'motto') {
-        childNode.value = '';
-      } else if (childNode.name === 'hotelName') {
-        childNode.value = '';
-      } else if (childNode.name === 'hotelMotto') {
-        childNode.value = '';
-      }
-    });
-  }
-};
-
-const Register = ({ loggedIn, registerUser }) => {
-  if (loggedIn) {
-    return <Redirect to='/' />;
-  }
-  return (
+  render() {
+    if (this.props.loggedIn) {
+      return <Redirect to="/" />;
+    }
+    return (
       <RegisterOuterWrapper>
-    <RegisterWrapper>
-      <form className='register-form'>
-        <h2>Register</h2>
-        <label>Name*</label>
-        <input name='name' type='text' />
-        <label>Email*</label>
-        <input name='email' type='text' />
-        <label>Password*</label>
-        <input
-          name='password'
-          type='password'
-        />
-        <label>Motto</label>
-        <input name='motto' type='text' />
-        <label>Hotel Name</label>
-        <input name='hotelName' type='text' />
-        <label>Hotel Motto</label>
-        <input
-          name='hotelMotto'
-          type='text'
-        />
-        <p id='result-message' />
-        <button type='submit' onClick={e => handleRegister(e, registerUser)}>
-          Register
-        </button>
-      </form>
-    </RegisterWrapper>
+        <RegisterWrapper>
+          <form className="register-form">
+            <h2>Register</h2>
+            <label>Name*</label>
+            <input
+              name="name"
+              type="text"
+              value={this.state.newUser.name}
+              onChange={this.handleInput}
+            />
+            <label>Email*</label>
+            <input
+              name="email"
+              type="text"
+              value={this.state.newUser.email}
+              onChange={this.handleInput}
+            />
+            <label>Password*</label>
+            <input
+              name="password"
+              type="password"
+              value={this.state.newUser.password}
+              onChange={this.handleInput}
+            />
+            <label>Motto</label>
+            <input
+              name="motto"
+              type="text"
+              value={this.state.newUser.motto}
+              onChange={this.handleInput}
+            />
+            <label>Hotel Name*</label>
+            <input
+              name="hotelName"
+              type="text"
+              value={this.state.newUser.hotelName}
+              onChange={this.handleInput}
+            />
+            <label>Hotel Motto</label>
+            <input
+              name="hotelMotto"
+              type="text"
+              value={this.state.newUser.hotelMotto}
+              onChange={this.handleInput}
+            />
+            <p>{this.state.flashMessage}</p>
+            <button type="submit" onClick={this.handleRegister}>
+              Register
+            </button>
+          </form>
+        </RegisterWrapper>
       </RegisterOuterWrapper>
-  );
-};
+    );
+  }
+}
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
@@ -118,7 +138,7 @@ export default connect(
 )(Register);
 
 const RegisterOuterWrapper = styled.div`
-background: ${theme.color.offWhite};
+  background: ${theme.color.offWhite};
 `;
 
 const RegisterWrapper = styled.div`
@@ -140,7 +160,7 @@ const RegisterWrapper = styled.div`
     @media (max-width: 600px) {
       width: 100%;
       margin: 0;
-      padding-bottom: 65px; 
+      padding-bottom: 65px;
     }
     h2 {
       font-size: ${theme.fontSize.xl};
@@ -152,7 +172,7 @@ const RegisterWrapper = styled.div`
       color: ${theme.color.accentPurple};
       font-weight: bold;
     }
-  
+
     input {
       border: none;
       border-bottom: 1px solid ${theme.color.footerText};
@@ -165,13 +185,13 @@ const RegisterWrapper = styled.div`
         outline: none;
       }
     }
-  
+
     button {
       width: 100%;
       height: ${theme.button.height};
       font-size: ${theme.fontSize.s};
       border-radius: ${theme.border.radius};
-      background:${theme.color.accentGreen};
+      background: ${theme.color.accentGreen};
       border: none;
       text-transform: ${theme.textTransform.uppercase};
       color: ${theme.color.white};
@@ -179,8 +199,8 @@ const RegisterWrapper = styled.div`
       margin: 15px 0;
       box-shadow: ${theme.shadow.buttonShadow};
       &:hover {
-      box-shadow: ${theme.shadow.buttonHover};
-      cursor: pointer;
+        box-shadow: ${theme.shadow.buttonHover};
+        cursor: pointer;
       }
     }
   }
