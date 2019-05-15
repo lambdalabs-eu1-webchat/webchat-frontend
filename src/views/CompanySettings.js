@@ -182,6 +182,7 @@ class CompanySettings extends React.Component {
 
 CompanySettings.propTypes = {
   hotel: PropTypes.object.isRequired,
+  rooms: PropTypes.array.isRequired,
   dispatchFetchSingleHotel: PropTypes.func.isRequired,
   dispatchUpdateHotel: PropTypes.func.isRequired,
   dispatchFetchRoomsForHotel: PropTypes.func.isRequired,
