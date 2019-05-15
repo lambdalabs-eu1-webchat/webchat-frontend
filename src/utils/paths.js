@@ -7,6 +7,7 @@ export const CHATS_CLOSED = 'api/chats/closed';
 export const HOTEL = 'api/hotel';
 export const SUBSCRIPTION = 'api/subscription';
 export const METHOD = 'api/subscription/method';
+export const EMAIL = 'api/email';
 
 export const SOCKET = {
   CLOSE_TICKET: 'close_ticket',
@@ -21,6 +22,8 @@ export const SOCKET = {
   REMOVE_QUEUED: 'remove_queued',
   ADD_QUEUED: 'add_queued',
   QUEUED_MESSAGE: 'queued_message',
+  TYPING: 'typing',
+  STOPPED_TYPING: 'stopped_typing',
 };
 
 export const APP_PATHS = {

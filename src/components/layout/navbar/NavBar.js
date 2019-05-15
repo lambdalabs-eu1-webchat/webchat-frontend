@@ -16,21 +16,27 @@ const NavBar = props => {
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />{' '}
           </header>
-          <div>
-            {props.numberActiveTickets ? (
-              <p className="tickets">
-                Active tickets: {props.numberActiveTickets}
-              </p>
-            ) : null}
-            {props.numberQueuedTickets ? (
-              <p className="tickets">
-                Queued tickets: {props.numberQueuedTickets}
-              </p>
-            ) : null}
-          </div>
         </NavLink>
         {props.currentUser.name ? (
-          <LoggedIn userType={props.currentUser.user_type} />
+          props.numberRooms > 0 ? (
+            <React.Fragment>
+              <div>
+                {props.numberActiveTickets ? (
+                  <p className="tickets">
+                    Active tickets: {props.numberActiveTickets}
+                  </p>
+                ) : null}
+                {props.numberQueuedTickets ? (
+                  <p className="tickets">
+                    Queued tickets: {props.numberQueuedTickets}
+                  </p>
+                ) : null}
+              </div>
+              <LoggedIn userType={props.currentUser.user_type} />
+            </React.Fragment>
+          ) : (
+            <NavLink to="/logout">Logout </NavLink>
+          )
         ) : (
           <LoggedOut />
         )}
@@ -43,6 +49,7 @@ function mapStateToProps(state) {
   return {
     numberActiveTickets: state.chats.activeChats.length,
     numberQueuedTickets: state.chats.queuedChats.length,
+    numberRooms: state.rooms.rooms.length,
   };
 }
 
