@@ -11,23 +11,56 @@ import CheckOutForm from '../components/GuestCheckOutForm';
 class CheckInOrOut extends React.Component {
   state = {
     availableRooms: [],
+    currentGuests: [],
   };
   componentDidMount() {
     axios
       .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/rooms/available`)
       .then(res => {
-        this.setState({ availableRooms: res.data });
+        this.setState({
+          availableRooms: res.data,
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // get the hotels current guests
+    axios
+      .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/guests?status=here`)
+      .then(res => {
+        this.setState({
+          currentGuests: res.data,
+        });
       })
       .catch(error => {
         console.log(error);
       });
   }
-  filterAvaliableRoom = room_id => {
+  filterAvailableRoom = room_id => {
     this.setState(cState => {
+      // get the room
       const availableRooms = cState.availableRooms.filter(
         room => room._id !== room_id,
       );
       return { availableRooms };
+    });
+  };
+  addCurrentGuest = guest => {
+    this.setState(cState => {
+      const currentGuests = [...cState.currentGuests, guest];
+      return {
+        currentGuests,
+      };
+    });
+  };
+  filterCurrentGuests = guest_id => {
+    this.setState(cState => {
+      const newCurrentGuests = cState.currentGuests.filter(
+        guest => guest_id !== guest._id,
+      );
+      return {
+        currentGuests: newCurrentGuests,
+      };
     });
   };
   render() {
@@ -37,13 +70,18 @@ class CheckInOrOut extends React.Component {
           <h1>Check-in</h1>
           <CheckInForm
             availableRooms={this.state.availableRooms}
-            filterAvaliableRoom={this.filterAvaliableRoom}
+            filterAvailableRoom={this.filterAvailableRoom}
+            addCurrentGuest={this.addCurrentGuest}
             hotel_id={this.props.hotel_id}
           />
         </div>
         <div>
           <h1>Check-out</h1>
-          <CheckOutForm hotel_id={this.props.hotel_id} />
+          <CheckOutForm
+            hotel_id={this.props.hotel_id}
+            currentGuests={this.state.currentGuests}
+            filterCurrentGuests={this.filterCurrentGuests}
+          />
         </div>
       </StyledCheckInOrOut>
     );

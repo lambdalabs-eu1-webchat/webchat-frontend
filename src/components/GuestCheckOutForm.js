@@ -12,23 +12,10 @@ import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
 class CheckOutForm extends React.Component {
   state = {
     emailInput: '',
-    currentGuests: [],
     selectedGuest: null,
     selectValue: '',
     errorRoom: false,
   };
-
-  componentDidMount() {
-    // get the hotels current guests
-    axios
-      .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/guests?status=here`)
-      .then(res => {
-        this.setState({ currentGuests: res.data });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
 
   setSelectValue = event => {
     this.setState({ selectValue: event.target.value, errorRoom: false });
@@ -72,14 +59,9 @@ class CheckOutForm extends React.Component {
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
         if (didDel) {
-          this.setState(cState => {
-            const newCurrentGuests = cState.currentGuests.filter(
-              guest => guest_id !== guest._id,
-            );
-            return {
-              currentGuests: newCurrentGuests,
-              selectValue: '',
-            };
+          this.props.filterCurrentGuests(guest_id);
+          this.setState({
+            selectValue: '',
           });
         }
       } catch (error) {
@@ -103,7 +85,7 @@ class CheckOutForm extends React.Component {
           <option value="" disabled>
             Select a Guest
           </option>
-          {this.state.currentGuests.map(guest => (
+          {this.props.currentGuests.map(guest => (
             <option key={guest._id} value={guest._id}>
               Room: {guest.room.name} Guest: {guest.name}
             </option>

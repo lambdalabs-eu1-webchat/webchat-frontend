@@ -45,7 +45,8 @@ class CheckInForm extends React.Component {
           },
         });
         const data = jwt.decode(res.data.token);
-        this.props.filterAvaliableRoom(room_id);
+        this.props.filterAvailableRoom(room_id);
+        this.props.addCurrentGuest(res.data.user);
         this.setState({
           loginCode: data.passcode,
           selectValue: '',
