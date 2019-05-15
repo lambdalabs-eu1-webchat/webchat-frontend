@@ -24,7 +24,8 @@ class Billing extends React.Component {
   state = {
     billingEmail: '',
     editPaymentMethodModal: false,
-    isRestrictedModalOpen: false,
+    isPaymentPlanModalOpen: false,
+    isHasManyAccsModalOpen: false,
   };
 
   componentDidMount() {
@@ -32,12 +33,17 @@ class Billing extends React.Component {
     this.props.fetchHotelStaff(this.props.hotel_id);
   }
 
-  openRestrictedModal = () => {
-    this.setState({ isRestrictedModalOpen: true });
+  openNeedPaymentPlanModal = () => {
+    this.setState({ isPaymentPlanModalOpen: true });
+  };
+
+  openHasManyAccsModal = () => {
+    this.setState({ isHasManyAccsModalOpen: true });
   };
 
   closeRestrictedModal = () => {
-    this.setState({ isRestrictedModalOpen: false });
+    this.setState({ isPaymentPlanModalOpen: false });
+    this.setState({ isHasManyAccsModalOpen: false });
   };
 
   handleInputChange = event => {
@@ -71,9 +77,9 @@ class Billing extends React.Component {
   fireSwitchCustomerPlan = plan => {
     const checkSwitchEligibility = this.checkPlanSwitchEligibility(plan);
     if (!this.props.hotel.billing) {
-      return this.openRestrictedModal();
+      this.openNeedPaymentPlanModal();
     } else if (!checkSwitchEligibility) {
-      return alert('You have too many staff accounts to switch to this plan');
+      this.openHasManyAccsModal();
     } else {
       const newPlan = { newPlan: planIds[plan] };
       this.props.switchCustomerPlan(this.props.hotel._id, newPlan);
@@ -119,10 +125,18 @@ class Billing extends React.Component {
           fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
         />
 
-        {this.state.isRestrictedModalOpen && (
+        {this.state.isPaymentPlanModalOpen && (
           <Restricted
             alert="Please add a payment method before switching plan"
-            isRestrictedModalOpen={this.state.isRestrictedModalOpen}
+            isRestrictedModalOpen={this.state.isPaymentPlanModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
+          />
+        )}
+
+        {this.state.isHasManyAccsModalOpen && (
+          <Restricted
+            alert="You have too many staff accounts to switch to this plan"
+            isRestrictedModalOpen={this.state.isHasManyAccsModalOpen}
             closeRestrictedModal={this.closeRestrictedModal}
           />
         )}
