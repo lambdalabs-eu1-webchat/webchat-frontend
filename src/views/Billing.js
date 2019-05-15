@@ -14,6 +14,7 @@ import {
 import { planIds } from '../utils/plans';
 import PlanCards from '../components/PlanCards';
 import PaymentMethod from '../components/PaymentMethod';
+import Restricted from '../components/reusable/RestrictedModal';
 
 const BillingWrapper = styled.div`
   padding: 10% 25%;
@@ -23,12 +24,21 @@ class Billing extends React.Component {
   state = {
     billingEmail: '',
     editPaymentMethodModal: false,
+    isRestrictedModalOpen: false,
   };
 
   componentDidMount() {
     this.props.fetchSingleHotel(this.props.hotel_id);
     this.props.fetchHotelStaff(this.props.hotel_id);
   }
+
+  openRestrictedModal = () => {
+    this.setState({ isRestrictedModalOpen: true });
+  };
+
+  closeRestrictedModal = () => {
+    this.setState({ isRestrictedModalOpen: false });
+  };
 
   handleInputChange = event => {
     this.setState({
@@ -61,7 +71,7 @@ class Billing extends React.Component {
   fireSwitchCustomerPlan = plan => {
     const checkSwitchEligibility = this.checkPlanSwitchEligibility(plan);
     if (!this.props.hotel.billing) {
-      return alert('Please add a payment method before switching plan');
+      return this.openRestrictedModal();
     } else if (!checkSwitchEligibility) {
       return alert('You have too many staff accounts to switch to this plan');
     } else {
@@ -86,7 +96,7 @@ class Billing extends React.Component {
     };
     await this.props.updateCustomerMethod(
       this.props.hotel._id,
-      enhancedStripeToken,
+      enhancedStripeToken
     );
     this.closeModal();
   };
@@ -108,6 +118,14 @@ class Billing extends React.Component {
           handleModalSwitch={this.handleModalSwitch}
           fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
         />
+
+        {this.state.isRestrictedModalOpen && (
+          <Restricted
+            alert="Please add a payment method before switching plan"
+            isRestrictedModalOpen={this.state.isRestrictedModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
+          />
+        )}
       </BillingWrapper>
     );
   }
@@ -138,11 +156,11 @@ const mapDispatchToProps = dispatch => {
       updateCustomerMethod,
       fetchHotelStaff,
     },
-    dispatch,
+    dispatch
   );
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Billing);
