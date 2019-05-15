@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "axios": "^0.18.0",
+    "email-validator": "^2.0.4",
     "jsonwebtoken": "^8.5.1",
     "match-sorter": "^3.0.0",
     "polished": "^3.3.0",
