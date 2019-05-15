@@ -2,6 +2,8 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+import theme from './../theme/styledTheme';
 import { loginRequest } from '../store/actions/auth';
 
 import { APP_PATHS } from '../utils/paths';
@@ -32,18 +34,21 @@ const Login = ({ loggedIn, loginRequest, numberRooms }) => {
     return <Redirect to="/chat" />;
   }
   return (
-    <div className="login-wrapper">
-      <form className="login-form">
-        <h2>Login</h2>
-        <label>Email</label>
-        <input name="email" placeholder="Your email..." type="text" />
-        <label>Password</label>
-        <input name="password" placeholder="Your password..." type="password" />
-        <button type="submit" onClick={handleClick(loginRequest)}>
-          Login
-        </button>
-      </form>
-    </div>
+      <LoginOuterWrapper>
+        <LoginWrapper>
+          <form className="login-form">
+            <h2>Login</h2>
+            <label>Email*</label>
+            <input name="email" type="text" />
+            <label>Password*</label>
+            <input name="password" type="password" />
+            <button type="submit" onClick={handleClick(loginRequest)}>
+              Login
+            </button>
+          </form>
+        </LoginWrapper>
+      </LoginOuterWrapper>
+
   );
 };
 
