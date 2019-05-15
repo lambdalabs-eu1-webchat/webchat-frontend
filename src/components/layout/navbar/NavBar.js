@@ -7,9 +7,23 @@ import LoggedIn from './SignedInLink';
 import LoggedOut from './SignedOutLink';
 import { connect } from 'react-redux';
 import theme from '../../../theme/styledTheme';
+import { SUPER_ADMIN } from '../../../utils/userTypes';
 
 const NavBar = props => {
-  debugger;
+  if (props.numberRooms === 0 && props.currentUser.user_type === SUPER_ADMIN) {
+    return (
+      <StyledNav className="nav-wrapper navy darken-2 hide-on-print">
+        <div className="container">
+          <NavLink to="/" className="brand-logo">
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />{' '}
+            </header>
+          </NavLink>
+          <NavLink to="/logout">Logout </NavLink>
+        </div>
+      </StyledNav>
+    );
+  }
   return (
     <StyledNav className="nav-wrapper navy darken-2 hide-on-print">
       <div className="container">
@@ -18,26 +32,22 @@ const NavBar = props => {
             <img src={logo} className="App-logo" alt="logo" />{' '}
           </header>
         </NavLink>
-        {props.currentUser.name ? (
-          props.numberRooms > 0 ? (
-            <React.Fragment>
-              <div>
-                {props.numberActiveTickets ? (
-                  <p className="tickets">
-                    Active tickets: {props.numberActiveTickets}
-                  </p>
-                ) : null}
-                {props.numberQueuedTickets ? (
-                  <p className="tickets">
-                    Queued tickets: {props.numberQueuedTickets}
-                  </p>
-                ) : null}
-              </div>
-              <LoggedIn userType={props.currentUser.user_type} />
-            </React.Fragment>
-          ) : (
-            <NavLink to="/logout">Logout </NavLink>
-          )
+        {props.currentUser.name ? ( // if a user is logged in
+          <React.Fragment>
+            <div>
+              {props.numberActiveTickets ? (
+                <p className="tickets">
+                  Active tickets: {props.numberActiveTickets}
+                </p>
+              ) : null}
+              {props.numberQueuedTickets ? (
+                <p className="tickets">
+                  Queued tickets: {props.numberQueuedTickets}
+                </p>
+              ) : null}
+            </div>
+            <LoggedIn userType={props.currentUser.user_type} />
+          </React.Fragment>
         ) : (
           <LoggedOut />
         )}
@@ -70,7 +80,7 @@ const StyledNav = styled.nav`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    
+
     img {
       border-radius: 0;
       width: 60%;
