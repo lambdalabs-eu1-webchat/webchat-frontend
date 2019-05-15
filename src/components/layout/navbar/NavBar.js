@@ -7,6 +7,7 @@ import LoggedOut from './SignedOutLink';
 import { connect } from 'react-redux';
 
 const NavBar = props => {
+  debugger;
   return (
     <StyledNav className="nav-wrapper navy darken-2 hide-on-print">
       <div className="container">

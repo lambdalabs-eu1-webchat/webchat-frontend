@@ -52,6 +52,7 @@ function Router({ user_type, fetchRooms, rooms, currentUser }) {
     );
   } else if (user_type === 'super admin') {
     // if havent gotten rooms yet get them
+    debugger;
     if (!gotRooms) {
       setGotRooms(true);
       fetchRooms(currentUser.hotel_id);
