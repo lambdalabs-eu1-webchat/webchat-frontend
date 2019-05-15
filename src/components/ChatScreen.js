@@ -36,7 +36,7 @@ class ChatScreen extends React.Component {
         {ACTIVE === status ? (
           <React.Fragment>
             <MessageComposer chat_id={chat._id} />
-            <Button onClick={this.closeTicket}>Close Ticket</Button>
+            <Button onClick={this.closeTicket}></Button>
           </React.Fragment>
         ) : null}
         {QUEUED === status ? (
@@ -85,7 +85,7 @@ function mapStateToProps(state) {
 const StyledChatScreen = styled.div`
 color:#545959;
 font-size:14px;
-backgroundColor:'red',
+
 `;
 
 const btn = {
@@ -93,8 +93,8 @@ const btn = {
   backgroundColor:'#4D9F60',
 }
 const name = {
-  fontWeight:'bolder',
-  color:'white',
+  // backgroundColor:'#F4F6FF',
+  color:'#333',
   // margin:'20px',
   };
 

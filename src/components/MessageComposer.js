@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { SOCKET } from '../utils/paths';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+import color from '@material-ui/core/colors/indigo';
 
 class MessageComposer extends React.Component {
   state = {
@@ -45,7 +46,7 @@ class MessageComposer extends React.Component {
           className="flex"
         />
         <Button onClick={this.handleSend}>
-        <span className="fas fa-paper-plane"></span>
+        <span style={col} className="fas fa-paper-plane"></span>
         </Button>
       </StyledMessageComposer>
     );
@@ -64,6 +65,9 @@ const StyledMessageComposer = styled.div`
     flex: 1;
   }
 `;
+const col= {
+  color:'#c7ccec',
+};
 // need to get the socket here to emit connect props
 
 const mapStateToProps = state => {

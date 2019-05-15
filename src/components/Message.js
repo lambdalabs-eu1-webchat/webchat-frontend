@@ -32,7 +32,7 @@ const StyledMessage = styled.div`
   padding: 15px;
 
 
-  ${props => (props.left ? `background:lightgray;` : 'background:#6876CB;')}
+  ${props => (props.left ? `background:#F4F6FF;` : 'background:#c7ccec;')}
   ${props => (props.left ? `text-align: left;` : 'text-align: right;')}
   ${props => (props.left ? `margin-right:auto;` : 'margin-left:auto;')}
   &:after {
@@ -51,12 +51,12 @@ const StyledMessage = styled.div`
         ? `
     border-left:0;
     left: 3%;
-    border-top-color: lightgray;
+    border-top-color: #F4F6FF;
     `
         : `
         border-right:0;
         right:3%;
-        border-top-color: #6876CB;
+        border-top-color: #c7ccec;
   `}
   }
 `;

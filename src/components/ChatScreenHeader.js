@@ -18,11 +18,12 @@ ChatScreenHeader.propTypes = {
 };
 
 const StyledChatScreenHeader = styled.div`
-border:2px solid #6876CB;
-margin: 10px;
+border:2px solid #c7ccec;
+margin-Top:10px;
+margin-Bottom:10px;
 padding:5px;
-background-color:#6876CB;
-border-radius:10px 10px  10px;
+background-color:#c7ccec;
+
 `;
 
 export default ChatScreenHeader;
