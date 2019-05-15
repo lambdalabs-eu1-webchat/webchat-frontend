@@ -6,7 +6,6 @@ const {
   ADD_QUEUED_CHAT,
   ADD_QUEUED_CHATS,
   REMOVE_QUEUED_CHAT,
-  UPDATE_ACTIVE_CHAT,
   FETCH_CLOSED_CHATS_SUCCESS,
   SAVE_SOCKET,
   SET_CURRENT_CHAT_ID,
@@ -14,6 +13,7 @@ const {
   ADD_QUEUE_MESSAGE,
   ADD_CURRENT_TYPER,
   CLEAR_CURRENT_TYPER,
+  UPDATE_TICKET_LANGUAGE,
 } = CHATS;
 
 const initState = {
@@ -41,7 +41,7 @@ const chats = (state = initState, action) => {
       return {
         ...state,
         queuedChats: state.queuedChats.filter(
-          chat => chat._id !== action.target,
+          chat => chat._id !== action.target
         ),
       };
     case ADD_MESSAGE:
@@ -96,6 +96,20 @@ const chats = (state = initState, action) => {
           return chat;
         }),
       };
+
+    case UPDATE_TICKET_LANGUAGE:
+      return {
+        ...state,
+        activeChats: state.activeChats.map(chat => {
+          if (chat._id === action.target) {
+            const newTickets = JSON.parse(JSON.stringify(chat.tickets));
+            newTickets[newTickets.length - 1].language = action.payload;
+            return { ...chat, tickets: newTickets };
+          }
+          return chat;
+        }),
+      };
+
     case CLEAR_CURRENT_TYPER:
       return {
         ...state,
