@@ -7,6 +7,7 @@ import {
   REGISTER_USER,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE,
+  REGISTER_USER_LOADING,
 } from './actionTypes';
 
 export const registerUserSuccess = newUser => {
@@ -106,6 +107,7 @@ export const registerUser = ({
   hotelMotto,
  }) => async dispatch => {
   dispatch({ type: REGISTER_USER });
+  dispatch({ type: REGISTER_USER_LOADING });
   const user = {
     name: String(name),
     email: String(email),
@@ -127,7 +129,10 @@ export const registerUser = ({
     const newUser = jsonResult;
     if (result.ok) {
       dispatch(registerUserSuccess(newUser));
+      dispatch({ type: REGISTER_USER_LOADING });
+      return jsonResult;
     } else {
+      dispatch({ type: REGISTER_USER_LOADING });
       throw new Error(jsonResult.message);
     }
   } catch (error) {

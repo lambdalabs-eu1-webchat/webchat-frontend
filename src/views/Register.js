@@ -18,7 +18,7 @@ class Register extends React.Component {
       hotelName: '',
       hotelMotto: '',
     },
-    flashMessage: '',
+    flashMessage: 'Please fill in all required fields',
   };
 
   clearInputs = () => {
@@ -31,6 +31,7 @@ class Register extends React.Component {
         hotelName: '',
         hotelMotto: '',
       },
+      flashMessage: '',
     });
   };
 
@@ -44,6 +45,16 @@ class Register extends React.Component {
     }));
   };
 
+  setFlashMessage = flashMessage => {
+    this.setState({
+      flashMessage,
+    });
+  };
+
+  handleLogin = token => {
+    console.log(token);
+  };
+
   handleRegister = async event => {
     event.preventDefault();
     try {
@@ -53,17 +64,26 @@ class Register extends React.Component {
         this.state.newUser.password &&
         this.state.newUser.hotelName
       ) {
-        if (validate(this.state.newUser.email)) {
-          await this.props.registerUser({ ...this.state.newUser });
+        if (this.state.newUser.password.length > 6) {
+          if (validate(this.state.newUser.email)) {
+            const res = await this.props.registerUser({
+              ...this.state.newUser,
+            });
+            if (res) {
+              const token = res.token;
+              this.handleLogin(token);
+              this.clearInputs();
+            } else {
+              this.setFlashMessage(
+                'Registration unsucessful, please try again',
+              );
+            }
+          } else {
+            this.setFlashMessage('Please use a valid email address');
+          }
         } else {
-          this.setState({
-            flashMessage: 'Please use a valid email address',
-          });
+          this.setFlashMessage('Passwords must be at least 7 characters');
         }
-      } else {
-        this.setState({
-          flashMessage: 'Please fill in all required fields',
-        });
       }
     } catch (error) {
       console.error(error);
