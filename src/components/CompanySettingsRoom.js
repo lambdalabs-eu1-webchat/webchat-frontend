@@ -41,7 +41,7 @@ const CompanySettingsRoom = ({
   deleteRoomForHotel,
   updateRoomForHotel,
 }) => {
-  return !room[index] ? (
+  return !room || !room[index] ? (
     <div>Loading</div>
   ) : (
     <div className="room">

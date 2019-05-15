@@ -1,22 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import CompanySettingsRoom from "./CompanySettingsRoom";
+import CompanySettingsRoom from './CompanySettingsRoom';
 
 const AddRooms = styled.section`
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    @media (max-width: 500px) {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  @media (max-width: 500px) {
     margin: 0 auto;
     max-width: 100%;
     padding-left: 35px;
-    }
+  }
 `;
 
-const handleClick = (
-    createRoomForHotel,
-    id
-) => event => {
+const handleClick = (createRoomForHotel, id) => event => {
   event.preventDefault();
   let roomName = '';
   event.target.parentNode.childNodes.forEach(childNode => {
@@ -25,7 +22,7 @@ const handleClick = (
     }
   });
   let blank = false;
-  if (roomName ) {
+  if (roomName) {
     createRoomForHotel(roomName, id);
   } else {
     blank = true;
@@ -46,34 +43,45 @@ const handleClick = (
   }
 };
 
-
-const CompanySettingsRoomsList = (props) => {
-  const { rooms, deleteRoomForHotel, updateRoomForHotel, currentUser, handleRoomInputChange, createRoomForHotel } = props;
+const CompanySettingsRoomsList = props => {
+  const {
+    rooms,
+    deleteRoomForHotel,
+    updateRoomForHotel,
+    currentUser,
+    handleRoomInputChange,
+    createRoomForHotel,
+  } = props;
   return (
     <div className="company-rooms-list">
       <AddRooms>
-        <input placeholder="Add rooms..." name="roomName"/>
-        <button type="submit" onClick={handleClick(createRoomForHotel, currentUser.hotel_id)}>ADD ROOMS</button>
+        <input placeholder="Add rooms..." name="roomName" />
+        <button
+          type="submit"
+          onClick={handleClick(createRoomForHotel, currentUser.hotel_id)}
+        >
+          ADD ROOMS
+        </button>
       </AddRooms>
       <section className="rooms-list">
-        {rooms && rooms.map((room, idx) => (
+        {rooms &&
+          rooms.map((room, idx) => (
             <CompanySettingsRoom
-                key={room._id}
-                index={idx}
-                name={room.name}
-                room={room._id}
-                rooms={rooms}
-                hotelId={currentUser.hotel_id}
-                currentUser={currentUser}
-                updateRoomForHotel={updateRoomForHotel}
-                deleteRoomForHotel={deleteRoomForHotel}
-                handleRoomInputChange={handleRoomInputChange}
+              key={room._id || 'new'}
+              index={idx}
+              name={room.name}
+              room={room._id}
+              rooms={rooms}
+              hotelId={currentUser.hotel_id}
+              currentUser={currentUser}
+              updateRoomForHotel={updateRoomForHotel}
+              deleteRoomForHotel={deleteRoomForHotel}
+              handleRoomInputChange={handleRoomInputChange}
             />
-        ))}
+          ))}
       </section>
-
     </div>
-  )
+  );
 };
 
 export default CompanySettingsRoomsList;
