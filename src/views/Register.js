@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { validate } from 'email-validator';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import theme from './../theme/styledTheme';
@@ -52,9 +53,17 @@ class Register extends React.Component {
         this.state.newUser.password &&
         this.state.newUser.hotelName
       ) {
-        await this.props.registerUser({ ...this.state.newUser });
+        if (validate(this.state.newUser.email)) {
+          await this.props.registerUser({ ...this.state.newUser });
+        } else {
+          this.setState({
+            flashMessage: 'Please use a valid email address',
+          });
+        }
       } else {
-        return alert('Please fill in all required fields');
+        this.setState({
+          flashMessage: 'Please fill in all required fields',
+        });
       }
     } catch (error) {
       console.error(error);
