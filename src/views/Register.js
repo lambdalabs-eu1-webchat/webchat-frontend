@@ -72,24 +72,22 @@ const Register = ({ loggedIn, registerUser }) => {
     <div className='register-wrapper'>
       <form className='register-form'>
         <h2>Register</h2>
-        <label>Name</label>
-        <input name='name' placeholder='Choose a name...' type='text' />
-        <label>Email</label>
-        <input name='email' placeholder='Your email...' type='text' />
-        <label>Password</label>
+        <label>Name*</label>
+        <input name='name' type='text' />
+        <label>Email*</label>
+        <input name='email' type='text' />
+        <label>Password*</label>
         <input
           name='password'
-          placeholder='Choose a password...'
           type='password'
         />
         <label>Motto</label>
-        <input name='motto' placeholder='Your motto...' type='text' />
+        <input name='motto' type='text' />
         <label>Hotel Name</label>
-        <input name='hotelName' placeholder='Your hotel name...' type='text' />
+        <input name='hotelName' type='text' />
         <label>Hotel Motto</label>
         <input
           name='hotelMotto'
-          placeholder='Your hotel motto...'
           type='text'
         />
         <p id='result-message' />
