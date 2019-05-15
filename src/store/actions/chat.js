@@ -1,5 +1,5 @@
 import { CHATS } from './actionTypes';
-import { DOMAIN, CHATS_CLOSED } from '../../utils/paths';
+import { DOMAIN, CHATS_CLOSED, TRANSLATE_CHAT } from '../../utils/paths';
 
 const {
   ADD_ACTIVE_CHATS,
@@ -7,7 +7,6 @@ const {
   ADD_QUEUED_CHAT,
   ADD_QUEUED_CHATS,
   REMOVE_QUEUED_CHAT,
-  UPDATE_ACTIVE_CHAT,
   FETCH_CLOSED_CHATS,
   FETCH_CLOSED_CHATS_SUCCESS,
   FETCH_CLOSED_CHATS_FAILURE,
@@ -17,6 +16,8 @@ const {
   ADD_QUEUE_MESSAGE,
   ADD_CURRENT_TYPER,
   CLEAR_CURRENT_TYPER,
+  UPDATE_TICKET_LANGUAGE,
+  TRANSLATE_CHATS_FAILURE,
 } = CHATS;
 
 export const saveSocket = socket => {
@@ -147,5 +148,46 @@ export const clearCurrentTyper = chat_id => {
   return {
     type: CLEAR_CURRENT_TYPER,
     target: chat_id,
+  };
+};
+
+export const translate = async (text, ticket_id, language) => {
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: language
+      ? JSON.stringify({ text, ticket_id, language })
+      : JSON.stringify({ text, ticket_id }),
+  };
+
+  try {
+    const response = await fetch(`${DOMAIN}${TRANSLATE_CHAT}`, config);
+    const jsonResponse = await response.json();
+    return jsonResponse;
+  } catch (error) {
+    // dispatch(translateChatFailure(error));
+    console.error(error);
+  }
+};
+
+export const updateTicketLanguage = (chat_id, language) => {
+  return {
+    type: UPDATE_TICKET_LANGUAGE,
+    target: chat_id,
+    payload: language,
+  };
+};
+
+export const translateChatFailure = error => {
+  if (!error) {
+    throw new Error('translateChatFailure requires an error argument');
+  }
+  return {
+    type: TRANSLATE_CHATS_FAILURE,
+    payload: {
+      error,
+    },
   };
 };
