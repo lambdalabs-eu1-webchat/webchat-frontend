@@ -127,7 +127,6 @@ function mapStateToProps(state) {
 
 const StyledChatScreen = styled.div`
 font-size:14px;
-
 `;
 
 const btn = {
@@ -142,6 +141,7 @@ const name = {
   // backgroundColor:'#6876CB',
   color:'#333',
   margin:'20px',
+  
   };
 
 
