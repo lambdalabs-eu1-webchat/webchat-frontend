@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-// import PropTypes from './node_modules/prop-types';
-// import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
+import theme from '../../../theme/styledTheme';
 
 const LoggedOut = () => {
   return (
-    <ul className="right">
+    <LoggedOutList className="right">
       <li>
         <NavLink to="/register">Register</NavLink>
       </li>
@@ -13,10 +13,19 @@ const LoggedOut = () => {
         {' '}
         <NavLink to="/login">Login</NavLink>
       </li>
-    </ul>
+    </LoggedOutList >
   );
 };
 export default LoggedOut;
+
+const LoggedOutList = styled.ul`
+  display: flex;
+  align-items: center;
+  a {
+    font-size: ${theme.fontSize.xs};
+    color: ${theme.color.white};
+  }
+`;
 
 // //  const LoggedOut = () => {
 // // return(
