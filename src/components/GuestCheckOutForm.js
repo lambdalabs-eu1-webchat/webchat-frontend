@@ -52,6 +52,10 @@ class CheckOutForm extends React.Component {
   checkOutGuest = async () => {
     const guestEmail = this.state.emailInput;
     const guest_id = this.state.selectValue;
+    const guest = this.props.currentGuests.find(
+      guest => guest._id === guest_id,
+    );
+    const room = { name: guest.room.name, _id: guest.room.id };
     if (guestEmail) {
       await this.sendGuestEmail();
     }
@@ -60,6 +64,7 @@ class CheckOutForm extends React.Component {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
         if (didDel) {
           this.props.filterCurrentGuests(guest_id);
+          this.props.addAvailableRoom(room);
           this.setState({
             selectValue: '',
           });

@@ -36,6 +36,12 @@ class CheckInOrOut extends React.Component {
         console.log(error);
       });
   }
+  addAvailableRoom = room => {
+    this.setState(cState => {
+      const availableRooms = [...cState.availableRooms, room];
+      return { availableRooms };
+    });
+  };
   filterAvailableRoom = room_id => {
     this.setState(cState => {
       // get the room
@@ -81,6 +87,7 @@ class CheckInOrOut extends React.Component {
             hotel_id={this.props.hotel_id}
             currentGuests={this.state.currentGuests}
             filterCurrentGuests={this.filterCurrentGuests}
+            addAvailableRoom={this.addAvailableRoom}
           />
         </div>
       </StyledCheckInOrOut>
