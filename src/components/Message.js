@@ -27,9 +27,10 @@ Message.propTypes = {
 const StyledMessage = styled.div`
   margin: 20px;
   position: relative;
-  max-width: 85%;
+  max-width: 65%;
   border-radius: 2em;
   padding: 15px;
+
 
   ${props => (props.left ? `background:lightgray;` : 'background:#6876CB;')}
   ${props => (props.left ? `text-align: left;` : 'text-align: right;')}

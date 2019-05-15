@@ -85,6 +85,7 @@ function mapStateToProps(state) {
 const StyledChatScreen = styled.div`
 color:#545959;
 font-size:14px;
+backgroundColor:'red',
 `;
 
 const btn = {
