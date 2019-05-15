@@ -44,10 +44,6 @@ const TicketView = ({
                   );
                 })}
               </div>
-             <div>
-             <span style={icons} className="fas fa-comment icon-5x"></span>
-              {/* <span style={icons}>chat</span> */}
-             </div>
             </div>
           );
         })}
@@ -83,6 +79,13 @@ const icons = {
 
   color:'pink',
   left: '100px',
+  backgroundColor:'pink',
+  margin: '10px',
+  padding: '10px',
+  width: '100%',
+  borderRadius:'10px',
+  fontWeight:'light',
+  fontSize:'13px',
 };
 
 const lineStyle = {

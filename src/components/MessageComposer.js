@@ -44,7 +44,9 @@ class MessageComposer extends React.Component {
           onChange={this.handleInput}
           className="flex"
         />
-        <Button onClick={this.handleSend}>Send</Button>
+        <Button onClick={this.handleSend}>
+        <span className="fas fa-paper-plane"></span>
+        </Button>
       </StyledMessageComposer>
     );
   }
