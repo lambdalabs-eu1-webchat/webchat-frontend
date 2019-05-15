@@ -58,6 +58,8 @@ const FooterWrapper = styled.div`
     a {
       font-size: ${theme.fontSize.xxs};
       color: ${theme.color.lightPurple};
+      text-decoration: none;
+      text-transform: uppercase;
       font-weight: bold;
       margin: 0;
       padding: 0;
