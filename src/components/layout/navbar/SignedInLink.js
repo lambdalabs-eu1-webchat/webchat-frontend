@@ -112,8 +112,8 @@ const MenuToggle = styled.div`
   .menu {
     border-radius: 0 0 0 5px;
     position: absolute;
-    width: 250px;
-    margin: -100px 0 100px -192px;
+    width: 280px;
+    margin: -100px 0 100px -189px;
     padding: 125px 50px 50px 50px;
     background: ${theme.color.secondaryPurple};
     list-style-type: none;
@@ -121,7 +121,7 @@ const MenuToggle = styled.div`
     transform: translate(0, -100%);
     transition: transform 0.8s cubic-bezier(0.77,0.2,0.05,1.0);
     @media (max-width: 600px) {
-      margin: -100px 0 50px -442px;
+      margin: -100px 0 50px -433px;
       width: 500px;
       transform-origin: 0 0;
       transform: translate(0, -100%);

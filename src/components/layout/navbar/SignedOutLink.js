@@ -24,6 +24,7 @@ const LoggedOutList = styled.ul`
   a {
     font-size: ${theme.fontSize.xs};
     color: ${theme.color.white};
+    padding-left: 20px;
   }
 `;
 

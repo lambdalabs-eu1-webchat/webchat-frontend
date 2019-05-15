@@ -60,6 +60,7 @@ const StyledNav = styled.nav`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 0 2%;
     
     img {
       border-radius: 0;
