@@ -1,15 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import theme from '../../theme/styledTheme';
-import Logo from '../layout/navbar/logo2.svg';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <FooterWrapper>
       <div className="footer-company">
-        <img src={Logo} alt="company-logo"/>
         <span>© {currentYear} FrontDesk</span>
         <div className="social-icons">
           <i className="fab fa-github" />
