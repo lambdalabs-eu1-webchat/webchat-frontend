@@ -63,7 +63,6 @@ TicketView.propTypes = {
 
 const StyledTicketView = styled.div`
   overflow-y: scroll;
-  height: 70vh;
 `;
 
 const StyledDiv = styled.div`

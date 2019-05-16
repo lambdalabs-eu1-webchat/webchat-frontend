@@ -74,8 +74,6 @@ Messages.propTypes = {
 };
 
 const StyledMessages = styled.div`
-  height: 60vh;
-  ${props => (props.status === CLOSED ? 'height: 80vh;' : null)}
   overflow-y: scroll;
 `;
 

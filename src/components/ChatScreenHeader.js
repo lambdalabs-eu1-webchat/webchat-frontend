@@ -22,6 +22,7 @@ const StyledChatScreenHeader = styled.div`
   padding: 0.3125rem;
   background-color: ${theme.color.footerText};
   height: 5vh;
+  min-height: 40px;
 `;
 
 export default ChatScreenHeader;
