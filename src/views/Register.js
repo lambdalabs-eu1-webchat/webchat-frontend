@@ -4,9 +4,10 @@ import { validate } from 'email-validator';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import theme from './../theme/styledTheme';
-
 import { connect } from 'react-redux';
+
 import { registerUser, loginRequest } from '../store/actions/auth.js';
+import { messages } from '../utils/messages';
 
 class Register extends React.Component {
   state = {
@@ -18,21 +19,7 @@ class Register extends React.Component {
       hotelName: '',
       hotelMotto: '',
     },
-    flashMessage: 'Please fill in all required fields',
-  };
-
-  clearInputs = () => {
-    this.setState({
-      newUser: {
-        name: '',
-        email: '',
-        password: '',
-        motto: '',
-        hotelName: '',
-        hotelMotto: '',
-      },
-      flashMessage: '',
-    });
+    flashMessage: messages.allRequiredFields,
   };
 
   handleInput = event => {
@@ -57,7 +44,7 @@ class Register extends React.Component {
       this.state.newUser.password,
     );
   };
-
+  
   handleRegister = async event => {
     event.preventDefault();
     try {
@@ -67,26 +54,24 @@ class Register extends React.Component {
         this.state.newUser.password &&
         this.state.newUser.hotelName
       ) {
-        if (this.state.newUser.password.length > 6) {
-          if (validate(this.state.newUser.email)) {
+        if (validate(this.state.newUser.email)) {
+          if (this.state.newUser.password.length > 6) {
             const res = await this.props.registerUser({
               ...this.state.newUser,
             });
-            if (res) {
-              // const token = res.token;
+            if (res.user) {
               this.handleLogin();
-              // this.clearInputs();
             } else {
-              this.setFlashMessage(
-                'Registration unsucessful, please try again',
-              );
+              this.setFlashMessage(res.message);
             }
           } else {
-            this.setFlashMessage('Please use a valid email address');
+            this.setFlashMessage(messages.passwordLength);
           }
         } else {
-          this.setFlashMessage('Passwords must be at least 7 characters');
+          this.setFlashMessage(messages.validEmail);
         }
+      } else {
+        this.setFlashMessage(messages.allRequiredFields);
       }
     } catch (error) {
       console.error(error);
@@ -146,7 +131,7 @@ class Register extends React.Component {
             />
             <p>
               {this.props.loading
-                ? 'Registration in progress'
+                ? messages.registrationInProgress
                 : this.state.flashMessage}
             </p>
             <button type="submit" onClick={this.handleRegister}>

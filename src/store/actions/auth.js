@@ -133,7 +133,7 @@ export const registerUser = ({
       return jsonResult;
     } else {
       dispatch({ type: REGISTER_USER_LOADING });
-      throw new Error(jsonResult.message);
+      return jsonResult;
     }
   } catch (error) {
     dispatch(registerUserFailure(error));
