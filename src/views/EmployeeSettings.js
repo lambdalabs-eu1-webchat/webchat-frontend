@@ -107,32 +107,33 @@ class EmployeeSettings extends React.Component {
 
   render() {
     return (
-      <EmployeeSettingsWrapper>
-        <h1>Employee Settings</h1>
-        <EmployeeSettingsForm
-          employee={this.props.employee}
-          employeeChanges={this.state.employeeChanges}
-          handleInputChange={this.handleInputChange}
-          fireUserUpdates={this.fireUserUpdates}
-          clearChanges={this.clearChanges}
-        />
-
-        {this.state.passwordsModalOpen && (
-          <Restricted
-            alert="Passwords must match"
-            isRestrictedModalOpen={this.state.passwordsModalOpen}
-            closeRestrictedModal={this.closeRestrictedModal}
+      <EmployeeSettingsOuter>
+        <EmployeeSettingsWrapper>
+          <EmployeeSettingsForm
+            employee={this.props.employee}
+            employeeChanges={this.state.employeeChanges}
+            handleInputChange={this.handleInputChange}
+            fireUserUpdates={this.fireUserUpdates}
+            clearChanges={this.clearChanges}
           />
-        )}
 
-        {this.state.nameEmailModalOpen && (
-          <Restricted
-            alert="Name and email cannot be blank"
-            isRestrictedModalOpen={this.state.nameEmailModalOpen}
-            closeRestrictedModal={this.closeRestrictedModal}
-          />
-        )}
-      </EmployeeSettingsWrapper>
+          {this.state.passwordsModalOpen && (
+            <Restricted
+              alert="Passwords must match"
+              isRestrictedModalOpen={this.state.passwordsModalOpen}
+              closeRestrictedModal={this.closeRestrictedModal}
+            />
+          )}
+
+          {this.state.nameEmailModalOpen && (
+            <Restricted
+              alert="Name and email cannot be blank"
+              isRestrictedModalOpen={this.state.nameEmailModalOpen}
+              closeRestrictedModal={this.closeRestrictedModal}
+            />
+          )}
+        </EmployeeSettingsWrapper>
+      </EmployeeSettingsOuter>
     );
   }
 }
