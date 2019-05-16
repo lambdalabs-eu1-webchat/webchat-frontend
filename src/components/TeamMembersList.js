@@ -7,21 +7,22 @@ const ListHeader = styled.div`
   justify-content: space-between;
   font-weight: bold;
   @media (max-width: 500px) {
-  display: none;
+    display: none;
   }
 `;
 
 const TeamMembersListWrapper = styled.div`
-    width: 880px;
-    margin: 0 auto;
-    height: 400px;
-    overflow: scroll;
-    @media (max-width: 500px) {
+  width: 880px;
+  margin: 0 auto;
+  height: 400px;
+  overflow-y: scroll;
+
+  @media (max-width: 500px) {
     max-width: 100%;
-    }
+  }
 `;
 
-const TeamMembersList = (props) => {
+const TeamMembersList = props => {
   const { deleteUser, changeUserType } = props;
   return (
     <TeamMembersListWrapper>
@@ -34,7 +35,8 @@ const TeamMembersList = (props) => {
       {props.users.map(user => (
         <TeamMember
           key={user._id}
-          name={user.name} email={user.email}
+          name={user.name}
+          email={user.email}
           currentUser={props.currentUser}
           user_type={user.user_type}
           userId={user._id}
@@ -43,7 +45,7 @@ const TeamMembersList = (props) => {
         />
       ))}
     </TeamMembersListWrapper>
-  )
+  );
 };
 
 export default TeamMembersList;
