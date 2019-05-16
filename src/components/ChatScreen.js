@@ -58,7 +58,7 @@ class ChatScreen extends React.Component {
     const lastTicket = chat.tickets[this.props.chat.tickets.length - 1];
 
     return (
-      <StyledChatScreen style={name}>
+      <StyledChatScreen>
         <ChatScreenHeader 
           guest_name={chat.guest.name}
           room_name={chat.room.name}
@@ -83,7 +83,7 @@ class ChatScreen extends React.Component {
         ) : null}
         {QUEUED === status ? (
           <React.Fragment>
-            <Button style={btn} onClick={this.joinChat}>Join Chat</Button>
+            <Button onClick={this.joinChat}>Join Chat</Button>
           </React.Fragment>
         ) : null}
       </StyledChatScreen>
@@ -126,21 +126,7 @@ function mapStateToProps(state) {
 }
 
 const StyledChatScreen = styled.div`
-color:#545959;
-font-size:14px;
-
 `;
-
-const btn = {
-  margin:'20px',
-  backgroundColor:'#4D9F60',
-}
-const name = {
-  backgroundColor:'#6876CB',
-  color:'#333',
-  margin:'20px',
-  };
-
 
 export default connect(
   mapStateToProps,

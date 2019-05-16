@@ -46,8 +46,8 @@ ChatsList.propTypes = {
 
 const divStyle = {
   border: '',
-  margin: '10px',
-  padding: '10px',
+  margin: '3rem',
+  padding: '2rem',
   
 };
 
