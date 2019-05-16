@@ -6,6 +6,7 @@ import ChatsList from '../components/chat/ChatsList';
 import Tabs from '../components/reusable/Tabs';
 import { QUEUED, ACTIVE, CLOSED } from '../utils/ticketStatus';
 import { fetchClosedChats } from '../store/actions/chat';
+import theme from '../theme/styledTheme'
 
 class Chat extends React.Component {
   state = {
@@ -31,8 +32,7 @@ class Chat extends React.Component {
     return (
       <StyledChat>
         <ChatListWrapper>
-          <h2>Welcome to the Chat page!</h2>
-          <Tabs
+          <Tabs 
             options={[QUEUED, ACTIVE, CLOSED]}
             selected={this.state.selectedTab}
             setSelected={this.setSelectedTab}
@@ -43,9 +43,9 @@ class Chat extends React.Component {
             status={this.state.selectedTab}
           />
         </ChatListWrapper>
-        <ChatScreenWrapper>
+        <ChatScreenWrapper >
           {this.props.currentChat ? (
-            <ChatScreen
+            <ChatScreen 
               status={this.props.status}
               chat={this.props.currentChat}
             />
@@ -58,16 +58,24 @@ class Chat extends React.Component {
 
 const StyledChat = styled.div`
   display: flex;
+  border:1px solid ${theme.color.accentGreen};
   justify-content: space-around;
   flex-direction: row;
+ 
+
+
 
   @media (max-width: 800px) {
     flex-direction: column;
   }
 `;
-
 const ChatListWrapper = styled.div`
   width: 50%;
+  background-color: ${theme.color.accentGreen};
+  align:center;
+  height: 70vh;
+  overflow: scroll;
+ 
 
   @media (max-width: 800px) {
     width: 100%;
@@ -76,7 +84,10 @@ const ChatListWrapper = styled.div`
 
 const ChatScreenWrapper = styled.div`
   width: 50%;
-
+  border:1px solid ${theme.color.accentGreen};
+  height: 70vh;
+  overflow-y: scroll;
+  
   @media (max-width: 800px) {
     width: 100%;
   }

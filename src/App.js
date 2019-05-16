@@ -20,8 +20,10 @@ import {
 import NavBar from './components/layout/navbar/NavBar';
 import Router from './components/Router';
 import Footer from './components/layout/Footer';
-import './App.css';
 import ChatsList from './components/chat/ChatsList';
+import './App.css';
+import styled from 'styled-components';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -117,11 +119,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <AppWrapper>
         <NavBar currentUser={this.props.currentUser} />
         <Router user_type={this.props.currentUser.user_type} />
         <Footer />
-      </div>
+      </AppWrapper>
     );
   }
 }
@@ -159,3 +161,10 @@ export default withRouter(
     },
   )(App),
 );
+
+const AppWrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;

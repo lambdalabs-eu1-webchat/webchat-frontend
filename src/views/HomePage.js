@@ -202,6 +202,12 @@ const HomePageContainer = styled.div`
     button {
       margin: 25px;
       padding: 10px 20px;
+      width: 20rem;
+      border-radius: 5px;
+      height: ${theme.button.height};
+      font-size: ${theme.fontSize.s};
+      border: none;
+      text-transform: uppercase;
       color: ${theme.color.white};
       background: ${theme.color.accentGreen};
       font-weight: bold;
@@ -210,6 +216,13 @@ const HomePageContainer = styled.div`
         box-shadow: ${theme.shadow.buttonHover};
         background: ${theme.color.accentPurple};
       }
+      @media(max-width: 600px) {
+      width: 87%;
+      margin: 2.5rem;
+      }
+    }
+    a {
+    align-self: center;
     }
   }
 
@@ -364,6 +377,11 @@ const HomePageContainer = styled.div`
         padding: 10px 20px;
         width: 95%;
         color: ${theme.color.white};
+        border: none;
+        background: ${theme.color.accentGreen};
+        text-transform: uppercase;
+        font-size: ${theme.fontSize.s};
+        border-radius: ${theme.border.radius};
         font-weight: bold;
         box-shadow: ${theme.shadow.buttonShadow};
         &:hover {

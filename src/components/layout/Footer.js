@@ -1,27 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import theme from '../../theme/styledTheme';
-import Logo from '../layout/navbar/logo2.svg';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <FooterWrapper className="hide-on-print">
       <div className="footer-company">
-        <img src={Logo} alt="company-logo" />
-        <span>© {currentYear} FrontDesk</span>
         <div className="social-icons">
           <i className="fab fa-github" />
           <i className="fab fa-linkedin-in" />
           <i className="far fa-envelope" />
         </div>
+        <span>© {currentYear} FrontDesk</span>
       </div>
       <nav className="footer-nav">
-        <Link>About</Link>
-        <Link>Help</Link>
-        <Link>Terms</Link>
-        <Link>Privacy</Link>
+        <button>About</button>
+        <button>Help</button>
+        <button>Terms</button>
+        <button>Privacy</button>
       </nav>
     </FooterWrapper>
   );
@@ -34,7 +31,7 @@ const FooterWrapper = styled.div`
   border-top: 4px solid ${theme.color.accentGreen};
   display: flex;
   color: ${theme.color.lightPurple};
-  padding: 2% 3%;
+  padding: 1.5rem 5rem;
   justify-content: space-between;
   align-items: center;
   @media (max-width: 1000px) {
@@ -48,17 +45,20 @@ const FooterWrapper = styled.div`
     width: 30%;
     display: flex;
     justify-content: space-between;
-    @media (max-width: 1000px) {
-      width: 85%;
+    @media(max-width: 1000px) {
+      width: 100%;
+
       justify-content: space-between;
       border-bottom: 1px solid ${theme.color.footerText};
       padding: 20px 0;
     }
-
-    a {
+    
+    button {
       font-size: ${theme.fontSize.xxs};
       color: ${theme.color.lightPurple};
       text-decoration: none;
+      background: none;
+      border:none;
       text-transform: uppercase;
       font-weight: bold;
       margin: 0;
@@ -73,14 +73,8 @@ const FooterWrapper = styled.div`
 
   .footer-company {
     display: flex;
+    @media (max-width: 1000px) {
     flex-direction: column;
-
-    img {
-      width: 60%;
-      @media (max-width: 1000px) {
-        padding-top: 20px;
-        margin: 0 auto;
-      }
     }
 
     span {
@@ -90,22 +84,27 @@ const FooterWrapper = styled.div`
       padding: 20px 0;
       @media (max-width: 1000px) {
         text-align: center;
+        padding: 0 1.5rem 0 0;
       }
     }
 
     .social-icons {
-      @media (max-width: 1000px) {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+      @media(max-width: 1000px) {
         text-align: center;
-        padding-bottom: 20px;
+        padding: 1.5rem;
+        margin: 0 auto;
       }
 
       .fab,
       .far {
         font-size: ${theme.fontSize.xs};
-        padding: 4%;
+        padding: 1rem;
         background: ${theme.color.accentPurple};
         border-radius: 50%;
-        margin-right: 7px;
+        margin-right: 1rem;
         &:hover {
           color: ${theme.color.accentGreen};
           transition: all 0.3s ease-in;
