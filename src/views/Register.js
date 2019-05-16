@@ -130,7 +130,7 @@ class Register extends React.Component {
               value={this.state.newUser.hotelMotto}
               onChange={this.handleInput}
             />
-            {this.props.loading ? (
+            {this.props.loading.register ? (
               <Spinner />
             ) : (
               <button type="submit" onClick={this.handleRegister}>
@@ -147,6 +147,7 @@ class Register extends React.Component {
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  loading: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
