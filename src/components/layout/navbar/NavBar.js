@@ -90,6 +90,9 @@ const StyledNav = styled.nav`
     color: ${theme.color.accentGreen};
   }
   .active {
-    color: white;
+    color: ${theme.color.white};
+  }
+  .brand-logo {
+    z-index: 5;
   }
 `;

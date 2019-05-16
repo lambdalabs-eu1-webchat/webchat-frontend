@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
-import theme from'../theme/styledTheme'
+import theme from '../theme/styledTheme';
 
 function Message({ message, guest_id }) {
   return (
@@ -33,7 +33,10 @@ const StyledMessage = styled.div`
   padding: 2rem;
 
 
-  ${props => (props.left ? `background:${theme.color.lightPurple};` : `background:${theme.color.footerText};`)}
+  ${props =>
+    props.left
+      ? `background:${theme.color.lightPurple};`
+      : `background:${theme.color.footerText};`}
   ${props => (props.left ? `text-align: left;` : 'text-align: right;')}
   ${props => (props.left ? `margin-right:auto;` : 'margin-left:auto;')}
   &:after {

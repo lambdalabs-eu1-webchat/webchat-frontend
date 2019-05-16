@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ADMIN, SUPER_ADMIN } from '../../../utils/userTypes';
 import styled from 'styled-components';
@@ -7,48 +7,61 @@ import theme from '../../../theme/styledTheme';
 import { APP_PATHS } from '../../../utils/paths';
 
 const LoggedIn = ({ userType }) => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  function toggleIsNavOpen() {
+    setIsNavOpen(!isNavOpen);
+  }
+  function closeNav() {
+    setIsNavOpen(false);
+  }
   return (
-  <MenuToggle id="menuToggle">
-    <input type="checkbox"/>
-    <span />
-    <span />
-    <span />
-    <ul className="menu">
-      <li>
-        {' '}
-        <NavLink to={APP_PATHS.CHAT}>Chat Dash</NavLink>
-      </li>
-      {userType === ADMIN ? (
+    <MenuToggle id="menuToggle">
+      <input onClick={toggleIsNavOpen} checked={isNavOpen} type="checkbox" />
+      <span />
+      <span />
+      <span />
+      <ul className="menu">
         <li>
-          <NavLink to={APP_PATHS.TEAM_MEMBERS}>Team Members</NavLink>
+          <NavLink onClick={closeNav} to={APP_PATHS.CHAT}>
+            Chat Dash
+          </NavLink>
         </li>
-      ) : null}
-      {userType === SUPER_ADMIN ? (
+        {userType === ADMIN ? (
+          <li>
+            <NavLink onClick={closeNav} to={APP_PATHS.TEAM_MEMBERS}>
+              Team Members
+            </NavLink>
+          </li>
+        ) : null}
+        {userType === SUPER_ADMIN ? (
+          <li>
+            <NavLink onClick={closeNav} to={APP_PATHS.COMPANY_DASH}>
+              Company Dash
+            </NavLink>
+          </li>
+        ) : null}
         <li>
-          <NavLink to={APP_PATHS.COMPANY_DASH}>Company Dash</NavLink>
+          <NavLink onClick={closeNav} to={APP_PATHS.CHECK_IN_OUT}>
+            Check In
+          </NavLink>
         </li>
-      ) : null}
-      <li>
-        {' '}
-        <NavLink to={APP_PATHS.CHECK_IN_OUT}>Check In</NavLink>
-      </li>
-      <li>
-        {' '}
-        <NavLink to={APP_PATHS.LOGOUT}>LogOut</NavLink>
-      </li>
-
-      {/* this will be linked to the Employee settings as an icon with their Initials or img */}
-      <li>
-        {' '}
-        <NavLink
-          to={APP_PATHS.ACCOUNT_SETTINGS}
-          className="btn btn-floating green lighten-1"
-        >
-          Account settings
-        </NavLink>
-      </li>
-    </ul>
-  </MenuToggle>
+        {/* this will be linked to the Employee settings as an icon with their Initials or img */}
+        <li>
+          <NavLink
+            onClick={closeNav}
+            to={APP_PATHS.ACCOUNT_SETTINGS}
+            className="btn btn-floating green lighten-1"
+          >
+            Account settings
+          </NavLink>
+        </li>
+        <li>
+          <NavLink onClick={closeNav} to={APP_PATHS.LOGOUT}>
+            LogOut
+          </NavLink>
+        </li>
+      </ul>
+    </MenuToggle>
   );
 };
 export default LoggedIn;
@@ -96,9 +109,8 @@ const MenuToggle = styled.div`
     border-radius: 2px;
     z-index: 1;
     transform-origin: 4px 0;
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-                opacity 0.55s ease;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+      background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
     &:first-child {
       transform-origin: 0 0;
     }
@@ -117,10 +129,14 @@ const MenuToggle = styled.div`
     list-style-type: none;
     transform-origin: 0 0;
     transform: translate(0, -100%);
-    transition: transform 0.8s cubic-bezier(0.77,0.2,0.05,1.0);
+    transition: transform 0.8s cubic-bezier(0.77, 0.2, 0.05, 1);
     @media (max-width: 600px) {
-      margin: -100px 0 50px -442px;
-      width: 500px;
+      position: fixed;
+      width: 100vw;
+      margin: 0;
+      top: 0;
+      left: 0;
+      padding-top: 50px;
       transform-origin: 0 0;
       transform: translate(0, -100%);
     }
