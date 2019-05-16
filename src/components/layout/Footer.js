@@ -5,7 +5,7 @@ import theme from '../../theme/styledTheme';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <FooterWrapper>
+    <FooterWrapper className="hide-on-print">
       <div className="footer-company">
         <div className="social-icons">
           <i className="fab fa-github" />
@@ -20,9 +20,8 @@ const Footer = () => {
         <button>Terms</button>
         <button>Privacy</button>
       </nav>
-
     </FooterWrapper>
-  )
+  );
 };
 
 export default Footer;
@@ -39,7 +38,7 @@ const FooterWrapper = styled.div`
     flex-direction: column-reverse;
     padding-top: 0;
   }
-  
+
   nav {
     background: none;
     padding: 0;
@@ -48,6 +47,7 @@ const FooterWrapper = styled.div`
     justify-content: space-between;
     @media(max-width: 1000px) {
       width: 100%;
+
       justify-content: space-between;
       border-bottom: 1px solid ${theme.color.footerText};
       padding: 20px 0;
@@ -70,24 +70,24 @@ const FooterWrapper = styled.div`
       }
     }
   }
-  
+
   .footer-company {
     display: flex;
     @media (max-width: 1000px) {
     flex-direction: column;
     }
 
-     span {
+    span {
       color: ${theme.color.footerText};
       font-size: ${theme.fontSize.xxs};
       font-weight: bold;
       padding: 20px 0;
-      @media(max-width: 1000px) {
+      @media (max-width: 1000px) {
         text-align: center;
         padding: 0 1.5rem 0 0;
       }
     }
-    
+
     .social-icons {
       display: flex;
       align-items: center;
@@ -97,8 +97,9 @@ const FooterWrapper = styled.div`
         padding: 1.5rem;
         margin: 0 auto;
       }
-      
-      .fab, .far {
+
+      .fab,
+      .far {
         font-size: ${theme.fontSize.xs};
         padding: 1rem;
         background: ${theme.color.accentPurple};
