@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import theme from './../theme/styledTheme';
-import { loginRequest } from '../store/actions/auth';
 
+import { messages } from '../utils/messages';
+import { loginRequest } from '../store/actions/auth';
 import { APP_PATHS } from '../utils/paths';
 
 class Login extends React.Component {
@@ -39,7 +40,7 @@ class Login extends React.Component {
         this.setFlashMessage(res.message);
       }
     } else {
-      this.setFlashMessage('Please fill in all required fields');
+      this.setFlashMessage(messages.allRequiredFields);
     }
   };
 
