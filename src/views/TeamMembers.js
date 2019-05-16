@@ -12,6 +12,8 @@ import { fetchSingleHotel } from '../store/actions/hotel';
 
 import TeamMembersList from '../components/TeamMembersList';
 import TeamMembersAddNewMemberModal from '../components/TeamMembersAddNewMemberModal';
+import styled from 'styled-components';
+import theme from './../theme/styledTheme';
 
 class TeamMembers extends React.Component {
   constructor(props) {
@@ -45,24 +47,26 @@ class TeamMembers extends React.Component {
       dispatchDeleteUser,
     } = this.props;
     return (
-      <div className='team-members'>
-        <h2>Team Members Page</h2>
-        <h3>Update and Assign Team Members</h3>
-        <TeamMembersList
-          users={users}
-          currentUser={currentUser}
-          changeUserType={dispatchChangeUserType}
-          deleteUser={dispatchDeleteUser}
-        />
-        <TeamMembersAddNewMemberModal
-          createUser={dispatchCreateUser}
-          handleHideModal={this.handleHideModal}
-          modalShown={this.state.modalShown}
-          plan={this.props.hotel.plan}
-          staffAmount={users.length}
-        />
-        <button onClick={this.handleShowModal}>Add Team Members</button>
-      </div>
+        <TeamMembersOuterWrapper>
+          <h2>Team Members</h2>
+        <TeamMembersWrapper>
+          <h3>Update and Assign Team Members</h3>
+          <TeamMembersList
+            users={users}
+            currentUser={currentUser}
+            changeUserType={dispatchChangeUserType}
+            deleteUser={dispatchDeleteUser}
+          />
+          <TeamMembersAddNewMemberModal
+            createUser={dispatchCreateUser}
+            handleHideModal={this.handleHideModal}
+            modalShown={this.state.modalShown}
+            plan={this.props.hotel.plan}
+            staffAmount={users.length}
+          />
+          <button onClick={this.handleShowModal}>Add Team Members</button>
+        </TeamMembersWrapper>
+      </TeamMembersOuterWrapper>
     );
   }
 }
@@ -94,3 +98,58 @@ export default connect(
     dispatchFetchSingleHotel: fetchSingleHotel,
   },
 )(TeamMembers);
+
+const TeamMembersOuterWrapper = styled.div`
+  margin: 0 3rem;
+  @media(max-width: 800px) {
+    margin: 0 auto;
+  }
+  h2 {
+    font-size: ${theme.fontSize.l};
+    padding: 1.5rem 0;
+  }
+`;
+
+const TeamMembersWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 5rem 0;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    max-width: 100%;
+  }
+  
+  h3 {
+    font-size: ${theme.fontSize.xs};
+    color: ${theme.color.accentPurple};
+    padding: 1.5rem 0;
+  }
+  
+  button {
+    width: 17rem;
+    height: ${theme.button.smallButton};
+    font-size: ${theme.fontSize.xxs};
+    border-radius: ${theme.border.radius};
+    background:${theme.color.accentGreen};
+    border: none;
+    text-transform: ${theme.textTransform.uppercase};
+    color: ${theme.color.white};
+    font-weight: ${theme.fontWeight.bold};
+    margin: 15px 0;
+    box-shadow: ${theme.shadow.buttonShadow};
+    &:hover {
+      box-shadow: ${theme.shadow.buttonHover};
+      cursor: pointer;
+    }
+    &:focus {
+      outline: none;
+    }
+    @media (max-width: 800px) {
+    width: 100%;
+      height: ${theme.button.height};
+      font-size: ${theme.fontSize.xs};
+      margin: 1.5rem 0;
+    }
+  }
+`;
