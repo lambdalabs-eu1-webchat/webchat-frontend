@@ -111,18 +111,19 @@ class CheckOutForm extends React.Component {
           onChange={event => this.setEmailInput(event.target.value)}
           margin="normal"
         />
-
-        {this.state.isCheckingOut ? (
-          <CircularProgress />
-        ) : (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.checkOutGuest}
-          >
-            Check Out
-          </Button>
-        )}
+        <div className="button-container">
+          {this.state.isCheckingOut ? (
+            <CircularProgress />
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.checkOutGuest}
+            >
+              Check Out
+            </Button>
+          )}
+        </div>
 
         {this.state.emailModalOpen && (
           <Restricted
@@ -152,13 +153,20 @@ const CheckOutFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   button {
-    margin-top: 10%;
+    width: 100%;
   }
   .error {
     background: red;
   }
   button {
     margin-bottom: 5%;
+  }
+  .button-container {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
