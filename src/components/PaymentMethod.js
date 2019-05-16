@@ -6,9 +6,7 @@ import CardDetails from './CardDetails';
 import PlanCheckout from './PlanCheckout';
 import EditPaymentMethodModal from './EditPaymentMethodModal';
 
-const PaymentMethodWrapper = styled.div`
-  padding-top: 10%;
-`;
+const PaymentMethodWrapper = styled.div``;
 
 const PaymentMethod = ({
   payment,

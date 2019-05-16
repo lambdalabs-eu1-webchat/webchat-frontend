@@ -18,7 +18,6 @@ import Restricted from '../components/reusable/RestrictedModal';
 import theme from '../theme/styledTheme';
 
 const BillingWrapper = styled.div`
-  /* padding: 10% 25%; */
   h1 {
     font-size: ${theme.fontSize.xl};
     padding: 25px;
