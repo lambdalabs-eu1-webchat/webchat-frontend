@@ -16,6 +16,8 @@ const PaymentMethod = ({
   editPaymentMethodModal,
   handleModalSwitch,
   fireUpdateCustomerMethod,
+
+  closeEditPaymentModal,
 }) => {
   if (payment) {
     return (
@@ -32,6 +34,7 @@ const PaymentMethod = ({
           editPaymentMethodModal={editPaymentMethodModal}
           handleModalSwitch={handleModalSwitch}
           fireUpdateCustomerMethod={fireUpdateCustomerMethod}
+          closeEditPaymentModal={closeEditPaymentModal}
         />
       </PaymentMethodWrapper>
     );

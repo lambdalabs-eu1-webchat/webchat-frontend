@@ -75,7 +75,7 @@ class Billing extends React.Component {
     });
   };
 
-  closeModal = () => {
+  closeEditPaymentModal = () => {
     this.setState({
       editPaymentMethodModal: false,
     });
@@ -121,7 +121,7 @@ class Billing extends React.Component {
       this.props.hotel._id,
       enhancedStripeToken
     );
-    this.closeModal();
+    this.closeEditPaymentModal();
   };
 
   render() {
@@ -136,6 +136,7 @@ class Billing extends React.Component {
           editPaymentMethodModal={this.state.editPaymentMethodModal}
           handleModalSwitch={this.handleModalSwitch}
           fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
+          closeEditPaymentModal={this.closeEditPaymentModal}
         />
         <PlanCards
           hotel={this.props.hotel}
