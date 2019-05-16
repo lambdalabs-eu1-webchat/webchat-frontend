@@ -26,8 +26,6 @@ class TranslateModal extends React.Component {
           {this.props.translations.map((message, idx) => (
             <Msg key={idx}> - {message.translatedText}</Msg>
           ))}
-
-          <Btn onClick={this.props.closeTranslateModal}>Close</Btn>
         </ModalWrapper>
       </Modal>
     );
@@ -45,12 +43,6 @@ const Msg = styled.div`
   text-align: left;
   color: ${theme.color.textColor};
   margin-bottom: 1rem;
-`;
-
-const Btn = styled.button`
-  align-self: end;
-  width: 100px;
-  color: ${theme.color.white};
 `;
 
 export default TranslateModal;
