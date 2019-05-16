@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import Confirm from './reusable/ConfirmModal';
+import Spinner from '../components/reusable/Spinner';
 
 const CompanySettingsRoom = ({
   room,
@@ -7,6 +9,7 @@ const CompanySettingsRoom = ({
   currentUser,
   deleteRoomForHotel,
   updateRoomForHotel,
+  loading,
 }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
@@ -28,8 +31,16 @@ const CompanySettingsRoom = ({
         value={inputValue}
         onChange={event => setInputValue(event.target.value)}
       />
-      <i className="far fa-edit" onClick={handleUpdateClick} />
-      <i className="fas fa-trash-alt" onClick={handleDeleteClick} />
+      {loading.updateRoom ? (
+        <Spinner />
+      ) : (
+        <i className="far fa-edit" onClick={handleUpdateClick} />
+      )}
+      {loading.deleteRoom ? (
+        <Spinner />
+      ) : (
+        <i className="fas fa-trash-alt" onClick={handleDeleteClick} />
+      )}
       {
         <React.Fragment>
           <Confirm

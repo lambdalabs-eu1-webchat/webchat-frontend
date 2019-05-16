@@ -11,6 +11,7 @@ import {
 } from '../store/actions/rooms';
 
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
+import Spinner from '../components/reusable/Spinner';
 
 const CompanySettingsWrapper = styled.div`
   display: flex;
@@ -109,8 +110,7 @@ class CompanySettings extends React.Component {
       return alert('Please add at least one room name');
     } else {
       // split the string into an array of room names on the comma separator
-      // trim all whitespace at the start and end of each string
-      // create a new array of objects with each room name set to the name key
+      // trim whitespace at the start and end of each string
       const roomsToAdd = rooms.split(',').map(room => ({ name: room.trim() }));
       this.props.dispatchCreateRoomForHotel(roomsToAdd, this.props.hotel._id);
       this.clearNewRooms();
@@ -157,7 +157,7 @@ class CompanySettings extends React.Component {
                     dispatchUpdateHotel,
                   ).bind(this)}
                 >
-                  Save
+                  {this.props.loading.updateHotel ? <Spinner /> : 'Save'}
                 </button>
               </div>
             </form>
@@ -173,6 +173,7 @@ class CompanySettings extends React.Component {
             deleteRoomForHotel={dispatchDeleteRoomForHotel}
             updateRoomForHotel={dispatchUpdateRoomForHotel}
             addRooms={this.addRooms}
+            loading={this.props.loading}
           />
         </CompanySettingsWrapper>
       </div>
@@ -183,6 +184,7 @@ class CompanySettings extends React.Component {
 CompanySettings.propTypes = {
   hotel: PropTypes.object.isRequired,
   rooms: PropTypes.array.isRequired,
+  loading: PropTypes.object.isRequired,
   dispatchFetchSingleHotel: PropTypes.func.isRequired,
   dispatchUpdateHotel: PropTypes.func.isRequired,
   dispatchFetchRoomsForHotel: PropTypes.func.isRequired,
@@ -196,6 +198,7 @@ const mapStateToProps = state => {
     hotel: state.hotel,
     rooms: state.rooms.rooms,
     currentUser: state.currentUser,
+    loading: state.loading,
   };
 };
 

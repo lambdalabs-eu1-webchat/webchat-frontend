@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import CompanySettingsRoom from './CompanySettingsRoom';
+import Spinner from '../components/reusable/Spinner';
 
 const AddRooms = styled.section`
   display: flex;
@@ -23,6 +25,7 @@ const CompanySettingsRoomsList = props => {
     handleInputChange,
     handleRoomInputChange,
     addRooms,
+    loading,
   } = props;
   return (
     <div className="company-rooms-list">
@@ -34,8 +37,10 @@ const CompanySettingsRoomsList = props => {
           value={newRooms}
           onChange={handleInputChange}
         />
-        <button type="submit" onClick={addRooms}>
-          ADD ROOMS
+        <button type="submit" onClick={addRooms}>{
+          loading.createRoom ? <Spinner /> :
+          'Add Rooms'
+        }
         </button>
       </AddRooms>
       <section className="rooms-list">
@@ -52,6 +57,7 @@ const CompanySettingsRoomsList = props => {
               updateRoomForHotel={updateRoomForHotel}
               deleteRoomForHotel={deleteRoomForHotel}
               handleRoomInputChange={handleRoomInputChange}
+              loading={loading}
             />
           ))}
       </section>
