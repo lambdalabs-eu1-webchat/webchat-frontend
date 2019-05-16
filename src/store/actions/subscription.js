@@ -150,7 +150,7 @@ export const updateCustomerMethod = (
   try {
     const result = await fetch(`${DOMAIN}${METHOD}/${hotelId}`, config);
     const jsonResult = await result.json();
-    dispatch({ type: SUBSCRIPTIONS.UPCATE_CUSTOMER_METHOD_FINISHED });
+    dispatch({ type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_FINISHED });
     if (result.ok) {
       dispatch(updateCustomerMethodSuccess(jsonResult));
     } else {
