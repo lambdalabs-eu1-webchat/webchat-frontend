@@ -57,7 +57,8 @@ EditPaymentMethodModal.propTypes = {
 const StyledBtn = styled.button`
   border: none;
   outline: none;
-  float: right;
+  position: absolute;
+  right: 5px;
 
   .fa-times-circle {
     background: white;
