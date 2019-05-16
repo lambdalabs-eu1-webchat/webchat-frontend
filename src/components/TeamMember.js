@@ -71,7 +71,6 @@ const TeamMember = ({
       setConfirmDeleteOpen(true);
     };
   };
-  console.log(isConfirmDeleteOpen);
   return (
     <HotelStaffWrapper>
       <p>{name}</p>
