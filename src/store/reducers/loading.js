@@ -7,6 +7,7 @@ import {
   UPDATE_HOTEL_FINISHED,
   FETCH_SINGLE_HOTEL_STARTED,
   FETCH_SINGLE_HOTEL_FINISHED,
+  ROOMS,
 } from '../actions/actionTypes';
 
 const loading = (state = false, action) => {
@@ -27,6 +28,22 @@ const loading = (state = false, action) => {
       return true;
     case FETCH_SINGLE_HOTEL_FINISHED:
       return false;
+    case ROOMS.FETCH_ROOMS_FOR_HOTEL_STARTED:
+      return true;
+    case ROOMS.FETCH_ROOMS_FOR_HOTEL_FINISHED:
+      return false;
+    case ROOMS.UPDATE_ROOM_FOR_HOTEL_STARTED:
+      return true;
+    case ROOMS.UPDATE_ROOM_FOR_HOTEL_FINISHED:
+      return false;
+    case ROOMS.DELETE_ROOM_FOR_HOTEL_STARTED:
+      return true;
+    case ROOMS.DELETE_ROOM_FOR_HOTEL_FINISHED:
+      return false;
+    case ROOMS.CREATE_ROOM_FOR_HOTEL_STARTED:
+      return true;
+    case ROOMS.CREATE_ROOM_FOR_HOTEL_FINISHED:
+    return false;
     default:
       return state;
   }
