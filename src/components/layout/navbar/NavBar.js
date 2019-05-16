@@ -10,7 +10,7 @@ import theme from '../../../theme/styledTheme';
 
 const NavBar = props => {
   return (
-    <StyledNav className="nav-wrapper navy darken-2">
+    <StyledNav className="nav-wrapper navy darken-2 hide-on-print">
       <div className="container">
         <NavLink to="/" className="brand-logo">
           <header className="App-header">

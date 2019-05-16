@@ -1,36 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
-import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import QRCode from 'qrcode.react';
+import axios from 'axios';
 
 import { DOMAIN, USERS, HOTEL, GUEST_CLIENT_DOMAIN } from '../utils/paths';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class CheckInForm extends React.Component {
   state = {
     nameInput: '',
     loginCode: '',
     currentRoom: null,
-    availableRooms: [],
-    selectValue: '',
+    selectValue: 'DEFAULT',
     errorRoom: false,
     errorName: false,
     guestToken: '',
+    isCheckingIn: false,
   };
-  componentDidMount() {
-    axios
-      .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/rooms/available`)
-      .then(res => {
-        this.setState({ availableRooms: res.data });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+
   setNameInput = nameInput => {
     this.setState({ nameInput, errorName: false });
   };
@@ -40,9 +32,11 @@ class CheckInForm extends React.Component {
 
   checkInGuest = async () => {
     const room_id = this.state.selectValue;
-    const room = this.state.availableRooms.find(room => room._id === room_id);
+    const room = this.props.availableRooms.find(room => room._id === room_id);
     const name = this.state.nameInput;
     if (name && room) {
+      // turn on spinner
+      this.setState({ isCheckingIn: true });
       try {
         const res = await axios.post(`${DOMAIN}${USERS}`, {
           hotel_id: this.props.hotel_id,
@@ -54,20 +48,18 @@ class CheckInForm extends React.Component {
           },
         });
         const data = jwt.decode(res.data.token);
-
-        this.setState(cState => {
-          const availableRooms = cState.availableRooms.filter(
-            room => room._id !== room_id
-          );
-          return {
-            loginCode: data.passcode,
-            availableRooms,
-            selectValue: '',
-            nameInput: '',
-            guestToken: res.data.token,
-          };
+        this.props.filterAvailableRoom(room_id);
+        this.props.addCurrentGuest(res.data.user);
+        this.setState({
+          loginCode: data.passcode,
+          selectValue: 'DEFAULT',
+          nameInput: '',
+          guestToken: res.data.token,
+          isCheckingIn: false,
         });
       } catch (error) {
+        this.setState({ isCheckingIn: false });
+
         console.error(error);
       }
     }
@@ -83,15 +75,18 @@ class CheckInForm extends React.Component {
     return (
       <CheckInFormWrapper>
         <Select
+          native={true}
           displayEmpty={true}
-          className={this.state.errorRoom ? 'error' : ''}
+          className={
+            this.state.errorRoom ? 'error hide-on-print' : 'hide-on-print'
+          }
           value={this.state.selectValue}
           onChange={this.setSelectValue}
         >
-          <option className="error" value="" disabled>
+          <option className="error hide-on-print" value="DEFAULT" disabled>
             Select a Room
           </option>
-          {this.state.availableRooms.map(room => (
+          {this.props.availableRooms.map(room => (
             <option key={room._id} value={room._id}>
               Room: {room.name}
             </option>
@@ -99,14 +94,26 @@ class CheckInForm extends React.Component {
         </Select>
         <TextField
           placeholder="Name"
-          className={this.state.errorName ? 'error' : ''}
+          className={
+            this.state.errorName ? 'error hide-on-print' : 'hide-on-print'
+          }
           onChange={event => this.setNameInput(event.target.value)}
           value={this.state.nameInput}
           margin="normal"
         />
-        <Button variant="contained" color="primary" onClick={this.checkInGuest}>
-          Check In
-        </Button>
+        {this.state.isCheckingIn ? (
+          <CircularProgress />
+        ) : (
+          <Button
+            className="hide-on-print"
+            variant="contained"
+            color="primary"
+            onClick={this.checkInGuest}
+          >
+            Check In
+          </Button>
+        )}
+        <p className="show-on-print">https://webchatlabs-guest.netlify.com</p>
         <div className="passcode">
           <h4>Login Code</h4>
           <p>{this.state.loginCode}</p>

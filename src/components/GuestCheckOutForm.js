@@ -5,6 +5,7 @@ import axios from 'axios';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { validate } from 'email-validator';
 
 import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
@@ -13,25 +14,13 @@ import Restricted from './reusable/RestrictedModal';
 class CheckOutForm extends React.Component {
   state = {
     emailInput: '',
-    currentGuests: [],
     selectedGuest: null,
-    selectValue: '',
+    selectValue: 'DEFAULT',
     errorRoom: false,
+    isCheckingOut: false,
     emailModalOpen: false,
     noChatModalOpen: false,
   };
-
-  componentDidMount() {
-    // get the hotels current guests
-    axios
-      .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/guests?status=here`)
-      .then(res => {
-        this.setState({ currentGuests: res.data });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
 
   setSelectValue = event => {
     this.setState({ selectValue: event.target.value, errorRoom: false });
@@ -79,24 +68,28 @@ class CheckOutForm extends React.Component {
   checkOutGuest = async () => {
     const guestEmail = this.state.emailInput;
     const guest_id = this.state.selectValue;
+    const guest = this.props.currentGuests.find(
+      guest => guest._id === guest_id,
+    );
+    const room = { name: guest.room.name, _id: guest.room.id };
     if (guestEmail) {
       await this.sendGuestEmail();
     }
     if (guest_id && !this.state.emailInput) {
+      this.setState({ isCheckingOut: true });
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
         if (didDel) {
-          this.setState(cState => {
-            const newCurrentGuests = cState.currentGuests.filter(
-              guest => guest_id !== guest._id
-            );
-            return {
-              currentGuests: newCurrentGuests,
-              selectValue: '',
-            };
+          this.props.filterCurrentGuests(guest_id);
+          this.props.addAvailableRoom(room);
+          this.setState({
+            selectValue: 'DEFAULT',
+            isCheckingOut: false,
           });
         }
       } catch (error) {
+        this.setState({ isCheckingOut: false });
+
         console.error(error);
       }
     }
@@ -109,15 +102,16 @@ class CheckOutForm extends React.Component {
     return (
       <CheckOutFormWrapper>
         <Select
+          native={true}
           displayEmpty={true}
           className={this.state.errorRoom ? 'error' : ''}
           onChange={this.setSelectValue}
           value={this.state.selectValue}
         >
-          <option value="" disabled>
+          <option value="DEFAULT" disabled>
             Select a Guest
           </option>
-          {this.state.currentGuests.map(guest => (
+          {this.props.currentGuests.map(guest => (
             <option key={guest._id} value={guest._id}>
               Room: {guest.room.name} Guest: {guest.name}
             </option>
@@ -129,13 +123,18 @@ class CheckOutForm extends React.Component {
           onChange={event => this.setEmailInput(event.target.value)}
           margin="normal"
         />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.checkOutGuest}
-        >
-          Check Out
-        </Button>
+
+        {this.state.isCheckingOut ? (
+          <CircularProgress />
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.checkOutGuest}
+          >
+            Check Out
+          </Button>
+        )}
 
         {this.state.emailModalOpen && (
           <Restricted
