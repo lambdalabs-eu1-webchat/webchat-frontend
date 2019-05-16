@@ -85,6 +85,7 @@ class Login extends React.Component {
 Login.propTypes = {
   loginRequest: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  numberRooms: PropTypes.number.isRequired,
 };
 
 function mapStateToProps(state) {
