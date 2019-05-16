@@ -31,7 +31,7 @@ class Chat extends React.Component {
     }
     return (
       <StyledChat>
-        <ChatListWrapper >
+        <ChatListWrapper>
           <Tabs 
             options={[QUEUED, ACTIVE, CLOSED]}
             selected={this.state.selectedTab}
@@ -74,7 +74,7 @@ const ChatListWrapper = styled.div`
   background-color: ${theme.color.accentGreen};
   align:center;
   height: 70vh;
-  overflow-y: scroll;
+  overflow: scroll;
  
 
   @media (max-width: 800px) {
