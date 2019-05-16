@@ -15,10 +15,10 @@ const Footer = () => {
         <span>© {currentYear} FrontDesk</span>
       </div>
       <nav className="footer-nav">
-        <Link>About</Link>
-        <Link>Help</Link>
-        <Link>Terms</Link>
-        <Link>Privacy</Link>
+        <button>About</button>
+        <button>Help</button>
+        <button>Terms</button>
+        <button>Privacy</button>
       </nav>
 
     </FooterWrapper>
@@ -53,10 +53,12 @@ const FooterWrapper = styled.div`
       padding: 20px 0;
     }
     
-    a {
+    button {
       font-size: ${theme.fontSize.xxs};
       color: ${theme.color.lightPurple};
       text-decoration: none;
+      background: none;
+      border:none;
       text-transform: uppercase;
       font-weight: bold;
       margin: 0;
