@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import theme from '../theme/styledTheme'
 
 function ChatScreenHeader({ guest_name, room_name }) {
   return (
@@ -18,11 +19,12 @@ ChatScreenHeader.propTypes = {
 };
 
 const StyledChatScreenHeader = styled.div`
-border:2px solid #c7ccec;
-margin-Top:10px;
-margin-Bottom:10px;
-padding:5px;
-background-color:#c7ccec;
+margin: 2rem;
+border:2px solid ${theme.color.footerText};
+margin-Top:0.625rem;
+margin-Bottom:0.625rem;
+padding:0.3125rem;
+background-color:${theme.color.footerText};
 
 `;
 
