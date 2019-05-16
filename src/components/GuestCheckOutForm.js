@@ -17,6 +17,8 @@ class CheckOutForm extends React.Component {
     selectValue: 'DEFAULT',
     errorRoom: false,
     isCheckingOut: false,
+    emailModalOpen: false,
+    noChatModalOpen: false,
   };
 
   setSelectValue = event => {
@@ -119,6 +121,22 @@ class CheckOutForm extends React.Component {
           >
             Check Out
           </Button>
+        )}
+
+        {this.state.emailModalOpen && (
+          <Restricted
+            alert="Please provide a valid email address"
+            isRestrictedModalOpen={this.state.emailModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
+          />
+        )}
+
+        {this.state.noChatModalOpen && (
+          <Restricted
+            alert="This guest had no chats during their stay, please remove their email"
+            isRestrictedModalOpen={this.state.noChatModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
+          />
         )}
       </CheckOutFormWrapper>
     );
