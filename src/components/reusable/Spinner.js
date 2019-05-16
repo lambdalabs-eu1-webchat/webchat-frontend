@@ -18,12 +18,12 @@ const Spinner = () => (
 
 const StyledSpinner = styled.svg`
   animation: rotate 1s linear infinite;
-  width: ${theme.spinner.diameter};
-  height: ${theme.spinner.diameter};
+  width: ${pr =>  pr.diameter ? pr.diameter : theme.spinner.diameter};
+  height: ${pr  => pr.diameter ? pr.diameter : theme.spinner.diameter};
   margin: auto;
 
   & .path {
-    stroke: ${theme.color.accentPurple};
+    stroke: ${pr => pr.color ? pr.color : theme.color.accentPurple};
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }
