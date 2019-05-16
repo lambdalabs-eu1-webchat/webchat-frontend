@@ -33,7 +33,7 @@ const PlanCard = ({ plan, current, fireSwitchCustomerPlan, loading }) => {
         >
           {plan.buttonText}
         </Button>
-      ) : current  && loading.switchPlan ? (
+      ) : current && loading.switchPlan ? (
         <Spinner />
       ) : (
         <></>

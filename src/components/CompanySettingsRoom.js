@@ -70,7 +70,7 @@ export default CompanySettingsRoom;
 const RoomWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  
+
   .fa-edit {
     color: ${theme.color.accentPurple};
   }

@@ -27,10 +27,8 @@ const CompanySettingsRoomsList = props => {
           value={newRooms}
           onChange={handleInputChange}
         />
-        <button type="submit" onClick={addRooms}>{
-          loading.createRoom ? <Spinner /> :
-          'Add Rooms'
-        }
+        <button type="submit" onClick={addRooms}>
+          {loading.createRoom ? <Spinner /> : 'Add Rooms'}
         </button>
       </AddRooms>
       <section className="rooms-list">
@@ -62,22 +60,22 @@ const CompanySettingsRoomsListWrapper = styled.div`
   flex-direction: column;
   width: 40%;
   @media (max-width: 800px) {
-    width:100%;
+    width: 100%;
   }
-  
+
   h3 {
     font-size: ${theme.fontSize.xs};
     color: ${theme.color.accentPurple};
     padding: 1.5rem 0;
   }
-      
+
   .rooms-list {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding-top: 0;
   }
-  
+
   input {
     border: none;
     border-bottom: 1px solid ${theme.color.footerText};
@@ -100,7 +98,7 @@ const AddRooms = styled.section`
     max-width: 100%;
     flex-direction: column;
   }
-  
+
   input {
     border: none;
     border-bottom: 1px solid ${theme.color.footerText};
@@ -114,13 +112,13 @@ const AddRooms = styled.section`
       outline: none;
     }
   }
-  
+
   button {
     width: 15rem;
     height: ${theme.button.smallButton};
     font-size: ${theme.fontSize.xxs};
     border-radius: ${theme.border.radius};
-    background:${theme.color.accentGreen};
+    background: ${theme.color.accentGreen};
     border: none;
     text-transform: ${theme.textTransform.uppercase};
     color: ${theme.color.white};

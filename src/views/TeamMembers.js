@@ -45,7 +45,7 @@ class TeamMembers extends React.Component {
       dispatchDeleteUser,
     } = this.props;
     return (
-      <div className='team-members'>
+      <div className="team-members">
         <h2>Team Members Page</h2>
         <h3>Update and Assign Team Members</h3>
         <TeamMembersList

@@ -29,11 +29,11 @@ function EditPaymentMethodModal({
 }) {
   return (
     // move this test key into dotenv
-    <StripeProvider apiKey='pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF'>
+    <StripeProvider apiKey="pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF">
       <EditPaymentMethodModalWrapper
         modalstatus={editPaymentMethodModal ? 'block' : 'none'}
       >
-        <Button variant='contained' color='primary' onClick={handleModalSwitch}>
+        <Button variant="contained" color="primary" onClick={handleModalSwitch}>
           x
         </Button>
         <Elements>

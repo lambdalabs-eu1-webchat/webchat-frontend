@@ -206,7 +206,7 @@ export default connect(
 
 const CompanySettingsOuterWrapper = styled.div`
   margin: 0 3rem;
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     margin: 0 auto;
   }
   h2 {
@@ -224,23 +224,23 @@ const CompanySettingsWrapper = styled.div`
     flex-direction: column;
     max-width: 100%;
   }
-  
+
   .company-details {
     width: 30%;
     @media (max-width: 800px) {
-    width:100%;
+      width: 100%;
     }
-    
+
     h3 {
       font-size: ${theme.fontSize.xs};
       color: ${theme.color.accentPurple};
       padding: 1.5rem 0;
     }
-    
+
     form {
       display: flex;
       flex-direction: column;
-      
+
       input {
         border: none;
         border-bottom: 1px solid ${theme.color.footerText};
@@ -258,7 +258,7 @@ const CompanySettingsWrapper = styled.div`
         height: ${theme.button.smallButton};
         font-size: ${theme.fontSize.xxs};
         border-radius: ${theme.border.radius};
-        background:${theme.color.accentGreen};
+        background: ${theme.color.accentGreen};
         border: none;
         text-transform: ${theme.textTransform.uppercase};
         color: ${theme.color.white};
