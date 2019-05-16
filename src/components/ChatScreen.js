@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import theme from '../theme/styledTheme'
 
 import Messages from './Messages';
 import ChatScreenHeader from './ChatScreenHeader';
@@ -126,27 +127,19 @@ function mapStateToProps(state) {
 }
 
 const StyledChatScreen = styled.div`
-font-size:0.875rem;
+font-size:${theme.fontSize.xxxs};
 `;
 
 const StyledJoinButton = styled.button`
    margin: 2rem;
    border-radius: 0.5rem;
-   background-color:#0CD4AF;
-   color:white;
-   font-weight:bold;
+   background-color:${theme.color.accentGreen};
+   color:${theme.color.white};
+   font-weight:${theme.fontWeight.bolder};;
    width:95%;
    align-item:center;
    padding:1.5rem;
 `;
-// const name = {
-//   // backgroundColor:'#6876CB',
-//   color:'#333',
-//   margin:'20px',
-  
-  // };
-
-
 export default connect(
   mapStateToProps,
   { setCurrentChatId, updateTicketLanguage }

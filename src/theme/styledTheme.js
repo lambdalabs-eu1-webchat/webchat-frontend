@@ -48,6 +48,7 @@ const theme = {
 
   fontWeight: {
     bold: 'bold',
+    bolder:'bolder',
   },
 
   border: {
