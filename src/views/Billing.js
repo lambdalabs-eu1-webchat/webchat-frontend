@@ -14,6 +14,7 @@ import {
 import { planIds } from '../utils/plans';
 import PlanCards from '../components/PlanCards';
 import PaymentMethod from '../components/PaymentMethod';
+import Restricted from '../components/reusable/RestrictedModal';
 
 const BillingWrapper = styled.div`
   padding: 10% 25%;
@@ -23,12 +24,27 @@ class Billing extends React.Component {
   state = {
     billingEmail: '',
     editPaymentMethodModal: false,
+    isPaymentPlanModalOpen: false,
+    isHasManyAccsModalOpen: false,
   };
 
   componentDidMount() {
     this.props.fetchSingleHotel(this.props.hotel_id);
     this.props.fetchHotelStaff(this.props.hotel_id);
   }
+
+  openNeedPaymentPlanModal = () => {
+    this.setState({ isPaymentPlanModalOpen: true });
+  };
+
+  openHasManyAccsModal = () => {
+    this.setState({ isHasManyAccsModalOpen: true });
+  };
+
+  closeRestrictedModal = () => {
+    this.setState({ isPaymentPlanModalOpen: false });
+    this.setState({ isHasManyAccsModalOpen: false });
+  };
 
   handleInputChange = event => {
     this.setState({
@@ -61,9 +77,9 @@ class Billing extends React.Component {
   fireSwitchCustomerPlan = plan => {
     const checkSwitchEligibility = this.checkPlanSwitchEligibility(plan);
     if (!this.props.hotel.billing) {
-      return alert('Please add a payment method before switching plan');
+      this.openNeedPaymentPlanModal();
     } else if (!checkSwitchEligibility) {
-      return alert('You have too many staff accounts to switch to this plan');
+      this.openHasManyAccsModal();
     } else {
       const newPlan = { newPlan: planIds[plan] };
       this.props.switchCustomerPlan(this.props.hotel._id, newPlan);
@@ -86,7 +102,7 @@ class Billing extends React.Component {
     };
     await this.props.updateCustomerMethod(
       this.props.hotel._id,
-      enhancedStripeToken,
+      enhancedStripeToken
     );
     this.closeModal();
   };
@@ -108,6 +124,22 @@ class Billing extends React.Component {
           handleModalSwitch={this.handleModalSwitch}
           fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
         />
+
+        {this.state.isPaymentPlanModalOpen && (
+          <Restricted
+            alert="Please add a payment method before switching plan"
+            isRestrictedModalOpen={this.state.isPaymentPlanModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
+          />
+        )}
+
+        {this.state.isHasManyAccsModalOpen && (
+          <Restricted
+            alert="You have too many staff accounts to switch to this plan"
+            isRestrictedModalOpen={this.state.isHasManyAccsModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
+          />
+        )}
       </BillingWrapper>
     );
   }
@@ -138,11 +170,11 @@ const mapDispatchToProps = dispatch => {
       updateCustomerMethod,
       fetchHotelStaff,
     },
-    dispatch,
+    dispatch
   );
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Billing);

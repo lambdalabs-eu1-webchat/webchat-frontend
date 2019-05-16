@@ -36,11 +36,27 @@ class CompanySettings extends React.Component {
       dispatchFetchRoomsForHotel,
     } = this.props;
     this.state = {
+      currentHotel: {},
       companyName: hotel.name,
       companyMotto: hotel.motto,
+      rooms: hotel.rooms,
+      newRooms: '',
     };
     dispatchFetchSingleHotel(currentUser.hotel_id);
     dispatchFetchRoomsForHotel(currentUser.hotel_id);
+  }
+
+  componentDidUpdate() {
+    if (this.state.currentHotel !== this.props.hotel) {
+      this.setState({
+        currentHotel: this.props.hotel,
+        companyName: this.props.hotel.name,
+        companyMotto: this.props.hotel.motto,
+      });
+    }
+    if (this.state.rooms !== this.props.rooms) {
+      this.setState({ rooms: this.props.rooms });
+    }
   }
 
   handleInputChange = event => {
@@ -53,6 +69,13 @@ class CompanySettings extends React.Component {
     });
   };
 
+  handleRoomInputChange = (event, index) => {
+    const newRoomName = event.target.value;
+    this.setState(cState => ({
+      rooms: [...cState.rooms, (cState.rooms[index].name = newRoomName)],
+    }));
+  };
+
   handleSubmit(hotelId, dispatchUpdateHotel) {
     return event => {
       event.preventDefault();
@@ -61,21 +84,38 @@ class CompanySettings extends React.Component {
         return;
       }
       dispatchUpdateHotel(hotelId, companyName, companyMotto);
-      document
-        .querySelectorAll('.form-input')
-        .forEach(input => (input.value = ''));
     };
   }
 
-  handleClear() {
+  handleRevert() {
     return event => {
       event.preventDefault();
-      // you shouldn't need this in react
-      document
-        .querySelectorAll('.form-input')
-        .forEach(input => (input.value = ''));
+      this.setState({
+        companyName: this.props.hotel.name,
+        companyMotto: this.props.hotel.motto,
+      });
     };
   }
+
+  clearNewRooms = () => {
+    this.setState({
+      newRooms: '',
+    });
+  };
+
+  addRooms = () => {
+    const rooms = this.state.newRooms;
+    if (!rooms.length) {
+      return alert('Please add at least one room name');
+    } else {
+      // split the string into an array of room names on the comma separator
+      // trim all whitespace at the start and end of each string
+      // create a new array of objects with each room name set to the name key
+      const roomsToAdd = rooms.split(',').map(room => ({ name: room.trim() }));
+      this.props.dispatchCreateRoomForHotel(roomsToAdd, this.props.hotel._id);
+      this.clearNewRooms();
+    }
+  };
 
   render() {
     const {
@@ -95,26 +135,26 @@ class CompanySettings extends React.Component {
           <section className="company-details">
             <h3>Update company details</h3>
             <form>
-              <label>Name</label>
               <input
                 name="companyName"
                 className="form-input"
-                placeholder={hotel.name}
+                value={this.state.companyName}
+                placeholder="hotel motto"
                 onChange={this.handleInputChange.bind(this)}
               />
-              <label>Company Motto</label>
               <input
                 name="companyMotto"
                 className="form-input"
-                placeholder={hotel.motto}
+                value={this.state.companyMotto}
+                placeholder="hotel motto"
                 onChange={this.handleInputChange.bind(this)}
               />
               <div className="action-buttons">
-                <button onClick={this.handleClear().bind(this)}>Clear</button>
+                <button onClick={this.handleRevert().bind(this)}>Revert</button>
                 <button
                   onClick={this.handleSubmit(
                     hotel._id,
-                    dispatchUpdateHotel
+                    dispatchUpdateHotel,
                   ).bind(this)}
                 >
                   Save
@@ -126,10 +166,13 @@ class CompanySettings extends React.Component {
             rooms={rooms}
             hotelId={hotel.id}
             currentUser={currentUser}
+            newRooms={this.state.newRooms}
             handleInputChange={this.handleInputChange.bind(this)}
+            handleRoomInputChange={this.handleRoomInputChange.bind(this)}
             createRoomForHotel={dispatchCreateRoomForHotel}
             deleteRoomForHotel={dispatchDeleteRoomForHotel}
             updateRoomForHotel={dispatchUpdateRoomForHotel}
+            addRooms={this.addRooms}
           />
         </CompanySettingsWrapper>
       </div>
@@ -142,6 +185,7 @@ CompanySettings.propTypes = {
   rooms: PropTypes.array.isRequired,
   dispatchFetchSingleHotel: PropTypes.func.isRequired,
   dispatchUpdateHotel: PropTypes.func.isRequired,
+  dispatchFetchRoomsForHotel: PropTypes.func.isRequired,
   dispatchDeleteRoomForHotel: PropTypes.func.isRequired,
   dispatchUpdateRoomForHotel: PropTypes.func.isRequired,
   dispatchCreateRoomForHotel: PropTypes.func.isRequired,
@@ -150,8 +194,8 @@ CompanySettings.propTypes = {
 const mapStateToProps = state => {
   return {
     hotel: state.hotel,
-    currentUser: state.currentUser,
     rooms: state.rooms.rooms,
+    currentUser: state.currentUser,
   };
 };
 
@@ -161,8 +205,9 @@ export default connect(
     dispatchFetchSingleHotel: fetchSingleHotel,
     dispatchUpdateHotel: updateHotel,
     dispatchFetchRoomsForHotel: fetchRoomsForHotel,
+    dispatchFetchRoomsForHotel: fetchRoomsForHotel,
     dispatchDeleteRoomForHotel: deleteRoomForHotel,
     dispatchUpdateRoomForHotel: updateRoomForHotel,
     dispatchCreateRoomForHotel: createRoomForHotel,
-  }
+  },
 )(CompanySettings);

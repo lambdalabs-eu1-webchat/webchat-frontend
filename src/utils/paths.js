@@ -16,6 +16,7 @@ export const SOCKET = {
   CLOSE_TICKET: 'close_ticket',
   ASSIGN_SELF_TICKET: 'assign_self_ticket',
   LOGIN: 'login',
+  LOGOUT: 'logout',
   FAILED_LOGIN: 'failed_login',
   QUEUED_CHATS: 'queued_chats',
   ACTIVE_CHATS: 'active_chats',
