@@ -69,7 +69,7 @@ padding: 0.625rem;
 width: 100%;
 border-radius:0.625rem;
 color:white;
-font-eight:${theme.fontWeight.light};
+font-weight:${theme.fontWeight.light};
 font-size:1rem;
 `; 
 const HeaderStyle = styled.div`

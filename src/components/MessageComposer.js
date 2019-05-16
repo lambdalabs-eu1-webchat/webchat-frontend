@@ -97,7 +97,6 @@ const StyledMessageComposer = styled.div`
 const StyledMessageComposerSendButton = styled.button`
 color: ${theme.color.footerText};
 border:none
-background-color:transparent;
 &:hover{
   background:transparent;
 }
