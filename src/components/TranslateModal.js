@@ -17,7 +17,7 @@ class TranslateModal extends React.Component {
         // (either by clicking on overlay or pressing ESC)
         onRequestClose={this.props.closeTranslateModal}
         style={{
-          overlay: modalTheme.translateOverlay,
+          overlay: modalTheme.overlay,
           content: modalTheme.translateContent,
         }}
       >
