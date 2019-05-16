@@ -9,7 +9,7 @@ import { DOMAIN, USERS, HOTEL, GUEST_CLIENT_DOMAIN } from '../utils/paths';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Spinner from '../components/reusable/Spinner';
 
 class CheckInForm extends React.Component {
   state = {
@@ -101,18 +101,14 @@ class CheckInForm extends React.Component {
           value={this.state.nameInput}
           margin="normal"
         />
-        {this.state.isCheckingIn ? (
-          <CircularProgress />
-        ) : (
-          <Button
-            className="hide-on-print"
-            variant="contained"
-            color="primary"
-            onClick={this.checkInGuest}
-          >
-            Check In
-          </Button>
-        )}
+        <Button
+          className="hide-on-print"
+          variant="contained"
+          color="primary"
+          onClick={this.checkInGuest}
+        >
+          {this.state.isCheckingIn ? <Spinner /> : 'Check In'}
+        </Button>
         <p className="show-on-print">https://webchatlabs-guest.netlify.com</p>
         <div className="passcode">
           <h4>Login Code</h4>

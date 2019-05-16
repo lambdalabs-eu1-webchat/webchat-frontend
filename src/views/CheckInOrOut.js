@@ -79,6 +79,7 @@ class CheckInOrOut extends React.Component {
             filterAvailableRoom={this.filterAvailableRoom}
             addCurrentGuest={this.addCurrentGuest}
             hotel_id={this.props.hotel_id}
+            loading={this.props.loading}
           />
         </div>
         <div className="hide-on-print">
@@ -88,6 +89,7 @@ class CheckInOrOut extends React.Component {
             currentGuests={this.state.currentGuests}
             filterCurrentGuests={this.filterCurrentGuests}
             addAvailableRoom={this.addAvailableRoom}
+            loading={this.props.loading}
           />
         </div>
       </StyledCheckInOrOut>
@@ -97,6 +99,7 @@ class CheckInOrOut extends React.Component {
 
 CheckInOrOut.propTypes = {
   hotel_id: propTypes.string.isRequired,
+  loading: propTypes.object.isRequired,
 };
 
 const StyledCheckInOrOut = styled.div`
@@ -119,6 +122,7 @@ const StyledCheckInOrOut = styled.div`
 function mapStateToProps(state) {
   return {
     hotel_id: state.currentUser.hotel_id,
+    loading: state.loading,
   };
 }
 

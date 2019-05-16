@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import axios from 'axios';
+
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { validate } from 'email-validator';
 import Restricted from './reusable/RestrictedModal';
 import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
+import Spinner from '../components/reusable/Spinner';
 
 class CheckOutForm extends React.Component {
   state = {
@@ -111,18 +112,13 @@ class CheckOutForm extends React.Component {
           onChange={event => this.setEmailInput(event.target.value)}
           margin="normal"
         />
-
-        {this.state.isCheckingOut ? (
-          <CircularProgress />
-        ) : (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.checkOutGuest}
-          >
-            Check Out
-          </Button>
-        )}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.checkOutGuest}
+        >
+          {this.state.isCheckingOut ? <Spinner /> : 'Check Out'}
+        </Button>
 
         {this.state.emailModalOpen && (
           <Restricted
