@@ -99,14 +99,14 @@ const TeamMember = ({
           closeRestrictedModal={closeModal}
         />
       )}
-      {isConfirmDeleteOpen && (
+      {
         <Confirm
           isOpen={isConfirmDeleteOpen}
           question={`Are you sure you want to delete the user "${name}"?`}
           yesCallBack={() => deleteUser(userId)}
           closeModal={() => setConfirmDeleteOpen(false)}
         />
-      )}
+      }
     </HotelStaffWrapper>
   );
 };
