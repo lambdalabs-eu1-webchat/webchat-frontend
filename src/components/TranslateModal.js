@@ -7,7 +7,6 @@ import theme from '../theme/styledTheme';
 
 class TranslateModal extends React.Component {
   render() {
-    console.log(this.props.translations);
     return (
       <Modal
         // The only required prop
