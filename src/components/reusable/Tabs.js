@@ -19,12 +19,10 @@ function Tabs({ options, selected, setSelected }) {
 
 const StyledTabs = styled.div`
   .tab {
-   margin-top:3rem;
    margin:2rem;
    padding:1rem;
    position: relative;
    width: 100%;
-   margin: 1em 0 2em;
    font-weight: 300;
   }
   .selected {
