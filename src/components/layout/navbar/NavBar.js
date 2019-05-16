@@ -90,6 +90,6 @@ const StyledNav = styled.nav`
     color: ${theme.color.accentGreen};
   }
   .active {
-    color: white;
+    color: ${theme.color.white};
   }
 `;
