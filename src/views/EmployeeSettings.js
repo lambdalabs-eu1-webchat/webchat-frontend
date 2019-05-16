@@ -2,14 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
+import theme from './../theme/styledTheme';
 
 import EmployeeSettingsForm from '../components/EmployeeSettingsForm';
 import { updateUser } from '../store/actions/users';
 import Restricted from '../components/reusable/RestrictedModal';
-
-const EmployeeSettingsWrapper = styled.div`
-  padding: 5% 25%;
-`;
 
 class EmployeeSettings extends React.Component {
   state = {
@@ -107,32 +104,31 @@ class EmployeeSettings extends React.Component {
 
   render() {
     return (
-      <EmployeeSettingsWrapper>
-        <h1>Employee Settings</h1>
-        <EmployeeSettingsForm
-          employee={this.props.employee}
-          employeeChanges={this.state.employeeChanges}
-          handleInputChange={this.handleInputChange}
-          fireUserUpdates={this.fireUserUpdates}
-          clearChanges={this.clearChanges}
-        />
-
-        {this.state.passwordsModalOpen && (
-          <Restricted
-            alert="Passwords must match"
-            isRestrictedModalOpen={this.state.passwordsModalOpen}
-            closeRestrictedModal={this.closeRestrictedModal}
+        <EmployeeSettingsWrapper>
+          <EmployeeSettingsForm
+            employee={this.props.employee}
+            employeeChanges={this.state.employeeChanges}
+            handleInputChange={this.handleInputChange}
+            fireUserUpdates={this.fireUserUpdates}
+            clearChanges={this.clearChanges}
           />
-        )}
 
-        {this.state.nameEmailModalOpen && (
-          <Restricted
-            alert="Name and email cannot be blank"
-            isRestrictedModalOpen={this.state.nameEmailModalOpen}
-            closeRestrictedModal={this.closeRestrictedModal}
-          />
-        )}
-      </EmployeeSettingsWrapper>
+          {this.state.passwordsModalOpen && (
+            <Restricted
+              alert="Passwords must match"
+              isRestrictedModalOpen={this.state.passwordsModalOpen}
+              closeRestrictedModal={this.closeRestrictedModal}
+            />
+          )}
+
+          {this.state.nameEmailModalOpen && (
+            <Restricted
+              alert="Name and email cannot be blank"
+              isRestrictedModalOpen={this.state.nameEmailModalOpen}
+              closeRestrictedModal={this.closeRestrictedModal}
+            />
+          )}
+        </EmployeeSettingsWrapper>
     );
   }
 }
@@ -154,3 +150,13 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(EmployeeSettings);
+
+const EmployeeSettingsWrapper = styled.div`
+  padding: 5rem 5rem 11rem 5rem;
+  background: ${theme.color.white};
+  margin: 0 5rem;
+  @media(max-width: 600px) {
+    padding: 3rem;
+    margin: 0;
+  }
+`;

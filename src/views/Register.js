@@ -160,7 +160,6 @@ export default connect(
 
 const RegisterOuterWrapper = styled.div`
   background: ${theme.color.offWhite};
-  height: 100%;
 `;
 
 const RegisterWrapper = styled.div`

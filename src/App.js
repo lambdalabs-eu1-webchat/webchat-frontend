@@ -20,11 +20,9 @@ import {
 import NavBar from './components/layout/navbar/NavBar';
 import Router from './components/Router';
 import Footer from './components/layout/Footer';
-import './App.css';
-
-import styled from 'styled-components';
-
 import ChatsList from './components/chat/ChatsList';
+import './App.css';
+import styled from 'styled-components';
 
 
 class App extends React.Component {
