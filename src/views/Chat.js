@@ -59,9 +59,11 @@ class Chat extends React.Component {
 const StyledChat = styled.div`
   display: flex;
   border: 1px solid ${theme.color.accentGreen};
+  background-color: ${theme.color.accentGreen};
   justify-content: space-around;
   flex-direction: row;
-
+  height: 100%;
+  overflow: hidden;
   @media (max-width: 800px) {
     flex-direction: column;
   }
@@ -70,9 +72,7 @@ const ChatListWrapper = styled.div`
   width: 50%;
   background-color: ${theme.color.accentGreen};
   align: center;
-  height: 70vh;
-  overflow: scroll;
-
+  height: 100%;
   @media (max-width: 800px) {
     width: 100%;
   }
@@ -80,9 +80,8 @@ const ChatListWrapper = styled.div`
 
 const ChatScreenWrapper = styled.div`
   width: 50%;
-  height: 70vh;
+  height: 100%;
   /* overflow-y: scroll; */
-
   @media (max-width: 800px) {
     width: 100%;
   }

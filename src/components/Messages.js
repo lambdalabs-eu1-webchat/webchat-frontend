@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 import Message from './Message';
 import RatingMessage from './RatingMessage';
 import { ADMIN, SUPER_ADMIN } from '../utils/userTypes';
-import { CLOSED } from '../utils/ticketStatus';
+import { CLOSED, QUEUED, ACTIVE } from '../utils/ticketStatus';
 
 class Messages extends React.Component {
   // pass in 'smooth' for smooth scroll
@@ -26,6 +26,7 @@ class Messages extends React.Component {
     const GuestId = guest.id;
     return (
       <StyledMessages
+        status={status}
         ref={el => {
           this.component = el;
         }}
@@ -74,6 +75,7 @@ Messages.propTypes = {
 
 const StyledMessages = styled.div`
   height: 60vh;
+  ${props => (props.status === CLOSED ? 'height: 80vh;' : null)}
   overflow-y: scroll;
 `;
 

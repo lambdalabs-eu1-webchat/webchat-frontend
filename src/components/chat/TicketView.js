@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setCurrentChatId } from '../../store/actions/chat';
 import { SOCKET } from '../../utils/paths';
-import theme from '../../theme/styledTheme'
-import styled from 'styled-components'
+import theme from '../../theme/styledTheme';
+import styled from 'styled-components';
 const filterTickets = (tickets, filterCond) => {
   return tickets.filter(ticket => ticket.status === filterCond);
 };
@@ -23,7 +23,7 @@ const TicketView = ({
     setCurrentChatId(chat_id, status);
   };
   return (
-    <div>
+    <StyledTicketView>
       {chatsArr &&
         chatsArr.map(chat => {
           return (
@@ -48,7 +48,7 @@ const TicketView = ({
             </StyledLineDiv>
           );
         })}
-    </div>
+    </StyledTicketView>
   );
 };
 
@@ -61,26 +61,31 @@ TicketView.propTypes = {
   setCurrentChatId: PropTypes.func.isRequired,
 };
 
+const StyledTicketView = styled.div`
+  overflow-y: scroll;
+  height: 70vh;
+`;
+
 const StyledDiv = styled.div`
-border:1px solid ${theme.color.accentGreen};
-background-color:${theme.color.accentPurple};
-margin: 0.625rem;
-padding: 0.625rem;
-width: 100%;
-border-radius:0.625rem;
-color:white;
-font-weight:${theme.fontWeight.light};
-font-size:1rem;
-`; 
+  border: 1px solid ${theme.color.accentGreen};
+  background-color: ${theme.color.accentPurple};
+  margin: 0.625rem;
+  padding: 0.625rem;
+  width: 100%;
+  border-radius: 0.625rem;
+  color: white;
+  font-weight: ${theme.fontWeight.light};
+  font-size: 1rem;
+`;
 const HeaderStyle = styled.div`
-font-weight:${theme.fontWeight.bolder};
-color:${theme.color.accentGreen}
+  font-weight: ${theme.fontWeight.bolder};
+  color: ${theme.color.accentGreen};
 `;
 
 const StyledLineDiv = styled.div`
   display: flex;
   justify-content: space-between;
-`; 
+`;
 
 function mapStateToProps(state) {
   return {
