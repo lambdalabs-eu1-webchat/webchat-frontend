@@ -8,6 +8,7 @@ import {
   FETCH_SINGLE_HOTEL_STARTED,
   FETCH_SINGLE_HOTEL_FINISHED,
   ROOMS,
+  SUBSCRIPTIONS,
 } from '../actions/actionTypes';
 
 const loading = (state = false, action) => {
@@ -43,7 +44,19 @@ const loading = (state = false, action) => {
     case ROOMS.CREATE_ROOM_FOR_HOTEL_STARTED:
       return true;
     case ROOMS.CREATE_ROOM_FOR_HOTEL_FINISHED:
-    return false;
+      return false;
+    case SUBSCRIPTIONS.CREATE_NEW_CUSTOMER_STARTED:
+      return true;
+    case SUBSCRIPTIONS.CREATE_NEW_CUSTOMER_FINISHED:
+      return false;
+    case SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN_STARTED:
+      return true;
+    case SUBSCRIPTIONS.SWICTH_CUSTOMER_PLAN_FINISHED:
+      return false;
+    case SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_STARTED:
+      return true;
+    case SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_FINISHED:
+      return false;
     default:
       return state;
   }
