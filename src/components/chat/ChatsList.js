@@ -26,7 +26,6 @@ class ChatsList extends React.Component {
 
     return (
       <div style={divStyle}>
-        <h3>{`${status.toUpperCase()} chats`}</h3>
         <SearchInput status={status} searchInputField={this.searchInputField} />
         <TicketView chatsArr={searchResult} status={status} />
       </div>
