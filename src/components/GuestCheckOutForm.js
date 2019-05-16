@@ -158,9 +158,6 @@ const CheckOutFormWrapper = styled.div`
   .error {
     background: red;
   }
-  button {
-    margin-bottom: 5%;
-  }
   .button-container {
     width: 100%;
     height: 80px;
