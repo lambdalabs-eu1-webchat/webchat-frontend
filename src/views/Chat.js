@@ -6,6 +6,7 @@ import ChatsList from '../components/chat/ChatsList';
 import Tabs from '../components/reusable/Tabs';
 import { QUEUED, ACTIVE, CLOSED } from '../utils/ticketStatus';
 import { fetchClosedChats } from '../store/actions/chat';
+import theme from '../theme/styledTheme'
 
 class Chat extends React.Component {
   state = {
@@ -57,7 +58,7 @@ class Chat extends React.Component {
 
 const StyledChat = styled.div`
   display: flex;
-  border:1px solid #0CD4AF;
+  border:1px solid ${theme.color.accentGreen};
   justify-content: space-around;
   flex-direction: row;
 
@@ -69,7 +70,7 @@ const StyledChat = styled.div`
 `;
 const ChatListWrapper = styled.div`
   width: 50%;
-  background-color:#0CD4AF;
+  background-color: ${theme.color.accentGreen};
   align:center;
 
   @media (max-width: 800px) {
@@ -79,7 +80,7 @@ const ChatListWrapper = styled.div`
 
 const ChatScreenWrapper = styled.div`
   width: 50%;
-  border:1px solid #0CD4AF;
+  border:1px solid ${theme.color.accentGreen};
   
   @media (max-width: 800px) {
     width: 100%;
