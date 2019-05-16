@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import theme from '../../theme/styledTheme'
 
 function Tabs({ options, selected, setSelected }) {
   return (
@@ -19,10 +20,17 @@ function Tabs({ options, selected, setSelected }) {
 
 const StyledTabs = styled.div`
   .tab {
-    border: 1px solid black;
+   margin:2rem;
+   padding:1.5rem;
+   position: relative;
+   width: 100%;
+   font-weight: 700;
+   color: ${theme.color.accentPurple}
+   text-transform: uppercase;
   }
   .selected {
-    background: salmon;
+    background: ${theme.color.white};
+
   }
 `;
 
