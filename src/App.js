@@ -21,20 +21,20 @@ import NavBar from './components/layout/navbar/NavBar';
 import Router from './components/Router';
 import Footer from './components/layout/Footer';
 import './App.css';
+
 import styled from 'styled-components';
+
+import ChatsList from './components/chat/ChatsList';
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
   }
-  state = {
-    socketInit: true,
-  };
-
   componentDidMount() {
     const token = localStorage.getItem('token');
-    if (token && this.state.socketInit) {
+    if (token && !this.props.socket) {
       this.setState({ socketInit: false });
       const socket = socketIOClient(DOMAIN);
       this.props.dispatchSaveSocket(socket);
@@ -76,7 +76,7 @@ class App extends React.Component {
 
   componentDidUpdate() {
     const token = localStorage.getItem('token');
-    if (token && this.state.socketInit) {
+    if (token && !this.props.socket) {
       this.setState({ socketInit: false });
       const socket = socketIOClient(DOMAIN);
       this.props.dispatchSaveSocket(socket);
@@ -141,7 +141,10 @@ App.propTypes = {
   dispatchAddQueueMessage: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({ currentUser: state.currentUser });
+const mapStateToProps = state => ({
+  currentUser: state.currentUser,
+  socket: state.chats.socket,
+});
 
 export default withRouter(
   connect(

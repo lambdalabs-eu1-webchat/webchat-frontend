@@ -9,8 +9,9 @@ import { connect } from 'react-redux';
 import theme from '../../../theme/styledTheme';
 
 const NavBar = props => {
+  debugger;
   return (
-    <StyledNav className="nav-wrapper navy darken-2">
+    <StyledNav className="nav-wrapper navy darken-2 hide-on-print">
       <div className="container">
         <NavLink to="/" className="brand-logo">
           <header className="App-header">
