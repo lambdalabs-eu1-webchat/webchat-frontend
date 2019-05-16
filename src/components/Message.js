@@ -40,8 +40,8 @@ const StyledMessage = styled.div`
     content: '';
     position: absolute;
     bottom: 0;
-    width: 25;
-    height: -0.5em;
+    width: 0.3rem;
+    height: -0.2em;
     border: 1em solid transparent ;
     border-top-color: #00aabb;
     border-bottom: 0;

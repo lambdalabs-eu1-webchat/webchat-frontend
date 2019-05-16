@@ -61,6 +61,7 @@ const StyledChat = styled.div`
   border:1px solid ${theme.color.accentGreen};
   justify-content: space-around;
   flex-direction: row;
+ 
 
 
 
@@ -72,6 +73,9 @@ const ChatListWrapper = styled.div`
   width: 50%;
   background-color: ${theme.color.accentGreen};
   align:center;
+  height: 70vh;
+  overflow-y: scroll;
+ 
 
   @media (max-width: 800px) {
     width: 100%;
@@ -81,6 +85,8 @@ const ChatListWrapper = styled.div`
 const ChatScreenWrapper = styled.div`
   width: 50%;
   border:1px solid ${theme.color.accentGreen};
+  height: 70vh;
+  overflow-y: scroll;
   
   @media (max-width: 800px) {
     width: 100%;

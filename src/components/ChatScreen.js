@@ -128,6 +128,7 @@ function mapStateToProps(state) {
 
 const StyledChatScreen = styled.div`
 font-size:${theme.fontSize.xxxs};
+
 `;
 
 const StyledJoinButton = styled.button`
