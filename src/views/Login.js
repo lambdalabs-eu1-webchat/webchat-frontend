@@ -74,10 +74,13 @@ class Login extends React.Component {
               onChange={this.handleInput}
             />
             <p>{this.state.flashMessage}</p>
-            <button type="submit" onClick={this.handleLogin}>
-              Login
-            </button>
-            <Spinner />
+            {this.props.loading ? (
+              <Spinner />
+            ) : (
+              <button type="submit" onClick={this.handleLogin}>
+                Login
+              </button>
+            )}
           </form>
         </LoginWrapper>
       </LoginOuterWrapper>
@@ -89,12 +92,14 @@ Login.propTypes = {
   loginRequest: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   numberRooms: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     loggedIn: !!state.currentUser._id,
     numberRooms: state.rooms.rooms.length,
+    loading: state.loading,
   };
 }
 

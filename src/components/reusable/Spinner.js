@@ -20,6 +20,7 @@ const StyledSpinner = styled.svg`
   animation: rotate 1s linear infinite;
   width: ${theme.spinner.diameter};
   height: ${theme.spinner.diameter};
+  margin: auto;
 
   & .path {
     stroke: ${theme.color.accentPurple};
