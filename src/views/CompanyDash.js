@@ -6,9 +6,11 @@ import TeamMembers from '../views/TeamMembers';
 import CompanySettings from '../views/CompanySettings';
 import { APP_PATHS } from '../utils/paths';
 import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
+
 function CompanyDash() {
   return (
-    <div>
+    <CompanyDashWrapper>
       <SuperAdminNav />
       <Switch>
         <Route
@@ -32,7 +34,15 @@ function CompanyDash() {
           )}
         />
       </Switch>
-    </div>
+    </CompanyDashWrapper>
   );
 }
 export default CompanyDash;
+
+const CompanyDashWrapper = styled.div`
+  margin: 0 5rem;
+  @media (max-width: 800px) {
+    margin: 0 3rem;
+  }
+`;
+

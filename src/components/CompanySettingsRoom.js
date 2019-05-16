@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
+import theme from './../theme/styledTheme';
 import Confirm from './reusable/ConfirmModal';
 import Spinner from '../components/reusable/Spinner';
 
@@ -24,7 +26,7 @@ const CompanySettingsRoom = ({
   return !room ? (
     <div>Loading</div>
   ) : (
-    <div className="room">
+    <RoomWrapper>
       <input
         placeholder="room name"
         name="roomName"
@@ -59,8 +61,20 @@ const CompanySettingsRoom = ({
           />
         </React.Fragment>
       }
-    </div>
+    </RoomWrapper>
   );
 };
 
 export default CompanySettingsRoom;
+
+const RoomWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  
+  .fa-edit {
+    color: ${theme.color.accentPurple};
+  }
+  .fa-trash-alt {
+    color: ${theme.color.accentPurple};
+  }
+`;
