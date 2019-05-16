@@ -61,12 +61,17 @@ class ChatScreen extends React.Component {
 
     this.setState({ translatedMessages: translatedText });
 
-    const lastTranslatedText = translatedText[translatedText.length - 1];
+    const firstTranslatedText = translatedText[0];
     const chat_id = this.props.chat._id;
-    // get language from last translated message to state
-    this.props.updateTicketLanguage(chat_id, lastTranslatedText.inputLang);
+    // get language from first translated message to state
+
+    this.props.updateTicketLanguage(
+      chat_id,
+      firstTranslatedText.detectedSourceLanguage
+    );
     // open modal with translated messages
     this.openTranslateModal();
+
   };
 
   render() {
