@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components'
 
 const SearchInput = ({ status, searchInputField }) => {
   return (
-    <input style={search}
+    <StyledInput
       placeholder={`Search ${status} tickets`}
       type="text"
       onChange={event => searchInputField(event.target.value)}
@@ -11,10 +12,10 @@ const SearchInput = ({ status, searchInputField }) => {
   );
 };
 
-const search = {
-  width:'100%',
-
-}
+const StyledInput = styled.input`
+width:92%;
+margin:2rem;
+`;
 
 SearchInput.propTypes = {
   status: PropTypes.string.isRequired,
