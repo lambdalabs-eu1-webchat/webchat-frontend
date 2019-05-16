@@ -41,8 +41,24 @@ const theme = {
     italic: 'italic'
   },
 
+  textTransform: {
+    uppercase: 'uppercase',
+  },
+
   fontWeight: {
     bold: 'bold',
+  },
+
+  border: {
+    radius: '5px',
+  },
+
+  input: {
+    height: '40px',
+  },
+
+  button: {
+    height: '48px',
   },
 
   spacing: {
