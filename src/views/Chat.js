@@ -75,6 +75,7 @@ const ChatListWrapper = styled.div`
   height: 100%;
   @media (max-width: 800px) {
     width: 100%;
+    height: 90vh;
   }
 `;
 
@@ -84,6 +85,8 @@ const ChatScreenWrapper = styled.div`
   /* overflow-y: scroll; */
   @media (max-width: 800px) {
     width: 100%;
+    height: 90vh;
+    margin-top: 40px;
   }
 `;
 
