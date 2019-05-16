@@ -7,9 +7,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { validate } from 'email-validator';
-
-import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
 import Restricted from './reusable/RestrictedModal';
+import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
 
 class CheckOutForm extends React.Component {
   state = {
@@ -30,19 +29,6 @@ class CheckOutForm extends React.Component {
     this.setState({ emailInput });
   };
 
-  openEmailModal = () => {
-    this.setState({ emailModalOpen: true });
-  };
-
-  openNoChatModal = () => {
-    this.setState({ noChatModalOpen: true });
-  };
-
-  closeRestrictedModal = () => {
-    this.setState({ emailModalOpen: false });
-    this.setState({ noChatModalOpen: false });
-  };
-
   sendGuestEmail = async () => {
     const emailDetails = {
       guestEmail: this.state.emailInput,
@@ -55,10 +41,12 @@ class CheckOutForm extends React.Component {
         if (didSend.data) {
           this.setState({ emailInput: '' });
         } else {
-          this.openNoChatModal();
+          return alert(
+            'This guest had no chats during their stay, please remove their email',
+          );
         }
       } else {
-        this.openEmailModal();
+        return alert('Please provide a valid email address');
       }
     } catch (error) {
       console.error(error);
