@@ -71,35 +71,35 @@ const Register = ({ loggedIn, registerUser }) => {
     return <Redirect to='/' />;
   }
   return (
-      <RegisterOuterWrapper>
-    <RegisterWrapper>
-      <form className='register-form'>
-        <h2>Register</h2>
-        <label>Name*</label>
-        <input name='name' type='text' />
-        <label>Email*</label>
-        <input name='email' type='text' />
-        <label>Password*</label>
-        <input
-          name='password'
-          type='password'
-        />
-        <label>Motto</label>
-        <input name='motto' type='text' />
-        <label>Hotel Name</label>
-        <input name='hotelName' type='text' />
-        <label>Hotel Motto</label>
-        <input
-          name='hotelMotto'
-          type='text'
-        />
-        <p id='result-message' />
-        <button type='submit' onClick={e => handleRegister(e, registerUser)}>
-          Register
-        </button>
-      </form>
-    </RegisterWrapper>
-      </RegisterOuterWrapper>
+    <RegisterOuterWrapper>
+      <RegisterWrapper>
+        <form className='register-form'>
+          <h2>Register</h2>
+          <label>Name*</label>
+          <input name='name' type='text' />
+          <label>Email*</label>
+          <input name='email' type='text' />
+          <label>Password*</label>
+          <input
+            name='password'
+            type='password'
+          />
+          <label>Motto</label>
+          <input name='motto' type='text' />
+          <label>Hotel Name</label>
+          <input name='hotelName' type='text' />
+          <label>Hotel Motto</label>
+          <input
+            name='hotelMotto'
+            type='text'
+          />
+          <p id='result-message' />
+          <button type='submit' onClick={e => handleRegister(e, registerUser)}>
+            Register
+          </button>
+        </form>
+      </RegisterWrapper>
+    </RegisterOuterWrapper>
   );
 };
 
@@ -118,11 +118,12 @@ export default connect(
 )(Register);
 
 const RegisterOuterWrapper = styled.div`
-background: ${theme.color.offWhite};
+  background: ${theme.color.offWhite};
+  height: 100%;
 `;
 
 const RegisterWrapper = styled.div`
-  padding: 4% 0;
+  padding: 8rem 0;
   @media (max-width: 600px) {
     width: 100%;
     margin: 0;
@@ -179,8 +180,8 @@ const RegisterWrapper = styled.div`
       margin: 15px 0;
       box-shadow: ${theme.shadow.buttonShadow};
       &:hover {
-      box-shadow: ${theme.shadow.buttonHover};
-      cursor: pointer;
+        box-shadow: ${theme.shadow.buttonHover};
+        cursor: pointer;
       }
     }
   }
