@@ -3,7 +3,6 @@ import Confirm from './reusable/ConfirmModal';
 
 const CompanySettingsRoom = ({
   room,
-  index,
   name,
   currentUser,
   deleteRoomForHotel,
@@ -17,10 +16,9 @@ const CompanySettingsRoom = ({
   };
   const handleUpdateClick = () => {
     setIsUpdateModalOpen(true);
-    // updateRoomForHotel(hotelId, id, roomName);
   };
 
-  return !room || !room[index] ? (
+  return !room ? (
     <div>Loading</div>
   ) : (
     <div className="room">
