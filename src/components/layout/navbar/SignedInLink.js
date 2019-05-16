@@ -136,6 +136,7 @@ const MenuToggle = styled.div`
       margin: 0;
       top: 0;
       left: 0;
+      padding-top: 50px;
       transform-origin: 0 0;
       transform: translate(0, -100%);
     }
