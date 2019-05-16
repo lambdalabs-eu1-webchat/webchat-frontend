@@ -24,6 +24,7 @@ const StyledTabs = styled.div`
    position: relative;
    width: 100%;
    font-weight: 300;
+   text-transform: uppercase;
   }
   .selected {
     background: #0CD4AF;
