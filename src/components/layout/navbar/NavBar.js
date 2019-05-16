@@ -92,4 +92,7 @@ const StyledNav = styled.nav`
   .active {
     color: ${theme.color.white};
   }
+  .brand-logo {
+    z-index: 5;
+  }
 `;
