@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Restricted from './reusable/RestrictedModal';
+import Confirm from './reusable/ConfirmModal';
 
 const HotelStaffWrapper = styled.div`
   display: flex;
@@ -28,12 +29,13 @@ const TeamMember = ({
   deleteUser,
 }) => {
   // use Hooks here, as it's already a func component
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isRestrictedModalOpen, setRestrictedModalOpen] = useState(false);
+  const [isConfirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
 
   const isAdmin = user_type === 'admin' || user_type === 'super admin';
 
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  const openModal = () => setRestrictedModalOpen(true);
+  const closeModal = () => setRestrictedModalOpen(false);
 
   const handleAdminPromotion = (changeUserType, id, currentUser, user_type) => {
     if (currentUser.user_type !== 'super admin') {
@@ -51,7 +53,7 @@ const TeamMember = ({
       }
     };
   };
-  const handleDeleteClick = (deleteUser, id, currentUser, user_type) => {
+  const handleDeleteClick = (currentUser, user_type) => {
     if (
       currentUser.user_type !== 'admin' &&
       currentUser.user_type !== 'super admin'
@@ -66,13 +68,9 @@ const TeamMember = ({
         openModal();
         return;
       }
-      if (window.confirm('Are you sure you want to delete this user?')) {
-        event.preventDefault();
-        deleteUser(id);
-      }
+      setConfirmDeleteOpen(true);
     };
   };
-
   return (
     <HotelStaffWrapper>
       <p>{name}</p>
@@ -85,21 +83,29 @@ const TeamMember = ({
           changeUserType,
           userId,
           currentUser,
-          user_type
+          user_type,
         )}
       />
       <i
         className="fas fa-trash-alt"
-        onClick={handleDeleteClick(deleteUser, userId, currentUser, user_type)}
+        onClick={handleDeleteClick(currentUser, user_type)}
       />
 
-      {isModalOpen && (
+      {isRestrictedModalOpen && (
         <Restricted
           alert="You are not authorized to delete this user!"
-          isRestrictedModalOpen={isModalOpen}
+          isModalOpen={isRestrictedModalOpen}
           closeRestrictedModal={closeModal}
         />
       )}
+      {
+        <Confirm
+          isOpen={isConfirmDeleteOpen}
+          question={`Are you sure you want to delete the user "${name}"?`}
+          yesCallBack={() => deleteUser(userId)}
+          closeModal={() => setConfirmDeleteOpen(false)}
+        />
+      }
     </HotelStaffWrapper>
   );
 };

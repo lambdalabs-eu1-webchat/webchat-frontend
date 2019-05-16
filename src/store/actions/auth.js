@@ -7,6 +7,7 @@ import {
   REGISTER_USER,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE,
+  REGISTER_USER_LOADING,
 } from './actionTypes';
 
 export const registerUserSuccess = newUser => {
@@ -37,9 +38,23 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
-export const loginSuccess = (id, hotel_id, email, token, user_type, name, motto) => {
+export const loginSuccess = (
+  id,
+  hotel_id,
+  email,
+  token,
+  user_type,
+  name,
+  motto,
+) => {
   const currentUser = {
-    id, hotel_id, email, token, user_type, name, motto
+    id,
+    hotel_id,
+    email,
+    token,
+    user_type,
+    name,
+    motto,
   };
   localStorage.setItem('currentUser', JSON.stringify(currentUser));
   localStorage.setItem('token', token);
@@ -52,7 +67,7 @@ export const loginSuccess = (id, hotel_id, email, token, user_type, name, motto)
       token,
       user_type,
       name,
-      motto
+      motto,
     },
   };
 };
@@ -79,7 +94,7 @@ export const loginRequest = (email, password) => async dispatch => {
     const result = await fetch(`${DOMAIN}${LOGIN}`, config);
     const jsonResult = await result.json();
     if (result.status === 401) {
-      throw new Error(jsonResult.error);
+      return jsonResult;
     }
     dispatch(
       loginSuccess(
@@ -92,6 +107,7 @@ export const loginRequest = (email, password) => async dispatch => {
         jsonResult.user.motto,
       ),
     );
+    return jsonResult;
   } catch (error) {
     dispatch(loginFailure(error.message));
   }
@@ -104,8 +120,9 @@ export const registerUser = ({
   motto,
   hotelName,
   hotelMotto,
- }) => async dispatch => {
+}) => async dispatch => {
   dispatch({ type: REGISTER_USER });
+  dispatch({ type: REGISTER_USER_LOADING });
   const user = {
     name: String(name),
     email: String(email),
@@ -127,8 +144,11 @@ export const registerUser = ({
     const newUser = jsonResult;
     if (result.ok) {
       dispatch(registerUserSuccess(newUser));
+      dispatch({ type: REGISTER_USER_LOADING });
+      return jsonResult;
     } else {
-      throw new Error(jsonResult.message);
+      dispatch({ type: REGISTER_USER_LOADING });
+      return jsonResult;
     }
   } catch (error) {
     dispatch(registerUserFailure(error));

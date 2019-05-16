@@ -4,6 +4,7 @@ import currentUser from './currentUser';
 import chats from './chats';
 import hotel from './hotel';
 import rooms from './rooms';
+import loading from './loading';
 
 const appReducer = combineReducers({
   users,
@@ -11,6 +12,7 @@ const appReducer = combineReducers({
   hotel,
   currentUser,
   rooms,
+  loading,
 });
 const rootReducer = (state, action) => {
   //clears state on logout

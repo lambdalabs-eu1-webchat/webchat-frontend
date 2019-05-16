@@ -4,57 +4,89 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import theme from './../theme/styledTheme';
-import { loginRequest } from '../store/actions/auth';
 
+import { messages } from '../utils/messages';
+import { loginRequest } from '../store/actions/auth';
 import { APP_PATHS } from '../utils/paths';
 
-const handleClick = loginRequest => event => {
-  event.preventDefault();
-  let email = '';
-  let password = '';
-  event.target.parentNode.childNodes.forEach(childNode => {
-    if (childNode.name === 'email') {
-      email = childNode.value;
-    } else if (childNode.name === 'password') {
-      password = childNode.value;
-    }
-  });
-  if (email && password) {
-    loginRequest(email, password);
-  }
-};
+class Login extends React.Component {
+  state = {
+    email: '',
+    password: '',
+    flashMessage: '',
+  };
 
-const Login = ({ loggedIn, loginRequest, numberRooms }) => {
-  if (numberRooms === 0 && loggedIn) {
+  handleInput = event => {
+    const input = event.target;
+    this.setState({
+      [input.name]: input.value,
+    });
+  };
+
+  setFlashMessage = flashMessage => {
+    this.setState({
+      flashMessage,
+    });
+  };
+
+  handleLogin = async event => {
+    event.preventDefault();
+    if (this.state.email && this.state.password) {
+      const res = await this.props.loginRequest(
+        this.state.email,
+        this.state.password,
+      );
+      if (res.message) {
+        this.setFlashMessage(res.message);
+      }
+    } else {
+      this.setFlashMessage(messages.allRequiredFields);
+    }
+  };
+
+  render() {
+    if (this.props.numberRooms === 0 && this.props.loggedIn) {
+      return (
+        <Redirect to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS} />
+      );
+    }
+    if (!!this.props.loggedIn) {
+      return <Redirect to="/chat" />;
+    }
     return (
-      <Redirect to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS} />
-    );
-  }
-  if (!!loggedIn) {
-    return <Redirect to="/chat" />;
-  }
-  return (
       <LoginOuterWrapper>
         <LoginWrapper>
           <form className="login-form">
             <h2>Login</h2>
             <label>Email*</label>
-            <input name="email" type="text" />
+            <input
+              name="email"
+              type="text"
+              value={this.state.email}
+              onChange={this.handleInput}
+            />
             <label>Password*</label>
-            <input name="password" type="password" />
-            <button type="submit" onClick={handleClick(loginRequest)}>
+            <input
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.handleInput}
+            />
+            <p>{this.state.flashMessage}</p>
+            <button type="submit" onClick={this.handleLogin}>
               Login
             </button>
           </form>
         </LoginWrapper>
       </LoginOuterWrapper>
-
-  );
-};
+    );
+  }
+}
 
 Login.propTypes = {
   loginRequest: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  numberRooms: PropTypes.number.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -84,7 +116,7 @@ const LoginWrapper = styled.div`
     margin: 0;
     padding: 0;
   }
-  
+
   form {
     margin: 0 auto;
     background: ${theme.color.white};
@@ -98,9 +130,9 @@ const LoginWrapper = styled.div`
       width: 100%;
       height: 100%;
       margin: auto 0;
-      padding-bottom: 6.5rem; 
+      padding-bottom: 6.5rem;
       align-self: center;
-      
+
       box-shadow: none;
     }
     h2 {
@@ -113,7 +145,7 @@ const LoginWrapper = styled.div`
       color: ${theme.color.accentPurple};
       font-weight: bold;
     }
-  
+
     input {
       border: none;
       border-bottom: 1px solid ${theme.color.footerText};
@@ -126,13 +158,13 @@ const LoginWrapper = styled.div`
         outline: none;
       }
     }
-  
+
     button {
       width: 100%;
       height: ${theme.button.height};
       font-size: ${theme.fontSize.s};
       border-radius: ${theme.border.radius};
-      background:${theme.color.accentGreen};
+      background: ${theme.color.accentGreen};
       border: none;
       text-transform: ${theme.textTransform.uppercase};
       color: ${theme.color.white};
@@ -140,11 +172,11 @@ const LoginWrapper = styled.div`
       margin: 15px 0;
       box-shadow: ${theme.shadow.buttonShadow};
       &:hover {
-      box-shadow: ${theme.shadow.buttonHover};
-      cursor: pointer;
+        box-shadow: ${theme.shadow.buttonHover};
+        cursor: pointer;
       }
       &:focus {
-      outline: none;
+        outline: none;
       }
     }
   }

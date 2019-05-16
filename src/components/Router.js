@@ -45,9 +45,8 @@ function Router({ user_type, fetchRooms, rooms, currentUser }) {
           path={APP_PATHS.ACCOUNT_SETTINGS}
           component={EmployeeSettings}
         />
-        <Route exact path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />;
-        ;
-        <Route render={() => <div style={style404}>404 not found</div>} />
+        <Route exact path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />
+        <Route render={() => <Redirect to={APP_PATHS.CHAT} />} />
       </Switch>
     );
   } else if (user_type === 'super admin') {
@@ -110,7 +109,7 @@ function Router({ user_type, fetchRooms, rooms, currentUser }) {
           component={EmployeeSettings}
         />
         <Route path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />;
-        <Route render={() => <div style={style404}>404 not found</div>} />
+        <Route render={() => <Redirect to={APP_PATHS.CHAT} />} />
       </Switch>
     );
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import theme from '../theme/styledTheme'
 
 import Messages from './Messages';
 import ChatScreenHeader from './ChatScreenHeader';
@@ -14,7 +15,22 @@ import {
   translate,
   updateTicketLanguage,
 } from '../store/actions/chat';
+import TranslateModal from './TranslateModal';
+
 class ChatScreen extends React.Component {
+  state = {
+    isTranslateModalOpen: false,
+    translatedMessages: [],
+  };
+
+  openTranslateModal = () => {
+    this.setState({ isTranslateModalOpen: true });
+  };
+
+  closeTranslateModal = () => {
+    this.setState({ isTranslateModalOpen: false });
+  };
+
   closeTicket = () => {
     const chat_id = this.props.chat._id;
     this.props.socket.emit(SOCKET.STOPPED_TYPING, chat_id);
@@ -42,24 +58,29 @@ class ChatScreen extends React.Component {
     });
     // translate message from guest
     const translatedText = await translate(textToTranslate, ticket_id);
-    /**
-     * @todo - Render translated text in a Modal
-     */
 
-    const lastTranslatedText = translatedText[translatedText.length - 1];
+    this.setState({ translatedMessages: translatedText });
+
+    const firstTranslatedText = translatedText[0];
     const chat_id = this.props.chat._id;
-    // get language from last translated message to state
-    this.props.updateTicketLanguage(chat_id, lastTranslatedText.inputLang);
+    // get language from first translated message to state
+
+    this.props.updateTicketLanguage(
+      chat_id,
+      firstTranslatedText.detectedSourceLanguage
+    );
+    // open modal with translated messages
+    this.openTranslateModal();
+
   };
 
   render() {
-
     const { chat, status, currentUser } = this.props;
     const lastTicket = chat.tickets[this.props.chat.tickets.length - 1];
 
     return (
       <StyledChatScreen>
-        <ChatScreenHeader
+        <ChatScreenHeader 
           guest_name={chat.guest.name}
           room_name={chat.room.name}
         />
@@ -83,9 +104,17 @@ class ChatScreen extends React.Component {
         ) : null}
         {QUEUED === status ? (
           <React.Fragment>
-            <Button onClick={this.joinChat}>Join Chat</Button>
+            <StyledJoinButton onClick={this.joinChat}>Join Chat</StyledJoinButton>
           </React.Fragment>
         ) : null}
+
+        {this.state.isTranslateModalOpen && (
+          <TranslateModal
+            translations={this.state.translatedMessages}
+            isTranslateModalOpen={this.state.isTranslateModalOpen}
+            closeTranslateModal={this.closeTranslateModal}
+          />
+        )}
       </StyledChatScreen>
     );
   }
@@ -125,8 +154,21 @@ function mapStateToProps(state) {
   };
 }
 
-const StyledChatScreen = styled.div``;
+const StyledChatScreen = styled.div`
+font-size:${theme.fontSize.xxxs};
 
+`;
+
+const StyledJoinButton = styled.button`
+   margin: 2rem;
+   border-radius: 0.5rem;
+   background-color:${theme.color.accentGreen};
+   color:${theme.color.white};
+   font-weight:${theme.fontWeight.bolder};;
+   width:95%;
+   align-item:center;
+   padding:1.5rem;
+`;
 export default connect(
   mapStateToProps,
   { setCurrentChatId, updateTicketLanguage }
