@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { validate } from 'email-validator';
-
+import Restricted from './reusable/RestrictedModal';
 import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
 
 class CheckOutForm extends React.Component {
@@ -111,6 +111,7 @@ class CheckOutForm extends React.Component {
           onChange={event => this.setEmailInput(event.target.value)}
           margin="normal"
         />
+
         {this.state.isCheckingOut ? (
           <CircularProgress />
         ) : (
