@@ -6,8 +6,6 @@ import CardDetails from './CardDetails';
 import PlanCheckout from './PlanCheckout';
 import EditPaymentMethodModal from './EditPaymentMethodModal';
 
-const PaymentMethodWrapper = styled.div``;
-
 const PaymentMethod = ({
   payment,
   fireCreateNewCustomer,
@@ -45,6 +43,7 @@ const PaymentMethod = ({
           fireCreateNewCustomer={fireCreateNewCustomer}
           billingEmail={billingEmail}
           handleInputChange={handleInputChange}
+          isPayment={payment ? true : false}
         />
       </PaymentMethodWrapper>
     );
@@ -59,5 +58,7 @@ PaymentMethod.propTypes = {
   handleModalSwitch: PT.func.isRequired,
   fireUpdateCustomerMethod: PT.func.isRequired,
 };
+
+const PaymentMethodWrapper = styled.div``;
 
 export default PaymentMethod;
