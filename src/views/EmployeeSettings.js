@@ -111,6 +111,7 @@ class EmployeeSettings extends React.Component {
             handleInputChange={this.handleInputChange}
             fireUserUpdates={this.fireUserUpdates}
             clearChanges={this.clearChanges}
+            loading={this.props.loading}
           />
 
           {this.state.passwordsModalOpen && (
@@ -135,6 +136,7 @@ class EmployeeSettings extends React.Component {
 
 const mapStateToProps = state => ({
   employee: state.currentUser,
+  loading: state.loading,
 });
 
 const mapDispatchToProps = dispatch => {

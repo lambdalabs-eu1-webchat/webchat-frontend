@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from './../theme/styledTheme';
 
+import theme from './../theme/styledTheme';
+import Spinner from '../components/reusable/Spinner';
 
 const EmployeeSettingsForm = ({
   employeeChanges,
   handleInputChange,
   fireUserUpdates,
   clearChanges,
+  loading,
 }) => {
   return (
     <div>
@@ -48,7 +50,7 @@ const EmployeeSettingsForm = ({
         />
         <div className="form-buttons">
           <button type="submit" onClick={fireUserUpdates}>
-            Update
+            {loading.updateUser ? <Spinner /> : 'Update'}
           </button>
           <button type="submit" onClick={clearChanges}>
             Cancel
@@ -71,13 +73,13 @@ const EmployeeSettingsFormWrapper = styled.div`
     width: 100%;
     height: 100%;
   }
-  
+
   h1 {
     font-size: ${theme.fontSize.xl};
     padding: 20px 0;
     color: ${theme.color.textColor};
   }
-  
+
   input {
     border: none;
     border-bottom: 1px solid ${theme.color.footerText};
@@ -91,10 +93,10 @@ const EmployeeSettingsFormWrapper = styled.div`
       outline: none;
     }
   }
-  
+
   .form-buttons {
     display: flex;
-    @media(max-width: 600px) {
+    @media (max-width: 600px) {
       flex-direction: column;
       width: 100%;
       margin: 0;
@@ -104,7 +106,7 @@ const EmployeeSettingsFormWrapper = styled.div`
       height: ${theme.button.height};
       font-size: ${theme.fontSize.s};
       border-radius: ${theme.border.radius};
-      background:${theme.color.accentGreen};
+      background: ${theme.color.accentGreen};
       border: none;
       text-transform: ${theme.textTransform.uppercase};
       color: ${theme.color.white};
@@ -119,11 +121,11 @@ const EmployeeSettingsFormWrapper = styled.div`
         outline: none;
       }
       &:first-child {
-      margin-right: 1.5rem;
+        margin-right: 1.5rem;
       }
       @media (max-width: 600px) {
         width: 100%;
       }
     }
-  } 
+  }
 `;
