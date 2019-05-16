@@ -104,7 +104,6 @@ class EmployeeSettings extends React.Component {
 
   render() {
     return (
-      <EmployeeSettingsOuter>
         <EmployeeSettingsWrapper>
           <EmployeeSettingsForm
             employee={this.props.employee}
@@ -130,7 +129,6 @@ class EmployeeSettings extends React.Component {
             />
           )}
         </EmployeeSettingsWrapper>
-      </EmployeeSettingsOuter>
     );
   }
 }
@@ -153,25 +151,12 @@ export default connect(
   mapDispatchToProps
 )(EmployeeSettings);
 
-const EmployeeSettingsOuter = styled.div`
-  background: ${theme.color.offWhite};
-  height: 100vh;
-  @media (max-width: 1000px) {
-    background: ${theme.color.white};
-  }
-`;
-
 const EmployeeSettingsWrapper = styled.div`
   padding: 5rem 5rem 11rem 5rem;
   background: ${theme.color.white};
   margin: 0 5rem;
-  box-shadow: ${theme.shadow.containerShadow};
-  @media (max-width: 1000px) {
-    box-shadow: none;
-  }
   @media(max-width: 600px) {
     padding: 3rem;
-    box-shadow: none;
     margin: 0;
   }
 `;
