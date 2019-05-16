@@ -48,13 +48,13 @@
 /*    margin: 5px;*/
 /*}*/
 
-p {
-  color: #213952;
-}
+/*p {*/
+/*  color: #213952;*/
+/*}*/
 
-button:hover {
-  background: #00a56a;
-}
+/*button:hover {*/
+/*  background: #00a56a;*/
+/*}*/
 
 .Logo {
   background-image: url(./frontdesklogo.png);
@@ -67,24 +67,24 @@ button:hover {
 }
 /* ====== Super Admin NavBar ====== */
 
-.super-admin-nav {
-  margin-top: 15px;
-  display: flex;
-  justify-content: flex-end;
-}
-.super-admin-nav a {
-  text-decoration: none;
-  color: #213952;
-  background: #f1f1f1;
-  padding: 10px;
-  width: 150px;
-  border-radius: 3px 3px 0 0;
-  border: 1px solid lightgrey;
-}
+/*.super-admin-nav {*/
+/*  margin-top: 15px;*/
+/*  display: flex;*/
+/*  justify-content: flex-end;*/
+/*}*/
+/*.super-admin-nav a {*/
+/*  text-decoration: none;*/
+/*  color: #213952;*/
+/*  background: #f1f1f1;*/
+/*  padding: 10px;*/
+/*  width: 150px;*/
+/*  border-radius: 3px 3px 0 0;*/
+/*  border: 1px solid lightgrey;*/
+/*}*/
 
-.super-admin-nav a.active {
-  background: #0cd4af;
-}
+/*.super-admin-nav a.active {*/
+/*  background: #0cd4af;*/
+/*}*/
 
 /*======== Team Members List ========= */
 
