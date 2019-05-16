@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import theme from './../theme/styledTheme';
 import { fetchSingleHotel, updateHotel } from '../store/actions/hotel';
 import {
   deleteRoomForHotel,
@@ -11,17 +12,6 @@ import {
 } from '../store/actions/rooms';
 
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
-
-const CompanySettingsWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 800px;
-  margin: 0 auto 100px;
-  @media (max-width: 500px) {
-    flex-direction: column;
-    max-width: 100%;
-  }
-`;
 
 class CompanySettings extends React.Component {
   constructor(props) {
@@ -129,7 +119,7 @@ class CompanySettings extends React.Component {
     } = this.props;
 
     return (
-      <div className="company-settings">
+      <CompanySettingsOuterWrapper>
         <h2>Company Settings</h2>
         <CompanySettingsWrapper>
           <section className="company-details">
@@ -175,7 +165,7 @@ class CompanySettings extends React.Component {
             addRooms={this.addRooms}
           />
         </CompanySettingsWrapper>
-      </div>
+      </CompanySettingsOuterWrapper>
     );
   }
 }
@@ -210,3 +200,91 @@ export default connect(
     dispatchCreateRoomForHotel: createRoomForHotel,
   },
 )(CompanySettings);
+
+const CompanySettingsOuterWrapper = styled.div`
+  margin: 0 3rem;
+  @media(max-width: 800px) {
+    margin: 0 auto;
+  }
+  h2 {
+    font-size: ${theme.fontSize.l};
+    padding: 1.5rem 0;
+  }
+`;
+
+const CompanySettingsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 5rem 0;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    max-width: 100%;
+  }
+  
+  .company-details {
+    width: 30%;
+    @media (max-width: 800px) {
+    width:100%;
+    }
+    
+    h3 {
+      font-size: ${theme.fontSize.xs};
+      color: ${theme.color.accentPurple};
+      padding: 1.5rem 0;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      
+      input {
+        border: none;
+        border-bottom: 1px solid ${theme.color.footerText};
+        margin-bottom: 20px;
+        height: ${theme.input.height};
+        font-size: ${theme.fontSize.xs};
+        padding: 20px 0;
+        border-radius: 0;
+        &:focus {
+          outline: none;
+        }
+      }
+      button {
+        width: 15rem;
+        height: ${theme.button.smallButton};
+        font-size: ${theme.fontSize.xxs};
+        border-radius: ${theme.border.radius};
+        background:${theme.color.accentGreen};
+        border: none;
+        text-transform: ${theme.textTransform.uppercase};
+        color: ${theme.color.white};
+        font-weight: ${theme.fontWeight.bold};
+        margin: 15px 0;
+        box-shadow: ${theme.shadow.buttonShadow};
+        &:hover {
+          box-shadow: ${theme.shadow.buttonHover};
+          cursor: pointer;
+        }
+        &:focus {
+          outline: none;
+        }
+        &:first-child {
+          margin-right: 1.5rem;
+        }
+        @media (max-width: 1200px) {
+          width: 100%;
+          height: ${theme.button.smallButton};
+          margin: 0 0 1.5rem 0;
+          &:first-child {
+            margin-right: 0;
+          }
+        }
+        @media (max-width: 800px) {
+          height: ${theme.button.height};
+          font-size: ${theme.fontSize.s};
+        }
+      }
+    }
+  }
+`;
