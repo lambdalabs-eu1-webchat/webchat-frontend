@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setCurrentChatId } from '../../store/actions/chat';
 import { SOCKET } from '../../utils/paths';
+import theme from '../../theme/styledTheme'
+import styled from 'styled-components'
 const filterTickets = (tickets, filterCond) => {
   return tickets.filter(ticket => ticket.status === filterCond);
 };
@@ -25,14 +27,13 @@ const TicketView = ({
       {chatsArr &&
         chatsArr.map(chat => {
           return (
-            <div
+            <StyledLineDiv
               onClick={() => handleChatSelect(chat._id)}
-              style={lineStyle}
               key={chat._id}
             >
-              <div style={divStyle}>
-                <div style={name}>Guest Name: {chat.guest.name}</div>
-                <div style={name}>Room Number: {chat.room.name}</div>
+              <StyledDiv>
+                <HeaderStyle>Guest Name: {chat.guest.name}</HeaderStyle>
+                <HeaderStyle>Room Number: {chat.room.name}</HeaderStyle>
                 {filterTickets(chat.tickets, status).map(ticket => {
                   return (
                     <div key={ticket._id}>
@@ -43,8 +44,8 @@ const TicketView = ({
                     </div>
                   );
                 })}
-              </div>
-            </div>
+              </StyledDiv>
+            </StyledLineDiv>
           );
         })}
     </div>
@@ -60,27 +61,27 @@ TicketView.propTypes = {
   setCurrentChatId: PropTypes.func.isRequired,
 };
 
-const divStyle = {
-  border:'1px solid #0CD4AF',
-  backgroundColor:'#5B66AC',
-  margin: '10px',
-  padding: '10px',
-  width: '100%',
-  borderRadius:'10px',
-  color:'white',
-  fontWeight:'light',
-  fontSize:'13px',
- 
-};
-const name = {
-fontWeight:'bolder',
-color:'white',
-};
+const StyledDiv = styled.div`
+border:1px solid ${theme.color.accentGreen};
+background-color:${theme.color.accentPurple};
+margin: 0.625rem;
+padding: 0.625rem;
+width: 100%;
+border-radius:0.625rem;
+color:white;
+font-eight:${theme.fontWeight.light};
+font-size:1rem;
+`; 
+const HeaderStyle = styled.div`
+font-weight:${theme.fontWeight.bolder};
+color:${theme.color.accentGreen}
+`;
 
-const lineStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-};
+const StyledLineDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`; 
+
 function mapStateToProps(state) {
   return {
     socket: state.chats.socket,
