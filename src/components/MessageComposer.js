@@ -7,6 +7,7 @@ import { SOCKET } from '../utils/paths';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import { translate } from '../store/actions/chat';
+import theme from '../theme/styledTheme'
 
 class MessageComposer extends React.Component {
   state = {
@@ -68,7 +69,9 @@ class MessageComposer extends React.Component {
           onChange={this.handleInput}
           className="flex"
         />
-        <Button onClick={this.handleSend}>Send</Button>
+        <StyledMessageComposerSendButton onClick={this.handleSend}>
+        <span  className="fas fa-paper-plane"></span>
+        </StyledMessageComposerSendButton>
         <Button onClick={() => this.translateSend()}>Translate & Send</Button>
       </StyledMessageComposer>
     );
@@ -89,7 +92,22 @@ const StyledMessageComposer = styled.div`
   .flex {
     flex: 1;
   }
+
 `;
+const StyledMessageComposerSendButton = styled.button`
+color: ${theme.color.footerText};
+border:none
+&:hover{
+  background:transparent;
+}
+&:focus {
+  outline: -webkit-focus-ring-color auto 5px;
+  outline-color: -webkit-focus-ring-color;
+  outline-style: auto;
+  outline-width: 0;
+}
+`;
+
 // need to get the socket here to emit connect props
 
 const mapStateToProps = state => {
