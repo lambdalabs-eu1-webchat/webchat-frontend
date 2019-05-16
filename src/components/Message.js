@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import theme from'../theme/styledTheme'
 
 function Message({ message, guest_id }) {
   return (
@@ -25,14 +26,14 @@ Message.propTypes = {
 };
 
 const StyledMessage = styled.div`
-  margin: 20px;
+  margin: 1.25rem;
   position: relative;
   max-width: 65%;
   border-radius: 2em;
-  padding: 15px;
+  padding: 2rem;
 
 
-  ${props => (props.left ? `background:#F4F6FF;` : 'background:#c7ccec;')}
+  ${props => (props.left ? `background:${theme.color.lightPurple};` : `background:${theme.color.footerText};`)}
   ${props => (props.left ? `text-align: left;` : 'text-align: right;')}
   ${props => (props.left ? `margin-right:auto;` : 'margin-left:auto;')}
   &:after {
@@ -51,12 +52,12 @@ const StyledMessage = styled.div`
         ? `
     border-left:0;
     left: 3%;
-    border-top-color: #F4F6FF;
+    border-top-color: ${theme.color.lightPurple};
     `
         : `
         border-right:0;
         right:3%;
-        border-top-color: #c7ccec;
+        border-top-color:${theme.color.footerText};
   `}
   }
 `;
