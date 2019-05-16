@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import TicketView from './TicketView';
 import SearchInput from './SearchInput';
 import searchMachine from './searchMachine';
+import styled from 'styled-components'
 
 class ChatsList extends React.Component {
   state = {
@@ -25,10 +26,10 @@ class ChatsList extends React.Component {
     const searchResult = searchMachine(chatsArr, this.state.inputField);
 
     return (
-      <div style={divStyle}>
+      <StyledDiv>
         <SearchInput status={status} searchInputField={this.searchInputField} />
         <TicketView chatsArr={searchResult} status={status} />
-      </div>
+      </StyledDiv>
     );
   }
 }
@@ -43,11 +44,11 @@ ChatsList.propTypes = {
   status: PropTypes.string.isRequired,
 };
 
-const divStyle = {
-  border: '',
-  margin: '10px',
-  padding: '10px',
-  
-};
+const StyledDiv = styled.div`
+border: none;
+margin: 0.625rem;
+padding:0.625rem;
+
+`;
 
 export default ChatsList;
