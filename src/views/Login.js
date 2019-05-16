@@ -12,6 +12,7 @@ class Login extends React.Component {
   state = {
     email: '',
     password: '',
+    flashMessage: '',
   };
 
   handleInput = event => {
@@ -21,8 +22,25 @@ class Login extends React.Component {
     });
   };
 
-  handleLogin = () => {
-    console.log('test');
+  setFlashMessage = flashMessage => {
+    this.setState({
+      flashMessage,
+    });
+  };
+
+  handleLogin = async event => {
+    event.preventDefault();
+    if (this.state.email && this.state.password) {
+      const res = await this.props.loginRequest(
+        this.state.email,
+        this.state.password,
+      );
+      if (res.message) {
+        this.setFlashMessage(res.message);
+      }
+    } else {
+      this.setFlashMessage('Please fill in all required fields');
+    }
   };
 
   render() {
@@ -53,6 +71,7 @@ class Login extends React.Component {
               value={this.state.password}
               onChange={this.handleInput}
             />
+            <p>{this.state.flashMessage}</p>
             <button type="submit" onClick={this.handleLogin}>
               Login
             </button>
