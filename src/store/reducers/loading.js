@@ -143,7 +143,7 @@ const loading = (state = initialState, action) => {
         ...state,
         switchPlan: true,
       };
-    case SUBSCRIPTIONS.SWICTH_CUSTOMER_PLAN_FINISHED:
+    case SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN_FINISHED:
       return {
         ...state,
         switchPlan: false,

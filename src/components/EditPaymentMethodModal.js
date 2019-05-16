@@ -5,6 +5,7 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 
 import PlanCheckoutForm from './PlanCheckoutForm';
+import Spinner from '../components/reusable/Spinner';
 
 const EditPaymentMethodModalWrapper = styled.div`
   display: ${props => props.modalstatus};
@@ -24,6 +25,7 @@ function EditPaymentMethodModal({
   editPaymentMethodModal,
   handleModalSwitch,
   fireUpdateCustomerMethod,
+  loading,
 }) {
   return (
     // move this test key into dotenv
@@ -42,6 +44,7 @@ function EditPaymentMethodModal({
             handleInputChange={handleInputChange}
             buttonText={'Change payment method'}
             fireUpdateCustomerMethod={fireUpdateCustomerMethod}
+            loading={loading}
           />
         </Elements>
       </EditPaymentMethodModalWrapper>

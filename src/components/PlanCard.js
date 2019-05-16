@@ -5,6 +5,8 @@ import ListItem from '@material-ui/core/ListItem';
 import PT from 'prop-types';
 import styled from 'styled-components';
 
+import Spinner from '../components/reusable/Spinner';
+
 const HighlighterWrapper = styled.div`
   background-color: ${props => props.highlight};
   width: 30%;
@@ -13,7 +15,7 @@ const HighlighterWrapper = styled.div`
   border: 1px solid lightgrey;
 `;
 
-const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
+const PlanCard = ({ plan, current, fireSwitchCustomerPlan, loading }) => {
   return (
     <HighlighterWrapper highlight={current ? 'blanchedalmond' : false}>
       <h2>{plan.title.toUpperCase()}</h2>
@@ -31,6 +33,8 @@ const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
         >
           {plan.buttonText}
         </Button>
+      ) : current  && loading.switchPlan ? (
+        <Spinner />
       ) : (
         <></>
       )}

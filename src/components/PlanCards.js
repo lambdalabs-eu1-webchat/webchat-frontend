@@ -9,23 +9,26 @@ const PlanCardWrapper = styled.div`
   display: flex;
 `;
 
-const PlanCards = ({ hotel, fireSwitchCustomerPlan }) => {
+const PlanCards = ({ hotel, fireSwitchCustomerPlan, loading }) => {
   return (
     <PlanCardWrapper>
       <PlanCard
         plan={freePlan}
         current={hotel.plan === 'free' ? true : false}
         fireSwitchCustomerPlan={fireSwitchCustomerPlan}
+        loading={loading}
       />
       <PlanCard
         plan={plusPlan}
         current={hotel.plan === 'plus' ? true : false}
         fireSwitchCustomerPlan={fireSwitchCustomerPlan}
+        loading={loading}
       />
       <PlanCard
         plan={proPlan}
         current={hotel.plan === 'pro' ? true : false}
         fireSwitchCustomerPlan={fireSwitchCustomerPlan}
+        loading={loading}
       />
     </PlanCardWrapper>
   );

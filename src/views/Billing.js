@@ -102,7 +102,7 @@ class Billing extends React.Component {
     };
     await this.props.updateCustomerMethod(
       this.props.hotel._id,
-      enhancedStripeToken
+      enhancedStripeToken,
     );
     this.closeModal();
   };
@@ -114,6 +114,7 @@ class Billing extends React.Component {
         <PlanCards
           hotel={this.props.hotel}
           fireSwitchCustomerPlan={this.fireSwitchCustomerPlan}
+          loading={this.props.loading}
         />
         <PaymentMethod
           payment={this.props.hotel.billing}
@@ -123,6 +124,7 @@ class Billing extends React.Component {
           editPaymentMethodModal={this.state.editPaymentMethodModal}
           handleModalSwitch={this.handleModalSwitch}
           fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
+          loading={this.props.loading}
         />
 
         {this.state.isPaymentPlanModalOpen && (
@@ -153,12 +155,14 @@ Billing.propTypes = {
   updateCustomerMethod: PT.func.isRequired,
   fetchHotelStaff: PT.func.isRequired,
   staff: PT.array.isRequired,
+  loading: PT.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   hotel: state.hotel,
   hotel_id: state.currentUser.hotel_id, // do we need to bring this and the hotel object in
   staff: state.users,
+  loading: state.loading,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -170,11 +174,11 @@ const mapDispatchToProps = dispatch => {
       updateCustomerMethod,
       fetchHotelStaff,
     },
-    dispatch
+    dispatch,
   );
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Billing);
