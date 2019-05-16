@@ -53,7 +53,7 @@ const TeamMember = ({
       }
     };
   };
-  const handleDeleteClick = (deleteUser, id, currentUser, user_type) => {
+  const handleDeleteClick = (currentUser, user_type) => {
     if (
       currentUser.user_type !== 'admin' &&
       currentUser.user_type !== 'super admin'
@@ -89,7 +89,7 @@ const TeamMember = ({
       />
       <i
         className="fas fa-trash-alt"
-        onClick={handleDeleteClick(deleteUser, userId, currentUser, user_type)}
+        onClick={handleDeleteClick(currentUser, user_type)}
       />
 
       {isRestrictedModalOpen && (

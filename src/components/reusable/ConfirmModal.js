@@ -15,7 +15,6 @@ class Confirm extends React.Component {
     if (this.props.noCallBack) {
       this.props.noCallBack();
     }
-    debugger;
     this.props.closeModal();
   };
   render() {

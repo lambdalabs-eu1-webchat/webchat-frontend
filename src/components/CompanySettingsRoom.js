@@ -1,35 +1,5 @@
-import React from 'react';
-
-const getRoomNameFromInput = parentNode => {
-  let roomName = '';
-  parentNode.childNodes.forEach(childNode => {
-    if (childNode.name === 'roomName') {
-      roomName = childNode.value;
-    }
-  });
-  return roomName;
-};
-
-const handleUpdateClick = (updateRoomForHotel, id, hotelId) => {
-  return event => {
-    event.preventDefault();
-    const roomName = getRoomNameFromInput(event.target.parentNode);
-    if (window.confirm('Are you sure you want to edit this room?')) {
-      if (roomName) {
-        updateRoomForHotel(hotelId, id, roomName);
-      }
-    }
-  };
-};
-
-const handleDeleteClick = (deleteRoomForHotel, id, hotelId) => {
-  return event => {
-    if (window.confirm('Are you sure you want to delete this room?')) {
-      event.preventDefault();
-      deleteRoomForHotel(id, hotelId);
-    }
-  };
-};
+import React, { useState } from 'react';
+import Confirm from './reusable/ConfirmModal';
 
 const CompanySettingsRoom = ({
   room,
@@ -41,6 +11,30 @@ const CompanySettingsRoom = ({
   deleteRoomForHotel,
   updateRoomForHotel,
 }) => {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const handleDeleteClick = () => {
+    setIsDeleteModalOpen(true);
+  };
+  const handleUpdateClick = (updateRoomForHotel, id, hotelId) => {
+    return event => {
+      event.preventDefault();
+      const roomName = getRoomNameFromInput(event.target.parentNode);
+      if (window.confirm('Are you sure you want to edit this room?')) {
+        if (roomName) {
+          updateRoomForHotel(hotelId, id, roomName);
+        }
+      }
+    };
+  };
+  const getRoomNameFromInput = parentNode => {
+    let roomName = '';
+    parentNode.childNodes.forEach(childNode => {
+      if (childNode.name === 'roomName') {
+        roomName = childNode.value;
+      }
+    });
+    return roomName;
+  };
   return !room || !room[index] ? (
     <div>Loading</div>
   ) : (
@@ -60,14 +54,15 @@ const CompanySettingsRoom = ({
           name,
         )}
       />
-      <i
-        className="fas fa-trash-alt"
-        onClick={handleDeleteClick(
-          deleteRoomForHotel,
-          room,
-          currentUser.hotel_id,
-        )}
-      />
+      <i className="fas fa-trash-alt" onClick={handleDeleteClick} />
+      {
+        <Confirm
+          isOpen={isDeleteModalOpen}
+          question={`Are you sure you want to delete room ${name}`}
+          closeModal={() => setIsDeleteModalOpen(false)}
+          yesCallBack={() => deleteRoomForHotel(room, currentUser.hotel_id)}
+        />
+      }
     </div>
   );
 };
