@@ -148,6 +148,7 @@ const CheckInFormWrapper = styled.div`
   }
   .passcode {
     width: 100%;
+    min-width: 175px;
     background-color: #aed581;
     height: 50px;
     border-radius: 1%;
