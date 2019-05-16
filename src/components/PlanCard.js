@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import PT from 'prop-types';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
@@ -45,6 +44,28 @@ const HighlighterWrapper = styled.div`
     font-size: 1rem;
     margin-right: 2.5%;
   }
+
+  button {
+    width: 15rem;
+    min-width: 150px;
+    padding: 2rem;
+    font-size: ${theme.fontSize.xxs};
+    border-radius: ${theme.border.radius};
+    background: ${theme.color.accentGreen};
+    border: none;
+    text-transform: ${theme.textTransform.uppercase};
+    color: ${theme.color.white};
+    font-weight: ${theme.fontWeight.bold};
+    margin: 15px 0;
+    box-shadow: ${theme.shadow.buttonShadow};
+    &:hover {
+      box-shadow: ${theme.shadow.buttonHover};
+      cursor: pointer;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 
 const PriceTag = styled.div`
@@ -71,13 +92,9 @@ const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
         <PriceTag>{plan.price}</PriceTag>
       </ul>
       {!current ? (
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => fireSwitchCustomerPlan(plan.title)}
-        >
+        <button onClick={() => fireSwitchCustomerPlan(plan.title)}>
           {plan.buttonText}
-        </Button>
+        </button>
       ) : (
         <></>
       )}
