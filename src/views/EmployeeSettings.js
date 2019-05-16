@@ -2,14 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
+import theme from './../theme/styledTheme';
 
 import EmployeeSettingsForm from '../components/EmployeeSettingsForm';
 import { updateUser } from '../store/actions/users';
 import Restricted from '../components/reusable/RestrictedModal';
-
-const EmployeeSettingsWrapper = styled.div`
-  padding: 5% 25%;
-`;
 
 class EmployeeSettings extends React.Component {
   state = {
@@ -155,3 +152,26 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(EmployeeSettings);
+
+const EmployeeSettingsOuter = styled.div`
+  background: ${theme.color.offWhite};
+  height: 100vh;
+  @media (max-width: 1000px) {
+    background: ${theme.color.white};
+  }
+`;
+
+const EmployeeSettingsWrapper = styled.div`
+  padding: 5rem 5rem 11rem 5rem;
+  background: ${theme.color.white};
+  margin: 0 5rem;
+  box-shadow: ${theme.shadow.containerShadow};
+  @media (max-width: 1000px) {
+    box-shadow: none;
+  }
+  @media(max-width: 600px) {
+    padding: 3rem;
+    box-shadow: none;
+    margin: 0;
+  }
+`;
