@@ -131,8 +131,11 @@ const MenuToggle = styled.div`
     transform: translate(0, -100%);
     transition: transform 0.8s cubic-bezier(0.77, 0.2, 0.05, 1);
     @media (max-width: 600px) {
-      margin: -100px 0 50px -442px;
-      width: 500px;
+      position: fixed;
+      width: 100vw;
+      margin: 0;
+      top: 0;
+      left: 0;
       transform-origin: 0 0;
       transform: translate(0, -100%);
     }
