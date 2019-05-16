@@ -1,4 +1,6 @@
 import React from 'react';
+import styled from 'styled-components';
+import theme from './../theme/styledTheme';
 
 const getRoomNameFromInput = parentNode => {
   let roomName = '';
@@ -44,7 +46,7 @@ const CompanySettingsRoom = ({
   return !room || !room[index] ? (
     <div>Loading</div>
   ) : (
-    <div className="room">
+    <RoomWrapper>
       <input
         placeholder="room name"
         name="roomName"
@@ -68,8 +70,20 @@ const CompanySettingsRoom = ({
           currentUser.hotel_id,
         )}
       />
-    </div>
+    </RoomWrapper>
   );
 };
 
 export default CompanySettingsRoom;
+
+const RoomWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  
+  .fa-edit {
+    color: ${theme.color.accentPurple};
+  }
+  .fa-trash-alt {
+    color: ${theme.color.accentPurple};
+  }
+`;
