@@ -15,9 +15,27 @@ import { planIds } from '../utils/plans';
 import PlanCards from '../components/PlanCards';
 import PaymentMethod from '../components/PaymentMethod';
 import Restricted from '../components/reusable/RestrictedModal';
+import theme from '../theme/styledTheme';
 
 const BillingWrapper = styled.div`
-  padding: 10% 25%;
+  /* padding: 10% 25%; */
+  h1 {
+    font-size: ${theme.fontSize.xl};
+    padding: 25px;
+    font-weight: bold;
+    width: 60%;
+    color: ${theme.color.textColor};
+    @media (max-width: 1000px) {
+      width: 90%;
+    }
+  }
+
+  padding: 0 2.5% 5% 2.5%;
+  @media (max-width: 1000px) {
+    width: 95%;
+    padding: 10% 0 15% 0;
+    margin: 0 auto;
+  }
 `;
 
 class Billing extends React.Component {
@@ -110,11 +128,7 @@ class Billing extends React.Component {
   render() {
     return (
       <BillingWrapper>
-        <h2>Billing</h2>
-        <PlanCards
-          hotel={this.props.hotel}
-          fireSwitchCustomerPlan={this.fireSwitchCustomerPlan}
-        />
+        <h1>Pricing plans</h1>
         <PaymentMethod
           payment={this.props.hotel.billing}
           fireCreateNewCustomer={this.fireCreateNewCustomer}
@@ -123,6 +137,10 @@ class Billing extends React.Component {
           editPaymentMethodModal={this.state.editPaymentMethodModal}
           handleModalSwitch={this.handleModalSwitch}
           fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
+        />
+        <PlanCards
+          hotel={this.props.hotel}
+          fireSwitchCustomerPlan={this.fireSwitchCustomerPlan}
         />
 
         {this.state.isPaymentPlanModalOpen && (
