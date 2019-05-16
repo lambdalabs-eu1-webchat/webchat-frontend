@@ -282,7 +282,7 @@ const CompanySettingsWrapper = styled.div`
         }
         @media (max-width: 800px) {
           height: ${theme.button.height};
-          font-size: ${theme.fontSize.s};
+          font-size: ${theme.fontSize.xs};
         }
       }
     }
