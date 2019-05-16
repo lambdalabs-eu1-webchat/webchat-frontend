@@ -22,7 +22,7 @@ const TeamMembersListWrapper = styled.div`
 `;
 
 const TeamMembersList = (props) => {
-  const { deleteUser, changeUserType } = props;
+  const { deleteUser, changeUserType, loading } = props;
   return (
     <TeamMembersListWrapper>
       <ListHeader>
@@ -40,6 +40,7 @@ const TeamMembersList = (props) => {
           userId={user._id}
           changeUserType={changeUserType}
           deleteUser={deleteUser}
+          loading={loading}
         />
       ))}
     </TeamMembersListWrapper>

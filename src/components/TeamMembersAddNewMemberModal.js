@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Restricted from '../components/reusable/RestrictedModal';
 
-// func here takes the hotel on state and checks satff count against plan/team-members
+import Restricted from '../components/reusable/RestrictedModal';
+import Spinner from '../components/reusable/Spinner';
 
 const TeamMembersAddNewMemberModal = ({
   createUser,
@@ -9,6 +9,7 @@ const TeamMembersAddNewMemberModal = ({
   handleHideModal,
   plan,
   staffAmount,
+  loading,
 }) => {
   // use Hooks here, as it's already a func component
   const [isModalOpen, setModalOpen] = useState(false);
@@ -34,7 +35,7 @@ const TeamMembersAddNewMemberModal = ({
     createUser,
     handleHideModal,
     plan,
-    staffAmount
+    staffAmount,
   ) => event => {
     event.preventDefault();
     let name = '';
@@ -96,7 +97,7 @@ const TeamMembersAddNewMemberModal = ({
           type="submit"
           onClick={handleClick(createUser, handleHideModal, plan, staffAmount)}
         >
-          Add Member
+          {loading.createUser ? <Spinner /> : 'Add Member'}
         </button>
         <p id="add-member-message" />
       </section>

@@ -53,6 +53,7 @@ class TeamMembers extends React.Component {
           currentUser={currentUser}
           changeUserType={dispatchChangeUserType}
           deleteUser={dispatchDeleteUser}
+          loading={this.props.loading}
         />
         <TeamMembersAddNewMemberModal
           createUser={dispatchCreateUser}
@@ -60,6 +61,7 @@ class TeamMembers extends React.Component {
           modalShown={this.state.modalShown}
           plan={this.props.hotel.plan}
           staffAmount={users.length}
+          loading={this.props.loading}
         />
         <button onClick={this.handleShowModal}>Add Team Members</button>
       </div>
@@ -73,6 +75,7 @@ TeamMembers.propTypes = {
   hotel: PropTypes.object.isRequired,
   dispatchChangeUserType: PropTypes.func.isRequired,
   dispatchDeleteUser: PropTypes.func.isRequired,
+  loading: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -80,6 +83,7 @@ const mapStateToProps = state => {
     users: state.users,
     currentUser: state.currentUser,
     hotel: state.hotel,
+    loading: state.loading,
   };
 };
 
