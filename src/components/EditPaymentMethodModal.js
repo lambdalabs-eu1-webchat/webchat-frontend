@@ -36,7 +36,7 @@ function EditPaymentMethodModal({
             fireCreateNewCustomer={fireCreateNewCustomer}
             billingEmail={billingEmail}
             handleInputChange={handleInputChange}
-            buttonText={'Change payment method'}
+            buttonText={'Confirm'}
             fireUpdateCustomerMethod={fireUpdateCustomerMethod}
           />
         </Elements>
@@ -57,6 +57,7 @@ EditPaymentMethodModal.propTypes = {
 const StyledBtn = styled.button`
   border: none;
   outline: none;
+  float: right;
 
   .fa-times-circle {
     background: white;
