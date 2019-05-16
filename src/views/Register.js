@@ -130,13 +130,9 @@ class Register extends React.Component {
               value={this.state.newUser.hotelMotto}
               onChange={this.handleInput}
             />
-            {this.props.loading.register ? (
-              <Spinner />
-            ) : (
-              <button type="submit" onClick={this.handleRegister}>
-                Register
-              </button>
-            )}
+            <button type="submit" onClick={this.handleRegister}>
+              {this.props.loading.register ? <Spinner /> : 'Register'}
+            </button>
           </form>
         </RegisterWrapper>
       </RegisterOuterWrapper>

@@ -74,13 +74,9 @@ class Login extends React.Component {
               onChange={this.handleInput}
             />
             <p>{this.state.flashMessage}</p>
-            {this.props.loading.login ? (
-              <Spinner />
-            ) : (
-              <button type="submit" onClick={this.handleLogin}>
-                Login
-              </button>
-            )}
+            <button type="submit" onClick={this.handleLogin}>
+              {this.props.loading.login ? <Spinner /> : 'Login'}
+            </button>
           </form>
         </LoginWrapper>
       </LoginOuterWrapper>
