@@ -5,17 +5,6 @@ import CompanySettingsRoom from './CompanySettingsRoom';
 import theme from './../theme/styledTheme';
 import Spinner from '../components/reusable/Spinner';
 
-const AddRooms = styled.section`
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  @media (max-width: 500px) {
-    margin: 0 auto;
-    max-width: 100%;
-    padding-left: 35px;
-  }
-`;
-
 const CompanySettingsRoomsList = props => {
   const {
     rooms,
