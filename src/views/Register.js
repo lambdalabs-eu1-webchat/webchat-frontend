@@ -160,10 +160,11 @@ export default connect(
 
 const RegisterOuterWrapper = styled.div`
   background: ${theme.color.offWhite};
+  height: 100%;
 `;
 
 const RegisterWrapper = styled.div`
-  padding: 4% 0;
+  padding: 8rem 0;
   @media (max-width: 600px) {
     width: 100%;
     margin: 0;
