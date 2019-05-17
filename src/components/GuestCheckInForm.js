@@ -123,16 +123,15 @@ const CheckInFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   select {
-    padding: 3rem;
     background: ${theme.color.lightPurple};
     font-size: ${theme.fontSize.xxs};
     color: ${theme.color.accentPurple};
     font-family: ${theme.font.fontFamily};
     font-weight: bold;
-    height: 3rem;
+    height: 6rem;
     border: none;
     &:focus {
-    outline: none;
+      outline: none;
     }
   }
   input {
@@ -147,13 +146,13 @@ const CheckInFormWrapper = styled.div`
       outline: none;
     }
   }
-  
+
   button {
     width: 100%;
     height: ${theme.button.smallButton};
     font-size: ${theme.fontSize.xxs};
     border-radius: ${theme.border.radius};
-    background:${theme.color.accentGreen};
+    background: ${theme.color.accentGreen};
     border: none;
     text-transform: ${theme.textTransform.uppercase};
     color: ${theme.color.white};
@@ -183,7 +182,7 @@ const CheckInFormWrapper = styled.div`
       font-size: ${theme.fontSize.xs};
     }
   }
-  
+
   .error {
     box-shadow: 0 0 3px red;
   }
@@ -203,11 +202,15 @@ const CheckInFormWrapper = styled.div`
       width: 100px;
       position: absolute;
       font-size: ${theme.fontSize.xxs};
+      font-family: ${theme.font.fontFamily};
+      font-weight: bold;
+      color: ${theme.color.accentPurple};
       top: 6px;
       left: 6px;
     }
     .login-code {
       font-size: ${theme.fontSize.m};
+      color: ${theme.color.accentPurple};
       justify-self: center;
     }
     @media (max-width: 800px) {

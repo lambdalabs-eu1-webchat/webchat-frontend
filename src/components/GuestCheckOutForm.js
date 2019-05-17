@@ -58,11 +58,12 @@ class CheckOutForm extends React.Component {
     const guest = this.props.currentGuests.find(
       guest => guest._id === guest_id,
     );
-    const room = { name: guest.room.name, _id: guest.room.id };
+
     if (guestEmail) {
       await this.sendGuestEmail();
     }
-    if (guest_id && !this.state.emailInput) {
+    if (guest_id !== 'DEFAULT' && !this.state.emailInput) {
+      const room = { name: guest.room.name, _id: guest.room.id };
       this.setState({ isCheckingOut: true });
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
@@ -80,7 +81,7 @@ class CheckOutForm extends React.Component {
         console.error(error);
       }
     }
-    if (!guest_id) {
+    if (guest_id === 'DEFAULT') {
       this.setState({ errorRoom: true });
     }
   };
@@ -111,6 +112,7 @@ class CheckOutForm extends React.Component {
           variant="contained"
           color="primary"
           onClick={this.checkOutGuest}
+          disabled={this.state.isCheckingOut}
         >
           {this.state.isCheckingOut ? <Spinner /> : 'Check Out'}
         </button>
@@ -144,21 +146,20 @@ const CheckOutFormWrapper = styled.div`
   flex-direction: column;
   margin: 0;
   width: 100%;
-  
+
   select {
-    padding: 3rem;
     background: ${theme.color.lightPurple};
     font-size: ${theme.fontSize.xxs};
     color: ${theme.color.accentPurple};
     font-family: ${theme.font.fontFamily};
     font-weight: bold;
-    height: 3rem;
+    height: 6rem;
     border: none;
     &:focus {
-    outline: none;
+      outline: none;
     }
   }
-  
+
   input {
     border: none;
     border-bottom: 1px solid ${theme.color.footerText};
@@ -171,13 +172,13 @@ const CheckOutFormWrapper = styled.div`
       outline: none;
     }
   }
-  
+
   button {
     width: 100%;
     height: ${theme.button.smallButton};
     font-size: ${theme.fontSize.xxs};
     border-radius: ${theme.border.radius};
-    background:${theme.color.accentGreen};
+    background: ${theme.color.accentGreen};
     border: none;
     text-transform: ${theme.textTransform.uppercase};
     color: ${theme.color.white};
@@ -204,7 +205,7 @@ const CheckOutFormWrapper = styled.div`
       font-size: ${theme.fontSize.xs};
     }
   }
-  
+
   .error {
     box-shadow: 0 0 3px red;
   }
