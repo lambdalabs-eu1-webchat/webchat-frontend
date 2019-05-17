@@ -130,6 +130,7 @@ class Register extends React.Component {
               value={this.state.newUser.hotelMotto}
               onChange={this.handleInput}
             />
+            <p>{this.state.flashMessage}</p>
             <button type="submit" onClick={this.handleRegister}>
               {this.props.loading.register ? <Spinner /> : 'Register'}
             </button>
