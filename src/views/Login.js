@@ -8,12 +8,13 @@ import theme from './../theme/styledTheme';
 import { messages } from '../utils/messages';
 import { loginRequest } from '../store/actions/auth';
 import { APP_PATHS } from '../utils/paths';
+import Spinner from '../components/reusable/Spinner';
 
 class Login extends React.Component {
   state = {
     email: '',
     password: '',
-    flashMessage: '',
+    flashMessage: messages.allRequiredFields,
   };
 
   handleInput = event => {
@@ -43,15 +44,9 @@ class Login extends React.Component {
       this.setFlashMessage(messages.allRequiredFields);
     }
   };
-
   render() {
-    if (this.props.numberRooms === 0 && this.props.loggedIn) {
-      return (
-        <Redirect to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS} />
-      );
-    }
     if (!!this.props.loggedIn) {
-      return <Redirect to="/chat" />;
+      return <Redirect to="/" />;
     }
     return (
       <LoginOuterWrapper>
@@ -74,7 +69,7 @@ class Login extends React.Component {
             />
             <p>{this.state.flashMessage}</p>
             <button type="submit" onClick={this.handleLogin}>
-              Login
+              {this.props.loading.login ? <Spinner /> : 'Login'}
             </button>
           </form>
         </LoginWrapper>
@@ -87,12 +82,15 @@ Login.propTypes = {
   loginRequest: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   numberRooms: PropTypes.number.isRequired,
+  loading: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     loggedIn: !!state.currentUser._id,
+    hotelHasZeroRooms: state.rooms.hotelHasZeroRooms,
     numberRooms: state.rooms.rooms.length,
+    loading: state.loading,
   };
 }
 
