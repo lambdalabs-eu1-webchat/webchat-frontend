@@ -203,6 +203,7 @@ export default connect(
 
 const CompanySettingsOuterWrapper = styled.div`
   margin: 0 3rem;
+  min-height: 730px;
   @media(max-width: 800px) {
     margin: 0 auto;
   }
@@ -282,7 +283,7 @@ const CompanySettingsWrapper = styled.div`
         }
         @media (max-width: 800px) {
           height: ${theme.button.height};
-          font-size: ${theme.fontSize.s};
+          font-size: ${theme.fontSize.xs};
         }
       }
     }
