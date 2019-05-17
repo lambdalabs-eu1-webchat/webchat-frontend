@@ -40,6 +40,7 @@ function Router({
   } else if (user_type === 'admin') {
     return (
       <Switch>
+        <Route exact path="/" component={HomePage} />
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
@@ -56,7 +57,6 @@ function Router({
     );
   } else if (user_type === 'super admin') {
     // if havent gotten rooms yet get them
-    debugger;
     if (!gotRooms) {
       fetchRooms(currentUser.hotel_id);
     }
@@ -81,12 +81,12 @@ function Router({
           />
         </Switch>
       );
-
       // redirect to that route
     }
 
     return (
       <Switch>
+        <Route exact path="/" component={HomePage} />
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
@@ -105,6 +105,7 @@ function Router({
   } else if (user_type === 'receptionist') {
     return (
       <Switch>
+        <Route exact path="/" component={HomePage} />
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
