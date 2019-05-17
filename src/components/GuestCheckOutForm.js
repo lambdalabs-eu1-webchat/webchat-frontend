@@ -160,7 +160,7 @@ const CheckOutFormWrapper = styled.div`
   }
   button {
     margin-bottom: 5%;
-    background-color:red;
+    background-color:${theme.color.warning};
   }
 `;
 
