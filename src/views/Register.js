@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 import { registerUser, loginRequest } from '../store/actions/auth.js';
 import { messages } from '../utils/messages';
+import Spinner from '../components/reusable/Spinner';
 
 class Register extends React.Component {
   state = {
@@ -129,13 +130,9 @@ class Register extends React.Component {
               value={this.state.newUser.hotelMotto}
               onChange={this.handleInput}
             />
-            <p>
-              {this.props.loading
-                ? messages.registrationInProgress
-                : this.state.flashMessage}
-            </p>
+            <p>{this.state.flashMessage}</p>
             <button type="submit" onClick={this.handleRegister}>
-              Register
+              {this.props.loading.register ? <Spinner /> : 'Register'}
             </button>
           </form>
         </RegisterWrapper>
@@ -147,6 +144,7 @@ class Register extends React.Component {
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  loading: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {

@@ -14,7 +14,7 @@ const PaymentMethod = ({
   editPaymentMethodModal,
   handleModalSwitch,
   fireUpdateCustomerMethod,
-
+  loading,
   closeEditPaymentModal,
 }) => {
   if (payment) {
@@ -32,6 +32,7 @@ const PaymentMethod = ({
           editPaymentMethodModal={editPaymentMethodModal}
           handleModalSwitch={handleModalSwitch}
           fireUpdateCustomerMethod={fireUpdateCustomerMethod}
+          loading={loading}
           closeEditPaymentModal={closeEditPaymentModal}
         />
       </PaymentMethodWrapper>
@@ -43,6 +44,7 @@ const PaymentMethod = ({
           fireCreateNewCustomer={fireCreateNewCustomer}
           billingEmail={billingEmail}
           handleInputChange={handleInputChange}
+          loading={loading}
           isPayment={payment ? true : false}
         />
       </PaymentMethodWrapper>
