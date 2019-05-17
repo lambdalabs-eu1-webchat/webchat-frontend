@@ -37,7 +37,7 @@ const ListHeader = styled.div`
   justify-content: space-between;
   font-weight: bold;
   background: ${theme.color.lightPurple};
-  padding: 0 3rem;
+  padding: 0 5rem;
   @media (max-width: 600px) {
     display: none;
   }
