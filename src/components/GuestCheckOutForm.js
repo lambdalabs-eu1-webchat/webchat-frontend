@@ -57,11 +57,12 @@ class CheckOutForm extends React.Component {
     const guest = this.props.currentGuests.find(
       guest => guest._id === guest_id,
     );
-    const room = { name: guest.room.name, _id: guest.room.id };
+
     if (guestEmail) {
       await this.sendGuestEmail();
     }
-    if (guest_id && !this.state.emailInput) {
+    if (guest_id !== 'DEFAULT' && !this.state.emailInput) {
+      const room = { name: guest.room.name, _id: guest.room.id };
       this.setState({ isCheckingOut: true });
       try {
         const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
@@ -79,7 +80,7 @@ class CheckOutForm extends React.Component {
         console.error(error);
       }
     }
-    if (!guest_id) {
+    if (guest_id === 'DEFAULT') {
       this.setState({ errorRoom: true });
     }
   };
