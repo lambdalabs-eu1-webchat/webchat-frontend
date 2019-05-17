@@ -4,6 +4,7 @@ const theme = {
     accentGreen: '#0CD4AF',
     accentPurple: '#6876CB',
     secondaryPurple: '#5B66AC',
+    warning:'#F65050',
     hoverGreen: '',
     hoverPurple: '',
     lightGreen: '',

@@ -143,10 +143,10 @@ const CheckInFormWrapper = styled.div`
     background-color:${theme.color.accentGreen};
   }
   .passcode {
-    width: 90%;
-    background-color: #aed581;
+    width: 100%;
+    background-color:${theme.color.accentGreen};
     height: 50px;
-    border-radius: 1%;
+    border-radius: 1em;
     padding: 5%;
     p {
       text-align: center;
