@@ -67,7 +67,7 @@ export const updateCustomerMethodSuccess = updatedHotel => {
       updatedHotel,
     },
   };
-}
+};
 
 export const updateCustomerMethodFailure = error => {
   if (!error) {
@@ -85,6 +85,7 @@ export const updateCustomerMethodFailure = error => {
 
 export const switchCustomerPlan = (hotelId, newPlan) => async dispatch => {
   dispatch({ type: SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN });
+  dispatch({ type: SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN_STARTED });
   const config = {
     method: 'PUT',
     headers: {
@@ -95,6 +96,7 @@ export const switchCustomerPlan = (hotelId, newPlan) => async dispatch => {
   try {
     const result = await fetch(`${DOMAIN}${SUBSCRIPTION}/${hotelId}`, config);
     const jsonResult = await result.json();
+    dispatch({ type: SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN_FINISHED });
     if (result.ok) {
       dispatch(switchCustomerPlanSuccess(jsonResult));
     } else {
@@ -110,6 +112,7 @@ export const createNewCustomer = (
   enhancedStripeToken,
 ) => async dispatch => {
   dispatch({ type: SUBSCRIPTIONS.CREATE_NEW_CUSTOMER });
+  dispatch({ type: SUBSCRIPTIONS.CREATE_NEW_CUSTOMER_STARTED });
   const config = {
     method: 'POST',
     headers: {
@@ -120,6 +123,7 @@ export const createNewCustomer = (
   try {
     const result = await fetch(`${DOMAIN}${SUBSCRIPTION}/${hotelId}`, config);
     const jsonResult = await result.json();
+    dispatch({ type: SUBSCRIPTIONS.CREATE_NEW_CUSTOMER_FINISHED });
     if (result.ok) {
       dispatch(creatNewCustomerSuccess(jsonResult));
     } else {
@@ -130,8 +134,12 @@ export const createNewCustomer = (
   }
 };
 
-export const updateCustomerMethod = (hotelId, enhancedStripeToken) => async dispatch => {
-  dispatch({  type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD });
+export const updateCustomerMethod = (
+  hotelId,
+  enhancedStripeToken,
+) => async dispatch => {
+  dispatch({ type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD });
+  dispatch({ type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_STARTED });
   const config = {
     method: 'PUT',
     headers: {
@@ -142,6 +150,7 @@ export const updateCustomerMethod = (hotelId, enhancedStripeToken) => async disp
   try {
     const result = await fetch(`${DOMAIN}${METHOD}/${hotelId}`, config);
     const jsonResult = await result.json();
+    dispatch({ type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_FINISHED });
     if (result.ok) {
       dispatch(updateCustomerMethodSuccess(jsonResult));
     } else {
@@ -150,4 +159,4 @@ export const updateCustomerMethod = (hotelId, enhancedStripeToken) => async disp
   } catch (error) {
     dispatch(updateCustomerMethodFailure(error));
   }
-}
+};

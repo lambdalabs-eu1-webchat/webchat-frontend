@@ -7,7 +7,7 @@ import QRCode from 'qrcode.react';
 import axios from 'axios';
 
 import { DOMAIN, USERS, GUEST_CLIENT_DOMAIN } from '../utils/paths';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Spinner from '../components/reusable/Spinner';
 
 class CheckInForm extends React.Component {
   state = {
@@ -96,18 +96,14 @@ class CheckInForm extends React.Component {
           onChange={event => this.setNameInput(event.target.value)}
           value={this.state.nameInput}
         />
-        {this.state.isCheckingIn ? (
-          <CircularProgress />
-        ) : (
-          <button
-            className="hide-on-print"
-            variant="contained"
-            color="primary"
-            onClick={this.checkInGuest}
-          >
-            Check In
-          </button>
-        )}
+        <button
+          className="hide-on-print"
+          variant="contained"
+          color="primary"
+          onClick={this.checkInGuest}
+        >
+          {this.state.isCheckingIn ? <Spinner /> : 'Check In'}
+        </button>
         <p className="show-on-print">https://webchatlabs-guest.netlify.com</p>
         <div className="passcode">
           <span className="login-code-label">Login Code:</span>

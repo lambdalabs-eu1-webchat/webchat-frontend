@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import CompanySettingsRoom from './CompanySettingsRoom';
 import theme from './../theme/styledTheme';
+import Spinner from '../components/reusable/Spinner';
 
 const CompanySettingsRoomsList = props => {
   const {
@@ -13,6 +15,7 @@ const CompanySettingsRoomsList = props => {
     handleInputChange,
     handleRoomInputChange,
     addRooms,
+    loading,
   } = props;
   return (
     <CompanySettingsRoomsListWrapper>
@@ -25,7 +28,7 @@ const CompanySettingsRoomsList = props => {
           onChange={handleInputChange}
         />
         <button type="submit" onClick={addRooms}>
-          ADD ROOMS
+          {loading.createRoom ? <Spinner /> : 'Add Rooms'}
         </button>
       </AddRooms>
       <section className="rooms-list">
@@ -42,6 +45,7 @@ const CompanySettingsRoomsList = props => {
               updateRoomForHotel={updateRoomForHotel}
               deleteRoomForHotel={deleteRoomForHotel}
               handleRoomInputChange={handleRoomInputChange}
+              loading={loading}
             />
           ))}
       </section>
@@ -56,15 +60,15 @@ const CompanySettingsRoomsListWrapper = styled.div`
   flex-direction: column;
   width: 40%;
   @media (max-width: 800px) {
-    width:100%;
+    width: 100%;
   }
-  
+
   h3 {
     font-size: ${theme.fontSize.xs};
     color: ${theme.color.accentPurple};
     padding: 1.5rem 0;
   }
-      
+
   .rooms-list {
     display: flex;
     flex-direction: column;
@@ -73,7 +77,7 @@ const CompanySettingsRoomsListWrapper = styled.div`
     height: 300px;
     overflow-y: scroll;
   }
-  
+
   input {
     border: none;
     border-bottom: 1px solid ${theme.color.footerText};
@@ -96,7 +100,7 @@ const AddRooms = styled.section`
     max-width: 100%;
     flex-direction: column;
   }
-  
+
   input {
     border: none;
     border-bottom: 1px solid ${theme.color.footerText};
@@ -110,13 +114,13 @@ const AddRooms = styled.section`
       outline: none;
     }
   }
-  
+
   button {
     width: 15rem;
     height: ${theme.button.smallButton};
     font-size: ${theme.fontSize.xxs};
     border-radius: ${theme.border.radius};
-    background:${theme.color.accentGreen};
+    background: ${theme.color.accentGreen};
     border: none;
     text-transform: ${theme.textTransform.uppercase};
     color: ${theme.color.white};
