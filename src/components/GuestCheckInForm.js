@@ -206,11 +206,15 @@ const CheckInFormWrapper = styled.div`
       width: 100px;
       position: absolute;
       font-size: ${theme.fontSize.xxs};
+      font-family: ${theme.font.fontFamily};
+      font-weight: bold;
+      color: ${theme.color.accentPurple};
       top: 6px;
       left: 6px;
     }
     .login-code {
       font-size: ${theme.fontSize.m};
+      color: ${theme.color.accentPurple};
       justify-self: center;
     }
     @media (max-width: 800px) {
