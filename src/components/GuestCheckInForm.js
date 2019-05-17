@@ -157,7 +157,7 @@ const CheckInFormWrapper = styled.div`
   button {
     width: 100%;
     height: ${theme.button.smallButton};
-    font-size: ${theme.fontSize.xxs};
+    font-size: ${theme.fontSize.xs};
     border-radius: ${theme.border.radius};
     background:${theme.color.accentGreen};
     border: none;
