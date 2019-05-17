@@ -12,6 +12,7 @@ function PlanCheckout({
   fireCreateNewCustomer,
   billingEmail,
   handleInputChange,
+  loading,
   isPayment,
 }) {
   const backFromAddPaymentModal = () => {
@@ -39,6 +40,7 @@ function PlanCheckout({
               billingEmail={billingEmail}
               handleInputChange={handleInputChange}
               buttonText={'Add payment method'}
+              loading={loading}
             />
           </Elements>
         </div>
@@ -51,6 +53,7 @@ PlanCheckout.propTypes = {
   fireCreateNewCustomer: PT.func.isRequired,
   billingEmail: PT.string.isRequired,
   handleInputChange: PT.func.isRequired,
+  loading: PT.bool.isRequired,
 };
 
 const StyledBtn = styled.button`

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import {
   fetchAllUsers,
   fetchHotelStaff,
@@ -9,7 +10,6 @@ import {
   deleteUser,
 } from '../store/actions/users';
 import { fetchSingleHotel } from '../store/actions/hotel';
-
 import TeamMembersList from '../components/TeamMembersList';
 import TeamMembersAddNewMemberModal from '../components/TeamMembersAddNewMemberModal';
 import styled from 'styled-components';
@@ -47,8 +47,8 @@ class TeamMembers extends React.Component {
       dispatchDeleteUser,
     } = this.props;
     return (
-        <TeamMembersOuterWrapper>
-          <h2>Team Members</h2>
+      <TeamMembersOuterWrapper>
+        <h2>Team Members</h2>
         <TeamMembersWrapper>
           <h3>Update and Assign Team Members</h3>
           <TeamMembersList
@@ -56,6 +56,7 @@ class TeamMembers extends React.Component {
             currentUser={currentUser}
             changeUserType={dispatchChangeUserType}
             deleteUser={dispatchDeleteUser}
+            loading={this.props.loading}
           />
           <TeamMembersAddNewMemberModal
             createUser={dispatchCreateUser}
@@ -63,6 +64,7 @@ class TeamMembers extends React.Component {
             modalShown={this.state.modalShown}
             plan={this.props.hotel.plan}
             staffAmount={users.length}
+            loading={this.props.loading}
           />
           <button onClick={this.handleShowModal}>Add Team Members</button>
         </TeamMembersWrapper>
@@ -77,6 +79,7 @@ TeamMembers.propTypes = {
   hotel: PropTypes.object.isRequired,
   dispatchChangeUserType: PropTypes.func.isRequired,
   dispatchDeleteUser: PropTypes.func.isRequired,
+  loading: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -84,6 +87,7 @@ const mapStateToProps = state => {
     users: state.users,
     currentUser: state.currentUser,
     hotel: state.hotel,
+    loading: state.loading,
   };
 };
 
@@ -102,7 +106,7 @@ export default connect(
 const TeamMembersOuterWrapper = styled.div`
   margin: 0 3rem;
   min-height: 730px;
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     margin: 0 auto;
   }
   h2 {
@@ -120,19 +124,19 @@ const TeamMembersWrapper = styled.div`
     flex-direction: column;
     max-width: 100%;
   }
-  
+
   h3 {
     font-size: ${theme.fontSize.xs};
     color: ${theme.color.accentPurple};
     padding: 1.5rem 0;
   }
-  
+
   button {
     width: 17rem;
     height: ${theme.button.smallButton};
     font-size: ${theme.fontSize.xxs};
     border-radius: ${theme.border.radius};
-    background:${theme.color.accentGreen};
+    background: ${theme.color.accentGreen};
     border: none;
     text-transform: ${theme.textTransform.uppercase};
     color: ${theme.color.white};
@@ -147,7 +151,7 @@ const TeamMembersWrapper = styled.div`
       outline: none;
     }
     @media (max-width: 800px) {
-    width: 100%;
+      width: 100%;
       height: ${theme.button.height};
       font-size: ${theme.fontSize.xs};
       margin: 1.5rem 0;

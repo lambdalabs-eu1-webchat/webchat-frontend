@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import theme from './.././theme/styledTheme';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import CircularProgress from '@material-ui/core/CircularProgress';
+
+import Spinner from '../components/reusable/Spinner';
 import { validate } from 'email-validator';
 import Restricted from './reusable/RestrictedModal';
 import { DOMAIN, USERS, EMAIL } from '../utils/paths';
@@ -107,14 +108,13 @@ class CheckOutForm extends React.Component {
           value={this.state.emailInput}
           onChange={event => this.setEmailInput(event.target.value)}
         />
-
-        {this.state.isCheckingOut ? (
-          <CircularProgress />
-        ) : (
-          <button color="primary" onClick={this.checkOutGuest}>
-            Check Out
-          </button>
-        )}
+        <button
+          variant="contained"
+          color="primary"
+          onClick={this.checkOutGuest}
+        >
+          {this.state.isCheckingOut ? <Spinner /> : 'Check Out'}
+        </button>
 
         {this.state.emailModalOpen && (
           <Restricted

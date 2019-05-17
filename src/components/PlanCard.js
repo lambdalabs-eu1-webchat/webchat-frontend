@@ -3,6 +3,8 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
 
+import Spinner from '../components/reusable/Spinner';
+
 const HighlighterWrapper = styled.div`
   background-color: ${props => props.highlight};
   border-radius: 5px;
@@ -76,7 +78,7 @@ const PriceTag = styled.div`
   padding: 5% 0;
 `;
 
-const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
+const PlanCard = ({ plan, current, fireSwitchCustomerPlan, loading }) => {
   return (
     <HighlighterWrapper
       highlight={current ? 'blanchedalmond' : theme.color.lightPurple}
@@ -95,6 +97,8 @@ const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
         <button onClick={() => fireSwitchCustomerPlan(plan.title)}>
           {plan.buttonText}
         </button>
+      ) : current && loading.switchPlan ? (
+        <Spinner />
       ) : (
         <></>
       )}

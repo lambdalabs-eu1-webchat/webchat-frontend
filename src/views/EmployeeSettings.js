@@ -93,7 +93,7 @@ class EmployeeSettings extends React.Component {
         (employeeChanges.password &&
           this.checkPasswordMatch(
             employeeChanges.password,
-            employeeChanges.passwordConf
+            employeeChanges.passwordConf,
           ))) &&
       this.checkEligibileUpdates()
     ) {
@@ -104,37 +104,39 @@ class EmployeeSettings extends React.Component {
 
   render() {
     return (
-        <EmployeeSettingsWrapper>
-          <EmployeeSettingsForm
-            employee={this.props.employee}
-            employeeChanges={this.state.employeeChanges}
-            handleInputChange={this.handleInputChange}
-            fireUserUpdates={this.fireUserUpdates}
-            clearChanges={this.clearChanges}
+      <EmployeeSettingsWrapper>
+        <EmployeeSettingsForm
+          employee={this.props.employee}
+          employeeChanges={this.state.employeeChanges}
+          handleInputChange={this.handleInputChange}
+          fireUserUpdates={this.fireUserUpdates}
+          clearChanges={this.clearChanges}
+          loading={this.props.loading}
+        />
+
+        {this.state.passwordsModalOpen && (
+          <Restricted
+            alert="Passwords must match"
+            isRestrictedModalOpen={this.state.passwordsModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
           />
+        )}
 
-          {this.state.passwordsModalOpen && (
-            <Restricted
-              alert="Passwords must match"
-              isRestrictedModalOpen={this.state.passwordsModalOpen}
-              closeRestrictedModal={this.closeRestrictedModal}
-            />
-          )}
-
-          {this.state.nameEmailModalOpen && (
-            <Restricted
-              alert="Name and email cannot be blank"
-              isRestrictedModalOpen={this.state.nameEmailModalOpen}
-              closeRestrictedModal={this.closeRestrictedModal}
-            />
-          )}
-        </EmployeeSettingsWrapper>
+        {this.state.nameEmailModalOpen && (
+          <Restricted
+            alert="Name and email cannot be blank"
+            isRestrictedModalOpen={this.state.nameEmailModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
+          />
+        )}
+      </EmployeeSettingsWrapper>
     );
   }
 }
 
 const mapStateToProps = state => ({
   employee: state.currentUser,
+  loading: state.loading,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -142,20 +144,20 @@ const mapDispatchToProps = dispatch => {
     {
       updateUser,
     },
-    dispatch
+    dispatch,
   );
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(EmployeeSettings);
 
 const EmployeeSettingsWrapper = styled.div`
   padding: 5rem 5rem 11rem 5rem;
   background: ${theme.color.white};
   margin: 0 5rem;
-  @media(max-width: 600px) {
+  @media (max-width: 600px) {
     padding: 3rem;
     margin: 0;
   }
