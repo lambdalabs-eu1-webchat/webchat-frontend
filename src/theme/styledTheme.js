@@ -2,8 +2,10 @@ const theme = {
   color: {
     // accentGreen: '#62CABE',
     accentGreen: '#0CD4AF',
-    accentPurple: '#6876CB',
-    secondaryPurple: '#5B66AC',
+    //turned the ones below to black  but 
+    // canrevert them to #6876CB ,#5B66AC respectively
+    accentPurple: 'black',
+    secondaryPurple: 'black',
     hoverGreen: '',
     hoverPurple: '',
     lightGreen: '',
