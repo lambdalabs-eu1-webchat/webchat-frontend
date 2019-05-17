@@ -70,12 +70,11 @@ const StyledTicketView = styled.div`
 `;
 
 const StyledDiv = styled.div`
-  border: 1px solid ${theme.color.accentGreen};
   background-color: ${theme.color.accentPurple};
   margin: 0.625rem;
   padding: 0.625rem;
   width: 100%;
-  border-radius: 0.625rem;
+  border-radius: 4px;
   color: white;
   font-weight: ${theme.fontWeight.light};
   font-size: 1rem;
