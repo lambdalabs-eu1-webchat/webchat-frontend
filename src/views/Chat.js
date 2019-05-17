@@ -67,29 +67,28 @@ const StyledChat = styled.div`
   }
 `;
 const ChatListWrapper = styled.div`
-  height: 100%;
+  max-width: 800px;
   border-radius: 5px;
-  width: 40%;
+  width: 45%;
   padding: 2rem;
   margin: 2rem;
   box-shadow: 0 16px 48px rgba(32, 41, 50, 0.21);
   @media (max-width: 800px) {
-    width: 100%;
-    height: 90vh;
+    width: 90%;
+    height: 70vh;
   }
 `;
 
 const ChatScreenWrapper = styled.div`
-  height: 100%;
-  height: 100%;
+  max-width: 800px;
   border-radius: 5px;
-  width: 40%;
+  width: 45%;
   padding: 2rem;
   margin: 2rem;
   box-shadow: 0 16px 48px rgba(32, 41, 50, 0.21);
   @media (max-width: 800px) {
-    width: 100%;
-    height: 90vh;
+    width: 90%;
+    height: 70vh;
     margin-top: 40px;
   }
 `;
