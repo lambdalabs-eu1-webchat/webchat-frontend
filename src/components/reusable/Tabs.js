@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from '../../theme/styledTheme'
+import theme from '../../theme/styledTheme';
 
 function Tabs({ options, selected, setSelected }) {
   return (
@@ -19,18 +19,37 @@ function Tabs({ options, selected, setSelected }) {
 }
 
 const StyledTabs = styled.div`
-  .tab {
-   margin:2rem;
-   padding:1.5rem;
-   position: relative;
-   width: 100%;
-   font-weight: 700;
-   color: ${theme.color.accentPurple}
-   text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    width: 100%;
   }
-  .selected {
-    background: ${theme.color.white};
-
+  .tab {
+    text-decoration: none;
+    color: ${theme.color.accentPurple};
+    text-transform: uppercase;
+    padding: 1rem 0;
+    width: 15rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    background: ${theme.color.lightPurple};
+    font-size: ${theme.fontSize.xxs};
+    margin: 0 5px;
+    &.selected {
+      color: ${theme.color.accentPurple};
+      border-bottom: 2px solid ${theme.color.accentGreen};
+      font-weight: bold;
+    }
+    @media (max-width: 600px) {
+      width: 100%;
+      background: ${theme.color.lightPurple};
+      margin-bottom: 1rem;
+      &.selected {
+        border-bottom: 2px solid ${theme.color.accentGreen};
+      }
+    }
   }
 `;
 
