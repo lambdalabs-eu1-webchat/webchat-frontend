@@ -15,6 +15,11 @@ export const fetchRooms = hotel_id => async dispatch => {
 };
 
 function successFetchRooms(rooms) {
+  if (rooms.length === 0) {
+    return {
+      type: ROOMS.HOTEL_HAS_ZERO_ROOMS,
+    };
+  }
   return {
     type: ROOMS.FETCH_ROOMS_FOR_HOTEL_SUCCESS,
     payload: rooms,
