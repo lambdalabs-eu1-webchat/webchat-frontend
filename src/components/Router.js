@@ -21,8 +21,13 @@ const style404 = {
   minHeight: 'calc(100vh - 236px)',
 };
 
-function Router({ user_type, fetchRooms, hotelHasZeroRooms, currentUser }) {
-  const [gotRooms, setGotRooms] = useState(false);
+function Router({
+  user_type,
+  fetchRooms,
+  hotelHasZeroRooms,
+  currentUser,
+  gotRooms,
+}) {
   if (!user_type) {
     return (
       <Switch>
@@ -51,12 +56,11 @@ function Router({ user_type, fetchRooms, hotelHasZeroRooms, currentUser }) {
     );
   } else if (user_type === 'super admin') {
     // if havent gotten rooms yet get them
+    debugger;
     if (!gotRooms) {
-      debugger;
-      setGotRooms(true);
       fetchRooms(currentUser.hotel_id);
     }
-    debugger;
+
     if (hotelHasZeroRooms) {
       // if no rooms make only route a route to make rooms
       return (
@@ -124,6 +128,7 @@ Router.propTypes = {
 function mapStateToProps(state) {
   return {
     hotelHasZeroRooms: state.rooms.hotelHasZeroRooms,
+    gotRooms: state.rooms.initGotRooms,
     currentUser: state.currentUser,
   };
 }

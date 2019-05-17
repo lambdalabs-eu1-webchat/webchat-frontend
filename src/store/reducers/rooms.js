@@ -5,6 +5,7 @@ const initState = {
   rooms: [],
   error: null,
   hotelHasZeroRooms: false,
+  initGotRooms: false,
 };
 
 const rooms = (state = initState, action) => {
@@ -17,6 +18,7 @@ const rooms = (state = initState, action) => {
         fetching: false,
         rooms: action.payload,
         hotelHasZeroRooms: false,
+        initGotRooms: true,
       };
     case ROOMS.FETCH_ROOMS_FOR_HOTEL_FAILURE:
       return { ...state, fetching: false, error: action.payload };
