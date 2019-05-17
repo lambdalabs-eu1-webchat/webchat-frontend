@@ -142,6 +142,7 @@ class Billing extends React.Component {
         <PlanCards
           hotel={this.props.hotel}
           fireSwitchCustomerPlan={this.fireSwitchCustomerPlan}
+          loading={this.props.loading}
         />
 
         {this.state.isPaymentPlanModalOpen && (
