@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 
 import modalTheme from '../../theme/modalTheme';
-import theme from '../../theme/styledTheme';
 
 class Confirm extends React.Component {
   clickYes = () => {
