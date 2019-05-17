@@ -17,26 +17,6 @@ import PaymentMethod from '../components/PaymentMethod';
 import Restricted from '../components/reusable/RestrictedModal';
 import theme from '../theme/styledTheme';
 
-const BillingWrapper = styled.div`
-  h1 {
-    font-size: ${theme.fontSize.xl};
-    padding: 25px;
-    font-weight: bold;
-    width: 60%;
-    color: ${theme.color.textColor};
-    @media (max-width: 1000px) {
-      width: 90%;
-    }
-  }
-
-  padding: 0 2.5% 5% 2.5%;
-  @media (max-width: 1000px) {
-    width: 95%;
-    padding: 10% 0 15% 0;
-    margin: 0 auto;
-  }
-`;
-
 class Billing extends React.Component {
   state = {
     billingEmail: '',
@@ -127,7 +107,6 @@ class Billing extends React.Component {
   render() {
     return (
       <BillingWrapper>
-        <h1>Pricing plans</h1>
         <PaymentMethod
           payment={this.props.hotel.billing}
           fireCreateNewCustomer={this.fireCreateNewCustomer}
@@ -196,3 +175,33 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Billing);
+
+const BillingWrapper = styled.div`
+display: flex;
+min-height: 730px;
+justify-content: space-between;
+  h1 {
+    font-size: ${theme.fontSize.l};
+    padding: 1.5rem 0;
+    //width: 60%;
+    color: ${theme.color.textColor};
+    @media (max-width: 1000px) {
+      width: 90%;
+    }
+  }
+  margin: 0 3rem;
+
+  @media (max-width: 1400px) {
+    flex-direction: column;
+  }
+  @media (max-width: 1000px) {
+  flex-direction: column;
+    width: 95%;
+    padding: 10% 0 15% 0;
+    margin: 0 auto;
+  }
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    width: 100%;
+  }
+`;
