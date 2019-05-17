@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import theme from './../theme/styledTheme';
 import TeamMember from './TeamMember';
 
-
 const TeamMembersList = props => {
   const { deleteUser, changeUserType } = props;
   return (
