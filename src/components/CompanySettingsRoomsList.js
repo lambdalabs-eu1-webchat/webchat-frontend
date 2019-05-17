@@ -69,7 +69,9 @@ const CompanySettingsRoomsListWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 0;
+    padding-top: 20px;
+    height: 300px;
+    overflow-y: scroll;
   }
   
   input {

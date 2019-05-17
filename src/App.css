@@ -1,61 +1,3 @@
-/*nav {*/
-/*    background: rgb(47, 70, 94);*/
-/*    padding: 10px 10px 30px;*/
-/*    margin: 0px;*/
-/*    display: flex;*/
-/*    justify-content: flex-end;*/
-/*}*/
-/*nav a {*/
-/*    padding: 0 10px;*/
-/*    color: #0B9FEC;*/
-/*    text-decoration: none;*/
-/*    text-transform: uppercase;*/
-/*}*/
-
-/*h2 {*/
-/*    font-size: 30px;*/
-/*    padding: 15px;*/
-/*    color: #213952;*/
-/*}*/
-
-/*form {*/
-/*    width: 300px;*/
-/*    margin: 0 auto;*/
-/*    padding: 20px 0;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*}*/
-/*input {*/
-/*    margin: 10px 0;*/
-/*    height: 40px;*/
-/*    border-radius: 5px;*/
-/*    border: 1px solid lightgrey;*/
-/*    padding-left: 10px;*/
-/*    font-size: 16px;*/
-/*}*/
-
-/*label {*/
-/*    margin-right: 10px;*/
-/*}*/
-/*button {*/
-/*    height: 40px;*/
-/*    font-size: 16px;*/
-/*    border-radius: 5px;*/
-/*    background: #0CD4AF;*/
-/*    border: none;*/
-/*    text-transform: uppercase;*/
-/*    color: #213952;*/
-/*    margin: 5px;*/
-/*}*/
-
-/*p {*/
-/*  color: #213952;*/
-/*}*/
-
-/*button:hover {*/
-/*  background: #00a56a;*/
-/*}*/
-
 .Logo {
   background-image: url(./frontdesklogo.png);
 }
@@ -64,78 +6,6 @@
   border-radius: 10px;
   height: 4vmin;
   pointer-events: none;
-}
-/* ====== Super Admin NavBar ====== */
-
-/*.super-admin-nav {*/
-/*  margin-top: 15px;*/
-/*  display: flex;*/
-/*  justify-content: flex-end;*/
-/*}*/
-/*.super-admin-nav a {*/
-/*  text-decoration: none;*/
-/*  color: #213952;*/
-/*  background: #f1f1f1;*/
-/*  padding: 10px;*/
-/*  width: 150px;*/
-/*  border-radius: 3px 3px 0 0;*/
-/*  border: 1px solid lightgrey;*/
-/*}*/
-
-/*.super-admin-nav a.active {*/
-/*  background: #0cd4af;*/
-/*}*/
-
-/*======== Team Members List ========= */
-
-.list-header p {
-  width: 50px;
-}
-
-.display-block {
-  display: block;
-}
-
-.display-none {
-  display: none;
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.modal-main {
-  position: fixed;
-  background: white;
-  width: 80%;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-}
-
-.rooms-list {
-  padding-top: 20px;
-  height: 300px;
-  overflow-y: scroll;
-}
-
-.room {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.far,
-.fas {
-  font-size: 25px;
-  padding: 0 5px;
 }
 
 .show-on-print {
@@ -150,8 +20,4 @@
     display: block;
   }
 }
-/*.App {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: space-between;*/
-/*}*/
+

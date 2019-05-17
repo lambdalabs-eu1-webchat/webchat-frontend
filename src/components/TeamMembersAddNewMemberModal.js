@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Restricted from '../components/reusable/RestrictedModal';
+import styled from 'styled-components';
+import theme from './../theme/styledTheme';
 
 // func here takes the hotel on state and checks satff count against plan/team-members
 
@@ -77,39 +79,126 @@ const TeamMembersAddNewMemberModal = ({
   };
 
   return (
-    <div className={showHideClassName}>
-      <section className="modal-main">
-        <button type="button" className="close" onClick={handleHideModal}>
-          X
-        </button>
-        <p>Name</p>
-        <input type="text" name="name" placeholder="Name..." />
-        <p>Email</p>
-        <input type="email" name="email" placeholder="Email..." />
-        <p>Password</p>
-        <input
-          type="password"
-          name="password"
-          placeholder="Default password..."
-        />
-        <button
-          type="submit"
-          onClick={handleClick(createUser, handleHideModal, plan, staffAmount)}
-        >
-          Add Member
-        </button>
-        <p id="add-member-message" />
-      </section>
+    <AddOuterWrapper>
+      <AddMembersModalWrapper className={showHideClassName}>
+        <section className="modal-main">
+          <button type="button" id="close" onClick={handleHideModal}>
+            X
+          </button>
+          <p>Name*</p>
+          <input type="text" name="name" placeholder="Name..." />
+          <p>Email*</p>
+          <input type="email" name="email" placeholder="Email..." />
+          <p>Password*</p>
+          <input
+            type="password"
+            name="password"
+            placeholder="Default password..."
+          />
+          <button
+            type="submit"
+            onClick={handleClick(createUser, handleHideModal, plan, staffAmount)}
+          >
+            Add Member
+          </button>
+          <p id="add-member-message" />
+        </section>
 
-      {isModalOpen && (
-        <Restricted
-          alert="Please upgrade your account to add more users"
-          isRestrictedModalOpen={isModalOpen}
-          closeRestrictedModal={closeModal}
-        />
-      )}
-    </div>
+        {isModalOpen && (
+          <Restricted
+            alert="Please upgrade your account to add more users"
+            isRestrictedModalOpen={isModalOpen}
+            closeRestrictedModal={closeModal}
+          />
+        )}
+      </AddMembersModalWrapper>
+    </AddOuterWrapper>
   );
 };
 
 export default TeamMembersAddNewMemberModal;
+
+const AddOuterWrapper = styled.div`
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+`;
+
+const AddMembersModalWrapper = styled.div`
+  p {
+    font-size: ${theme.fontSize.xs};
+    color: ${theme.color.accentPurple};
+    padding: 1.5rem 0;
+  }
+  input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid ${theme.color.footerText};
+    margin-bottom: 20px;
+    height: ${theme.input.height};
+    font-size: ${theme.fontSize.xs};
+    padding: 20px 0;
+    border-radius: 0;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+    font-weight: normal;
+    font-size: ${theme.fontSize.xxs};
+    font-family: 'Lato', sans-serif;
+    }
+  }
+  
+  .modal-main {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    background: white;
+    width: 40rem;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    border-radius: ${theme.border.radius};
+    padding: 0 3rem;
+    button {
+      width: 100%;
+      height: ${theme.button.smallButton};
+    }
+    @media(max-width: 500px) {
+      width:100%;
+    }
+  }
+  
+  #close {
+    background: none;
+    color: ${theme.color.textColor};
+    width: 3rem;
+    height: 3rem;
+    position: relative;
+    left: 100%;
+    font-size: ${theme.fontSize.s};
+    text-align: center;
+    box-shadow: none;
+    padding: 0.5rem;
+    margin: 0;
+    &:hover {
+      box-shadow: none;
+      color: ${theme.color.accentPurple};
+    }
+  }
+`;
