@@ -5,16 +5,6 @@ import styled from 'styled-components';
 import PlanCard from '../components/PlanCard';
 import { freePlan, plusPlan, proPlan } from '../utils/plans';
 
-const PlanCardWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  margin: 2rem;
-  @media (max-width: 1000px) {
-    flex-direction: column;
-    width: 90%;
-  }
-`;
-
 const PlanCards = ({ hotel, fireSwitchCustomerPlan, loading }) => {
   return (
     <PlanCardWrapper>
@@ -46,3 +36,23 @@ PlanCards.propTypes = {
 };
 
 export default PlanCards;
+
+const PlanCardWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  padding-top: 6.5rem;
+  margin: 2rem;
+  @media (max-width: 1400px) {
+    padding-top: 0;
+  }
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 0;
+  }
+    @media (max-width: 600px) {
+    width: 100%;
+    margin: 0;
+  }
+`;
