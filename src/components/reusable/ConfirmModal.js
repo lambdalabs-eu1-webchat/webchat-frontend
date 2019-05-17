@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 
 import modalTheme from '../../theme/modalTheme';
-import theme from '../../theme/styledTheme';
 
 class Confirm extends React.Component {
   clickYes = () => {
@@ -28,10 +27,11 @@ class Confirm extends React.Component {
         onRequestClose={closeModal}
         style={{
           overlay: modalTheme.overlay,
+          content: modalTheme.restrictedContent,
         }}
       >
         <ModalWrapper>
-          <p>{question}</p>
+          <p className="question">{question}</p>
           <button onClick={this.clickYes}>Yes</button>
           <button onClick={this.clickNo}>No</button>
         </ModalWrapper>
@@ -41,9 +41,19 @@ class Confirm extends React.Component {
 }
 
 const ModalWrapper = styled.div`
-  position: relative;
+  .question {
+    width: 100%;
+    text-align: center;
+  }
+  button {
+    height: 30px;
+    margin: 15px;
+  }
+  align-items: space-around;
+  justify-content: center;
+  flex-wrap: wrap;
   display: flex;
-  flex-direction: column;
+  height: 100%;
 `;
 
 export default Confirm;
