@@ -112,6 +112,7 @@ class CheckOutForm extends React.Component {
           variant="contained"
           color="primary"
           onClick={this.checkOutGuest}
+          disabled={this.state.isCheckingOut}
         >
           {this.state.isCheckingOut ? <Spinner /> : 'Check Out'}
         </button>
