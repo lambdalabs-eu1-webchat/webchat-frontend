@@ -9,7 +9,7 @@ const CardDetailsWrapper = styled.div`
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  max-width: 660;
+  max-width: 660px;
   margin: 0 2rem;
 
   flex-direction: column;
