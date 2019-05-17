@@ -72,7 +72,7 @@ class CheckInOrOut extends React.Component {
   render() {
     return (
       <StyledCheckInOrOut>
-        <div>
+        <div className="sub-container">
           <h1 className="hide-on-print">Check-in</h1>
           <CheckInForm
             availableRooms={this.state.availableRooms}
@@ -82,7 +82,7 @@ class CheckInOrOut extends React.Component {
             loading={this.props.loading}
           />
         </div>
-        <div className="hide-on-print">
+        <div className="hide-on-print sub-container">
           <h1>Check-out</h1>
           <CheckOutForm
             hotel_id={this.props.hotel_id}
@@ -110,12 +110,17 @@ const StyledCheckInOrOut = styled.div`
   @media (max-width: 1200px) {
     margin-top: 4%;
   }
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
+
   h1 {
     padding: 10% 0;
     font-size: 1.5rem;
   }
-  div {
+  .sub-container {
     width: 95%;
+    padding: 0 20px;
   }
 `;
 

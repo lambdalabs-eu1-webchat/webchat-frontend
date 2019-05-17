@@ -7,7 +7,6 @@ import theme from '../theme/styledTheme';
 
 class TranslateModal extends React.Component {
   render() {
-    console.log(this.props.translations);
     return (
       <Modal
         // The only required prop
@@ -18,7 +17,7 @@ class TranslateModal extends React.Component {
         // (either by clicking on overlay or pressing ESC)
         onRequestClose={this.props.closeTranslateModal}
         style={{
-          overlay: modalTheme.translateOverlay,
+          overlay: modalTheme.overlay,
           content: modalTheme.translateContent,
         }}
       >

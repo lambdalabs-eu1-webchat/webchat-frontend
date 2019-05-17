@@ -7,6 +7,12 @@ import { freePlan, plusPlan, proPlan } from '../utils/plans';
 
 const PlanCardWrapper = styled.div`
   display: flex;
+  justify-content: space-around;
+  margin: 2rem;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    width: 90%;
+  }
 `;
 
 const PlanCards = ({ hotel, fireSwitchCustomerPlan, loading }) => {

@@ -15,7 +15,8 @@ const TeamMembersListWrapper = styled.div`
   width: 880px;
   margin: 0 auto;
   height: 400px;
-  overflow: scroll;
+  overflow-y: scroll;
+
   @media (max-width: 500px) {
     max-width: 100%;
   }

@@ -148,13 +148,17 @@ const CheckOutFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   button {
-    margin-top: 10%;
+    width: 100%;
   }
   .error {
     background: red;
   }
-  button {
-    margin-bottom: 5%;
+  .button-container {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

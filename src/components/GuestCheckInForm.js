@@ -111,8 +111,8 @@ class CheckInForm extends React.Component {
         </Button>
         <p className="show-on-print">https://webchatlabs-guest.netlify.com</p>
         <div className="passcode">
-          <h4>Login Code</h4>
-          <p>{this.state.loginCode}</p>
+          <span className="login-code-label">Login Code:</span>
+          <span className="login-code">{this.state.loginCode}</span>
         </div>
         <QRCode value={`${GUEST_CLIENT_DOMAIN}#${this.state.guestToken}`} />
       </CheckInFormWrapper>
@@ -128,22 +128,41 @@ const CheckInFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   button {
-    margin-top: 10%;
+    width: 100%;
+  }
+  .button-container {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .error {
     background: red;
   }
-  button {
-    margin-bottom: 5%;
-  }
   .passcode {
-    width: 90%;
+    width: 100%;
+    min-width: 175px;
     background-color: #aed581;
     height: 50px;
     border-radius: 1%;
     padding: 5%;
-    p {
-      text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .login-code-label {
+      width: 100px;
+      position: absolute;
+      top: 6px;
+      left: 6px;
+    }
+    .login-code {
+      font-size: 30px;
+      justify-self: center;
+    }
+    @media (max-width: 800px) {
+      width: 100%;
     }
   }
   canvas {
