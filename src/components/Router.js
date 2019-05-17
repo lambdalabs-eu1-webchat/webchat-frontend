@@ -21,7 +21,7 @@ const style404 = {
   minHeight: 'calc(100vh - 236px)',
 };
 
-function Router({ user_type, fetchRooms, rooms, currentUser }) {
+function Router({ user_type, fetchRooms, hotelHasZeroRooms, currentUser }) {
   const [gotRooms, setGotRooms] = useState(false);
   if (!user_type) {
     return (
@@ -52,11 +52,12 @@ function Router({ user_type, fetchRooms, rooms, currentUser }) {
   } else if (user_type === 'super admin') {
     // if havent gotten rooms yet get them
     if (!gotRooms) {
+      debugger;
       setGotRooms(true);
       fetchRooms(currentUser.hotel_id);
     }
-
-    if (rooms.length === 0) {
+    debugger;
+    if (hotelHasZeroRooms) {
       // if no rooms make only route a route to make rooms
       return (
         <Switch>
@@ -64,9 +65,10 @@ function Router({ user_type, fetchRooms, rooms, currentUser }) {
             path={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS}
             component={CompanyDash}
           />
+          <Route exact path={APP_PATHS.LOGIN} component={Login} />
+          <Route exact path={APP_PATHS.REGISTER} component={Register} />
           <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
           <Route
-            path="/"
             render={() => (
               <Redirect
                 to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS}
@@ -121,7 +123,7 @@ Router.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    rooms: state.rooms.rooms,
+    hotelHasZeroRooms: state.rooms.hotelHasZeroRooms,
     currentUser: state.currentUser,
   };
 }

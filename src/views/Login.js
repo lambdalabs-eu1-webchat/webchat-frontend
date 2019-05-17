@@ -43,13 +43,7 @@ class Login extends React.Component {
       this.setFlashMessage(messages.allRequiredFields);
     }
   };
-
   render() {
-    if (this.props.numberRooms === 0 && this.props.loggedIn) {
-      return (
-        <Redirect to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS} />
-      );
-    }
     if (!!this.props.loggedIn) {
       return <Redirect to="/chat" />;
     }
@@ -92,7 +86,7 @@ Login.propTypes = {
 function mapStateToProps(state) {
   return {
     loggedIn: !!state.currentUser._id,
-    numberRooms: state.rooms.rooms.length,
+    hotelHasZeroRooms: state.rooms.hotelHasZeroRooms,
   };
 }
 

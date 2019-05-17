@@ -44,7 +44,7 @@ class Register extends React.Component {
       this.state.newUser.password,
     );
   };
-  
+
   handleRegister = async event => {
     event.preventDefault();
     try {
@@ -80,7 +80,7 @@ class Register extends React.Component {
 
   render() {
     if (this.props.loggedIn) {
-      return <Redirect to="/" />;
+      return <Redirect to="/chat" />;
     }
     return (
       <RegisterOuterWrapper>
