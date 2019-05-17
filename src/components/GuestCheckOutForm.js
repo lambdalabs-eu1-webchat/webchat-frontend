@@ -211,7 +211,7 @@ const CheckOutFormWrapper = styled.div`
   .error {
     box-shadow: 0 0 3px red;
   }
-  
+
   button {
     margin-bottom: 5%;
   }

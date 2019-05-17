@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import theme from './../theme/styledTheme';
 import TeamMember from './TeamMember';
 
-const TeamMembersList = (props) => {
+
+const TeamMembersList = props => {
   const { deleteUser, changeUserType } = props;
   return (
     <TeamMembersListWrapper>
@@ -16,7 +17,8 @@ const TeamMembersList = (props) => {
       {props.users.map(user => (
         <TeamMember
           key={user._id}
-          name={user.name} email={user.email}
+          name={user.name}
+          email={user.email}
           currentUser={props.currentUser}
           user_type={user.user_type}
           userId={user._id}
@@ -25,7 +27,7 @@ const TeamMembersList = (props) => {
         />
       ))}
     </TeamMembersListWrapper>
-  )
+  );
 };
 
 export default TeamMembersList;

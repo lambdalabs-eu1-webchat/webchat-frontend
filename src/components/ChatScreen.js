@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import theme from '../theme/styledTheme'
+import theme from '../theme/styledTheme';
 
 import Messages from './Messages';
 import ChatScreenHeader from './ChatScreenHeader';
@@ -80,7 +80,7 @@ class ChatScreen extends React.Component {
 
     return (
       <StyledChatScreen>
-        <ChatScreenHeader 
+        <ChatScreenHeader
           guest_name={chat.guest.name}
           room_name={chat.room.name}
         />
@@ -104,7 +104,9 @@ class ChatScreen extends React.Component {
         ) : null}
         {QUEUED === status ? (
           <React.Fragment>
-            <StyledJoinButton onClick={this.joinChat}>Join Chat</StyledJoinButton>
+            <StyledJoinButton onClick={this.joinChat}>
+              Join Chat
+            </StyledJoinButton>
           </React.Fragment>
         ) : null}
 
@@ -132,10 +134,10 @@ ChatScreen.propTypes = {
               name: propTypes.string.isRequired,
             }).isRequired,
             text: propTypes.string.isRequired,
-          })
+          }),
         ),
         status: propTypes.string.isRequired,
-      })
+      }),
     ).isRequired,
     guest: propTypes.shape({
       id: propTypes.string.isRequired,
@@ -155,21 +157,25 @@ function mapStateToProps(state) {
 }
 
 const StyledChatScreen = styled.div`
-font-size:${theme.fontSize.xxxs};
-
+  font-size: ${theme.fontSize.xxxs};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color: ${theme.color.white};
 `;
 
 const StyledJoinButton = styled.button`
-   margin: 2rem;
-   border-radius: 0.5rem;
-   background-color:${theme.color.accentGreen};
-   color:${theme.color.white};
-   font-weight:${theme.fontWeight.bolder};;
-   width:95%;
-   align-item:center;
-   padding:1.5rem;
+  margin: 2rem;
+  border-radius: 0.5rem;
+  background-color: ${theme.color.accentGreen};
+  color: ${theme.color.white};
+  font-weight: ${theme.fontWeight.bolder};
+  width: 95%;
+  align-item: center;
+  padding: 1.5rem;
 `;
 export default connect(
   mapStateToProps,
-  { setCurrentChatId, updateTicketLanguage }
+  { setCurrentChatId, updateTicketLanguage },
 )(ChatScreen);

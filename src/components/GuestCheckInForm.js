@@ -110,8 +110,8 @@ class CheckInForm extends React.Component {
         )}
         <p className="show-on-print">https://webchatlabs-guest.netlify.com</p>
         <div className="passcode">
-          <h4>Login Code</h4>
-          <p>{this.state.loginCode}</p>
+          <span className="login-code-label">Login Code:</span>
+          <span className="login-code">{this.state.loginCode}</span>
         </div>
         <QRCode value={`${GUEST_CLIENT_DOMAIN}#${this.state.guestToken}`} />
       </CheckInFormWrapper>
@@ -194,25 +194,49 @@ const CheckInFormWrapper = styled.div`
     box-shadow: 0 0 3px red;
   }
   
-  button {
-    margin-bottom: 5%;
-  }
+//   button {
+//     margin-bottom: 5%;
+//   }
   
+//   .passcode {
+//     width: 100%;
+//     background: ${theme.color.lightPurple};
+//     height: 8rem;
+//     border-radius: 5px;
+//     padding: 3rem;
+//     margin-bottom: 3rem;
+//     h4 {
+//       font-size: ${theme.fontSize.xxs};
+//       align-self: center;
+//     }
+    
+//     p {
+//       text-align: center;
+//       padding-bottom: 1.5rem
+
   .passcode {
     width: 100%;
-    background: ${theme.color.lightPurple};
-    height: 8rem;
-    border-radius: 5px;
-    padding: 3rem;
-    margin-bottom: 3rem;
-    h4 {
-      font-size: ${theme.fontSize.xxs};
-      align-self: center;
+    min-width: 175px;
+    background-color: #aed581;
+    height: 50px;
+    border-radius: 1%;
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .login-code-label {
+      width: 100px;
+      position: absolute;
+      top: 6px;
+      left: 6px;
     }
-    
-    p {
-      text-align: center;
-      padding-bottom: 1.5rem;
+    .login-code {
+      font-size: 30px;
+      justify-self: center;
+    }
+    @media (max-width: 800px) {
+      width: 100%;
     }
   }
   canvas {
