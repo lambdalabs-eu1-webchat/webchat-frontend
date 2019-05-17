@@ -80,7 +80,7 @@ class Register extends React.Component {
 
   render() {
     if (this.props.loggedIn) {
-      return <Redirect to="/chat" />;
+      return <Redirect to="/" />;
     }
     return (
       <RegisterOuterWrapper>

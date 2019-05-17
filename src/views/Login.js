@@ -45,7 +45,7 @@ class Login extends React.Component {
   };
   render() {
     if (!!this.props.loggedIn) {
-      return <Redirect to="/chat" />;
+      return <Redirect to="/" />;
     }
     return (
       <LoginOuterWrapper>
