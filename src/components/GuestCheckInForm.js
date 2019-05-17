@@ -151,9 +151,7 @@ const CheckInFormWrapper = styled.div`
       outline: none;
     }
   }
-  //.hide-on-print {
-  //  padding: 30px;
-  //}
+  
   button {
     width: 100%;
     height: ${theme.button.smallButton};
@@ -193,34 +191,14 @@ const CheckInFormWrapper = styled.div`
   .error {
     box-shadow: 0 0 3px red;
   }
-  
-//   button {
-//     margin-bottom: 5%;
-//   }
-  
-//   .passcode {
-//     width: 100%;
-//     background: ${theme.color.lightPurple};
-//     height: 8rem;
-//     border-radius: 5px;
-//     padding: 3rem;
-//     margin-bottom: 3rem;
-//     h4 {
-//       font-size: ${theme.fontSize.xxs};
-//       align-self: center;
-//     }
-    
-//     p {
-//       text-align: center;
-//       padding-bottom: 1.5rem
 
   .passcode {
     width: 100%;
     min-width: 175px;
-    background-color: #aed581;
-    height: 50px;
-    border-radius: 1%;
-    padding: 5%;
+    background-color: ${theme.color.lightPurple};
+    height: 8rem;
+    border-radius: 5px;
+    padding: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -228,11 +206,12 @@ const CheckInFormWrapper = styled.div`
     .login-code-label {
       width: 100px;
       position: absolute;
+      font-size: ${theme.fontSize.xxs};
       top: 6px;
       left: 6px;
     }
     .login-code {
-      font-size: 30px;
+      font-size: ${theme.fontSize.m};
       justify-self: center;
     }
     @media (max-width: 800px) {
@@ -240,7 +219,7 @@ const CheckInFormWrapper = styled.div`
     }
   }
   canvas {
-    margin: 1rem auto;
+    margin: 2rem auto;
   }
 `;
 
