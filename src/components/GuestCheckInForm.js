@@ -10,6 +10,7 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import theme from '../theme/styledTheme'
 
 class CheckInForm extends React.Component {
   state = {
@@ -139,6 +140,7 @@ const CheckInFormWrapper = styled.div`
   }
   button {
     margin-bottom: 5%;
+    background-color:${theme.color.accentGreen};
   }
   .passcode {
     width: 90%;

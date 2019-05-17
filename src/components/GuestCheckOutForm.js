@@ -9,6 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { validate } from 'email-validator';
 import Restricted from './reusable/RestrictedModal';
 import { DOMAIN, HOTEL, USERS, EMAIL } from '../utils/paths';
+import theme from '../theme/styledTheme'
 
 class CheckOutForm extends React.Component {
   state = {
@@ -159,6 +160,7 @@ const CheckOutFormWrapper = styled.div`
   }
   button {
     margin-bottom: 5%;
+    background-color:red;
   }
 `;
 
