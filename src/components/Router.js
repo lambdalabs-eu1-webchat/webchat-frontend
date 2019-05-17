@@ -40,7 +40,6 @@ function Router({
   } else if (user_type === 'admin') {
     return (
       <Switch>
-        <Route exact path="/" component={HomePage} />
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
@@ -86,7 +85,6 @@ function Router({
 
     return (
       <Switch>
-        <Route exact path="/" component={HomePage} />
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
@@ -99,13 +97,18 @@ function Router({
         />
         <Route exact path={APP_PATHS.CHECK_IN_OUT} component={CheckInOrOut} />
         ;
-        <Route render={() => <div style={style404}>404 not found</div>} />
+        <Route
+          render={() => (
+            <Redirect
+              to={APP_PATHS.COMPANY_DASH + APP_PATHS.COMPANY_SETTINGS}
+            />
+          )}
+        />
       </Switch>
     );
   } else if (user_type === 'receptionist') {
     return (
       <Switch>
-        <Route exact path="/" component={HomePage} />
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.LOGOUT} component={Logout} />
