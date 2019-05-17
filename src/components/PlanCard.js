@@ -2,8 +2,10 @@ import React from 'react';
 import PT from 'prop-types';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
+import Spinner from '../components/reusable/Spinner';
 
-const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
+
+const PlanCard = ({ plan, current, fireSwitchCustomerPlan, loading }) => {
   return (
     <HighlighterWrapper
       highlight={current ? 'blanchedalmond' : theme.color.lightPurple}
@@ -22,6 +24,8 @@ const PlanCard = ({ plan, current, fireSwitchCustomerPlan }) => {
         <button onClick={() => fireSwitchCustomerPlan(plan.title)}>
           {plan.buttonText}
         </button>
+      ) : current && loading.switchPlan ? (
+        <Spinner />
       ) : (
         <></>
       )}
@@ -122,3 +126,4 @@ const PriceTag = styled.div`
   font-weight: bold;
   padding: 5% 0;
 `;
+

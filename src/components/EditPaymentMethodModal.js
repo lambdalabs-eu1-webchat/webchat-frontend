@@ -15,6 +15,7 @@ function EditPaymentMethodModal({
   fireUpdateCustomerMethod,
   closeEditPaymentModal,
   editPaymentMethodModal,
+  loading,
 }) {
   return (
     <StripeProvider apiKey="pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF">
@@ -38,6 +39,7 @@ function EditPaymentMethodModal({
             handleInputChange={handleInputChange}
             buttonText={'Confirm'}
             fireUpdateCustomerMethod={fireUpdateCustomerMethod}
+            loading={loading}
           />
         </Elements>
       </Modal>

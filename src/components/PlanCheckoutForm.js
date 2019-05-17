@@ -4,6 +4,8 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
 
+import Spinner from '../components/reusable/Spinner';
+
 class PlanCheckoutForm extends Component {
   createCustomer = async () => {
     const { token } = await this.props.stripe.createToken();
@@ -33,7 +35,12 @@ class PlanCheckoutForm extends Component {
               : () => this.createCustomer()
           }
         >
-          {this.props.buttonText}
+          {this.props.loading.createCustomer ||
+          this.props.loading.updateCustomerMethod ? (
+            <Spinner />
+          ) : (
+            this.props.buttonText
+          )}
         </StyledBtn>
       </FormWrapper>
     );
@@ -72,6 +79,7 @@ const FormWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   margin: 2rem 0;
+  overflow: hidden;
 `;
 
 const StyledBtn = styled.button`

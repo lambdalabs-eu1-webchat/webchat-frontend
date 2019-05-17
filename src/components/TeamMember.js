@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import theme from './../theme/styledTheme';
 import Restricted from './reusable/RestrictedModal';
 import Confirm from './reusable/ConfirmModal';
+import Spinner from '../components/reusable/Spinner';
 
 const TeamMember = ({
   name,
@@ -12,6 +14,7 @@ const TeamMember = ({
   changeUserType,
   userId,
   deleteUser,
+  loading,
 }) => {
   // use Hooks here, as it's already a func component
   const [isRestrictedModalOpen, setRestrictedModalOpen] = useState(false);
@@ -75,11 +78,14 @@ const TeamMember = ({
         />
       </div>
 
-      <i
-        className="fas fa-trash-alt"
-        onClick={handleDeleteClick(currentUser, user_type)}
-      />
-
+      {loading.deleteUser ? (
+        <Spinner />
+      ) : (
+        <i
+          className="fas fa-trash-alt"
+          onClick={handleDeleteClick(currentUser, user_type)}
+        />
+      )}
       {isRestrictedModalOpen && (
         <Restricted
           alert="You are not authorized to delete this user!"
