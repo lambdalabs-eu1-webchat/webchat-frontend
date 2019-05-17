@@ -14,7 +14,7 @@ class Login extends React.Component {
   state = {
     email: '',
     password: '',
-    flashMessage: '',
+    flashMessage: messages.allRequiredFields,
   };
 
   handleInput = event => {
