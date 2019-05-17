@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TicketView from './TicketView';
 import SearchInput from './SearchInput';
 import searchMachine from './searchMachine';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 class ChatsList extends React.Component {
   state = {
@@ -45,10 +45,12 @@ ChatsList.propTypes = {
 };
 
 const StyledDiv = styled.div`
-border: none;
-margin: 0.625rem;
-padding:0.625rem;
-
+  border: none;
+  margin: 0.625rem;
+  padding: 0.625rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default ChatsList;
