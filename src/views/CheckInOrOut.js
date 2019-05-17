@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import theme from './.././theme/styledTheme';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -72,7 +73,8 @@ class CheckInOrOut extends React.Component {
   render() {
     return (
       <StyledCheckInOrOut>
-        <div className="sub-container">
+
+         <CheckInWrapper className="sub-container">
           <h1 className="hide-on-print">Check-in</h1>
           <CheckInForm
             availableRooms={this.state.availableRooms}
@@ -81,8 +83,8 @@ class CheckInOrOut extends React.Component {
             hotel_id={this.props.hotel_id}
             loading={this.props.loading}
           />
-        </div>
-        <div className="hide-on-print sub-container">
+         </CheckInWrapper>
+         <CheckOutWrapper className="hide-on-print sub-container">
           <h1>Check-out</h1>
           <CheckOutForm
             hotel_id={this.props.hotel_id}
@@ -91,7 +93,7 @@ class CheckInOrOut extends React.Component {
             addAvailableRoom={this.addAvailableRoom}
             loading={this.props.loading}
           />
-        </div>
+         </CheckOutWrapper>
       </StyledCheckInOrOut>
     );
   }
@@ -103,12 +105,16 @@ CheckInOrOut.propTypes = {
 };
 
 const StyledCheckInOrOut = styled.div`
-  width: 70%;
+  width: 80%;
   display: flex;
-  justify-content: space-around;
-  margin: auto;
-  @media (max-width: 1200px) {
-    margin-top: 4%;
+  justify-content: space-between;
+  margin: 8rem auto;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    width: 100%;
+    margin: 5rem auto;
+    padding: 0 3rem;
   }
   @media (max-width: 800px) {
     flex-direction: column;
@@ -116,12 +122,25 @@ const StyledCheckInOrOut = styled.div`
 
   h1 {
     padding: 10% 0;
-    font-size: 1.5rem;
+    font-size: ${theme.fontSize.l};
   }
-  .sub-container {
-    width: 95%;
-    padding: 0 20px;
+`;
+
+const CheckInWrapper = styled.div`
+  width: 80%;
+  margin-right: 3rem;
+  @media(max-width:1000px) {
+    width: 100%;
+    margin: 0 auto;
   }
+`;
+
+const CheckOutWrapper = styled.div`
+  width: 80%;
+  margin-left: 3rem;
+  @media(max-width:1000px) {
+    margin: 0 auto;
+    width: 100%;
 `;
 
 function mapStateToProps(state) {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+
 import theme from './../theme/styledTheme';
 import { fetchSingleHotel, updateHotel } from '../store/actions/hotel';
 import {
@@ -10,7 +11,6 @@ import {
   fetchRoomsForHotel,
   createRoomForHotel,
 } from '../store/actions/rooms';
-
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
 import Spinner from '../components/reusable/Spinner';
 
@@ -206,7 +206,8 @@ export default connect(
 
 const CompanySettingsOuterWrapper = styled.div`
   margin: 0 3rem;
-  @media (max-width: 800px) {
+  min-height: 730px;
+  @media(max-width: 800px) {
     margin: 0 auto;
   }
   h2 {
@@ -285,7 +286,7 @@ const CompanySettingsWrapper = styled.div`
         }
         @media (max-width: 800px) {
           height: ${theme.button.height};
-          font-size: ${theme.fontSize.s};
+          font-size: ${theme.fontSize.xs};
         }
       }
     }
