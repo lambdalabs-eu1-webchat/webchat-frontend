@@ -20,6 +20,7 @@ const PaymentMethod = ({
   if (payment) {
     return (
       <PaymentMethodWrapper>
+        <h1>Pricing plans</h1>
         <CardDetails
           card={payment.card}
           email={payment.customer.email}
@@ -59,6 +60,12 @@ PaymentMethod.propTypes = {
   fireUpdateCustomerMethod: PT.func.isRequired,
 };
 
-const PaymentMethodWrapper = styled.div``;
+const PaymentMethodWrapper = styled.div`
+margin: 0;
+width: 40%;
+@media(max-width: 600px) {
+width: 100%;
+}
+`;
 
 export default PaymentMethod;
