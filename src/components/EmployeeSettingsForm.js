@@ -101,8 +101,8 @@ const EmployeeSettingsFormWrapper = styled.div`
     }
     button {
       width: 15rem;
-      height: ${theme.button.height};
-      font-size: ${theme.fontSize.s};
+      height: ${theme.button.smallButton};
+      font-size: ${theme.fontSize.xxs};
       border-radius: ${theme.border.radius};
       background:${theme.color.accentGreen};
       border: none;
@@ -123,6 +123,8 @@ const EmployeeSettingsFormWrapper = styled.div`
       }
       @media (max-width: 600px) {
         width: 100%;
+        font-size: ${theme.fontSize.xs};
+        height: ${theme.button.height};
       }
     }
   } 

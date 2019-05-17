@@ -203,6 +203,7 @@ export default connect(
 
 const CompanySettingsOuterWrapper = styled.div`
   margin: 0 3rem;
+  min-height: 730px;
   @media(max-width: 800px) {
     margin: 0 auto;
   }

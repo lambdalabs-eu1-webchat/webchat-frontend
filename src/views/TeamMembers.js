@@ -101,6 +101,7 @@ export default connect(
 
 const TeamMembersOuterWrapper = styled.div`
   margin: 0 3rem;
+  min-height: 730px;
   @media(max-width: 800px) {
     margin: 0 auto;
   }
@@ -114,7 +115,7 @@ const TeamMembersWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 5rem 0;
+  padding: 5rem 0 0 0;
   @media (max-width: 800px) {
     flex-direction: column;
     max-width: 100%;
