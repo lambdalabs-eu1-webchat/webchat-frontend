@@ -34,7 +34,7 @@ const NavBar = props => {
         </NavLink>
         {props.currentUser.name ? ( // if a user is logged in
           <React.Fragment>
-            <div>
+            <div className="tickets-nav">
               {props.numberActiveTickets ? (
                 <p className="tickets">
                   Active tickets: {props.numberActiveTickets}
@@ -86,9 +86,38 @@ const StyledNav = styled.nav`
       width: 60%;
     }
   }
-  .tickets {
-    color: ${theme.color.accentGreen};
+  .tickets-nav {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 6%;
+    @media (max-width: 1000px) {
+      right: 10%;
+    }
+    @media (max-width: 600px) {
+      right: 15%;
+      flex-direction: column;
+      text-align: right;
+    }
+      @media (max-width: 450px) {
+      right: 17%;
+      flex-direction: column;
+      text-align: right;
+    }
   }
+  
+  .tickets {
+    color: ${theme.color.lightPurple};
+    font-weight: bold;
+    font-size: ${theme.fontSize.xxs};
+    &:first-child {
+      margin-right: 1.3rem;
+      @media (max-width: 600px) {
+        margin: 0;
+      }
+    }
+  }
+  
   .active {
     color: ${theme.color.white};
   }
