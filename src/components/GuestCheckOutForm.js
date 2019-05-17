@@ -110,10 +110,7 @@ class CheckOutForm extends React.Component {
         {this.state.isCheckingOut ? (
           <CircularProgress />
         ) : (
-          <button
-            color="primary"
-            onClick={this.checkOutGuest}
-          >
+          <button color="primary" onClick={this.checkOutGuest}>
             Check Out
           </button>
         )}
@@ -147,21 +144,20 @@ const CheckOutFormWrapper = styled.div`
   flex-direction: column;
   margin: 0;
   width: 100%;
-  
+
   select {
-    padding: 3rem;
     background: ${theme.color.lightPurple};
     font-size: ${theme.fontSize.xxs};
     color: ${theme.color.accentPurple};
     font-family: ${theme.font.fontFamily};
     font-weight: bold;
-    height: 3rem;
+    height: 6rem;
     border: none;
     &:focus {
-    outline: none;
+      outline: none;
     }
   }
-  
+
   input {
     border: none;
     border-bottom: 1px solid ${theme.color.footerText};
@@ -174,13 +170,13 @@ const CheckOutFormWrapper = styled.div`
       outline: none;
     }
   }
-  
+
   button {
     width: 100%;
     height: ${theme.button.smallButton};
     font-size: ${theme.fontSize.xxs};
     border-radius: ${theme.border.radius};
-    background:${theme.color.accentGreen};
+    background: ${theme.color.accentGreen};
     border: none;
     text-transform: ${theme.textTransform.uppercase};
     color: ${theme.color.white};
@@ -207,7 +203,7 @@ const CheckOutFormWrapper = styled.div`
       font-size: ${theme.fontSize.xs};
     }
   }
-  
+
   .error {
     box-shadow: 0 0 3px red;
   }
