@@ -1,13 +1,16 @@
 import { DOMAIN, LOGIN, REGISTER } from '../../utils/paths';
 import {
+  LOGIN_REQUEST,
+  LOGIN_REQUEST_STARTED,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGIN_REQUEST,
-  LOGOUT,
+  LOGIN_REQUEST_FINISHED,
   REGISTER_USER,
+  REGISTER_USER_STARTED,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE,
-  REGISTER_USER_LOADING,
+  REGISTER_USER_FINISHED,
+  LOGOUT,
 } from './actionTypes';
 
 export const registerUserSuccess = newUser => {
@@ -83,6 +86,7 @@ export const loginFailure = error => ({
 
 export const loginRequest = (email, password) => async dispatch => {
   dispatch({ type: LOGIN_REQUEST });
+  dispatch({ type: LOGIN_REQUEST_STARTED });
   const config = {
     method: 'POST',
     headers: {
@@ -93,6 +97,7 @@ export const loginRequest = (email, password) => async dispatch => {
   try {
     const result = await fetch(`${DOMAIN}${LOGIN}`, config);
     const jsonResult = await result.json();
+    dispatch({ type: LOGIN_REQUEST_FINISHED });
     if (result.status === 401) {
       return jsonResult;
     }
@@ -122,7 +127,7 @@ export const registerUser = ({
   hotelMotto,
 }) => async dispatch => {
   dispatch({ type: REGISTER_USER });
-  dispatch({ type: REGISTER_USER_LOADING });
+  dispatch({ type: REGISTER_USER_STARTED });
   const user = {
     name: String(name),
     email: String(email),
@@ -142,12 +147,11 @@ export const registerUser = ({
     const result = await fetch(`${DOMAIN}${REGISTER}`, config);
     const jsonResult = await result.json();
     const newUser = jsonResult;
+    dispatch({ type: REGISTER_USER_FINISHED });
     if (result.ok) {
       dispatch(registerUserSuccess(newUser));
-      dispatch({ type: REGISTER_USER_LOADING });
       return jsonResult;
     } else {
-      dispatch({ type: REGISTER_USER_LOADING });
       return jsonResult;
     }
   } catch (error) {

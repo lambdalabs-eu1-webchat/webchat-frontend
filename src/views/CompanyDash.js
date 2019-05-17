@@ -45,4 +45,3 @@ const CompanyDashWrapper = styled.div`
     margin: 0 3rem;
   }
 `;
-

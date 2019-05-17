@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import theme from './../theme/styledTheme';
 import Restricted from './reusable/RestrictedModal';
 import Confirm from './reusable/ConfirmModal';
-
-const HotelStaffWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  @media (max-width: 500px) {
-    flex-direction: column;
-    max-width: 100%;
-    text-align: left;
-    padding: 20px;
-  }
-  p {
-    width: 50px;
-  }
-`;
+import Spinner from '../components/reusable/Spinner';
 
 const TeamMember = ({
   name,
@@ -27,6 +14,7 @@ const TeamMember = ({
   changeUserType,
   userId,
   deleteUser,
+  loading,
 }) => {
   // use Hooks here, as it's already a func component
   const [isRestrictedModalOpen, setRestrictedModalOpen] = useState(false);
@@ -73,24 +61,31 @@ const TeamMember = ({
   };
   return (
     <HotelStaffWrapper>
-      <p>{name}</p>
-      <p>{email}</p>
-      <input
-        type="checkbox"
-        checked={isAdmin}
-        disabled={user_type === 'super admin'}
-        onChange={handleAdminPromotion(
-          changeUserType,
-          userId,
-          currentUser,
-          user_type,
-        )}
-      />
-      <i
-        className="fas fa-trash-alt"
-        onClick={handleDeleteClick(currentUser, user_type)}
-      />
+      <p><label>Name:</label>{name}</p>
+      <p><label>Email:</label>{email}</p>
+      <div className="checkbox-container">
+        <label>Admin:</label>
+        <input
+            type="checkbox"
+            checked={isAdmin}
+            disabled={user_type === 'super admin'}
+            onChange={handleAdminPromotion(
+                changeUserType,
+                userId,
+                currentUser,
+                user_type,
+            )}
+        />
+      </div>
 
+      {loading.deleteUser ? (
+        <Spinner />
+      ) : (
+        <i
+          className="fas fa-trash-alt"
+          onClick={handleDeleteClick(currentUser, user_type)}
+        />
+      )}
       {isRestrictedModalOpen && (
         <Restricted
           alert="You are not authorized to delete this user!"
@@ -111,3 +106,79 @@ const TeamMember = ({
 };
 
 export default TeamMember;
+
+const HotelStaffWrapper = styled.div`
+  display: flex;
+  padding: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    width: 100%;
+    text-align: left;
+    background: ${theme.color.lightPurple};
+    border-radius: ${theme.border.radius};
+    margin: 1.5rem 0;
+  }
+  
+  label {
+    display: none;
+    @media (max-width: 600px) {
+    display: inline-flex;
+    padding-right: 1rem;
+    font-size: ${theme.fontSize.xs};
+    color: ${theme.color.accentPurple};
+    }
+  }
+  
+  p {
+    width: 20rem;
+    font-size: ${theme.fontSize.xs};
+    @media (max-width: 600px) {
+    width: 100%;
+    padding: 1.5rem;
+    border-bottom: 1px solid ${theme.color.footerText};
+    }
+  }
+  
+  input {
+    padding-left: 1.5rem;
+    margin: 0 auto;
+    align-self: center;
+    vertical-align:middle;
+    text-align: center;
+    font-size: 3rem;
+    @media (max-width: 600px) {
+      padding-bottom: 15px;
+    }
+  }
+  
+  .checkbox-container {
+    width: 10rem;
+    align-items: center;
+    @media (max-width: 600px) {
+      width: 100%;
+      align-items: center;
+      padding: 1.5rem;
+      border-bottom: 1px solid ${theme.color.footerText};
+      
+      label {
+        align-self: center;
+      }
+    }
+  }
+  
+  .fa-trash-alt {
+    color: ${theme.color.accentPurple};
+    width: 20rem;
+    font-size: ${theme.fontSize.m};
+    @media (max-width: 600px) {
+      width: 100%;
+      padding: 1.5rem;
+      text-align: center;
+      }
+    &:last-child {
+      width: 10rem;
+    }
+  }
+`;

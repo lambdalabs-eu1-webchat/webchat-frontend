@@ -1,50 +1,48 @@
 import React from 'react';
 import { Elements, StripeProvider } from 'react-stripe-elements';
-import Button from '@material-ui/core/Button';
 import PT from 'prop-types';
 import styled from 'styled-components';
+import Modal from 'react-modal';
 
 import PlanCheckoutForm from './PlanCheckoutForm';
-
-const EditPaymentMethodModalWrapper = styled.div`
-  display: ${props => props.modalstatus};
-  background-color: lightgrey;
-  z-index: 1;
-  width: 50%;
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
+import modalTheme from '../theme/modalTheme';
+import theme from '../theme/styledTheme';
 
 function EditPaymentMethodModal({
   fireCreateNewCustomer,
   billingEmail,
   handleInputChange,
-  editPaymentMethodModal,
-  handleModalSwitch,
   fireUpdateCustomerMethod,
+  closeEditPaymentModal,
+  editPaymentMethodModal,
+  loading,
 }) {
   return (
-    // move this test key into dotenv
-    <StripeProvider apiKey='pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF'>
-      <EditPaymentMethodModalWrapper
-        modalstatus={editPaymentMethodModal ? 'block' : 'none'}
+    <StripeProvider apiKey="pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF">
+      <Modal
+        onRequestClose={closeEditPaymentModal}
+        style={{
+          overlay: modalTheme.overlay,
+          content: modalTheme.paymentContent,
+        }}
+        isOpen={editPaymentMethodModal}
+        ariaHideApp={false}
       >
-        <Button variant='contained' color='primary' onClick={handleModalSwitch}>
-          x
-        </Button>
+        <StyledBtn onClick={closeEditPaymentModal}>
+          <i class="fas fa-times-circle" />
+        </StyledBtn>
         <Elements>
           <PlanCheckoutForm
             mode={'edit'}
             fireCreateNewCustomer={fireCreateNewCustomer}
             billingEmail={billingEmail}
             handleInputChange={handleInputChange}
-            buttonText={'Change payment method'}
+            buttonText={'Confirm'}
             fireUpdateCustomerMethod={fireUpdateCustomerMethod}
+            loading={loading}
           />
         </Elements>
-      </EditPaymentMethodModalWrapper>
+      </Modal>
     </StripeProvider>
   );
 }
@@ -57,5 +55,29 @@ EditPaymentMethodModal.propTypes = {
   handleModalSwitch: PT.func.isRequired,
   fireUpdateCustomerMethod: PT.func.isRequired,
 };
+
+const StyledBtn = styled.button`
+  border: none;
+  outline: none;
+  position: absolute;
+  right: 5px;
+
+  .fa-times-circle {
+    background: white;
+    border-radius: 50%;
+    padding: 2.5%;
+    color: ${theme.color.secondaryPurple};
+    font-size: 2.5rem;
+
+    &:hover {
+      box-shadow: ${theme.shadow.buttonHover};
+      cursor: pointer;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 export default EditPaymentMethodModal;

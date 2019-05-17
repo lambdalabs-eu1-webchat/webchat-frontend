@@ -7,25 +7,34 @@ import { freePlan, plusPlan, proPlan } from '../utils/plans';
 
 const PlanCardWrapper = styled.div`
   display: flex;
+  justify-content: space-around;
+  margin: 2rem;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    width: 90%;
+  }
 `;
 
-const PlanCards = ({ hotel, fireSwitchCustomerPlan }) => {
+const PlanCards = ({ hotel, fireSwitchCustomerPlan, loading }) => {
   return (
     <PlanCardWrapper>
       <PlanCard
         plan={freePlan}
         current={hotel.plan === 'free' ? true : false}
         fireSwitchCustomerPlan={fireSwitchCustomerPlan}
+        loading={loading}
       />
       <PlanCard
         plan={plusPlan}
         current={hotel.plan === 'plus' ? true : false}
         fireSwitchCustomerPlan={fireSwitchCustomerPlan}
+        loading={loading}
       />
       <PlanCard
         plan={proPlan}
         current={hotel.plan === 'pro' ? true : false}
         fireSwitchCustomerPlan={fireSwitchCustomerPlan}
+        loading={loading}
       />
     </PlanCardWrapper>
   );

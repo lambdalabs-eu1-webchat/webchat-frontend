@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import theme from './../theme/styledTheme';
 import propTypes from 'prop-types';
 import jwt from 'jsonwebtoken';
 import QRCode from 'qrcode.react';
 import axios from 'axios';
 
-import { DOMAIN, USERS, HOTEL, GUEST_CLIENT_DOMAIN } from '../utils/paths';
-import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { DOMAIN, USERS, GUEST_CLIENT_DOMAIN } from '../utils/paths';
+import Spinner from '../components/reusable/Spinner';
 
 class CheckInForm extends React.Component {
   state = {
@@ -74,9 +72,7 @@ class CheckInForm extends React.Component {
   render() {
     return (
       <CheckInFormWrapper>
-        <Select
-          native={true}
-          displayEmpty={true}
+        <select
           className={
             this.state.errorRoom ? 'error hide-on-print' : 'hide-on-print'
           }
@@ -91,32 +87,27 @@ class CheckInForm extends React.Component {
               Room: {room.name}
             </option>
           ))}
-        </Select>
-        <TextField
+        </select>
+        <input
           placeholder="Name"
           className={
             this.state.errorName ? 'error hide-on-print' : 'hide-on-print'
           }
           onChange={event => this.setNameInput(event.target.value)}
           value={this.state.nameInput}
-          margin="normal"
         />
-        {this.state.isCheckingIn ? (
-          <CircularProgress />
-        ) : (
-          <Button
-            className="hide-on-print"
-            variant="contained"
-            color="primary"
-            onClick={this.checkInGuest}
-          >
-            Check In
-          </Button>
-        )}
+        <button
+          className="hide-on-print"
+          variant="contained"
+          color="primary"
+          onClick={this.checkInGuest}
+        >
+          {this.state.isCheckingIn ? <Spinner /> : 'Check In'}
+        </button>
         <p className="show-on-print">https://webchatlabs-guest.netlify.com</p>
         <div className="passcode">
-          <h4>Login Code</h4>
-          <p>{this.state.loginCode}</p>
+          <span className="login-code-label">Login Code:</span>
+          <span className="login-code">{this.state.loginCode}</span>
         </div>
         <QRCode value={`${GUEST_CLIENT_DOMAIN}#${this.state.guestToken}`} />
       </CheckInFormWrapper>
@@ -131,27 +122,100 @@ CheckInForm.propTypes = {
 const CheckInFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  button {
-    margin-top: 10%;
+  select {
+    padding: 3rem;
+    background: ${theme.color.lightPurple};
+    font-size: ${theme.fontSize.xxs};
+    color: ${theme.color.accentPurple};
+    font-family: ${theme.font.fontFamily};
+    font-weight: bold;
+    height: 3rem;
+    border: none;
+    &:focus {
+    outline: none;
+    }
   }
+  input {
+    border: none;
+    border-bottom: 1px solid ${theme.color.footerText};
+    margin: 2rem 0;
+    height: ${theme.input.height};
+    font-size: ${theme.fontSize.xs};
+    padding: 20px 0;
+    border-radius: 0;
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  button {
+    width: 100%;
+    height: ${theme.button.smallButton};
+    font-size: ${theme.fontSize.xxs};
+    border-radius: ${theme.border.radius};
+    background:${theme.color.accentGreen};
+    border: none;
+    text-transform: ${theme.textTransform.uppercase};
+    color: ${theme.color.white};
+    font-weight: ${theme.fontWeight.bold};
+    margin: 15px 0;
+    box-shadow: ${theme.shadow.buttonShadow};
+    &:hover {
+      box-shadow: ${theme.shadow.buttonHover};
+      cursor: pointer;
+    }
+    &:focus {
+      outline: none;
+    }
+    &:first-child {
+      margin-right: 1.5rem;
+    }
+    @media (max-width: 1200px) {
+      width: 100%;
+      height: ${theme.button.smallButton};
+      margin: 0 0 1.5rem 0;
+      &:first-child {
+        margin-right: 0;
+      }
+    }
+    @media (max-width: 800px) {
+      height: ${theme.button.height};
+      font-size: ${theme.fontSize.xs};
+    }
+  }
+  
   .error {
-    background: red;
+    box-shadow: 0 0 3px red;
   }
-  button {
-    margin-bottom: 5%;
-  }
+
   .passcode {
-    width: 90%;
-    background-color: #aed581;
-    height: 50px;
-    border-radius: 1%;
-    padding: 5%;
-    p {
-      text-align: center;
+    width: 100%;
+    min-width: 175px;
+    background-color: ${theme.color.lightPurple};
+    height: 8rem;
+    border-radius: 5px;
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .login-code-label {
+      width: 100px;
+      position: absolute;
+      font-size: ${theme.fontSize.xxs};
+      top: 6px;
+      left: 6px;
+    }
+    .login-code {
+      font-size: ${theme.fontSize.m};
+      justify-self: center;
+    }
+    @media (max-width: 800px) {
+      width: 100%;
     }
   }
   canvas {
-    margin: 1rem auto;
+    margin: 2rem auto;
   }
 `;
 

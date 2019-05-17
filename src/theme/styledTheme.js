@@ -26,11 +26,11 @@ const theme = {
   },
 
   font: {
-    fontFamily: '\'Lato\', sans-serif',
+    fontFamily: "'Lato', sans-serif",
   },
 
   fontSize: {
-    xxxs:'0.875rem',
+    xxxs: '0.875rem',
     xxs: '1.2rem',
     xs: '1.6rem',
     s: '1.8rem',
@@ -41,7 +41,7 @@ const theme = {
   },
 
   fontStyle: {
-    italic: 'italic'
+    italic: 'italic',
   },
 
   textTransform: {
@@ -50,7 +50,7 @@ const theme = {
 
   fontWeight: {
     bold: 'bold',
-    bolder:'bolder',
+    bolder: 'bolder',
   },
 
   border: {
@@ -66,10 +66,14 @@ const theme = {
     smallButton: '30px',
   },
 
+  spinner: {
+    diameter: '30px',
+  },
+
   spacing: {
     lineHeight: '1.5',
     letterSpacing: '0.1rem',
-  }
+  },
 };
 
 export default theme;

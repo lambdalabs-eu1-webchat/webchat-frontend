@@ -1,27 +1,41 @@
 // import axios from "axios";
 import { DOMAIN, USERS } from '../../utils/paths';
 import {
+  FETCH_ALL_USERS,
+  FETCH_ALL_USERS_STARTED,
   FETCH_ALL_USERS_SUCCESS,
   FETCH_ALL_USERS_FAILURE,
-  FETCH_ALL_USERS,
+  FETCH_ALL_USERS_FINISHED,
+  FETCH_SINGLE_USER,
+  FETCH_SINGLE_USER_STARTED,
   FETCH_SINGLE_USER_SUCCESS,
   FETCH_SINGLE_USER_FAILURE,
-  FETCH_SINGLE_USER,
+  FETCH_SINGLE_USER_FINISHED,
   FETCH_HOTEL_STAFF,
+  FETCH_HOTEL_STAFF_STARTED,
   FETCH_HOTEL_STAFF_SUCCESS,
   FETCH_HOTEL_STAFF_FAILURE,
+  FETCH_HOTEL_STAFF_FINISHED,
   CREATE_USER,
+  CREATE_USER_STARTED,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAILURE,
+  CREATE_USER_FINISHED,
   UPDATE_USER,
+  UPDATE_USER_STARTED,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
+  UPDATE_USER_FINISHED,
   CHANGE_USER_TYPE,
+  CHANGE_USER_TYPE_STARTED,
   CHANGE_USER_TYPE_SUCCESS,
   CHANGE_USER_TYPE_FAILURE,
+  CHANGE_USER_TYPE_FINISHED,
   DELETE_USER,
+  DELETE_USER_STARTED,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILURE,
+  DELETE_USER_FINISHED,
 } from './actionTypes';
 
 // Synchronous action creators
@@ -201,9 +215,11 @@ export const deleteUserFailure = error => {
 
 export const fetchAllUsers = () => async dispatch => {
   dispatch({ type: FETCH_ALL_USERS });
+  dispatch({ type: FETCH_ALL_USERS_STARTED });
   try {
     const result = await fetch(`${DOMAIN}${USERS}`);
     const jsonResult = await result.json();
+    dispatch({ type: FETCH_ALL_USERS_FINISHED });
     dispatch(fetchAllUsersSuccess(jsonResult));
   } catch (error) {
     dispatch(fetchAllUsersFailure(error));
@@ -212,9 +228,11 @@ export const fetchAllUsers = () => async dispatch => {
 
 export const fetchSingleUser = id => async dispatch => {
   dispatch({ type: FETCH_SINGLE_USER });
+  dispatch({ type: FETCH_SINGLE_USER_STARTED });
   try {
     const result = await fetch(`${DOMAIN}${USERS}/${id}`);
     const jsonResult = await result.json();
+    dispatch({ type: FETCH_SINGLE_USER_FINISHED });
     dispatch(fetchAllUsersSuccess(jsonResult));
   } catch (error) {
     dispatch(fetchAllUsersFailure(error));
@@ -223,9 +241,11 @@ export const fetchSingleUser = id => async dispatch => {
 
 export const fetchHotelStaff = id => async dispatch => {
   dispatch({ type: FETCH_HOTEL_STAFF });
+  dispatch({ type: FETCH_HOTEL_STAFF_STARTED });
   try {
     const result = await fetch(`${DOMAIN}${USERS}?hotel_id=${id}`);
     const jsonResult = await result.json();
+    dispatch({ type: FETCH_HOTEL_STAFF_FINISHED });
     dispatch(fetchHotelStaffSuccess(jsonResult));
   } catch (error) {
     dispatch(fetchHotelStaffFailure(error));
@@ -239,8 +259,8 @@ export const createUser = (
   user_type,
   motto = '',
 ) => async (dispatch, getState) => {
-
   dispatch({ type: CREATE_USER });
+  dispatch({ type: CREATE_USER_STARTED });
   const user = {
     hotel_id: getState().currentUser.hotel_id,
     name: String(name),
@@ -260,6 +280,7 @@ export const createUser = (
     const result = await fetch(`${DOMAIN}${USERS}`, config);
     const jsonResult = await result.json();
     const newUser = { ...jsonResult };
+    dispatch({ type: CREATE_USER_FINISHED });
     if (result.ok) {
       dispatch(createUserSuccess(newUser));
       dispatch(fetchHotelStaff(getState().currentUser.hotel_id));
@@ -273,6 +294,7 @@ export const createUser = (
 
 export const updateUser = (userUpdates, id) => async dispatch => {
   dispatch({ type: UPDATE_USER });
+  dispatch({ type: UPDATE_USER_STARTED });
   const config = {
     method: 'PUT',
     headers: {
@@ -283,6 +305,7 @@ export const updateUser = (userUpdates, id) => async dispatch => {
   try {
     const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
     const jsonResult = await result.json();
+    dispatch({ type: UPDATE_USER_FINISHED });
     if (result.ok) {
       dispatch(updateUserSuccess(jsonResult));
     } else {
@@ -295,6 +318,7 @@ export const updateUser = (userUpdates, id) => async dispatch => {
 
 export const changeUserType = (id, newType) => async dispatch => {
   dispatch({ type: CHANGE_USER_TYPE });
+  dispatch({ type: CHANGE_USER_TYPE_STARTED });
   const promotedUser = {
     user_type: String(newType),
   };
@@ -308,6 +332,7 @@ export const changeUserType = (id, newType) => async dispatch => {
   try {
     const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
     const jsonResult = await result.json();
+    dispatch({ type: CHANGE_USER_TYPE_FINISHED });
     if (result.ok) {
       const newUser = { ...jsonResult };
       dispatch(changeUserTypeSuccess(newUser));
@@ -321,6 +346,7 @@ export const changeUserType = (id, newType) => async dispatch => {
 
 export const deleteUser = id => async (dispatch, getState) => {
   dispatch({ type: DELETE_USER });
+  dispatch({ type: DELETE_USER_STARTED });
   const config = {
     method: 'DELETE',
     headers: {
@@ -330,6 +356,7 @@ export const deleteUser = id => async (dispatch, getState) => {
   try {
     const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
     const jsonResult = await result.json();
+    dispatch({ type: DELETE_USER_FINISHED });
     if (result.ok) {
       dispatch(deleteUserSuccess(id));
       dispatch(fetchHotelStaff(getState().currentUser.hotel_id));

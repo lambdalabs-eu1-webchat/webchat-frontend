@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+
 import theme from './../theme/styledTheme';
 import { fetchSingleHotel, updateHotel } from '../store/actions/hotel';
 import {
@@ -10,8 +11,8 @@ import {
   fetchRoomsForHotel,
   createRoomForHotel,
 } from '../store/actions/rooms';
-
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
+import Spinner from '../components/reusable/Spinner';
 
 class CompanySettings extends React.Component {
   constructor(props) {
@@ -99,8 +100,7 @@ class CompanySettings extends React.Component {
       return alert('Please add at least one room name');
     } else {
       // split the string into an array of room names on the comma separator
-      // trim all whitespace at the start and end of each string
-      // create a new array of objects with each room name set to the name key
+      // trim whitespace at the start and end of each string
       const roomsToAdd = rooms.split(',').map(room => ({ name: room.trim() }));
       this.props.dispatchCreateRoomForHotel(roomsToAdd, this.props.hotel._id);
       this.clearNewRooms();
@@ -147,7 +147,7 @@ class CompanySettings extends React.Component {
                     dispatchUpdateHotel,
                   ).bind(this)}
                 >
-                  Save
+                  {this.props.loading.updateHotel ? <Spinner /> : 'Save'}
                 </button>
               </div>
             </form>
@@ -163,6 +163,7 @@ class CompanySettings extends React.Component {
             deleteRoomForHotel={dispatchDeleteRoomForHotel}
             updateRoomForHotel={dispatchUpdateRoomForHotel}
             addRooms={this.addRooms}
+            loading={this.props.loading}
           />
         </CompanySettingsWrapper>
       </CompanySettingsOuterWrapper>
@@ -173,6 +174,7 @@ class CompanySettings extends React.Component {
 CompanySettings.propTypes = {
   hotel: PropTypes.object.isRequired,
   rooms: PropTypes.array.isRequired,
+  loading: PropTypes.object.isRequired,
   dispatchFetchSingleHotel: PropTypes.func.isRequired,
   dispatchUpdateHotel: PropTypes.func.isRequired,
   dispatchFetchRoomsForHotel: PropTypes.func.isRequired,
@@ -186,6 +188,7 @@ const mapStateToProps = state => {
     hotel: state.hotel,
     rooms: state.rooms.rooms,
     currentUser: state.currentUser,
+    loading: state.loading,
   };
 };
 
@@ -203,6 +206,7 @@ export default connect(
 
 const CompanySettingsOuterWrapper = styled.div`
   margin: 0 3rem;
+  min-height: 730px;
   @media(max-width: 800px) {
     margin: 0 auto;
   }
@@ -221,23 +225,23 @@ const CompanySettingsWrapper = styled.div`
     flex-direction: column;
     max-width: 100%;
   }
-  
+
   .company-details {
     width: 30%;
     @media (max-width: 800px) {
-    width:100%;
+      width: 100%;
     }
-    
+
     h3 {
       font-size: ${theme.fontSize.xs};
       color: ${theme.color.accentPurple};
       padding: 1.5rem 0;
     }
-    
+
     form {
       display: flex;
       flex-direction: column;
-      
+
       input {
         border: none;
         border-bottom: 1px solid ${theme.color.footerText};
@@ -255,7 +259,7 @@ const CompanySettingsWrapper = styled.div`
         height: ${theme.button.smallButton};
         font-size: ${theme.fontSize.xxs};
         border-radius: ${theme.border.radius};
-        background:${theme.color.accentGreen};
+        background: ${theme.color.accentGreen};
         border: none;
         text-transform: ${theme.textTransform.uppercase};
         color: ${theme.color.white};
@@ -282,7 +286,7 @@ const CompanySettingsWrapper = styled.div`
         }
         @media (max-width: 800px) {
           height: ${theme.button.height};
-          font-size: ${theme.fontSize.s};
+          font-size: ${theme.fontSize.xs};
         }
       }
     }

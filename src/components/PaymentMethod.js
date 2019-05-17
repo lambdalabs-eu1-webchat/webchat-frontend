@@ -6,10 +6,6 @@ import CardDetails from './CardDetails';
 import PlanCheckout from './PlanCheckout';
 import EditPaymentMethodModal from './EditPaymentMethodModal';
 
-const PaymentMethodWrapper = styled.div`
-  padding-top: 10%;
-`;
-
 const PaymentMethod = ({
   payment,
   fireCreateNewCustomer,
@@ -18,6 +14,8 @@ const PaymentMethod = ({
   editPaymentMethodModal,
   handleModalSwitch,
   fireUpdateCustomerMethod,
+  loading,
+  closeEditPaymentModal,
 }) => {
   if (payment) {
     return (
@@ -34,6 +32,8 @@ const PaymentMethod = ({
           editPaymentMethodModal={editPaymentMethodModal}
           handleModalSwitch={handleModalSwitch}
           fireUpdateCustomerMethod={fireUpdateCustomerMethod}
+          loading={loading}
+          closeEditPaymentModal={closeEditPaymentModal}
         />
       </PaymentMethodWrapper>
     );
@@ -44,6 +44,8 @@ const PaymentMethod = ({
           fireCreateNewCustomer={fireCreateNewCustomer}
           billingEmail={billingEmail}
           handleInputChange={handleInputChange}
+          loading={loading}
+          isPayment={payment ? true : false}
         />
       </PaymentMethodWrapper>
     );
@@ -58,5 +60,7 @@ PaymentMethod.propTypes = {
   handleModalSwitch: PT.func.isRequired,
   fireUpdateCustomerMethod: PT.func.isRequired,
 };
+
+const PaymentMethodWrapper = styled.div``;
 
 export default PaymentMethod;
