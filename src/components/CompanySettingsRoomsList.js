@@ -16,10 +16,18 @@ const CompanySettingsRoomsList = props => {
     handleRoomInputChange,
     addRooms,
     loading,
+    fileRead,
   } = props;
   return (
     <CompanySettingsRoomsListWrapper>
-      <h3>To add multiple rooms, separate each room name with a comma</h3>
+      <h3>Upload room names via CSV or add rooms below, separating each name with a comma</h3>
+      <input
+          name="roomsUpload"
+          type="file"
+          accept=".csv"
+          onChange={fileRead}
+          value={undefined}
+        />
       <AddRooms>
         <input
           placeholder="Add rooms..."
