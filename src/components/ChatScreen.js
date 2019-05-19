@@ -57,21 +57,19 @@ class ChatScreen extends React.Component {
       return msg.text;
     });
     // translate message from guest
-    const translatedText = await translate(textToTranslate, ticket_id);
+    this.props.translate(textToTranslate, ticket_id);
 
-    this.setState({ translatedMessages: translatedText });
+    // this.setState({ translatedMessages: translatedText });
 
-    const firstTranslatedText = translatedText[0];
-    const chat_id = this.props.chat._id;
+    // const firstTranslatedText = translatedText[0];
+    // const chat_id = this.props.chat._id;
     // get language from first translated message to state
-
-    this.props.updateTicketLanguage(
-      chat_id,
-      firstTranslatedText.detectedSourceLanguage
-    );
+    // this.props.updateTicketLanguage(
+    //   chat_id,
+    //   firstTranslatedText.detectedSourceLanguage,
+    // );
     // open modal with translated messages
-    this.openTranslateModal();
-
+    // this.openTranslateModal();
   };
 
   render() {
@@ -177,5 +175,5 @@ const StyledJoinButton = styled.button`
 `;
 export default connect(
   mapStateToProps,
-  { setCurrentChatId, updateTicketLanguage },
+  { setCurrentChatId, updateTicketLanguage, translate },
 )(ChatScreen);

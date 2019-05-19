@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Message from './Message';
 import RatingMessage from './RatingMessage';
@@ -21,7 +22,7 @@ class Messages extends React.Component {
     this.scrollToBottom();
   };
   render() {
-    const { tickets, guest, userType, status } = this.props;
+    const { tickets, guest, userType, status, translatedTickets } = this.props;
     const guestName = guest.name;
     const GuestId = guest.id;
     return (
@@ -43,8 +44,17 @@ class Messages extends React.Component {
                 <p>No Rating given</p>
               )
             ) : null}
-            {ticket.messages.map(message => (
-              <Message key={message._id} message={message} guest_id={GuestId} />
+            {ticket.messages.map((message, i) => (
+              <Message
+                key={message._id}
+                message={message}
+                guest_id={GuestId}
+                translatedMessage={
+                  translatedTickets[ticket._id]
+                    ? translatedTickets[ticket._id][i]
+                    : { detectedSourceLanguage: false }
+                }
+              />
             ))}
           </div>
         ))}
@@ -77,4 +87,10 @@ const StyledMessages = styled.div`
   overflow-y: scroll;
 `;
 
-export default Messages;
+function mapStateToProps(state) {
+  return {
+    translatedTickets: state.chats.translatedTickets,
+  };
+}
+
+export default connect(mapStateToProps)(Messages);
