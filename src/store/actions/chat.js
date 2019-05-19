@@ -18,6 +18,7 @@ const {
   CLEAR_CURRENT_TYPER,
   UPDATE_TICKET_LANGUAGE,
   TRANSLATE_CHATS_FAILURE,
+  ADD_TRANSLATED_TICKET,
 } = CHATS;
 
 export const saveSocket = socket => {
@@ -177,6 +178,14 @@ export const updateTicketLanguage = (chat_id, language) => {
     type: UPDATE_TICKET_LANGUAGE,
     target: chat_id,
     payload: language,
+  };
+};
+
+export const addTranslatedTicket = (chat_id, ticket_id, messages) => {
+  return {
+    type: ADD_TRANSLATED_TICKET,
+    target: chat_id,
+    payload: { ticket_id, messages },
   };
 };
 
