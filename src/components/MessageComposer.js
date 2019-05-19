@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { SOCKET } from '../utils/paths';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-import { translate } from '../store/actions/chat';
+import { translateMessage } from '../store/actions/chat';
 import theme from '../theme/styledTheme';
 
 class MessageComposer extends React.Component {
@@ -28,12 +28,11 @@ class MessageComposer extends React.Component {
       const { socket, chat_id, last_ticket_id, language } = this.props;
 
       // translate hotel staff message based on language from guest message
-      const translatedInputValue = await translate(
+      const translatedInputValue = await translateMessage(
         this.state.inputValue,
         last_ticket_id,
         language,
       );
-
       socket.emit(SOCKET.MESSAGE, {
         chat_id: this.props.chat_id,
         // emit the translated message to chat

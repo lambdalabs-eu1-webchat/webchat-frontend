@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { translate } from '../store/actions/chat';
 import Message from './Message';
 import RatingMessage from './RatingMessage';
 import { ADMIN, SUPER_ADMIN } from '../utils/userTypes';
@@ -21,6 +21,12 @@ class Messages extends React.Component {
   componentDidUpdate = () => {
     this.scrollToBottom();
   };
+  translateTicket = ticket => {
+    const textToTranslate = ticket.messages.map(msg => {
+      return msg.text;
+    });
+    this.props.translate(textToTranslate, ticket._id, this.props.chat_id);
+  };
   render() {
     const { tickets, guest, userType, status, translatedTickets } = this.props;
     const guestName = guest.name;
@@ -36,6 +42,9 @@ class Messages extends React.Component {
           <div>
             <p>{`${guestName}'s ticket # ${i}`}</p>
             <p>{`Status: ${status}`}</p>
+            <button onClick={() => this.translateTicket(ticket)}>
+              Translate
+            </button>
             {status === CLOSED &&
             (userType === ADMIN || userType === SUPER_ADMIN) ? (
               ticket.rating ? (
@@ -93,4 +102,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Messages);
+export default connect(
+  mapStateToProps,
+  { translate },
+)(Messages);

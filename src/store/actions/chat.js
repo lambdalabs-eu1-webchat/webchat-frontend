@@ -152,7 +152,13 @@ export const clearCurrentTyper = chat_id => {
   };
 };
 
-export const translate = (text, ticket_id, language) => async dispatch => {
+export const translate = (
+  text,
+  ticket_id,
+  chat_id,
+  language,
+) => async dispatch => {
+  debugger;
   const config = {
     method: 'POST',
     headers: {
@@ -168,6 +174,29 @@ export const translate = (text, ticket_id, language) => async dispatch => {
     const jsonResponse = await response.json();
     dispatch(addTranslatedTicket(ticket_id, jsonResponse));
     // return jsonResponse;
+    const firstTranslatedText = jsonResponse[0];
+    updateTicketLanguage(chat_id, firstTranslatedText.detectedSourceLanguage);
+  } catch (error) {
+    // dispatch(translateChatFailure(error));
+    console.error(error);
+  }
+};
+export const translateMessage = async (text, ticket_id, language) => {
+  debugger;
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: language
+      ? JSON.stringify({ text, ticket_id, language })
+      : JSON.stringify({ text, ticket_id }),
+  };
+
+  try {
+    const response = await fetch(`${DOMAIN}${TRANSLATE_CHAT}`, config);
+    const jsonResponse = await response.json();
+    return jsonResponse;
   } catch (error) {
     // dispatch(translateChatFailure(error));
     console.error(error);

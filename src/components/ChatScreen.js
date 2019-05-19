@@ -57,7 +57,7 @@ class ChatScreen extends React.Component {
       return msg.text;
     });
     // translate message from guest
-    this.props.translate(textToTranslate, ticket_id);
+    this.props.translate(textToTranslate, ticket_id, this.props.chat._id);
 
     // this.setState({ translatedMessages: translatedText });
 
@@ -87,6 +87,7 @@ class ChatScreen extends React.Component {
           status={status}
           tickets={chat.tickets}
           guest={chat.guest}
+          chat_id={chat._id}
         />
         {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
         {ACTIVE === status ? (

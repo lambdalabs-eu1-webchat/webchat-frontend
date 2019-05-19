@@ -4,15 +4,16 @@ import propTypes from 'prop-types';
 import theme from '../theme/styledTheme';
 
 function Message({ message, guest_id, translatedMessage }) {
-  console.log(translatedMessage);
   return (
     <StyledMessage left={guest_id === message.sender.id}>
       <span>{message.sender.name} : </span>
       <div className="bubble-container">
         <span className="bubble me">{message.text}</span>
         <p>
-          {translatedMessage.detectedSourceLanguage !== 'en'
-            ? translatedMessage.translatedText
+          {translatedMessage
+            ? translatedMessage.detectedSourceLanguage !== 'en'
+              ? translatedMessage.translatedText
+              : null
             : null}
         </p>
       </div>
