@@ -158,6 +158,9 @@ const CheckOutFormWrapper = styled.div`
     &:focus {
       outline: none;
     }
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   input {

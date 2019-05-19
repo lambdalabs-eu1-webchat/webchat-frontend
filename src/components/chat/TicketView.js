@@ -78,6 +78,10 @@ const StyledDiv = styled.div`
   color: white;
   font-weight: ${theme.fontWeight.light};
   font-size: 1rem;
+  &:hover {
+    cursor: pointer;
+    background: ${theme.color.hoverPurple};
+  }
 `;
 const HeaderStyle = styled.div`
   font-weight: ${theme.fontWeight.bolder};

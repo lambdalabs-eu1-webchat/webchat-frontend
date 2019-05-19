@@ -133,6 +133,9 @@ const CheckInFormWrapper = styled.div`
     &:focus {
       outline: none;
     }
+    &:hover {
+      cursor: pointer;
+    }
   }
   input {
     border: none;
