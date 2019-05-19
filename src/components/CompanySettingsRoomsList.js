@@ -20,13 +20,12 @@ const CompanySettingsRoomsList = props => {
   } = props;
   return (
     <CompanySettingsRoomsListWrapper>
-      <h3>Upload room names via CSV or add rooms below, separating each name with a comma</h3>
+      <h3>Add rooms with a CSV, or type out your hotel's room names, separating each with a comma</h3>
       <input
           name="roomsUpload"
           type="file"
           accept=".csv"
           onChange={fileRead}
-          value={undefined}
         />
       <AddRooms>
         <input
