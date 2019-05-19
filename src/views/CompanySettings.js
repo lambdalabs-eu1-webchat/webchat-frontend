@@ -100,6 +100,8 @@ class CompanySettings extends React.Component {
       const reader = new FileReader();
       reader.onloadend = event => {
         const rooms = event.target.result;
+        // replace return carriages with a comma and a space
+        // spacing is used for cleaner display on the Add Rooms input
         const newRooms = rooms.replace(/\n/g, ', ');
         this.setState({
           newRooms,
