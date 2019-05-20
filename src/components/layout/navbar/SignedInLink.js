@@ -16,7 +16,7 @@ const LoggedIn = ({ userType }) => {
   }
   return (
     <MenuToggle id="menuToggle">
-      <input onClick={toggleIsNavOpen} checked={isNavOpen} type="checkbox" />
+      <input onClick={toggleIsNavOpen} checked={isNavOpen} type="checkbox" readOnly />
       <span />
       <span />
       <span />
