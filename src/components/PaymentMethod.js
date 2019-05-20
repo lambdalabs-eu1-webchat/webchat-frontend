@@ -3,7 +3,6 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 
 import CardDetails from './CardDetails';
-import PlanCheckout from './PlanCheckout';
 import EditPaymentMethodModal from './EditPaymentMethodModal';
 
 const PaymentMethod = ({
@@ -15,7 +14,7 @@ const PaymentMethod = ({
   handleModalSwitch,
   fireUpdateCustomerMethod,
   loading,
-  closeEditPaymentModal,
+  closeEditPaymentModal
 }) => {
   if (payment) {
     return (
@@ -41,15 +40,23 @@ const PaymentMethod = ({
   } else {
     return (
       <PaymentMethodWrapper>
-        <PlanCheckout
-          fireCreateNewCustomer={fireCreateNewCustomer}
-          billingEmail={billingEmail}
-          handleInputChange={handleInputChange}
-          loading={loading}
-          isPayment={payment ? true : false}
+        <h1>Pricing plans</h1>
+        <CardDetails
+          card={emptyCard}
+          email=""
+          handleModalSwitch={handleModalSwitch}
         />
       </PaymentMethodWrapper>
     );
+  }
+};
+
+const emptyCard = {
+  brand: '',
+  last_four: '',
+  expiration: {
+    month: '',
+    year: ''
   }
 };
 
@@ -59,15 +66,15 @@ PaymentMethod.propTypes = {
   handleInputChange: PT.func.isRequired,
   editPaymentMethodModal: PT.bool.isRequired,
   handleModalSwitch: PT.func.isRequired,
-  fireUpdateCustomerMethod: PT.func.isRequired,
+  fireUpdateCustomerMethod: PT.func.isRequired
 };
 
 const PaymentMethodWrapper = styled.div`
-margin: 0;
-width: 40%;
-@media(max-width: 600px) {
-width: 100%;
-}
+  margin: 0;
+  width: 40%;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 export default PaymentMethod;
