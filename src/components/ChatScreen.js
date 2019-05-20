@@ -89,7 +89,7 @@ class ChatScreen extends React.Component {
           tickets={chat.tickets}
           guest={chat.guest}
         />
-        {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
+        {chat.typingUser ? <p className="typing">{chat.typingUser.name} is typing...</p> : null}
         {ACTIVE === status ? (
           <React.Fragment>
             <MessageComposer
@@ -168,6 +168,11 @@ const StyledChatScreen = styled.div`
   justify-content: space-between;
   height: 100%;
   background-color: ${theme.color.white};
+  .typing {
+    font-size: ${theme.fontSize.message};
+    font-style: italic;
+    padding-left: 1rem;
+  }
 `;
 
 const StyledChatButtons = styled.div`
