@@ -56,7 +56,7 @@ PlanCheckout.propTypes = {
   fireCreateNewCustomer: PT.func.isRequired,
   billingEmail: PT.string.isRequired,
   handleInputChange: PT.func.isRequired,
-  loading: PT.bool.isRequired
+  loading: PT.object.isRequired,
 };
 
 const Sth3 = styled.h3`

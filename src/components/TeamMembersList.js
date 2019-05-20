@@ -15,7 +15,7 @@ const TeamMembersList = props => {
       </ListHeader>
       {props.users.map(user => (
         <TeamMember
-          key={user._id}
+          key={user._id ||  'new'}
           name={user.name}
           email={user.email}
           currentUser={props.currentUser}
@@ -41,7 +41,7 @@ const ListHeader = styled.div`
   @media (max-width: 600px) {
     display: none;
   }
-  
+
   h4 {
     color: ${theme.color.accentPurple};
     font-size: ${theme.fontSize.xxs};

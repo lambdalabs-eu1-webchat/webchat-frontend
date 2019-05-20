@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import theme from './../theme/styledTheme';
@@ -59,6 +60,21 @@ const EmployeeSettingsForm = ({
       </EmployeeSettingsFormWrapper>
     </div>
   );
+};
+
+EmployeeSettingsForm.propTypes = {
+  handleInputChange: PropTypes.func.isRequired,
+  fireUserUpdates: PropTypes.func.isRequired,
+  clearChanges: PropTypes.func.isRequired,
+  employeeChanges: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    passwordConf: PropTypes.string.isRequired,
+    nameEmailModalOpen: PropTypes.bool.isRequired,
+    passwordsModalOpen: PropTypes.bool.isRequired,
+  }).isRequired,
+  loading: PropTypes.object.isRequired,
 };
 
 export default EmployeeSettingsForm;

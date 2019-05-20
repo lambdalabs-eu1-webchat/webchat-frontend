@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import theme from './../../theme/styledTheme';
 
 const SearchInput = ({ status, searchInputField }) => {
   return (
@@ -13,8 +14,16 @@ const SearchInput = ({ status, searchInputField }) => {
 };
 
 const StyledInput = styled.input`
-width:92%;
-margin:2rem;
+  border: none;
+  border-bottom: 1px solid ${theme.color.footerText};
+  margin: 20px 0;
+  height: ${theme.input.height};
+  font-size: ${theme.fontSize.xxs};
+  padding: 20px 0;
+  border-radius: 0;
+  &:focus {
+    outline: none;
+  }
 `;
 
 SearchInput.propTypes = {

@@ -155,7 +155,7 @@ export const createRoomForHotel = (
   try {
     const result = await fetch(`${DOMAIN}${HOTEL}/${hotel_id}/rooms`, config);
     const jsonResult = await result.json();
-    const newRoom = [...jsonResult];
+    const newRoom = jsonResult.currentRoomList || jsonResult;
     dispatch({ type: ROOMS.CREATE_ROOM_FOR_HOTEL_FINISHED });
     if (result.ok) {
       dispatch(createRoomForHotelSuccess(newRoom));

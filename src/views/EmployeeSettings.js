@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
@@ -133,6 +134,19 @@ class EmployeeSettings extends React.Component {
     );
   }
 }
+
+EmployeeSettings.propTypes = {
+  updateUser: PropTypes.func.isRequired,
+  loading: PropTypes.object.isRequired,
+  employee: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    hotel_id: PropTypes.string.isRequired,
+    token: PropTypes.string.isRequired,
+    user_type: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    motto: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 const mapStateToProps = state => ({
   employee: state.currentUser,

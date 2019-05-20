@@ -94,6 +94,23 @@ class CompanySettings extends React.Component {
     });
   };
 
+  fileRead = event => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = event => {
+        const rooms = event.target.result;
+        // replace return carriages with a comma and a space
+        // spacing is used for cleaner display on the Add Rooms input
+        const newRooms = rooms.replace(/\n/g, ', ');
+        this.setState({
+          newRooms,
+        });
+      };
+      reader.readAsText(file);
+    }
+  };
+
   addRooms = () => {
     const rooms = this.state.newRooms;
     if (!rooms.length) {
@@ -164,6 +181,7 @@ class CompanySettings extends React.Component {
             updateRoomForHotel={dispatchUpdateRoomForHotel}
             addRooms={this.addRooms}
             loading={this.props.loading}
+            fileRead={this.fileRead}
           />
         </CompanySettingsWrapper>
       </CompanySettingsOuterWrapper>
@@ -207,7 +225,7 @@ export default connect(
 const CompanySettingsOuterWrapper = styled.div`
   margin: 0 3rem;
   min-height: 730px;
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     margin: 0 auto;
   }
   h2 {

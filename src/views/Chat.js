@@ -59,22 +59,26 @@ const StyledChat = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  height: 100%;
-  overflow: hidden;
   @media (max-width: 800px) {
     flex-direction: column;
+        margin: 0;
   }
 `;
 const ChatListWrapper = styled.div`
   max-width: 800px;
   border-radius: 5px;
+  height: 730px;
   width: 45%;
   padding: 2rem;
   margin: 2rem;
   box-shadow: 0 16px 48px rgba(32, 41, 50, 0.21);
   @media (max-width: 800px) {
-    width: 90%;
-    height: 70vh;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    margin: 0;
+    padding: 30px;
+    overflow-y: scroll;
   }
 `;
 
@@ -83,12 +87,16 @@ const ChatScreenWrapper = styled.div`
   border-radius: 5px;
   width: 45%;
   padding: 2rem;
+  height: 730px;
   margin: 2rem;
   box-shadow: 0 16px 48px rgba(32, 41, 50, 0.21);
   @media (max-width: 800px) {
-    width: 90%;
-    height: 70vh;
+    width: 100%;
+    min-height: 300px;
+    margin: 0;
+    padding: 30px;
     margin-top: 40px;
+    box-shadow: none;
   }
 `;
 

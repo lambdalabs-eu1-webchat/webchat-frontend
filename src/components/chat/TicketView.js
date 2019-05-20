@@ -71,17 +71,22 @@ const StyledTicketView = styled.div`
 
 const StyledDiv = styled.div`
   background-color: ${theme.color.accentPurple};
-  margin: 0.625rem;
-  padding: 0.625rem;
+  margin-bottom: 1rem;
+  padding: 1.5rem;
   width: 100%;
   border-radius: 4px;
   color: white;
   font-weight: ${theme.fontWeight.light};
-  font-size: 1rem;
+  font-size: ${theme.fontSize.xxs};
+  &:hover {
+    cursor: pointer;
+    background: ${theme.color.hoverPurple};
+  }
 `;
 const HeaderStyle = styled.div`
   font-weight: ${theme.fontWeight.bolder};
   color: ${theme.color.accentGreen};
+  padding-bottom: 0.5rem;
 `;
 
 const StyledLineDiv = styled.div`
