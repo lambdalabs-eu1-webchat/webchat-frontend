@@ -15,7 +15,7 @@ const TeamMembersList = props => {
       </ListHeader>
       {props.users.map(user => (
         <TeamMember
-          key={user._id}
+          key={user._id ||  'new'}
           name={user.name}
           email={user.email}
           currentUser={props.currentUser}
