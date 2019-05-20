@@ -48,7 +48,7 @@ export const loginSuccess = (
   token,
   user_type,
   name,
-  motto,
+
 ) => {
   const currentUser = {
     id,
@@ -57,7 +57,7 @@ export const loginSuccess = (
     token,
     user_type,
     name,
-    motto,
+  
   };
   localStorage.setItem('currentUser', JSON.stringify(currentUser));
   localStorage.setItem('token', token);
@@ -70,7 +70,7 @@ export const loginSuccess = (
       token,
       user_type,
       name,
-      motto,
+  
     },
   };
 };
@@ -109,7 +109,6 @@ export const loginRequest = (email, password) => async dispatch => {
         jsonResult.token,
         jsonResult.user.user_type,
         jsonResult.user.name,
-        jsonResult.user.motto,
       ),
     );
     return jsonResult;
@@ -122,9 +121,8 @@ export const registerUser = ({
   name,
   email,
   password,
-  motto,
   hotelName,
-  hotelMotto,
+
 }) => async dispatch => {
   dispatch({ type: REGISTER_USER });
   dispatch({ type: REGISTER_USER_STARTED });
@@ -132,9 +130,8 @@ export const registerUser = ({
     name: String(name),
     email: String(email),
     password: String(password),
-    motto: String(motto),
     hotel_name: String(hotelName),
-    hotel_motto: String(hotelMotto),
+
   };
   const config = {
     method: 'POST',
