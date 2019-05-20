@@ -27,8 +27,8 @@ class Billing extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchSingleHotel(this.props.hotel._id);
-    this.props.fetchHotelStaff(this.props.hotel._id);
+    this.props.fetchSingleHotel(this.props.hotel_id);
+    this.props.fetchHotelStaff(this.props.hotel_id);
   }
 
   openNeedPaymentPlanModal = () => {
@@ -163,6 +163,7 @@ Billing.propTypes = {
 
 const mapStateToProps = state => ({
   hotel: state.hotel,
+  hotel_id: state.currentUser.hotel_id,
   staff: state.users,
   loading: state.loading
 });
@@ -189,7 +190,6 @@ const BillingWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 730px;
-  /* justify-content: space-between; */
   h1 {
     font-size: ${theme.fontSize.l};
     padding: 1.5rem 0;
