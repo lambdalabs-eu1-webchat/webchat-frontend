@@ -16,7 +16,6 @@ class Register extends React.Component {
       name: '',
       email: '',
       password: '',
-      motto: '',
       hotelName: '',
       hotelMotto: '',
     },
@@ -107,13 +106,6 @@ class Register extends React.Component {
               name="password"
               type="password"
               value={this.state.newUser.password}
-              onChange={this.handleInput}
-            />
-            <label>Motto</label>
-            <input
-              name="motto"
-              type="text"
-              value={this.state.newUser.motto}
               onChange={this.handleInput}
             />
             <label>Hotel Name*</label>
