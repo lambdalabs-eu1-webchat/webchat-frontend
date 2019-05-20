@@ -15,7 +15,6 @@ class EmployeeSettings extends React.Component {
       email: this.props.employee.email,
       password: '',
       passwordConf: '',
-      motto: this.props.employee.motto,
       nameEmailModalOpen: false,
       passwordsModalOpen: false,
     },
@@ -37,7 +36,6 @@ class EmployeeSettings extends React.Component {
         email: this.props.employee.email,
         password: '',
         passwordConf: '',
-        motto: this.props.employee.motto,
       },
     });
   };
