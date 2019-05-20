@@ -18,7 +18,7 @@ const StyledInput = styled.input`
   border-bottom: 1px solid ${theme.color.footerText};
   margin: 20px 0;
   height: ${theme.input.height};
-  font-size: ${theme.fontSize.xxs};
+  font-size: ${theme.fontSize.message};
   padding: 20px 0;
   border-radius: 0;
   &:focus {
