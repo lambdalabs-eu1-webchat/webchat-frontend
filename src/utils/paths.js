@@ -1,5 +1,5 @@
-// export const DOMAIN = 'http://localhost:7000/';
-export const DOMAIN = 'https://web-chat-labs.herokuapp.com/';
+export const DOMAIN = 'http://localhost:7000/';
+// export const DOMAIN = 'https://web-chat-labs.herokuapp.com/';
 export const GUEST_CLIENT_DOMAIN = 'https://webchatlabs-guest.netlify.com/';
 export const LOGIN = 'api/auth/login';
 export const REGISTER = 'api/auth/register';
@@ -27,6 +27,7 @@ export const SOCKET = {
   QUEUED_MESSAGE: 'queued_message',
   TYPING: 'typing',
   STOPPED_TYPING: 'stopped_typing',
+  CHECK_OUT: 'check_out',
 };
 
 export const APP_PATHS = {

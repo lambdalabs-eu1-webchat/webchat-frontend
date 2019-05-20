@@ -73,8 +73,7 @@ class CheckInOrOut extends React.Component {
   render() {
     return (
       <StyledCheckInOrOut>
-
-         <CheckInWrapper className="sub-container">
+        <CheckInWrapper className="sub-container">
           <h1 className="hide-on-print">Check-in</h1>
           <CheckInForm
             availableRooms={this.state.availableRooms}
@@ -83,8 +82,8 @@ class CheckInOrOut extends React.Component {
             hotel_id={this.props.hotel_id}
             loading={this.props.loading}
           />
-         </CheckInWrapper>
-         <CheckOutWrapper className="hide-on-print sub-container">
+        </CheckInWrapper>
+        <CheckOutWrapper className="hide-on-print sub-container">
           <h1>Check-out</h1>
           <CheckOutForm
             hotel_id={this.props.hotel_id}
@@ -92,8 +91,9 @@ class CheckInOrOut extends React.Component {
             filterCurrentGuests={this.filterCurrentGuests}
             addAvailableRoom={this.addAvailableRoom}
             loading={this.props.loading}
+            socket={this.props.socket}
           />
-         </CheckOutWrapper>
+        </CheckOutWrapper>
       </StyledCheckInOrOut>
     );
   }
@@ -129,7 +129,7 @@ const StyledCheckInOrOut = styled.div`
 const CheckInWrapper = styled.div`
   width: 80%;
   margin-right: 3rem;
-  @media(max-width:1000px) {
+  @media (max-width: 1000px) {
     width: 100%;
     margin: 0 auto;
   }
@@ -147,6 +147,7 @@ function mapStateToProps(state) {
   return {
     hotel_id: state.currentUser.hotel_id,
     loading: state.loading,
+    socket: state.chats.socket,
   };
 }
 
