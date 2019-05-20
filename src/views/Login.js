@@ -164,7 +164,7 @@ const LoginWrapper = styled.div`
     button {
       width: 100%;
       height: ${theme.button.height};
-      font-size: ${theme.fontSize.s};
+      font-size: ${theme.fontSize.xs};
       border-radius: ${theme.border.radius};
       background: ${theme.color.accentGreen};
       border: none;
