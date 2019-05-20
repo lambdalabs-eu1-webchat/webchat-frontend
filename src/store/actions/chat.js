@@ -158,7 +158,6 @@ export const translate = (
   chat_id,
   language,
 ) => async dispatch => {
-  debugger;
   const config = {
     method: 'POST',
     headers: {
@@ -174,15 +173,14 @@ export const translate = (
     const jsonResponse = await response.json();
     dispatch(addTranslatedTicket(ticket_id, jsonResponse));
     // return jsonResponse;
-    const firstTranslatedText = jsonResponse[0];
-    updateTicketLanguage(chat_id, firstTranslatedText.detectedSourceLanguage);
+    const lasrTranslatedText = jsonResponse[jsonResponse.length - 1];
+    updateTicketLanguage(chat_id, lasrTranslatedText.detectedSourceLanguage);
   } catch (error) {
     // dispatch(translateChatFailure(error));
     console.error(error);
   }
 };
 export const translateMessage = async (text, ticket_id, language) => {
-  debugger;
   const config = {
     method: 'POST',
     headers: {
