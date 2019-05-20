@@ -41,13 +41,7 @@ const EmployeeSettingsForm = ({
           onChange={handleInputChange}
           placeholder="retype new password"
         />
-        <input
-          name="motto"
-          type="text"
-          value={employeeChanges.motto}
-          onChange={handleInputChange}
-          placeholder="motto"
-        />
+     
         <div className="form-buttons">
           <button type="submit" onClick={fireUserUpdates}>
             {loading.updateUser ? <Spinner /> : 'Update'}
