@@ -74,10 +74,20 @@ const RoomWrapper = styled.div`
   .fa-edit {
     color: ${theme.color.accentPurple};
     font-size: ${theme.fontSize.m};
+    &:hover {
+      cursor: pointer;
+      color: ${theme.color.accentGreen};
+      transition: all 0.5s ease;
+    }
   }
 
   .fa-trash-alt {
     color: ${theme.color.accentPurple};
     font-size: ${theme.fontSize.m};
+    &:hover {
+      cursor: pointer;
+      color: ${theme.color.accentGreen};
+      transition: all 0.5s ease;
+    }
   }
 `;

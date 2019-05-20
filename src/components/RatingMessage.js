@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import theme from './.././theme/styledTheme';
 
 function RatingMessage({ rating }) {
   const stars = [];
@@ -18,6 +19,18 @@ RatingMessage.propTypes = {
   rating: propTypes.number.isRequired,
 };
 
-const StyledRatingMessage = styled.div``;
+const StyledRatingMessage = styled.div`
+  padding: 1rem 0;
+    
+    .far {
+      color: ${theme.color.accentPurple};
+      font-size: ${theme.fontSize.m};
+    }
+    
+    .fas {
+      color: ${theme.color.accentPurple};
+      font-size: ${theme.fontSize.m};
+    }
+`;
 
 export default RatingMessage;

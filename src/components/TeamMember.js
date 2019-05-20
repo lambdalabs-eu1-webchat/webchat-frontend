@@ -151,6 +151,9 @@ const HotelStaffWrapper = styled.div`
     @media (max-width: 600px) {
       padding-bottom: 15px;
     }
+    &:hover {
+    cursor: pointer;
+    }
   }
   
   .checkbox-container {
@@ -179,6 +182,11 @@ const HotelStaffWrapper = styled.div`
       }
     &:last-child {
       width: 10rem;
+    }
+    &:hover {
+      cursor: pointer;
+      color: ${theme.color.accentGreen};
+      transition: all 0.5s ease;
     }
   }
 `;

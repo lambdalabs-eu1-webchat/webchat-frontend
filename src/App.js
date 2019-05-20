@@ -163,9 +163,6 @@ export default withRouter(
 
 const AppWrapper = styled.div`
   height: 100vh;
-  @media (max-width: 800px) {
-    height: 100%;
-  }
   display: flex;
   flex-direction: column;
   justify-content: space-between;

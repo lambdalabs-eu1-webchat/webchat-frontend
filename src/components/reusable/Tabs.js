@@ -42,6 +42,9 @@ const StyledTabs = styled.div`
       border-bottom: 2px solid ${theme.color.accentGreen};
       font-weight: bold;
     }
+    &:hover {
+      cursor: pointer;
+    }
     @media (max-width: 600px) {
       width: 100%;
       background: ${theme.color.lightPurple};
