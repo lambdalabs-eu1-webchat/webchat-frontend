@@ -17,7 +17,6 @@ class Register extends React.Component {
       email: '',
       password: '',
       hotelName: '',
-      hotelMotto: '',
     },
     flashMessage: messages.allRequiredFields,
   };
@@ -113,13 +112,6 @@ class Register extends React.Component {
               name="hotelName"
               type="text"
               value={this.state.newUser.hotelName}
-              onChange={this.handleInput}
-            />
-            <label>Hotel Motto</label>
-            <input
-              name="hotelMotto"
-              type="text"
-              value={this.state.newUser.hotelMotto}
               onChange={this.handleInput}
             />
             <p>{this.state.flashMessage}</p>
