@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-import Restricted from './reusable/RestrictedModal';
 import theme from './../theme/styledTheme';
 import Spinner from '../components/reusable/Spinner';
 
@@ -13,32 +12,11 @@ const TeamMembersAddNewMemberModal = ({
   staffAmount,
   loading,
 }) => {
-  // use Hooks here, as it's already a func component
-  const [isModalOpen, setModalOpen] = useState(false);
-
   const showHideClassName = modalShown
     ? 'modal display-block'
     : 'modal display-none';
 
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
-
-  const checkAddEligibility = (plan, staffAmount) => {
-    if (plan === 'free' && staffAmount === 5) {
-      openModal();
-    } else if (plan === 'pro' && staffAmount === 15) {
-      openModal();
-    } else {
-      return true;
-    }
-  };
-
-  const handleClick = (
-    createUser,
-    handleHideModal,
-    plan,
-    staffAmount,
-  ) => event => {
+  const handleClick = (createUser, handleHideModal) => event => {
     event.preventDefault();
     let name = '';
     let email = '';
@@ -53,7 +31,7 @@ const TeamMembersAddNewMemberModal = ({
       }
     });
     let blank = false;
-    if (name && email && password && checkAddEligibility(plan, staffAmount)) {
+    if (name && email && password) {
       createUser(name, email, password, 'receptionist');
       setTimeout(handleHideModal, 800);
     } else {
@@ -98,20 +76,17 @@ const TeamMembersAddNewMemberModal = ({
           />
           <button
             type="submit"
-            onClick={handleClick(createUser, handleHideModal, plan, staffAmount)}
+            onClick={handleClick(
+              createUser,
+              handleHideModal,
+              plan,
+              staffAmount,
+            )}
           >
             {loading.createUser ? <Spinner /> : 'Add Member'}
           </button>
           <p id="add-member-message" />
         </section>
-
-        {isModalOpen && (
-          <Restricted
-            alert="Please upgrade your account to add more users"
-            isRestrictedModalOpen={isModalOpen}
-            closeRestrictedModal={closeModal}
-          />
-        )}
       </AddMembersModalWrapper>
     </AddOuterWrapper>
   );
@@ -120,22 +95,22 @@ const TeamMembersAddNewMemberModal = ({
 export default TeamMembersAddNewMemberModal;
 
 const AddOuterWrapper = styled.div`
-.display-block {
-  display: block;
-}
+  .display-block {
+    display: block;
+  }
 
-.display-none {
-  display: none;
-}
+  .display-none {
+    display: none;
+  }
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-}
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
 `;
 
 const AddMembersModalWrapper = styled.div`
@@ -157,12 +132,12 @@ const AddMembersModalWrapper = styled.div`
       outline: none;
     }
     &::placeholder {
-    font-weight: normal;
-    font-size: ${theme.fontSize.xxs};
-    font-family: 'Lato', sans-serif;
+      font-weight: normal;
+      font-size: ${theme.fontSize.xxs};
+      font-family: 'Lato', sans-serif;
     }
   }
-  
+
   .modal-main {
     display: flex;
     flex-direction: column;
@@ -180,11 +155,11 @@ const AddMembersModalWrapper = styled.div`
       width: 100%;
       height: ${theme.button.smallButton};
     }
-    @media(max-width: 500px) {
-      width:100%;
+    @media (max-width: 500px) {
+      width: 100%;
     }
   }
-  
+
   #close {
     background: none;
     color: ${theme.color.textColor};
