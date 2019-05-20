@@ -28,7 +28,6 @@ if (currentUser) {
     currentUser.token, 
     currentUser.user_type, 
     currentUser.name, 
-    currentUser.motto
   ));
 }
 
