@@ -28,7 +28,7 @@ function PlanCheckout({
       ariaHideApp={false}
     >
       <StyledBtn onClick={closeRestrictedModal}>
-        <i class="fas fa-times-circle" />
+        <i className="fas fa-times-circle" />
       </StyledBtn>
       {alert && <Sth3>{alert}</Sth3>}
       <StripeProvider apiKey="pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF">
