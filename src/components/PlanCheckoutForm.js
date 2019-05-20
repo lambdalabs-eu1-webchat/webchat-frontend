@@ -2,19 +2,39 @@ import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import PT from 'prop-types';
 import styled from 'styled-components';
-import theme from '../theme/styledTheme';
+import { validate } from 'email-validator';
 
+import theme from '../theme/styledTheme';
+import { messages } from '../utils/messages';
 import Spinner from '../components/reusable/Spinner';
 
 class PlanCheckoutForm extends Component {
+  state = {
+    flashMessage: messages.allRequiredFields
+  };
+
+  setFlashMessage = flashMessage => {
+    this.setState({
+      flashMessage
+    });
+  };
+
   createCustomer = async () => {
-    const { token } = await this.props.stripe.createToken();
-    this.props.fireCreateNewCustomer(token);
+    if (validate(this.props.billingEmail)) {
+      const { token } = await this.props.stripe.createToken();
+      this.props.fireCreateNewCustomer(token);
+    } else {
+      this.setFlashMessage(messages.validEmail);
+    }
   };
 
   editPaymentMethod = async () => {
-    const { token } = await this.props.stripe.createToken();
-    this.props.fireUpdateCustomerMethod(token);
+    if (validate(this.props.billingEmail)) {
+      const { token } = await this.props.stripe.createToken();
+      this.props.fireUpdateCustomerMethod(token);
+    } else {
+      this.setFlashMessage(messages.validEmail);
+    }
   };
 
   render() {
@@ -23,7 +43,7 @@ class PlanCheckoutForm extends Component {
         <StyledInput
           name="billingEmail"
           type="text"
-          placeholder="Billing Email"
+          placeholder="Billing Email*"
           value={this.props.billingEmail}
           onChange={event => this.props.handleInputChange(event)}
         />
@@ -42,6 +62,7 @@ class PlanCheckoutForm extends Component {
             this.props.buttonText
           )}
         </StyledBtn>
+        <p>*{this.state.flashMessage}</p>
       </FormWrapper>
     );
   }
@@ -49,12 +70,12 @@ class PlanCheckoutForm extends Component {
 
 PlanCheckoutForm.propTypes = {
   stripe: PT.shape({
-    createToken: PT.func.isRequired,
+    createToken: PT.func.isRequired
   }).isRequired,
   fireCreateNewCustomer: PT.func.isRequired,
   billingEmail: PT.string.isRequired,
   handleInputChange: PT.func.isRequired,
-  buttonText: PT.string.isRequired,
+  buttonText: PT.string.isRequired
 };
 
 const createOptions = () => {
@@ -62,15 +83,15 @@ const createOptions = () => {
     style: {
       base: {
         fontSize: theme.fontSize.xxs,
-        fontFamily: theme.font.fontFamily,
+        fontFamily: theme.font.fontFamily
       },
       invalid: {
-        color: '#9e2146',
+        color: '#9e2146'
       },
       empty: {
-        color: '#333',
-      },
-    },
+        color: '#333'
+      }
+    }
   };
 };
 
