@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { messages } from '../utils/messages';
 import theme from './../theme/styledTheme';
 import Spinner from '../components/reusable/Spinner';
 
@@ -11,17 +12,20 @@ const TeamMembersAddNewMemberModal = ({
   plan,
   staffAmount,
   loading,
+  flashMessage,
+  handleFlash,
 }) => {
   const showHideClassName = modalShown
     ? 'modal display-block'
     : 'modal display-none';
 
-  const handleClick = (createUser, handleHideModal) => event => {
+  const handleClick = (createUser, handleHideModal) => async event => {
+    const userInfo = event.target;
     event.preventDefault();
     let name = '';
     let email = '';
     let password = '';
-    event.target.parentNode.childNodes.forEach(childNode => {
+    userInfo.parentNode.childNodes.forEach(childNode => {
       if (childNode.name === 'name') {
         name = childNode.value;
       } else if (childNode.name === 'email') {
@@ -32,20 +36,25 @@ const TeamMembersAddNewMemberModal = ({
     });
     let blank = false;
     if (name && email && password) {
-      createUser(name, email, password, 'receptionist');
-      setTimeout(handleHideModal, 800);
+      const res = await createUser(name, email, password, 'receptionist');
+      if (res.message) {
+        handleFlash(messages.duplicateEmail);
+        return;
+      } else {
+        setTimeout(handleHideModal, 800);
+      }
     } else {
       blank = true;
     }
 
     if (blank) {
-      event.target.parentNode.childNodes.forEach(childNode => {
+      userInfo.parentNode.childNodes.forEach(childNode => {
         if (childNode.getAttribute('id') === 'add-member-message') {
           childNode.textContent = 'Please fill in all the required fields.';
         }
       });
     } else {
-      event.target.parentNode.childNodes.forEach(childNode => {
+      userInfo.parentNode.childNodes.forEach(childNode => {
         if (childNode.name === 'name') {
           childNode.value = '';
         } else if (childNode.name === 'email') {
@@ -74,6 +83,7 @@ const TeamMembersAddNewMemberModal = ({
             name="password"
             placeholder="Default password..."
           />
+          <p>{flashMessage}</p>
           <button
             type="submit"
             onClick={handleClick(
