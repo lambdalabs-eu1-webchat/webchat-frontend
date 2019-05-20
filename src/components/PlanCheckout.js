@@ -30,7 +30,7 @@ function PlanCheckout({
       ariaHideApp={false}
     >
       <StyledBtn onClick={backFromAddPaymentModal}>
-        <i class="fas fa-times-circle" />
+        <i className="fas fa-times-circle" />
       </StyledBtn>
       <StripeProvider apiKey="pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF">
         <div>
@@ -53,7 +53,7 @@ PlanCheckout.propTypes = {
   fireCreateNewCustomer: PT.func.isRequired,
   billingEmail: PT.string.isRequired,
   handleInputChange: PT.func.isRequired,
-  loading: PT.bool.isRequired,
+  loading: PT.object.isRequired,
 };
 
 const StyledBtn = styled.button`
