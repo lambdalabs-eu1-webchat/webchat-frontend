@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-import Restricted from './reusable/RestrictedModal';
 import theme from './../theme/styledTheme';
 import Spinner from '../components/reusable/Spinner';
 
@@ -13,31 +12,13 @@ const TeamMembersAddNewMemberModal = ({
   staffAmount,
   loading,
 }) => {
-  // use Hooks here, as it's already a func component
-  const [isModalOpen, setModalOpen] = useState(false);
-
   const showHideClassName = modalShown
     ? 'modal display-block'
     : 'modal display-none';
 
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
-
-  const checkAddEligibility = (plan, staffAmount) => {
-    if (plan === 'free' && staffAmount === 5) {
-      openModal();
-    } else if (plan === 'pro' && staffAmount === 15) {
-      openModal();
-    } else {
-      return true;
-    }
-  };
-
   const handleClick = (
     createUser,
     handleHideModal,
-    plan,
-    staffAmount,
   ) => event => {
     event.preventDefault();
     let name = '';
@@ -53,7 +34,7 @@ const TeamMembersAddNewMemberModal = ({
       }
     });
     let blank = false;
-    if (name && email && password && checkAddEligibility(plan, staffAmount)) {
+    if (name && email && password) {
       createUser(name, email, password, 'receptionist');
       setTimeout(handleHideModal, 800);
     } else {
@@ -104,14 +85,6 @@ const TeamMembersAddNewMemberModal = ({
           </button>
           <p id="add-member-message" />
         </section>
-
-        {isModalOpen && (
-          <Restricted
-            alert="Please upgrade your account to add more users"
-            isRestrictedModalOpen={isModalOpen}
-            closeRestrictedModal={closeModal}
-          />
-        )}
       </AddMembersModalWrapper>
     </AddOuterWrapper>
   );
