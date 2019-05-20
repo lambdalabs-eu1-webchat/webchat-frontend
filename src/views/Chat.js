@@ -62,7 +62,7 @@ const StyledChat = styled.div`
   flex-direction: row;
   @media (max-width: 800px) {
     flex-direction: column;
-        margin: 3rem;
+        margin: 0;
   }
 `;
 const ChatListWrapper = styled.div`
@@ -78,6 +78,7 @@ const ChatListWrapper = styled.div`
     height: auto;
     box-shadow: none;
     margin: 0;
+    padding: 30px;
     overflow-y: scroll;
   }
 `;
@@ -94,7 +95,7 @@ const ChatScreenWrapper = styled.div`
     width: 100%;
     min-height: 300px;
     margin: 0;
-    padding: 20px;
+    padding: 30px;
     margin-top: 40px;
     box-shadow: none;
   }
