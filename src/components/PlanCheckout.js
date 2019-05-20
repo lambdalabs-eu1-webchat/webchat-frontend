@@ -10,12 +10,14 @@ import theme from '../theme/styledTheme';
 
 function PlanCheckout({
   fireCreateNewCustomer,
+  fireUpdateCustomerMethod,
   billingEmail,
   handleInputChange,
   loading,
   isPayment,
   closeRestrictedModal,
-  alert
+  alert,
+  mode
 }) {
   return (
     <Modal
@@ -36,10 +38,12 @@ function PlanCheckout({
           <Elements>
             <PlanCheckoutForm
               fireCreateNewCustomer={fireCreateNewCustomer}
+              fireUpdateCustomerMethod={fireUpdateCustomerMethod}
               billingEmail={billingEmail}
               handleInputChange={handleInputChange}
               buttonText={'Add payment method'}
               loading={loading}
+              mode={mode}
             />
           </Elements>
         </div>

@@ -20,21 +20,21 @@ class PlanCheckoutForm extends Component {
   };
 
   createCustomer = async () => {
-    if (validate(this.props.billingEmail)) {
-      const { token } = await this.props.stripe.createToken();
-      this.props.fireCreateNewCustomer(token);
-    } else {
-      this.setFlashMessage(messages.validEmail);
-    }
+    // if (validate(this.props.billingEmail)) {
+    const { token } = await this.props.stripe.createToken();
+    this.props.fireCreateNewCustomer(token);
+    // } else {
+    // this.setFlashMessage(messages.validEmail);
+    // }
   };
 
   editPaymentMethod = async () => {
-    if (validate(this.props.billingEmail)) {
-      const { token } = await this.props.stripe.createToken();
-      this.props.fireUpdateCustomerMethod(token);
-    } else {
-      this.setFlashMessage(messages.validEmail);
-    }
+    // if (validate(this.props.billingEmail)) {
+    const { token } = await this.props.stripe.createToken();
+    this.props.fireUpdateCustomerMethod(token);
+    // } else {
+    //   this.setFlashMessage(messages.validEmail);
+    // }
   };
 
   render() {
@@ -73,6 +73,7 @@ PlanCheckoutForm.propTypes = {
     createToken: PT.func.isRequired
   }).isRequired,
   fireCreateNewCustomer: PT.func.isRequired,
+  fireUpdateCustomerMethod: PT.func.isRequired,
   billingEmail: PT.string.isRequired,
   handleInputChange: PT.func.isRequired,
   buttonText: PT.string.isRequired

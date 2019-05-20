@@ -72,15 +72,18 @@ class Billing extends React.Component {
   };
 
   fireCreateNewCustomer = token => {
+    console.log('create new');
     const enhancedStripeToken = {
       ...token,
       email: this.state.billingEmail,
       plan: planIds.free
     };
     this.props.createNewCustomer(this.props.hotel._id, enhancedStripeToken);
+    this.closeRestrictedModal();
   };
 
   fireUpdateCustomerMethod = async token => {
+    console.log('update old');
     const enhancedStripeToken = {
       ...token,
       email: this.state.billingEmail
@@ -119,9 +122,11 @@ class Billing extends React.Component {
                 ? null
                 : 'Please add a payment method before switching plan'
             }
+            mode={this.props.hotel.billing ? 'edit' : 'create'}
             isRestrictedModalOpen={this.state.isPaymentMethodModalOpen}
             closeRestrictedModal={this.closeRestrictedModal}
             fireCreateNewCustomer={this.fireCreateNewCustomer}
+            fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
             billingEmail={this.billingEmail}
             handleInputChange={this.handleInputChange}
             loading={this.props.loading}
