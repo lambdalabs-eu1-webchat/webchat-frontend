@@ -6,7 +6,7 @@ import { translate } from '../store/actions/chat';
 import Message from './Message';
 import RatingMessage from './RatingMessage';
 import { ADMIN, SUPER_ADMIN } from '../utils/userTypes';
-import { CLOSED, QUEUED, ACTIVE } from '../utils/ticketStatus';
+import { CLOSED } from '../utils/ticketStatus';
 
 class Messages extends React.Component {
   // pass in 'smooth' for smooth scroll
@@ -81,15 +81,15 @@ Messages.propTypes = {
           _id: propTypes.string.isRequired,
           sender: propTypes.shape({
             id: propTypes.string.isRequired,
-            name: propTypes.string.isRequired,
+            name: propTypes.string.isRequired
           }).isRequired,
-          text: propTypes.string.isRequired,
-        }),
+          text: propTypes.string.isRequired
+        })
       ),
-      status: propTypes.string.isRequired,
-    }),
+      status: propTypes.string.isRequired
+    })
   ).isRequired,
-  guest_id: propTypes.string.isRequired,
+  guest_id: propTypes.string.isRequired
 };
 
 const StyledMessages = styled.div`

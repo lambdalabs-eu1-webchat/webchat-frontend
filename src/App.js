@@ -20,7 +20,6 @@ import {
 import NavBar from './components/layout/navbar/NavBar';
 import Router from './components/Router';
 import Footer from './components/layout/Footer';
-import ChatsList from './components/chat/ChatsList';
 import './App.css';
 import styled from 'styled-components';
 
@@ -163,9 +162,6 @@ export default withRouter(
 
 const AppWrapper = styled.div`
   height: 100vh;
-  @media (max-width: 800px) {
-    height: 100%;
-  }
   display: flex;
   flex-direction: column;
   justify-content: space-between;

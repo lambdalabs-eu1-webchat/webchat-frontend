@@ -4,7 +4,7 @@ import theme from './.././theme/styledTheme';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { DOMAIN, USERS, HOTEL } from '../utils/paths';
+import { DOMAIN, HOTEL } from '../utils/paths';
 
 import CheckInForm from '../components/GuestCheckInForm';
 import CheckOutForm from '../components/GuestCheckOutForm';

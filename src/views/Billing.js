@@ -9,20 +9,20 @@ import { fetchHotelStaff } from '../store/actions/users';
 import {
   switchCustomerPlan,
   createNewCustomer,
-  updateCustomerMethod,
+  updateCustomerMethod
 } from '../store/actions/subscription';
 import { planIds } from '../utils/plans';
 import PlanCards from '../components/PlanCards';
 import PaymentMethod from '../components/PaymentMethod';
 import Restricted from '../components/reusable/RestrictedModal';
 import theme from '../theme/styledTheme';
+import PlanCheckout from '../components/PlanCheckout';
 
 class Billing extends React.Component {
   state = {
     billingEmail: '',
-    editPaymentMethodModal: false,
-    isPaymentPlanModalOpen: false,
-    isHasManyAccsModalOpen: false,
+    isPaymentMethodModalOpen: false,
+    isHasManyAccsModalOpen: false
   };
 
   componentDidMount() {
@@ -31,7 +31,7 @@ class Billing extends React.Component {
   }
 
   openNeedPaymentPlanModal = () => {
-    this.setState({ isPaymentPlanModalOpen: true });
+    this.setState({ isPaymentMethodModalOpen: true });
   };
 
   openHasManyAccsModal = () => {
@@ -39,25 +39,13 @@ class Billing extends React.Component {
   };
 
   closeRestrictedModal = () => {
-    this.setState({ isPaymentPlanModalOpen: false });
+    this.setState({ isPaymentMethodModalOpen: false });
     this.setState({ isHasManyAccsModalOpen: false });
   };
 
   handleInputChange = event => {
     this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  handleModalSwitch = () => {
-    this.setState({
-      editPaymentMethodModal: !this.state.editPaymentMethodModal,
-    });
-  };
-
-  closeEditPaymentModal = () => {
-    this.setState({
-      editPaymentMethodModal: false,
+      [event.target.name]: event.target.value
     });
   };
 
@@ -87,21 +75,22 @@ class Billing extends React.Component {
     const enhancedStripeToken = {
       ...token,
       email: this.state.billingEmail,
-      plan: planIds.free,
+      plan: planIds.free
     };
     this.props.createNewCustomer(this.props.hotel._id, enhancedStripeToken);
+    this.closeRestrictedModal();
   };
 
   fireUpdateCustomerMethod = async token => {
     const enhancedStripeToken = {
       ...token,
-      email: this.state.billingEmail,
+      email: this.state.billingEmail
     };
     await this.props.updateCustomerMethod(
       this.props.hotel._id,
-      enhancedStripeToken,
+      enhancedStripeToken
     );
-    this.closeEditPaymentModal();
+    this.closeRestrictedModal();
   };
 
   render() {
@@ -112,11 +101,11 @@ class Billing extends React.Component {
           fireCreateNewCustomer={this.fireCreateNewCustomer}
           billingEmail={this.state.billingEmail}
           handleInputChange={this.handleInputChange}
-          editPaymentMethodModal={this.state.editPaymentMethodModal}
-          handleModalSwitch={this.handleModalSwitch}
+          isPaymentMethodModalOpen={this.state.isPaymentMethodModalOpen}
+          openNeedPaymentPlanModal={this.openNeedPaymentPlanModal}
           fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
           loading={this.props.loading}
-          closeEditPaymentModal={this.closeEditPaymentModal}
+          closeRestrictedModal={this.closeRestrictedModal}
         />
         <PlanCards
           hotel={this.props.hotel}
@@ -124,11 +113,22 @@ class Billing extends React.Component {
           loading={this.props.loading}
         />
 
-        {this.state.isPaymentPlanModalOpen && (
-          <Restricted
-            alert="Please add a payment method before switching plan"
-            isRestrictedModalOpen={this.state.isPaymentPlanModalOpen}
+        {this.state.isPaymentMethodModalOpen && (
+          <PlanCheckout
+            alert={
+              this.props.hotel.billing
+                ? null
+                : 'Please add a payment method before switching plan'
+            }
+            mode={this.props.hotel.billing ? 'edit' : 'create'}
+            isRestrictedModalOpen={this.state.isPaymentMethodModalOpen}
             closeRestrictedModal={this.closeRestrictedModal}
+            fireCreateNewCustomer={this.fireCreateNewCustomer}
+            fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
+            billingEmail={this.state.billingEmail}
+            handleInputChange={this.handleInputChange}
+            loading={this.props.loading}
+            isPayment={false}
           />
         )}
 
@@ -152,14 +152,14 @@ Billing.propTypes = {
   updateCustomerMethod: PT.func.isRequired,
   fetchHotelStaff: PT.func.isRequired,
   staff: PT.array.isRequired,
-  loading: PT.object.isRequired,
+  loading: PT.object.isRequired
 };
 
 const mapStateToProps = state => ({
   hotel: state.hotel,
-  hotel_id: state.currentUser.hotel_id, // do we need to bring this and the hotel object in
+  hotel_id: state.currentUser.hotel_id,
   staff: state.users,
-  loading: state.loading,
+  loading: state.loading
 });
 
 const mapDispatchToProps = dispatch => {
@@ -169,21 +169,21 @@ const mapDispatchToProps = dispatch => {
       createNewCustomer,
       switchCustomerPlan,
       updateCustomerMethod,
-      fetchHotelStaff,
+      fetchHotelStaff
     },
-    dispatch,
+    dispatch
   );
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Billing);
 
 const BillingWrapper = styled.div`
-display: flex;
-min-height: 730px;
-justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  min-height: 730px;
   h1 {
     font-size: ${theme.fontSize.l};
     padding: 1.5rem 0;
@@ -199,7 +199,7 @@ justify-content: space-between;
     flex-direction: column;
   }
   @media (max-width: 1000px) {
-  flex-direction: column;
+    flex-direction: column;
     width: 95%;
     padding: 10% 0 15% 0;
     margin: 0 auto;

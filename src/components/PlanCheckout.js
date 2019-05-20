@@ -10,37 +10,40 @@ import theme from '../theme/styledTheme';
 
 function PlanCheckout({
   fireCreateNewCustomer,
+  fireUpdateCustomerMethod,
   billingEmail,
   handleInputChange,
   loading,
   isPayment,
+  closeRestrictedModal,
+  alert,
+  mode
 }) {
-  const backFromAddPaymentModal = () => {
-    window.history.back();
-  };
-
   return (
     <Modal
-      onRequestClose={backFromAddPaymentModal}
+      onRequestClose={closeRestrictedModal}
       style={{
         overlay: modalTheme.overlay,
-        content: modalTheme.paymentContent,
+        content: modalTheme.paymentContent
       }}
       isOpen={!isPayment}
       ariaHideApp={false}
     >
-      <StyledBtn onClick={backFromAddPaymentModal}>
-        <i class="fas fa-times-circle" />
+      <StyledBtn onClick={closeRestrictedModal}>
+        <i className="fas fa-times-circle" />
       </StyledBtn>
+      {alert && <Sth3>{alert}</Sth3>}
       <StripeProvider apiKey="pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF">
         <div>
           <Elements>
             <PlanCheckoutForm
               fireCreateNewCustomer={fireCreateNewCustomer}
+              fireUpdateCustomerMethod={fireUpdateCustomerMethod}
               billingEmail={billingEmail}
               handleInputChange={handleInputChange}
               buttonText={'Add payment method'}
               loading={loading}
+              mode={mode}
             />
           </Elements>
         </div>
@@ -53,8 +56,15 @@ PlanCheckout.propTypes = {
   fireCreateNewCustomer: PT.func.isRequired,
   billingEmail: PT.string.isRequired,
   handleInputChange: PT.func.isRequired,
-  loading: PT.bool.isRequired,
+  loading: PT.object.isRequired,
 };
+
+const Sth3 = styled.h3`
+  color: ${theme.color.accentText};
+  text-align: center;
+  font-size: ${theme.fontSize.s};
+  font-weight: bold;
+`;
 
 const StyledBtn = styled.button`
   border: none;
