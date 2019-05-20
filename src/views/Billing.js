@@ -21,8 +21,7 @@ import PlanCheckout from '../components/PlanCheckout';
 class Billing extends React.Component {
   state = {
     billingEmail: '',
-    editPaymentMethodModal: false,
-    isPaymentPlanModalOpen: false,
+    isPaymentMethodModalOpen: false,
     isHasManyAccsModalOpen: false
   };
 
@@ -32,7 +31,7 @@ class Billing extends React.Component {
   }
 
   openNeedPaymentPlanModal = () => {
-    this.setState({ isPaymentPlanModalOpen: true });
+    this.setState({ isPaymentMethodModalOpen: true });
   };
 
   openHasManyAccsModal = () => {
@@ -40,25 +39,13 @@ class Billing extends React.Component {
   };
 
   closeRestrictedModal = () => {
-    this.setState({ isPaymentPlanModalOpen: false });
+    this.setState({ isPaymentMethodModalOpen: false });
     this.setState({ isHasManyAccsModalOpen: false });
   };
 
   handleInputChange = event => {
     this.setState({
       [event.target.name]: event.target.value
-    });
-  };
-
-  handleModalSwitch = () => {
-    this.setState({
-      editPaymentMethodModal: !this.state.editPaymentMethodModal
-    });
-  };
-
-  closeEditPaymentModal = () => {
-    this.setState({
-      editPaymentMethodModal: false
     });
   };
 
@@ -102,7 +89,7 @@ class Billing extends React.Component {
       this.props.hotel._id,
       enhancedStripeToken
     );
-    this.closeEditPaymentModal();
+    this.closeRestrictedModal();
   };
 
   render() {
@@ -113,11 +100,11 @@ class Billing extends React.Component {
           fireCreateNewCustomer={this.fireCreateNewCustomer}
           billingEmail={this.state.billingEmail}
           handleInputChange={this.handleInputChange}
-          editPaymentMethodModal={this.state.editPaymentMethodModal}
-          handleModalSwitch={this.handleModalSwitch}
+          isPaymentMethodModalOpen={this.state.isPaymentMethodModalOpen}
+          openNeedPaymentPlanModal={this.openNeedPaymentPlanModal}
           fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
           loading={this.props.loading}
-          closeEditPaymentModal={this.closeEditPaymentModal}
+          closeRestrictedModal={this.closeRestrictedModal}
         />
         <PlanCards
           hotel={this.props.hotel}
@@ -125,10 +112,14 @@ class Billing extends React.Component {
           loading={this.props.loading}
         />
 
-        {this.state.isPaymentPlanModalOpen && (
+        {this.state.isPaymentMethodModalOpen && (
           <PlanCheckout
-            alert="Please add a payment method before switching plan"
-            isRestrictedModalOpen={this.state.isPaymentPlanModalOpen}
+            alert={
+              this.props.hotel.billing
+                ? null
+                : 'Please add a payment method before switching plan'
+            }
+            isRestrictedModalOpen={this.state.isPaymentMethodModalOpen}
             closeRestrictedModal={this.closeRestrictedModal}
             fireCreateNewCustomer={this.fireCreateNewCustomer}
             billingEmail={this.billingEmail}

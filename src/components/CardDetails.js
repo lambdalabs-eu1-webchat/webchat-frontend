@@ -3,7 +3,7 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
 
-const CardDetails = ({ card, email, handleModalSwitch }) => {
+const CardDetails = ({ card, email, openNeedPaymentPlanModal }) => {
   return (
     <div>
       <CardDetailsWrapper>
@@ -14,7 +14,7 @@ const CardDetails = ({ card, email, handleModalSwitch }) => {
           Expiration: {card.expiration.month}/{card.expiration.year}
         </span>
         <span>Receipts sent to: {email}</span>
-        <button onClick={handleModalSwitch}>Edit</button>
+        <button onClick={openNeedPaymentPlanModal}>Edit</button>
       </CardDetailsWrapper>
     </div>
   );
@@ -30,7 +30,7 @@ CardDetails.propTypes = {
     }).isRequired
   }).isRequired,
   email: PT.string.isRequired,
-  handleModalSwitch: PT.func.isRequired
+  openNeedPaymentPlanModal: PT.func.isRequired
 };
 
 export default CardDetails;

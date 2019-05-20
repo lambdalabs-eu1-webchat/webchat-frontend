@@ -3,19 +3,8 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 
 import CardDetails from './CardDetails';
-import EditPaymentMethodModal from './EditPaymentMethodModal';
 
-const PaymentMethod = ({
-  payment,
-  fireCreateNewCustomer,
-  billingEmail,
-  handleInputChange,
-  editPaymentMethodModal,
-  handleModalSwitch,
-  fireUpdateCustomerMethod,
-  loading,
-  closeEditPaymentModal
-}) => {
+const PaymentMethod = ({ payment, openNeedPaymentPlanModal }) => {
   if (payment) {
     return (
       <PaymentMethodWrapper>
@@ -23,17 +12,7 @@ const PaymentMethod = ({
         <CardDetails
           card={payment.card}
           email={payment.customer.email}
-          handleModalSwitch={handleModalSwitch}
-        />
-        <EditPaymentMethodModal
-          fireCreateNewCustomer={fireCreateNewCustomer}
-          billingEmail={billingEmail}
-          handleInputChange={handleInputChange}
-          editPaymentMethodModal={editPaymentMethodModal}
-          handleModalSwitch={handleModalSwitch}
-          fireUpdateCustomerMethod={fireUpdateCustomerMethod}
-          loading={loading}
-          closeEditPaymentModal={closeEditPaymentModal}
+          openNeedPaymentPlanModal={openNeedPaymentPlanModal}
         />
       </PaymentMethodWrapper>
     );
@@ -44,7 +23,7 @@ const PaymentMethod = ({
         <CardDetails
           card={emptyCard}
           email=""
-          handleModalSwitch={handleModalSwitch}
+          openNeedPaymentPlanModal={openNeedPaymentPlanModal}
         />
       </PaymentMethodWrapper>
     );
@@ -61,12 +40,7 @@ const emptyCard = {
 };
 
 PaymentMethod.propTypes = {
-  billingEmail: PT.string.isRequired,
-  fireCreateNewCustomer: PT.func.isRequired,
-  handleInputChange: PT.func.isRequired,
-  editPaymentMethodModal: PT.bool.isRequired,
-  handleModalSwitch: PT.func.isRequired,
-  fireUpdateCustomerMethod: PT.func.isRequired
+  openNeedPaymentPlanModal: PT.func.isRequired
 };
 
 const PaymentMethodWrapper = styled.div`
