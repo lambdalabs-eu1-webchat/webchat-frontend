@@ -32,7 +32,7 @@ const PlanCards = ({ hotel, fireSwitchCustomerPlan, loading }) => {
 
 PlanCards.propTypes = {
   hotel: PT.object.isRequired,
-  fireSwitchCustomerPlan: PT.func.isRequired,
+  fireSwitchCustomerPlan: PT.func.isRequired
 };
 
 export default PlanCards;
@@ -40,7 +40,7 @@ export default PlanCards;
 const PlanCardWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  padding-top: 6.5rem;
+  padding-top: 4rem;
   margin: 2rem;
   @media (max-width: 1400px) {
     padding-top: 0;
@@ -51,7 +51,7 @@ const PlanCardWrapper = styled.div`
     margin: 0 auto;
     padding-top: 0;
   }
-    @media (max-width: 600px) {
+  @media (max-width: 600px) {
     width: 100%;
     margin: 0;
   }

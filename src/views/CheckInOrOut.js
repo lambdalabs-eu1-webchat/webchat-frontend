@@ -4,7 +4,7 @@ import theme from './.././theme/styledTheme';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { DOMAIN, USERS, HOTEL } from '../utils/paths';
+import { DOMAIN, HOTEL } from '../utils/paths';
 
 import CheckInForm from '../components/GuestCheckInForm';
 import CheckOutForm from '../components/GuestCheckOutForm';
@@ -12,14 +12,14 @@ import CheckOutForm from '../components/GuestCheckOutForm';
 class CheckInOrOut extends React.Component {
   state = {
     availableRooms: [],
-    currentGuests: [],
+    currentGuests: []
   };
   componentDidMount() {
     axios
       .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/rooms/available`)
       .then(res => {
         this.setState({
-          availableRooms: res.data,
+          availableRooms: res.data
         });
       })
       .catch(error => {
@@ -30,7 +30,7 @@ class CheckInOrOut extends React.Component {
       .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/guests?status=here`)
       .then(res => {
         this.setState({
-          currentGuests: res.data,
+          currentGuests: res.data
         });
       })
       .catch(error => {
@@ -47,7 +47,7 @@ class CheckInOrOut extends React.Component {
     this.setState(cState => {
       // get the room
       const availableRooms = cState.availableRooms.filter(
-        room => room._id !== room_id,
+        room => room._id !== room_id
       );
       return { availableRooms };
     });
@@ -56,25 +56,24 @@ class CheckInOrOut extends React.Component {
     this.setState(cState => {
       const currentGuests = [...cState.currentGuests, guest];
       return {
-        currentGuests,
+        currentGuests
       };
     });
   };
   filterCurrentGuests = guest_id => {
     this.setState(cState => {
       const newCurrentGuests = cState.currentGuests.filter(
-        guest => guest_id !== guest._id,
+        guest => guest_id !== guest._id
       );
       return {
-        currentGuests: newCurrentGuests,
+        currentGuests: newCurrentGuests
       };
     });
   };
   render() {
     return (
       <StyledCheckInOrOut>
-
-         <CheckInWrapper className="sub-container">
+        <CheckInWrapper className="sub-container">
           <h1 className="hide-on-print">Check-in</h1>
           <CheckInForm
             availableRooms={this.state.availableRooms}
@@ -83,8 +82,8 @@ class CheckInOrOut extends React.Component {
             hotel_id={this.props.hotel_id}
             loading={this.props.loading}
           />
-         </CheckInWrapper>
-         <CheckOutWrapper className="hide-on-print sub-container">
+        </CheckInWrapper>
+        <CheckOutWrapper className="hide-on-print sub-container">
           <h1>Check-out</h1>
           <CheckOutForm
             hotel_id={this.props.hotel_id}
@@ -93,7 +92,7 @@ class CheckInOrOut extends React.Component {
             addAvailableRoom={this.addAvailableRoom}
             loading={this.props.loading}
           />
-         </CheckOutWrapper>
+        </CheckOutWrapper>
       </StyledCheckInOrOut>
     );
   }
@@ -101,7 +100,7 @@ class CheckInOrOut extends React.Component {
 
 CheckInOrOut.propTypes = {
   hotel_id: propTypes.string.isRequired,
-  loading: propTypes.object.isRequired,
+  loading: propTypes.object.isRequired
 };
 
 const StyledCheckInOrOut = styled.div`
@@ -129,7 +128,7 @@ const StyledCheckInOrOut = styled.div`
 const CheckInWrapper = styled.div`
   width: 80%;
   margin-right: 3rem;
-  @media(max-width:1000px) {
+  @media (max-width: 1000px) {
     width: 100%;
     margin: 0 auto;
   }
@@ -146,7 +145,7 @@ const CheckOutWrapper = styled.div`
 function mapStateToProps(state) {
   return {
     hotel_id: state.currentUser.hotel_id,
-    loading: state.loading,
+    loading: state.loading
   };
 }
 
