@@ -41,7 +41,7 @@ const StyledMessage = styled.div`
     props.left
       ? `background:${theme.color.lightPurple};`
       : `background:${theme.color.footerText};`}
-  /* ${props => (props.left ? `text-align: left;` : 'text-align: right;')} */
+  ${props => (props.left ? `text-align: left;` : 'text-align: right;')}
   ${props => (props.left ? `margin-right:auto;` : 'margin-left:auto;')}
   &:after {
     content: '';
