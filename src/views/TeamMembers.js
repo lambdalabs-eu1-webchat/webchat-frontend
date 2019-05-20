@@ -33,7 +33,7 @@ class TeamMembers extends React.Component {
   }
 
   checkAddEligibility = () => {
-    const plan =  this.props.hotel.plan;
+    const plan = this.props.hotel.plan;
     const staffAmount = this.props.users.length;
     if (plan === 'free' && staffAmount === 5) {
       return false;
@@ -47,14 +47,14 @@ class TeamMembers extends React.Component {
   closeModal = () => {
     this.setState({
       isModalOpen: false,
-    })
-  }
+    });
+  };
 
   handleShowModal = () => {
-    if(this.checkAddEligibility()){
-    this.setState({ modalShown: true });
+    if (this.checkAddEligibility()) {
+      this.setState({ modalShown: true });
     } else {
-      this.setState({ isModalOpen: true })
+      this.setState({ isModalOpen: true });
     }
   };
 
@@ -92,12 +92,12 @@ class TeamMembers extends React.Component {
           />
           <button onClick={this.handleShowModal}>Add Team Members</button>
           {this.state.isModalOpen && (
-          <Restricted
-            alert="Please upgrade your account to add more users"
-            isRestrictedModalOpen={this.state.isModalOpen}
-            closeRestrictedModal={this.closeModal}
-          />
-        )}
+            <Restricted
+              alert="Please upgrade your account to add more users"
+              isRestrictedModalOpen={this.state.isModalOpen}
+              closeRestrictedModal={this.closeModal}
+            />
+          )}
         </TeamMembersWrapper>
       </TeamMembersOuterWrapper>
     );

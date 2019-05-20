@@ -16,10 +16,7 @@ const TeamMembersAddNewMemberModal = ({
     ? 'modal display-block'
     : 'modal display-none';
 
-  const handleClick = (
-    createUser,
-    handleHideModal,
-  ) => event => {
+  const handleClick = (createUser, handleHideModal) => event => {
     event.preventDefault();
     let name = '';
     let email = '';
@@ -79,7 +76,12 @@ const TeamMembersAddNewMemberModal = ({
           />
           <button
             type="submit"
-            onClick={handleClick(createUser, handleHideModal, plan, staffAmount)}
+            onClick={handleClick(
+              createUser,
+              handleHideModal,
+              plan,
+              staffAmount,
+            )}
           >
             {loading.createUser ? <Spinner /> : 'Add Member'}
           </button>
@@ -93,22 +95,22 @@ const TeamMembersAddNewMemberModal = ({
 export default TeamMembersAddNewMemberModal;
 
 const AddOuterWrapper = styled.div`
-.display-block {
-  display: block;
-}
+  .display-block {
+    display: block;
+  }
 
-.display-none {
-  display: none;
-}
+  .display-none {
+    display: none;
+  }
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-}
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
 `;
 
 const AddMembersModalWrapper = styled.div`
@@ -130,12 +132,12 @@ const AddMembersModalWrapper = styled.div`
       outline: none;
     }
     &::placeholder {
-    font-weight: normal;
-    font-size: ${theme.fontSize.xxs};
-    font-family: 'Lato', sans-serif;
+      font-weight: normal;
+      font-size: ${theme.fontSize.xxs};
+      font-family: 'Lato', sans-serif;
     }
   }
-  
+
   .modal-main {
     display: flex;
     flex-direction: column;
@@ -153,11 +155,11 @@ const AddMembersModalWrapper = styled.div`
       width: 100%;
       height: ${theme.button.smallButton};
     }
-    @media(max-width: 500px) {
-      width:100%;
+    @media (max-width: 500px) {
+      width: 100%;
     }
   }
-  
+
   #close {
     background: none;
     color: ${theme.color.textColor};

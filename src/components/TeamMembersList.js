@@ -41,7 +41,7 @@ const ListHeader = styled.div`
   @media (max-width: 600px) {
     display: none;
   }
-  
+
   h4 {
     color: ${theme.color.accentPurple};
     font-size: ${theme.fontSize.xxs};
