@@ -9,25 +9,26 @@ import { fetchHotelStaff } from '../store/actions/users';
 import {
   switchCustomerPlan,
   createNewCustomer,
-  updateCustomerMethod,
+  updateCustomerMethod
 } from '../store/actions/subscription';
 import { planIds } from '../utils/plans';
 import PlanCards from '../components/PlanCards';
 import PaymentMethod from '../components/PaymentMethod';
 import Restricted from '../components/reusable/RestrictedModal';
 import theme from '../theme/styledTheme';
+import PlanCheckout from '../components/PlanCheckout';
 
 class Billing extends React.Component {
   state = {
     billingEmail: '',
     editPaymentMethodModal: false,
     isPaymentPlanModalOpen: false,
-    isHasManyAccsModalOpen: false,
+    isHasManyAccsModalOpen: false
   };
 
   componentDidMount() {
-    this.props.fetchSingleHotel(this.props.hotel_id);
-    this.props.fetchHotelStaff(this.props.hotel_id);
+    this.props.fetchSingleHotel(this.props.hotel._id);
+    this.props.fetchHotelStaff(this.props.hotel._id);
   }
 
   openNeedPaymentPlanModal = () => {
@@ -45,19 +46,19 @@ class Billing extends React.Component {
 
   handleInputChange = event => {
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   };
 
   handleModalSwitch = () => {
     this.setState({
-      editPaymentMethodModal: !this.state.editPaymentMethodModal,
+      editPaymentMethodModal: !this.state.editPaymentMethodModal
     });
   };
 
   closeEditPaymentModal = () => {
     this.setState({
-      editPaymentMethodModal: false,
+      editPaymentMethodModal: false
     });
   };
 
@@ -87,7 +88,7 @@ class Billing extends React.Component {
     const enhancedStripeToken = {
       ...token,
       email: this.state.billingEmail,
-      plan: planIds.free,
+      plan: planIds.free
     };
     this.props.createNewCustomer(this.props.hotel._id, enhancedStripeToken);
   };
@@ -95,11 +96,11 @@ class Billing extends React.Component {
   fireUpdateCustomerMethod = async token => {
     const enhancedStripeToken = {
       ...token,
-      email: this.state.billingEmail,
+      email: this.state.billingEmail
     };
     await this.props.updateCustomerMethod(
       this.props.hotel._id,
-      enhancedStripeToken,
+      enhancedStripeToken
     );
     this.closeEditPaymentModal();
   };
@@ -125,10 +126,15 @@ class Billing extends React.Component {
         />
 
         {this.state.isPaymentPlanModalOpen && (
-          <Restricted
+          <PlanCheckout
             alert="Please add a payment method before switching plan"
             isRestrictedModalOpen={this.state.isPaymentPlanModalOpen}
             closeRestrictedModal={this.closeRestrictedModal}
+            fireCreateNewCustomer={this.fireCreateNewCustomer}
+            billingEmail={this.billingEmail}
+            handleInputChange={this.handleInputChange}
+            loading={this.props.loading}
+            isPayment={false}
           />
         )}
 
@@ -152,14 +158,13 @@ Billing.propTypes = {
   updateCustomerMethod: PT.func.isRequired,
   fetchHotelStaff: PT.func.isRequired,
   staff: PT.array.isRequired,
-  loading: PT.object.isRequired,
+  loading: PT.object.isRequired
 };
 
 const mapStateToProps = state => ({
   hotel: state.hotel,
-  hotel_id: state.currentUser.hotel_id, // do we need to bring this and the hotel object in
   staff: state.users,
-  loading: state.loading,
+  loading: state.loading
 });
 
 const mapDispatchToProps = dispatch => {
@@ -169,21 +174,22 @@ const mapDispatchToProps = dispatch => {
       createNewCustomer,
       switchCustomerPlan,
       updateCustomerMethod,
-      fetchHotelStaff,
+      fetchHotelStaff
     },
-    dispatch,
+    dispatch
   );
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Billing);
 
 const BillingWrapper = styled.div`
-display: flex;
-min-height: 730px;
-justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  min-height: 730px;
+  /* justify-content: space-between; */
   h1 {
     font-size: ${theme.fontSize.l};
     padding: 1.5rem 0;
@@ -199,7 +205,7 @@ justify-content: space-between;
     flex-direction: column;
   }
   @media (max-width: 1000px) {
-  flex-direction: column;
+    flex-direction: column;
     width: 95%;
     padding: 10% 0 15% 0;
     margin: 0 auto;
