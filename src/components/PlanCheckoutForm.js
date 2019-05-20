@@ -20,21 +20,21 @@ class PlanCheckoutForm extends Component {
   };
 
   createCustomer = async () => {
-    // if (validate(this.props.billingEmail)) {
-    const { token } = await this.props.stripe.createToken();
-    this.props.fireCreateNewCustomer(token);
-    // } else {
-    // this.setFlashMessage(messages.validEmail);
-    // }
+    if (validate(this.props.billingEmail)) {
+      const { token } = await this.props.stripe.createToken();
+      this.props.fireCreateNewCustomer(token);
+    } else {
+      this.setFlashMessage(messages.validEmail);
+    }
   };
 
   editPaymentMethod = async () => {
-    // if (validate(this.props.billingEmail)) {
-    const { token } = await this.props.stripe.createToken();
-    this.props.fireUpdateCustomerMethod(token);
-    // } else {
-    //   this.setFlashMessage(messages.validEmail);
-    // }
+    if (validate(this.props.billingEmail)) {
+      const { token } = await this.props.stripe.createToken();
+      this.props.fireUpdateCustomerMethod(token);
+    } else {
+      this.setFlashMessage(messages.validEmail);
+    }
   };
 
   render() {
@@ -67,6 +67,10 @@ class PlanCheckoutForm extends Component {
     );
   }
 }
+
+PlanCheckoutForm.defaultProps = {
+  billingEmail: ''
+};
 
 PlanCheckoutForm.propTypes = {
   stripe: PT.shape({

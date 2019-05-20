@@ -72,7 +72,6 @@ class Billing extends React.Component {
   };
 
   fireCreateNewCustomer = token => {
-    console.log('create new');
     const enhancedStripeToken = {
       ...token,
       email: this.state.billingEmail,
@@ -83,7 +82,6 @@ class Billing extends React.Component {
   };
 
   fireUpdateCustomerMethod = async token => {
-    console.log('update old');
     const enhancedStripeToken = {
       ...token,
       email: this.state.billingEmail
@@ -127,7 +125,7 @@ class Billing extends React.Component {
             closeRestrictedModal={this.closeRestrictedModal}
             fireCreateNewCustomer={this.fireCreateNewCustomer}
             fireUpdateCustomerMethod={this.fireUpdateCustomerMethod}
-            billingEmail={this.billingEmail}
+            billingEmail={this.state.billingEmail}
             handleInputChange={this.handleInputChange}
             loading={this.props.loading}
             isPayment={false}

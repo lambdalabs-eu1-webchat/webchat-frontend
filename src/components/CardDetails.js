@@ -11,7 +11,9 @@ const CardDetails = ({ card, email, openNeedPaymentPlanModal }) => {
         <span>Card: {card.brand}</span>
         <span>Last four digits: {card.last_four}</span>
         <span>
-          Expiration: {card.expiration.month}/{card.expiration.year}
+          Expiration: {card.expiration.month}
+          {card.brand === '' ? '' : '/'}
+          {card.expiration.year}
         </span>
         <span>Receipts sent to: {email}</span>
         <button onClick={openNeedPaymentPlanModal}>Edit</button>
