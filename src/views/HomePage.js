@@ -205,7 +205,7 @@ const HomePageContainer = styled.div`
       width: 20rem;
       border-radius: 5px;
       height: ${theme.button.height};
-      font-size: ${theme.fontSize.s};
+      font-size: ${theme.fontSize.xs};
       border: none;
       text-transform: uppercase;
       color: ${theme.color.white};
@@ -215,10 +215,12 @@ const HomePageContainer = styled.div`
       &:hover {
         box-shadow: ${theme.shadow.buttonHover};
         background: ${theme.color.accentPurple};
+        cursor: pointer;
+        transition: all 0.3s ease;
       }
       @media(max-width: 600px) {
-      width: 87%;
-      margin: 2.5rem;
+        width: 90%;
+        margin: 5%;
       }
     }
     a {
@@ -373,23 +375,25 @@ const HomePageContainer = styled.div`
       }
       
       button {
-        margin: 5% 2.5%;
-        padding: 10px 20px;
-        width: 95%;
+        margin: 5% 0;
+        height: ${theme.button.height};
+        width: 100%;
         color: ${theme.color.white};
         border: none;
         background: ${theme.color.accentGreen};
         text-transform: uppercase;
-        font-size: ${theme.fontSize.s};
+        font-size: ${theme.fontSize.xs};
         border-radius: ${theme.border.radius};
         font-weight: bold;
         box-shadow: ${theme.shadow.buttonShadow};
         &:hover {
           box-shadow: ${theme.shadow.buttonHover};
           background: ${theme.color.accentPurple};
+          cursor: pointer;
+          transition: all 0.3s ease;
         }
         @media(max-width: 500px) {
-          margin: 0 auto;
+          margin: 0 auto;  
         }
       }
       

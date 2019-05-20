@@ -52,7 +52,7 @@ const EmployeeSettingsForm = ({
           <button type="submit" onClick={fireUserUpdates}>
             {loading.updateUser ? <Spinner /> : 'Update'}
           </button>
-          <button type="submit" onClick={clearChanges}>
+          <button className="cancel" type="submit" onClick={clearChanges}>
             Cancel
           </button>
         </div>
@@ -116,6 +116,7 @@ const EmployeeSettingsFormWrapper = styled.div`
       &:hover {
         box-shadow: ${theme.shadow.buttonHover};
         cursor: pointer;
+        transition: all 0.3s ease;
       }
       &:focus {
         outline: none;
@@ -127,7 +128,13 @@ const EmployeeSettingsFormWrapper = styled.div`
         width: 100%;
         font-size: ${theme.fontSize.xs};
         height: ${theme.button.height};
+        margin: 0;
+        margin-bottom: 15px;
       }
+    }
+    
+    .cancel {
+      background: ${theme.color.accentPurple};
     }
   }
 `;

@@ -156,6 +156,10 @@ const LoginWrapper = styled.div`
         outline: none;
       }
     }
+    
+    p {
+      font-size: ${theme.fontSize.xxs};
+    }
 
     button {
       width: 100%;
