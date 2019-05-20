@@ -75,7 +75,7 @@ const RoomWrapper = styled.div`
     color: ${theme.color.accentPurple};
     font-size: ${theme.fontSize.m};
   }
-  
+
   .fa-trash-alt {
     color: ${theme.color.accentPurple};
     font-size: ${theme.fontSize.m};
