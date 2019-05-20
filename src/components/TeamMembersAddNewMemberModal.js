@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { validate } from 'email-validator';
 
 import { messages } from '../utils/messages';
 import theme from './../theme/styledTheme';
@@ -34,35 +35,33 @@ const TeamMembersAddNewMemberModal = ({
         password = childNode.value;
       }
     });
-    let blank = false;
+
     if (name && email && password) {
-      const res = await createUser(name, email, password, 'receptionist');
-      if (res.message) {
-        handleFlash(messages.duplicateEmail);
-        return;
+      if (validate(email)) {
+        if (password.length > 3) {
+          const res = await createUser(name, email, password, 'receptionist');
+          if (res.message) {
+            handleFlash(messages.duplicateEmail);
+          } else {
+            setTimeout(handleHideModal, 800);
+            userInfo.parentNode.childNodes.forEach(childNode => {
+              if (childNode.name === 'name') {
+                childNode.value = '';
+              } else if (childNode.name === 'email') {
+                childNode.value = '';
+              } else if (childNode.name === 'password') {
+                childNode.value = '';
+              }
+            });
+          }
+        } else {
+          handleFlash(messages.tempPasswordLength);
+        }
       } else {
-        setTimeout(handleHideModal, 800);
+        handleFlash(messages.validEmail);
       }
     } else {
-      blank = true;
-    }
-
-    if (blank) {
-      userInfo.parentNode.childNodes.forEach(childNode => {
-        if (childNode.getAttribute('id') === 'add-member-message') {
-          childNode.textContent = 'Please fill in all the required fields.';
-        }
-      });
-    } else {
-      userInfo.parentNode.childNodes.forEach(childNode => {
-        if (childNode.name === 'name') {
-          childNode.value = '';
-        } else if (childNode.name === 'email') {
-          childNode.value = '';
-        } else if (childNode.name === 'password') {
-          childNode.value = '';
-        }
-      });
+      handleFlash(messages.allRequiredFields);
     }
   };
 
