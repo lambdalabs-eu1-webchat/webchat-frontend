@@ -50,7 +50,7 @@ const EmployeeSettingsForm = ({
           placeholder="motto"
         />
         <div className="form-buttons">
-          <button type="submit" onClick={fireUserUpdates}>
+          <button type="submit" onClick={fireUserUpdates} disabled={loading.updateUser}>
             {loading.updateUser ? <Spinner /> : 'Update'}
           </button>
           <button type="submit" onClick={clearChanges}>

@@ -101,6 +101,7 @@ class CheckInForm extends React.Component {
           variant="contained"
           color="primary"
           onClick={this.checkInGuest}
+          disabled={this.state.isCheckingIn}
         >
           {this.state.isCheckingIn ? <Spinner /> : 'Check In'}
         </button>

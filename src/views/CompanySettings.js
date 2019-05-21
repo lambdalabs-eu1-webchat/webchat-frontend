@@ -163,6 +163,7 @@ class CompanySettings extends React.Component {
                     hotel._id,
                     dispatchUpdateHotel,
                   ).bind(this)}
+                  disabled={this.props.loading.updateHotel}
                 >
                   {this.props.loading.updateHotel ? <Spinner /> : 'Save'}
                 </button>
