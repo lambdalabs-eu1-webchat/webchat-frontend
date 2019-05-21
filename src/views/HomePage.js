@@ -83,7 +83,7 @@ class HomePage extends React.Component {
           <section className="pricing-plan">
             <h1>Our pricing plans</h1>
               <p>
-                No hotel is to big or too small for FrontDesk.<br/> Our services can be customized to suit any need you may have.
+                No hotel is too big or too small for FrontDesk.<br/> Our services can be customized to suit any need you may have.
               </p>
             <div className="pricing-cards">
               <div className="pricing-card">
