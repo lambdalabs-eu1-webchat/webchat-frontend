@@ -56,6 +56,7 @@ const CardDetailsWrapper = styled.div`
     text-align: left;
     font-size: ${theme.fontSize.s};
     font-weight: bold;
+    padding: 15px 0;
   }
 
   span {
