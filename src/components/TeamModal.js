@@ -50,7 +50,7 @@ export default class TeamModal extends React.Component {
 
               <div className="pricing-card">
               <h2><i className="fas fa-user"></i>
-                <br></br>Employee / Recepionist </h2>
+                <br></br>Employee / Receptionist </h2>
                 <ul>
                   <li><i className="fas fa-check"></i>Restricted access</li>
                   <li><i className="fas fa-check"></i>Live chat with guests</li>
