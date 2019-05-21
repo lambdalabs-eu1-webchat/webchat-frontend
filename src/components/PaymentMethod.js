@@ -8,7 +8,7 @@ const PaymentMethod = ({ payment, openNeedPaymentPlanModal }) => {
   if (payment) {
     return (
       <PaymentMethodWrapper>
-        <h1>Pricing plans</h1>
+        <h1>Billing</h1>
         <CardDetails
           card={payment.card}
           email={payment.customer.email}
