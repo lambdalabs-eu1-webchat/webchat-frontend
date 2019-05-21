@@ -142,6 +142,10 @@ export default connect(
 
 const RegisterOuterWrapper = styled.div`
   background: ${theme.color.offWhite};
+  height: 100%;
+  @media (max-width: 600px) {
+    background: ${theme.color.white};
+  }
 `;
 
 const RegisterWrapper = styled.div`
@@ -164,6 +168,7 @@ const RegisterWrapper = styled.div`
       width: 100%;
       margin: 0;
       padding-bottom: 65px;
+      box-shadow: none;
     }
     h2 {
       font-size: ${theme.fontSize.xl};
@@ -171,9 +176,8 @@ const RegisterWrapper = styled.div`
       color: ${theme.color.textColor};
     }
     label {
-      font-size: ${theme.fontSize.xxs};
+      font-size: ${theme.fontSize.xs};
       color: ${theme.color.accentPurple};
-      font-weight: bold;
     }
 
     input {
@@ -190,7 +194,7 @@ const RegisterWrapper = styled.div`
     }
     
     p {
-      font-size: ${theme.fontSize.xxs};
+      font-size: ${theme.fontSize.xs};
     }
 
     button {

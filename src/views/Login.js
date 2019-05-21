@@ -138,9 +138,8 @@ const LoginWrapper = styled.div`
       color: ${theme.color.textColor};
     }
     label {
-      font-size: ${theme.fontSize.xxs};
+      font-size: ${theme.fontSize.xs};
       color: ${theme.color.accentPurple};
-      font-weight: bold;
     }
 
     input {
@@ -157,7 +156,7 @@ const LoginWrapper = styled.div`
     }
     
     p {
-      font-size: ${theme.fontSize.xxs};
+      font-size: ${theme.fontSize.xs};
     }
 
     button {
