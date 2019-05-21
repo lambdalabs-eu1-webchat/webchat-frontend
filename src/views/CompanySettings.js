@@ -146,7 +146,7 @@ class CompanySettings extends React.Component {
                 name="companyName"
                 className="form-input"
                 value={this.state.companyName}
-                placeholder="hotel motto"
+                placeholder="hotel name"
                 onChange={this.handleInputChange.bind(this)}
               />
               <input
