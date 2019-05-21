@@ -280,14 +280,12 @@ export const createUser = (
     const result = await fetch(`${DOMAIN}${USERS}`, config);
     const jsonResult = await result.json();
     dispatch({ type: CREATE_USER_FINISHED });
-    if (result) {
-      if (result.ok) {
-        dispatch(createUserSuccess(jsonResult));
-        dispatch(fetchHotelStaff(getState().currentUser.hotel_id));
-      }
+    if (result.ok) {
+      dispatch(createUserSuccess(jsonResult));
+      dispatch(fetchHotelStaff(getState().currentUser.hotel_id));
       return jsonResult;
     } else {
-      throw new Error(jsonResult.message);
+      return jsonResult;
     }
   } catch (error) {
     dispatch(createUserFailure(error.message));
