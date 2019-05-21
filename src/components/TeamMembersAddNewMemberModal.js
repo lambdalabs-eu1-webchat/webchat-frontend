@@ -43,7 +43,7 @@ const TeamMembersAddNewMemberModal = ({
           if (res.message) {
             handleFlash(res.message);
           } else {
-            setTimeout(handleHideModal, 800);
+            handleHideModal();
             userInfo.parentNode.childNodes.forEach(childNode => {
               if (childNode.name === 'name') {
                 childNode.value = '';
