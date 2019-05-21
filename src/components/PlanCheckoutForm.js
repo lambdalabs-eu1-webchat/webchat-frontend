@@ -97,6 +97,7 @@ const StyledBtn = styled.button`
   &:hover {
     box-shadow: ${theme.shadow.buttonHover};
     cursor: pointer;
+    transition: all 0.3s ease;
   }
   &:focus {
     outline: none;
