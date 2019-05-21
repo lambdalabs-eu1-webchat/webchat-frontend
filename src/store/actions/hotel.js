@@ -77,12 +77,11 @@ export const fetchSingleHotel = id => async dispatch => {
   }
 };
 
-export const updateHotel = (id, name, motto) => async dispatch => {
+export const updateHotel = (id, name) => async dispatch => {
   dispatch({ type: UPDATE_HOTEL });
   dispatch({ type: UPDATE_HOTEL_STARTED });
   const updatedHotel = {
     name: String(name),
-    motto: String(motto),
   };
   const config = {
     method: 'PUT',

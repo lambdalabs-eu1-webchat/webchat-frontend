@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { translate } from '../store/actions/chat';
+import theme from './.././theme/styledTheme';
 
 import Message from './Message';
 import RatingMessage from './RatingMessage';
@@ -20,8 +23,14 @@ class Messages extends React.Component {
   componentDidUpdate = () => {
     this.scrollToBottom();
   };
+  translateTicket = ticket => {
+    const textToTranslate = ticket.messages.map(msg => {
+      return msg.text;
+    });
+    this.props.translate(textToTranslate, ticket._id, this.props.chat_id);
+  };
   render() {
-    const { tickets, guest, userType, status } = this.props;
+    const { tickets, guest, userType, status, translatedTickets } = this.props;
     const guestName = guest.name;
     const GuestId = guest.id;
     return (
@@ -35,6 +44,9 @@ class Messages extends React.Component {
           <div>
             <p>{`${guestName}'s ticket # ${i}`}</p>
             <p>{`Status: ${status}`}</p>
+            <button onClick={() => this.translateTicket(ticket)}>
+              Translate
+            </button>
             {status === CLOSED &&
             (userType === ADMIN || userType === SUPER_ADMIN) ? (
               ticket.rating ? (
@@ -43,8 +55,17 @@ class Messages extends React.Component {
                 <p>No Rating given</p>
               )
             ) : null}
-            {ticket.messages.map(message => (
-              <Message key={message._id} message={message} guest_id={GuestId} />
+            {ticket.messages.map((message, i) => (
+              <Message
+                key={message._id}
+                message={message}
+                guest_id={GuestId}
+                translatedMessage={
+                  translatedTickets[ticket._id]
+                    ? translatedTickets[ticket._id][i]
+                    : { detectedSourceLanguage: false }
+                }
+              />
             ))}
           </div>
         ))}
@@ -62,19 +83,36 @@ Messages.propTypes = {
           _id: propTypes.string.isRequired,
           sender: propTypes.shape({
             id: propTypes.string.isRequired,
-            name: propTypes.string.isRequired
+            name: propTypes.string.isRequired,
           }).isRequired,
-          text: propTypes.string.isRequired
-        })
+          text: propTypes.string.isRequired,
+        }),
       ),
-      status: propTypes.string.isRequired
-    })
+      status: propTypes.string.isRequired,
+    }),
   ).isRequired,
-  guest_id: propTypes.string.isRequired
+  guest_id: propTypes.string.isRequired,
 };
 
 const StyledMessages = styled.div`
   overflow-y: scroll;
+  margin-top: 1.5rem;
+
+  div {
+    p {
+      font-size: ${theme.fontSize.message};
+      margin: 0 1rem;
+    }
+  }
 `;
 
-export default Messages;
+function mapStateToProps(state) {
+  return {
+    translatedTickets: state.chats.translatedTickets,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { translate },
+)(Messages);

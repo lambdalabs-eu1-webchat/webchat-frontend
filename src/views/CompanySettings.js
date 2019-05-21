@@ -29,7 +29,6 @@ class CompanySettings extends React.Component {
     this.state = {
       currentHotel: {},
       companyName: hotel.name,
-      companyMotto: hotel.motto,
       rooms: hotel.rooms,
       newRooms: '',
     };
@@ -42,7 +41,6 @@ class CompanySettings extends React.Component {
       this.setState({
         currentHotel: this.props.hotel,
         companyName: this.props.hotel.name,
-        companyMotto: this.props.hotel.motto,
       });
     }
     if (this.state.rooms !== this.props.rooms) {
@@ -70,11 +68,11 @@ class CompanySettings extends React.Component {
   handleSubmit(hotelId, dispatchUpdateHotel) {
     return event => {
       event.preventDefault();
-      const { companyName, companyMotto } = this.state;
-      if (!companyMotto || !companyName) {
+      const { companyName } = this.state;
+      if (!companyName) {
         return;
       }
-      dispatchUpdateHotel(hotelId, companyName, companyMotto);
+      dispatchUpdateHotel(hotelId, companyName);
     };
   }
 
@@ -83,7 +81,6 @@ class CompanySettings extends React.Component {
       event.preventDefault();
       this.setState({
         companyName: this.props.hotel.name,
-        companyMotto: this.props.hotel.motto,
       });
     };
   }
@@ -149,15 +146,8 @@ class CompanySettings extends React.Component {
                 placeholder="hotel motto"
                 onChange={this.handleInputChange.bind(this)}
               />
-              <input
-                name="companyMotto"
-                className="form-input"
-                value={this.state.companyMotto}
-                placeholder="hotel motto"
-                onChange={this.handleInputChange.bind(this)}
-              />
               <div className="action-buttons">
-                <button onClick={this.handleRevert().bind(this)}>Revert</button>
+                <button className="cancel" onClick={this.handleRevert().bind(this)}>Cancel</button>
                 <button
                   onClick={this.handleSubmit(
                     hotel._id,
@@ -287,6 +277,7 @@ const CompanySettingsWrapper = styled.div`
         &:hover {
           box-shadow: ${theme.shadow.buttonHover};
           cursor: pointer;
+          transition: all 0.3s ease;
         }
         &:focus {
           outline: none;
@@ -306,6 +297,10 @@ const CompanySettingsWrapper = styled.div`
           height: ${theme.button.height};
           font-size: ${theme.fontSize.xs};
         }
+      }
+      
+      .cancel {
+        background: ${theme.color.accentPurple};
       }
     }
   }

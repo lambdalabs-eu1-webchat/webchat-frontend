@@ -4,7 +4,7 @@ import {
   SUBSCRIPTIONS,
 } from '../actions/actionTypes';
 
-const initialState = { plan: '', _id: '', name: '', motto: '', rooms: [], _v: 0 };
+const initialState = { plan: '', _id: '', name: '', rooms: [], _v: 0 };
 
 const hotel = (state = initialState, action) => {
   switch (action.type) {

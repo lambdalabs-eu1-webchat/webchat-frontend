@@ -6,6 +6,10 @@ const modalTheme = {
     top: 0,
     left: 0,
     right: 0,
+    background: 'rgba(0, 0, 0, 0.6)',
+    zIndex: 55,
+    width: '100%',
+    height: '100%',
     bottom: 0
   },
   restrictedContent: {
@@ -17,9 +21,9 @@ const modalTheme = {
     width: '500px',
     maxHeight: '100%',
     height: '200px',
-    margin: '0 1rem',
     backgroundColor: theme.color.offWhite,
     boxShadow: theme.shadow.cardShadow,
+    border: 'none',
     fontFamily: theme.font.fontFamily
   },
   translateContent: {
@@ -37,7 +41,7 @@ const modalTheme = {
     fontFamily: theme.font.fontFamily
   },
   paymentContent: {
-    position: 'fixed',
+    position: 'absolute',
     top: '50%',
     left: '50%',
     right: '50%',

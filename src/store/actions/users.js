@@ -257,7 +257,7 @@ export const createUser = (
   email,
   password,
   user_type,
-  motto = '',
+
 ) => async (dispatch, getState) => {
   dispatch({ type: CREATE_USER });
   dispatch({ type: CREATE_USER_STARTED });
@@ -266,7 +266,7 @@ export const createUser = (
     name: String(name),
     email: String(email),
     password: String(password),
-    motto: String(motto),
+
     user_type: String(user_type),
   };
   const config = {
