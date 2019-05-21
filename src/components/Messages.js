@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import theme from './.././theme/styledTheme';
 
 import Message from './Message';
 import RatingMessage from './RatingMessage';
@@ -75,6 +76,14 @@ Messages.propTypes = {
 
 const StyledMessages = styled.div`
   overflow-y: scroll;
+    margin-top: 1.5rem;
+  
+  div {
+    p {
+      font-size: ${theme.fontSize.message};
+      margin: 0 1rem;
+    }
+  }
 `;
 
 export default Messages;

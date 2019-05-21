@@ -24,6 +24,7 @@ const StyledTabs = styled.div`
   @media (max-width: 600px) {
     flex-direction: column;
     width: 100%;
+    padding-top: 30px;
   }
   .tab {
     text-decoration: none;
@@ -48,6 +49,7 @@ const StyledTabs = styled.div`
     @media (max-width: 600px) {
       width: 100%;
       background: ${theme.color.lightPurple};
+      margin: 0;
       margin-bottom: 1rem;
       &.selected {
         border-bottom: 2px solid ${theme.color.accentGreen};

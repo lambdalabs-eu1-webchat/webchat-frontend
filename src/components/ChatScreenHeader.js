@@ -6,7 +6,7 @@ import theme from '../theme/styledTheme';
 function ChatScreenHeader({ guest_name, room_name }) {
   return (
     <StyledChatScreenHeader>
-      <p>Guest Name:{guest_name}</p>
+      <p>Guest Name: {guest_name}</p>
       <p>Room: {room_name}</p>
     </StyledChatScreenHeader>
   );
@@ -18,11 +18,12 @@ ChatScreenHeader.propTypes = {
 };
 
 const StyledChatScreenHeader = styled.div`
-  border: 2px solid ${theme.color.footerText};
-  padding: 0.3125rem;
-  background-color: ${theme.color.footerText};
+  font-size: ${theme.fontSize.message};
+  border-radius: 5px;
+  padding: 0.5rem 1rem ;
+  background: ${theme.color.footerText};
   height: 5vh;
-  min-height: 40px;
+  min-height: 50px;
 `;
 
 export default ChatScreenHeader;
