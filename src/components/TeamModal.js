@@ -12,7 +12,7 @@ export default class TeamModal extends React.Component {
             return null;
         }
         return (
-            <bigContainer>
+            <Container>
             <div style={backdropStyle}>
                 <div style={modalStyle}>           
 
@@ -68,15 +68,16 @@ export default class TeamModal extends React.Component {
               </div>
             </div>
         </div>
-        </bigContainer>
+        </Container>
         )
     }
 }
 
-const bigContainer = styled.div`
+const Container = styled.div`
   background: ${theme.color.white};
   margin: 0 5rem;
   box-shadow: ${theme.shadow.containerShadow};
+  overflow-y:scroll;
 
   h1 {
     font-size: ${theme.fontSize.xl};
@@ -237,16 +238,18 @@ const backdropStyle = {
     left:0,
     right:0,
     backgroundColor:'rgba(0,0,0,0.3)',
-    padding:'50'
+    padding:'50',
+    overflow:'scroll',
 };
 const modalStyle = {
    backgroundColor:theme.color.offWhite,
    borderRadius:5,
-   maxWidth:600,
-   minHeight:400,
+   maxWidth:800,
+   minHeight:200,
    margin:'0 auto',
    padding:30,
-   position:'relative'
+   position:'relative',
+  
 };
 // const modalBackDropStyle = styled.div`
 // position:fixed;
