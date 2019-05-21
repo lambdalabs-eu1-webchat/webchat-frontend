@@ -285,10 +285,11 @@ export const createUser = (
       dispatch(fetchHotelStaff(getState().currentUser.hotel_id));
       return jsonResult;
     } else {
-      return jsonResult;
+      throw new Error(jsonResult.message);
     }
   } catch (error) {
     dispatch(createUserFailure(error.message));
+    return error;
   }
 };
 
