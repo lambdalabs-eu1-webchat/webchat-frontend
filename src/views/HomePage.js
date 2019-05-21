@@ -399,7 +399,7 @@ const HomePageContainer = styled.div`
       
       .fa-check {
         background: #e2fdf8;
-        border: 1px solid white;
+        border: 2px solid white;
         border-radius: 50%;
         padding: 2.5%;
         color: ${theme.color.accentGreen};
