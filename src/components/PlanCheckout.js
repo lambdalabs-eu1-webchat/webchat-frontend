@@ -59,7 +59,7 @@ PlanCheckout.propTypes = {
   loading: PT.bool.isRequired,
 };
 
-const StyledBtn = styled.button`
+const StyledBtn = styled.div`
   background: none;
   border: none;
   button {
