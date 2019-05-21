@@ -81,19 +81,20 @@ Messages.propTypes = {
           _id: propTypes.string.isRequired,
           sender: propTypes.shape({
             id: propTypes.string.isRequired,
-            name: propTypes.string.isRequired
+            name: propTypes.string.isRequired,
           }).isRequired,
-          text: propTypes.string.isRequired
-        })
+          text: propTypes.string.isRequired,
+        }),
       ),
-      status: propTypes.string.isRequired
-    })
+      status: propTypes.string.isRequired,
+    }),
   ).isRequired,
-  guest_id: propTypes.string.isRequired
+  guest_id: propTypes.string.isRequired,
 };
 
 const StyledMessages = styled.div`
   overflow-y: scroll;
+  flex: 1;
 `;
 
 function mapStateToProps(state) {

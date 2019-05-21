@@ -9,7 +9,7 @@ import ChatScreenHeader from './ChatScreenHeader';
 import MessageComposer from './MessageComposer';
 import Button from '@material-ui/core/Button';
 import { SOCKET } from '../utils/paths';
-import { ACTIVE, QUEUED } from '../utils/ticketStatus';
+import { ACTIVE, QUEUED, CLOSED } from '../utils/ticketStatus';
 import {
   setCurrentChatId,
   translate,
@@ -77,19 +77,22 @@ class ChatScreen extends React.Component {
     const lastTicket = chat.tickets[this.props.chat.tickets.length - 1];
 
     return (
-      <StyledChatScreen>
-        <ChatScreenHeader
-          guest_name={chat.guest.name}
-          room_name={chat.room.name}
-        />
-        <Messages
-          userType={currentUser.user_type}
-          status={status}
-          tickets={chat.tickets}
-          guest={chat.guest}
-          chat_id={chat._id}
-        />
-        {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
+      <StyledChatScreen status={status}>
+        <div className="top-group">
+          <ChatScreenHeader
+            guest_name={chat.guest.name}
+            room_name={chat.room.name}
+          />
+          <Messages
+            userType={currentUser.user_type}
+            status={status}
+            tickets={chat.tickets}
+            guest={chat.guest}
+            chat_id={chat._id}
+          />
+          {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
+        </div>
+
         {ACTIVE === status ? (
           <React.Fragment>
             <MessageComposer
@@ -162,6 +165,12 @@ const StyledChatScreen = styled.div`
   justify-content: space-between;
   height: 100%;
   background-color: ${theme.color.white};
+  .top-group {
+    height: ${props => (props.status === CLOSED ? '100%' : '90%')};
+
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const StyledJoinButton = styled.button`
