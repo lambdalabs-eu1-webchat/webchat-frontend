@@ -3,7 +3,7 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
 
-const CardDetails = ({ card, email, openNeedPaymentPlanModal }) => {
+const CardDetails = ({ payment, card, email, openNeedPaymentPlanModal }) => {
   return (
     <div>
       <CardDetailsWrapper>
@@ -16,7 +16,7 @@ const CardDetails = ({ card, email, openNeedPaymentPlanModal }) => {
           {card.expiration.year}
         </span>
         <span>Receipts sent to: {email}</span>
-        <button onClick={openNeedPaymentPlanModal}>Edit</button>
+        <button onClick={openNeedPaymentPlanModal}>{payment ? 'Edit' : 'Add' }</button>
       </CardDetailsWrapper>
     </div>
   );

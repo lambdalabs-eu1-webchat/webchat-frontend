@@ -10,6 +10,7 @@ const PaymentMethod = ({ payment, openNeedPaymentPlanModal }) => {
       <PaymentMethodWrapper>
         <h1>Billing</h1>
         <CardDetails
+          payment={payment}
           card={payment.card}
           email={payment.customer.email}
           openNeedPaymentPlanModal={openNeedPaymentPlanModal}
