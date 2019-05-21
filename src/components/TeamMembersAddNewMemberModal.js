@@ -67,16 +67,13 @@ const TeamMembersAddNewMemberModal = ({
     }
   };
 
-
-  const showModal = () => {
-    this.setState({
-      ...this.state,
-      show: !this.state.show
-    });
-  }
   return (
+  
     <AddOuterWrapper>
-      <input type="button" onClick= {this.showModal} value="User Roles" />
+      <TeamModal>
+       This msg is from modal 
+      </TeamModal>
+
       <AddMembersModalWrapper className={showHideClassName}>
         <section className="modal-main">
           <button type="button" id="close" onClick={handleHideModal}>
@@ -107,19 +104,11 @@ const TeamMembersAddNewMemberModal = ({
           <p id="add-member-message" />
         </section>
       </AddMembersModalWrapper>
-
-      <TeamModal show={this.state.show}>
-             This msg is from modal 
-      </TeamModal>
     </AddOuterWrapper>
   );
 };
 
 export default TeamMembersAddNewMemberModal;
-
-const TeamModals = styled.div`
-
-`;
 
 const AddOuterWrapper = styled.div`
   .display-block {
