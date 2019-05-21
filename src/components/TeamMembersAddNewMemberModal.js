@@ -41,7 +41,7 @@ const TeamMembersAddNewMemberModal = ({
         if (password.length > 3) {
           const res = await createUser(name, email, password, 'receptionist');
           if (res.message) {
-            handleFlash(messages.duplicateEmail);
+            handleFlash(res.message);
           } else {
             setTimeout(handleHideModal, 800);
             userInfo.parentNode.childNodes.forEach(childNode => {
