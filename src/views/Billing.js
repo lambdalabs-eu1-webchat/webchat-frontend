@@ -182,12 +182,10 @@ export default connect(
 
 const BillingWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   min-height: 730px;
   h1 {
     font-size: ${theme.fontSize.l};
     padding: 1.5rem 0;
-    //width: 60%;
     color: ${theme.color.textColor};
     @media (max-width: 1000px) {
       width: 90%;

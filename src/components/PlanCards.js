@@ -40,7 +40,7 @@ export default PlanCards;
 const PlanCardWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  padding-top: 4rem;
+  padding-top: 6rem;
   margin: 2rem;
   @media (max-width: 1400px) {
     padding-top: 0;
