@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { validate } from 'email-validator';
 import styled from 'styled-components';
 import theme from './../theme/styledTheme';
 
@@ -90,6 +91,15 @@ class EmployeeSettings extends React.Component {
     }
   };
 
+  validateEmail = () => {
+    if (validate(this.state.employeeChanges.email)) {
+      return true;
+    } else {
+      this.resetUser();
+      this.setFlashMessage(messages.validEmail);
+    }
+  };
+
   fireUserUpdates = async () => {
     const employeeChanges = this.state.employeeChanges;
     if (
@@ -99,7 +109,8 @@ class EmployeeSettings extends React.Component {
             employeeChanges.password,
             employeeChanges.passwordConf,
           ))) &&
-      this.checkEligibileUpdates()
+      this.checkEligibileUpdates() &&
+      this.validateEmail()
     ) {
       const userUpdates = this.state.employeeChanges;
       const res = await this.props.updateUser(
