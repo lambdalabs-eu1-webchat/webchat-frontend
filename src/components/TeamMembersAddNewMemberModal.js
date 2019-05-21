@@ -5,8 +5,6 @@ import { validate } from 'email-validator';
 import { messages } from '../utils/messages';
 import theme from './../theme/styledTheme';
 import Spinner from '../components/reusable/Spinner';
-import TeamModal from './TeamModal'
-
 
 const TeamMembersAddNewMemberModal = ({
   createUser,
@@ -70,9 +68,6 @@ const TeamMembersAddNewMemberModal = ({
   return (
   
     <AddOuterWrapper>
-      <TeamModal>
-       This msg is from modal 
-      </TeamModal>
 
       <AddMembersModalWrapper className={showHideClassName}>
         <section className="modal-main">
