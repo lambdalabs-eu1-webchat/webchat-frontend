@@ -7,6 +7,7 @@ import theme from './../theme/styledTheme';
 import Spinner from '../components/reusable/Spinner';
 import TeamModal from './TeamModal'
 
+
 const TeamMembersAddNewMemberModal = ({
   createUser,
   modalShown,
@@ -66,8 +67,16 @@ const TeamMembersAddNewMemberModal = ({
     }
   };
 
+
+  const showModal = () => {
+    this.setState({
+      ...this.state,
+      show: !this.state.show
+    });
+  }
   return (
     <AddOuterWrapper>
+      <input type="button" onClick= {this.showModal} value="User Roles" />
       <AddMembersModalWrapper className={showHideClassName}>
         <section className="modal-main">
           <button type="button" id="close" onClick={handleHideModal}>
@@ -99,14 +108,18 @@ const TeamMembersAddNewMemberModal = ({
         </section>
       </AddMembersModalWrapper>
 
-      <TeamModal>
-
+      <TeamModal show={this.state.show}>
+             This msg is from modal 
       </TeamModal>
     </AddOuterWrapper>
   );
 };
 
 export default TeamMembersAddNewMemberModal;
+
+const TeamModals = styled.div`
+
+`;
 
 const AddOuterWrapper = styled.div`
   .display-block {
