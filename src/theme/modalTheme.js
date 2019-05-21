@@ -7,6 +7,10 @@ const modalTheme = {
     left: 0,
     right: 0,
     bottom: 0,
+    background: 'rgba(0, 0, 0, 0.6)',
+    zIndex: 55,
+    width: '100%',
+    height: '100%',
   },
   restrictedContent: {
     position: 'absolute',
@@ -17,10 +21,10 @@ const modalTheme = {
     width: '500px',
     maxHeight: '100%',
     height: '200px',
-    margin: '0 1rem',
     backgroundColor: theme.color.offWhite,
     boxShadow: theme.shadow.cardShadow,
     fontFamily: theme.font.fontFamily,
+    border: 'none',
   },
   translateContent: {
     position: 'absolute',
@@ -37,7 +41,7 @@ const modalTheme = {
     fontFamily: theme.font.fontFamily,
   },
   paymentContent: {
-    position: 'fixed',
+    position: 'absolute',
     top: '50%',
     left: '50%',
     right: '50%',
