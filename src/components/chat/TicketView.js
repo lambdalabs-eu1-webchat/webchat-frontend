@@ -8,6 +8,7 @@ import theme from '../../theme/styledTheme';
 import styled from 'styled-components';
 import Spinner from '../../components/reusable/Spinner';
 
+import titleCase from '../../utils/titleCase';
 const filterTickets = (tickets, filterCond) => {
   return tickets.filter(ticket => ticket.status === filterCond);
 };
@@ -43,13 +44,16 @@ const TicketView = ({
                   key={chat._id}
                 >
                   <StyledDiv>
-                    <HeaderStyle>Guest Name: {chat.guest.name}</HeaderStyle>
+                    <HeaderStyle>
+                      Guest Name: {titleCase(chat.guest.name)}
+                    </HeaderStyle>
                     <HeaderStyle>Room Number: {chat.room.name}</HeaderStyle>
                     {filterTickets(chat.tickets, status).map(ticket => {
                       return (
                         <div key={ticket._id}>
                           <div>
                             Last message:
+                            <span />
                             {ticket.messages[ticket.messages.length - 1].text}
                           </div>
                         </div>
@@ -90,7 +94,11 @@ const StyledDiv = styled.div`
   border-radius: 4px;
   color: white;
   font-weight: ${theme.fontWeight.light};
-  font-size: ${theme.fontSize.xxs};
+  font-size: ${theme.fontSize.message};
+
+  span {
+    padding-left: 5px;
+  }
   &:hover {
     cursor: pointer;
     background: ${theme.color.hoverPurple};

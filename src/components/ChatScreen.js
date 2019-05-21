@@ -7,9 +7,8 @@ import theme from '../theme/styledTheme';
 import Messages from './Messages';
 import ChatScreenHeader from './ChatScreenHeader';
 import MessageComposer from './MessageComposer';
-import Button from '@material-ui/core/Button';
 import { SOCKET } from '../utils/paths';
-import { ACTIVE, QUEUED } from '../utils/ticketStatus';
+import { ACTIVE, QUEUED, CLOSED } from '../utils/ticketStatus';
 import {
   setCurrentChatId,
   translate,
@@ -57,21 +56,19 @@ class ChatScreen extends React.Component {
       return msg.text;
     });
     // translate message from guest
-    const translatedText = await translate(textToTranslate, ticket_id);
+    this.props.translate(textToTranslate, ticket_id, this.props.chat._id);
 
-    this.setState({ translatedMessages: translatedText });
+    // this.setState({ translatedMessages: translatedText });
 
-    const firstTranslatedText = translatedText[0];
-    const chat_id = this.props.chat._id;
+    // const firstTranslatedText = translatedText[0];
+    // const chat_id = this.props.chat._id;
     // get language from first translated message to state
-
-    this.props.updateTicketLanguage(
-      chat_id,
-      firstTranslatedText.detectedSourceLanguage
-    );
+    // this.props.updateTicketLanguage(
+    //   chat_id,
+    //   firstTranslatedText.detectedSourceLanguage,
+    // );
     // open modal with translated messages
-    this.openTranslateModal();
-
+    // this.openTranslateModal();
   };
 
   render() {
@@ -79,18 +76,22 @@ class ChatScreen extends React.Component {
     const lastTicket = chat.tickets[this.props.chat.tickets.length - 1];
 
     return (
-      <StyledChatScreen>
-        <ChatScreenHeader
-          guest_name={chat.guest.name}
-          room_name={chat.room.name}
-        />
-        <Messages
-          userType={currentUser.user_type}
-          status={status}
-          tickets={chat.tickets}
-          guest={chat.guest}
-        />
-        {chat.typingUser ? <p>{chat.typingUser.name} is typing</p> : null}
+      <StyledChatScreen status={status}>
+        <div className="top-group">
+          <ChatScreenHeader
+            guest_name={chat.guest.name}
+            room_name={chat.room.name}
+          />
+          <Messages
+            userType={currentUser.user_type}
+            status={status}
+            tickets={chat.tickets}
+            guest={chat.guest}
+          />
+          {chat.typingUser ? (
+            <p className="typing">{chat.typingUser.name} is typing...</p>
+          ) : null}
+        </div>
         {ACTIVE === status ? (
           <React.Fragment>
             <MessageComposer
@@ -98,14 +99,16 @@ class ChatScreen extends React.Component {
               last_ticket_id={lastTicket._id}
               language={lastTicket.language}
             />
-            <Button onClick={this.closeTicket}>Close Ticket</Button>
-            <Button onClick={this.translateMessage}>Translate</Button>
+            <StyledChatButtons>
+              <button onClick={this.closeTicket}>Close Ticket</button>
+              <button onClick={this.translateMessage}>Translate</button>
+            </StyledChatButtons>
           </React.Fragment>
         ) : null}
         {QUEUED === status ? (
           <React.Fragment>
-            <StyledJoinButton onClick={this.joinChat}>
-              Join Chat
+            <StyledJoinButton>
+              <button onClick={this.joinChat}>Join Chat</button>
             </StyledJoinButton>
           </React.Fragment>
         ) : null}
@@ -163,19 +166,69 @@ const StyledChatScreen = styled.div`
   justify-content: space-between;
   height: 100%;
   background-color: ${theme.color.white};
+  .top-group {
+    height: ${props => (props.status === CLOSED ? '100%' : '90%')};
+
+    display: flex;
+    flex-direction: column;
+  }
+  .typing {
+    font-size: ${theme.fontSize.message};
+    font-style: italic;
+    padding-left: 1rem;
+  }
 `;
 
-const StyledJoinButton = styled.button`
-  margin: 2rem;
-  border-radius: 0.5rem;
-  background-color: ${theme.color.accentGreen};
-  color: ${theme.color.white};
-  font-weight: ${theme.fontWeight.bolder};
-  width: 95%;
-  align-item: center;
-  padding: 1.5rem;
+const StyledChatButtons = styled.div`
+  button {
+    width: 100%;
+    height: ${theme.button.smallButton};
+    font-size: ${theme.fontSize.xxs};
+    border-radius: ${theme.border.radius};
+    background: ${theme.color.accentGreen};
+    border: none;
+    text-transform: ${theme.textTransform.uppercase};
+    color: ${theme.color.white};
+    font-weight: ${theme.fontWeight.bold};
+    margin-bottom: 15px;
+    box-shadow: ${theme.shadow.buttonShadow};
+    &:hover {
+      box-shadow: ${theme.shadow.buttonHover};
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    &:focus {
+      outline: none;
+    }
+    &:last-child {
+      margin: 0;
+    }
+    @media (max-width: 800px) {
+      height: ${theme.button.height};
+      font-size: ${theme.fontSize.xs};
+    }
+  }
+`;
+
+const StyledJoinButton = styled.div`
+  button {
+    margin-top: 1.5rem;
+    border-radius: 5px;
+    background-color: ${theme.color.accentGreen};
+    color: ${theme.color.white};
+    font-weight: ${theme.fontWeight.bold};
+    font-size: ${theme.fontSize.xxs};
+    width: 100%;
+    align-item: center;
+    height: ${theme.button.smallButton};
+    text-transform: uppercase;
+    @media (max-width: 800px) {
+      font-size: ${theme.fontSize.xs};
+      height: ${theme.button.height};
+    }
+  }
 `;
 export default connect(
   mapStateToProps,
-  { setCurrentChatId, updateTicketLanguage },
+  { setCurrentChatId, updateTicketLanguage, translate },
 )(ChatScreen);

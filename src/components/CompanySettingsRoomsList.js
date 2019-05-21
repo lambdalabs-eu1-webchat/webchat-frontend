@@ -100,8 +100,9 @@ const CompanySettingsRoomsListWrapper = styled.div`
 
 const AddRooms = styled.section`
   display: flex;
+  justify-content: space-between;
   align-items: baseline;
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     max-width: 100%;
     flex-direction: column;
   }
@@ -114,9 +115,12 @@ const AddRooms = styled.section`
     font-size: ${theme.fontSize.xs};
     padding: 20px 0;
     border-radius: 0;
-    width: 100%;
+    width: 70%;
     &:focus {
       outline: none;
+    }
+    @media(max-width: 800px) {
+      width: 100%;
     }
   }
 
@@ -135,6 +139,7 @@ const AddRooms = styled.section`
     &:hover {
       box-shadow: ${theme.shadow.buttonHover};
       cursor: pointer;
+      transition: all 0.3s ease;
     }
     &:focus {
       outline: none;
@@ -142,8 +147,6 @@ const AddRooms = styled.section`
     @media (max-width: 800px) {
       height: ${theme.button.height};
       font-size: ${theme.fontSize.xs};
-    }
-    @media (max-width: 600px) {
       width: 100%;
       margin: 0 0 2rem;
     }

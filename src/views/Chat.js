@@ -9,7 +9,7 @@ import { fetchClosedChats } from '../store/actions/chat';
 
 class Chat extends React.Component {
   state = {
-    selectedTab: ACTIVE
+    selectedTab: ACTIVE,
   };
   setSelectedTab = option => {
     if (option === CLOSED) {
@@ -61,7 +61,7 @@ const StyledChat = styled.div`
   flex-direction: row;
   @media (max-width: 800px) {
     flex-direction: column;
-        margin: 0;
+    margin: 0;
   }
 `;
 const ChatListWrapper = styled.div`
@@ -74,11 +74,10 @@ const ChatListWrapper = styled.div`
   box-shadow: 0 16px 48px rgba(32, 41, 50, 0.21);
   @media (max-width: 800px) {
     width: 100%;
-    height: auto;
+    max-height: 600px;
     box-shadow: none;
     margin: 0;
     padding: 30px;
-    overflow-y: scroll;
   }
 `;
 
@@ -121,11 +120,11 @@ const mapStateToProps = state => {
     closedChats: chats.closedChats,
     currentChat,
     status,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchClosedChats }
+  { fetchClosedChats },
 )(Chat);

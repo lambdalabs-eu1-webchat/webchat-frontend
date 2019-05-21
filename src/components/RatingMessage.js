@@ -20,17 +20,17 @@ RatingMessage.propTypes = {
 };
 
 const StyledRatingMessage = styled.div`
-  padding: 1rem 0;
-    
-    .far {
-      color: ${theme.color.accentPurple};
-      font-size: ${theme.fontSize.m};
-    }
-    
-    .fas {
-      color: ${theme.color.accentPurple};
-      font-size: ${theme.fontSize.m};
-    }
+  padding: 1rem 1rem;
+
+  .far {
+    color: ${theme.color.accentPurple};
+    font-size: ${theme.fontSize.m};
+  }
+
+  .fas {
+    color: ${theme.color.accentPurple};
+    font-size: ${theme.fontSize.m};
+  }
 `;
 
 export default RatingMessage;

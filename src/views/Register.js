@@ -16,9 +16,7 @@ class Register extends React.Component {
       name: '',
       email: '',
       password: '',
-      motto: '',
       hotelName: '',
-      hotelMotto: '',
     },
     flashMessage: messages.allRequiredFields,
   };
@@ -109,25 +107,11 @@ class Register extends React.Component {
               value={this.state.newUser.password}
               onChange={this.handleInput}
             />
-            <label>Motto</label>
-            <input
-              name="motto"
-              type="text"
-              value={this.state.newUser.motto}
-              onChange={this.handleInput}
-            />
             <label>Hotel Name*</label>
             <input
               name="hotelName"
               type="text"
               value={this.state.newUser.hotelName}
-              onChange={this.handleInput}
-            />
-            <label>Hotel Motto</label>
-            <input
-              name="hotelMotto"
-              type="text"
-              value={this.state.newUser.hotelMotto}
               onChange={this.handleInput}
             />
             <p>{this.state.flashMessage}</p>
@@ -208,11 +192,15 @@ const RegisterWrapper = styled.div`
         outline: none;
       }
     }
+    
+    p {
+      font-size: ${theme.fontSize.xxs};
+    }
 
     button {
       width: 100%;
       height: ${theme.button.height};
-      font-size: ${theme.fontSize.s};
+      font-size: ${theme.fontSize.xs};
       border-radius: ${theme.border.radius};
       background: ${theme.color.accentGreen};
       border: none;
@@ -224,6 +212,7 @@ const RegisterWrapper = styled.div`
       &:hover {
         box-shadow: ${theme.shadow.buttonHover};
         cursor: pointer;
+        transition: all 0.3s ease;
       }
     }
   }

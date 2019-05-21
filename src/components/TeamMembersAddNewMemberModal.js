@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { validate } from 'email-validator';
 
+import { messages } from '../utils/messages';
 import theme from './../theme/styledTheme';
 import Spinner from '../components/reusable/Spinner';
 
@@ -11,17 +13,20 @@ const TeamMembersAddNewMemberModal = ({
   plan,
   staffAmount,
   loading,
+  flashMessage,
+  handleFlash,
 }) => {
   const showHideClassName = modalShown
     ? 'modal display-block'
     : 'modal display-none';
 
-  const handleClick = (createUser, handleHideModal) => event => {
+  const handleClick = (createUser, handleHideModal) => async event => {
+    const userInfo = event.target;
     event.preventDefault();
     let name = '';
     let email = '';
     let password = '';
-    event.target.parentNode.childNodes.forEach(childNode => {
+    userInfo.parentNode.childNodes.forEach(childNode => {
       if (childNode.name === 'name') {
         name = childNode.value;
       } else if (childNode.name === 'email') {
@@ -30,30 +35,33 @@ const TeamMembersAddNewMemberModal = ({
         password = childNode.value;
       }
     });
-    let blank = false;
-    if (name && email && password) {
-      createUser(name, email, password, 'receptionist');
-      setTimeout(handleHideModal, 800);
-    } else {
-      blank = true;
-    }
 
-    if (blank) {
-      event.target.parentNode.childNodes.forEach(childNode => {
-        if (childNode.getAttribute('id') === 'add-member-message') {
-          childNode.textContent = 'Please fill in all the required fields.';
+    if (name && email && password) {
+      if (validate(email)) {
+        if (password.length > 3) {
+          const res = await createUser(name, email, password, 'receptionist');
+          if (!res.user) {
+            handleFlash(res.message);
+          } else {
+            handleHideModal();
+            userInfo.parentNode.childNodes.forEach(childNode => {
+              if (childNode.name === 'name') {
+                childNode.value = '';
+              } else if (childNode.name === 'email') {
+                childNode.value = '';
+              } else if (childNode.name === 'password') {
+                childNode.value = '';
+              }
+            });
+          }
+        } else {
+          handleFlash(messages.tempPasswordLength);
         }
-      });
+      } else {
+        handleFlash(messages.validEmail);
+      }
     } else {
-      event.target.parentNode.childNodes.forEach(childNode => {
-        if (childNode.name === 'name') {
-          childNode.value = '';
-        } else if (childNode.name === 'email') {
-          childNode.value = '';
-        } else if (childNode.name === 'password') {
-          childNode.value = '';
-        }
-      });
+      handleFlash(messages.allRequiredFields);
     }
   };
 
@@ -74,6 +82,7 @@ const TeamMembersAddNewMemberModal = ({
             name="password"
             placeholder="Default password..."
           />
+          <p id="flash-message">{flashMessage}</p>
           <button
             type="submit"
             onClick={handleClick(
@@ -119,6 +128,10 @@ const AddMembersModalWrapper = styled.div`
     font-size: ${theme.fontSize.xs};
     color: ${theme.color.accentPurple};
     padding: 1.5rem 0;
+  }
+  #flash-message {
+    font-size: ${theme.fontSize.xxs};
+    color: ${theme.color.textColor};
   }
   input {
     width: 100%;

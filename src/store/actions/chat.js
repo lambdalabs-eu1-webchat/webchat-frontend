@@ -20,6 +20,7 @@ const {
   CLEAR_CURRENT_TYPER,
   UPDATE_TICKET_LANGUAGE,
   TRANSLATE_CHATS_FAILURE,
+  ADD_TRANSLATED_TICKET,
 } = CHATS;
 
 export const saveSocket = socket => {
@@ -156,7 +157,37 @@ export const clearCurrentTyper = chat_id => {
   };
 };
 
-export const translate = async (text, ticket_id, language) => {
+export const translate = (
+  text,
+  ticket_id,
+  chat_id,
+  language,
+) => async dispatch => {
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: language
+      ? JSON.stringify({ text, ticket_id, language })
+      : JSON.stringify({ text, ticket_id }),
+  };
+
+  try {
+    const response = await fetch(`${DOMAIN}${TRANSLATE_CHAT}`, config);
+    const jsonResponse = await response.json();
+    dispatch(addTranslatedTicket(ticket_id, jsonResponse));
+    // return jsonResponse;
+    const lasrTranslatedText = jsonResponse[jsonResponse.length - 1];
+    dispatch(
+      updateTicketLanguage(chat_id, lasrTranslatedText.detectedSourceLanguage),
+    );
+  } catch (error) {
+    // dispatch(translateChatFailure(error));
+    console.error(error);
+  }
+};
+export const translateMessage = async (text, ticket_id, language) => {
   const config = {
     method: 'POST',
     headers: {
@@ -184,6 +215,14 @@ export const updateTicketLanguage = (chat_id, language) => {
     payload: language,
   };
 };
+
+export function addTranslatedTicket(ticket_id, messages) {
+  return {
+    type: ADD_TRANSLATED_TICKET,
+    target: ticket_id,
+    payload: messages,
+  };
+}
 
 export const translateChatFailure = error => {
   if (!error) {
