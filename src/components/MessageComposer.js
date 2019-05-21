@@ -25,6 +25,7 @@ class MessageComposer extends React.Component {
     try {
       const { socket, chat_id, last_ticket_id, language } = this.props;
       // translate hotel staff message based on language from guest message
+      debugger;
       const translatedInputValue = await translateMessage(
         this.state.inputValue,
         last_ticket_id,

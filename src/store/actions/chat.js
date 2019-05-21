@@ -174,7 +174,9 @@ export const translate = (
     dispatch(addTranslatedTicket(ticket_id, jsonResponse));
     // return jsonResponse;
     const lasrTranslatedText = jsonResponse[jsonResponse.length - 1];
-    updateTicketLanguage(chat_id, lasrTranslatedText.detectedSourceLanguage);
+    dispatch(
+      updateTicketLanguage(chat_id, lasrTranslatedText.detectedSourceLanguage),
+    );
   } catch (error) {
     // dispatch(translateChatFailure(error));
     console.error(error);
