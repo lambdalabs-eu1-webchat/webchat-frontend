@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { SOCKET } from '../utils/paths';
 import { translate } from '../store/actions/chat';
-import theme from '../theme/styledTheme'
+import theme from '../theme/styledTheme';
 
 class MessageComposer extends React.Component {
   state = {
@@ -20,7 +20,9 @@ class MessageComposer extends React.Component {
     socket.emit(SOCKET.STOPPED_TYPING, chat_id);
     this.setInputValue('');
   };
-
+  handleEnter = event => {
+    if ('Enter' === event.key) this.handleSend();
+  };
   translateSend = async () => {
     try {
       const { socket, chat_id, last_ticket_id, language } = this.props;
@@ -29,7 +31,7 @@ class MessageComposer extends React.Component {
       const translatedInputValue = await translate(
         this.state.inputValue,
         last_ticket_id,
-        language
+        language,
       );
 
       socket.emit(SOCKET.MESSAGE, {
@@ -66,11 +68,17 @@ class MessageComposer extends React.Component {
           value={this.state.inputValue}
           onChange={this.handleInput}
           className="flex"
+          onKeyPress={this.handleEnter}
         />
         <StyledMessageComposerSendButton onClick={this.handleSend}>
-        <span  className="fas fa-paper-plane" />
+          <span className="fas fa-paper-plane" />
         </StyledMessageComposerSendButton>
-        <button className="translate-and-send" onClick={() => this.translateSend()}>Translate & Send</button>
+        <button
+          className="translate-and-send"
+          onClick={() => this.translateSend()}
+        >
+          Translate & Send
+        </button>
       </StyledMessageComposer>
     );
   }
@@ -103,7 +111,7 @@ const StyledMessageComposer = styled.div`
       outline: none;
     }
   }
-  
+
   .translate-and-send {
     border: none;
     border-radius: 5px;
@@ -117,14 +125,13 @@ const StyledMessageComposer = styled.div`
     &:focus {
       outline: none;
     }
-    
+
     &:hover {
-    cursor: pointer;
-    box-shadow: ${theme.shadow.buttonHover};
-    transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: ${theme.shadow.buttonHover};
+      transition: all 0.3s ease;
     }
   }
-
 `;
 const StyledMessageComposerSendButton = styled.button`
   border: none;
@@ -132,7 +139,7 @@ const StyledMessageComposerSendButton = styled.button`
   &:focus {
     outline: none;
   }
-  
+
   button {
     border: none;
     background: none;
@@ -141,7 +148,7 @@ const StyledMessageComposerSendButton = styled.button`
       outline: none;
     }
   }
-  
+
   .fa-paper-plane {
     background: none;
     background: transparent;
@@ -165,5 +172,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {}
+  {},
 )(MessageComposer);
