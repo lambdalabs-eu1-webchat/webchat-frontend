@@ -7,7 +7,7 @@ import theme from './../theme/styledTheme';
 
 import EmployeeSettingsForm from '../components/EmployeeSettingsForm';
 import { updateUser } from '../store/actions/users';
-import Restricted from '../components/reusable/RestrictedModal';
+import { messages } from '../utils/messages';
 
 class EmployeeSettings extends React.Component {
   state = {
@@ -16,9 +16,8 @@ class EmployeeSettings extends React.Component {
       email: this.props.employee.email,
       password: '',
       passwordConf: '',
-      nameEmailModalOpen: false,
-      passwordsModalOpen: false,
     },
+    flashMessage: '',
   };
 
   handleInputChange = event => {
@@ -41,17 +40,10 @@ class EmployeeSettings extends React.Component {
     });
   };
 
-  openPasswordsModal = () => {
-    this.setState({ passwordsModalOpen: true });
-  };
-
-  openNameEmailModal = () => {
-    this.setState({ nameEmailModalOpen: true });
-  };
-
-  closeRestrictedModal = () => {
-    this.setState({ passwordsModalOpen: false });
-    this.setState({ nameEmailModalOpen: false });
+  setFlashMessage = flashMessage => {
+    this.setState({
+      flashMessage,
+    });
   };
 
   checkPasswordMatch = (password, passwordRetype) => {
@@ -65,7 +57,7 @@ class EmployeeSettings extends React.Component {
           passwordConf: '',
         },
       });
-      this.openPasswordsModal();
+      this.setFlashMessage(messages.passwordMatch);
     }
   };
 
@@ -81,7 +73,7 @@ class EmployeeSettings extends React.Component {
           email: this.props.employee.email,
         },
       });
-      this.openNameEmailModal();
+      this.setFlashMessage(messages.nameAndEmail);
     }
   };
 
@@ -111,23 +103,8 @@ class EmployeeSettings extends React.Component {
           fireUserUpdates={this.fireUserUpdates}
           clearChanges={this.clearChanges}
           loading={this.props.loading}
+          flashMessage={this.state.flashMessage}
         />
-
-        {this.state.passwordsModalOpen && (
-          <Restricted
-            alert="Passwords must match"
-            isRestrictedModalOpen={this.state.passwordsModalOpen}
-            closeRestrictedModal={this.closeRestrictedModal}
-          />
-        )}
-
-        {this.state.nameEmailModalOpen && (
-          <Restricted
-            alert="Name and email cannot be blank"
-            isRestrictedModalOpen={this.state.nameEmailModalOpen}
-            closeRestrictedModal={this.closeRestrictedModal}
-          />
-        )}
       </EmployeeSettingsWrapper>
     );
   }
@@ -142,7 +119,6 @@ EmployeeSettings.propTypes = {
     token: PropTypes.string.isRequired,
     user_type: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    motto: PropTypes.string.isRequired,
   }).isRequired,
 };
 

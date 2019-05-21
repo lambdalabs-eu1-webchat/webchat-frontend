@@ -146,7 +146,7 @@ export const updateUserSuccess = updatedUser => {
   return {
     type: UPDATE_USER_SUCCESS,
     payload: {
-      updatedUser,
+      updatedCurrentUser,
     },
   };
 };

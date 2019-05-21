@@ -11,6 +11,7 @@ const EmployeeSettingsForm = ({
   fireUserUpdates,
   clearChanges,
   loading,
+  flashMessage,
 }) => {
   return (
     <div>
@@ -42,6 +43,7 @@ const EmployeeSettingsForm = ({
           onChange={handleInputChange}
           placeholder="retype new password"
         />
+        <p>{flashMessage}</p>
      
         <div className="form-buttons">
           <button type="submit" onClick={fireUserUpdates}>
@@ -60,13 +62,12 @@ EmployeeSettingsForm.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
   fireUserUpdates: PropTypes.func.isRequired,
   clearChanges: PropTypes.func.isRequired,
+  flashMessage: PropTypes.string.isRequired,
   employeeChanges: PropTypes.shape({
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     passwordConf: PropTypes.string.isRequired,
-    nameEmailModalOpen: PropTypes.bool.isRequired,
-    passwordsModalOpen: PropTypes.bool.isRequired,
   }).isRequired,
   loading: PropTypes.object.isRequired,
 };
