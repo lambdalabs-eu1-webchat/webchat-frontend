@@ -12,6 +12,7 @@ const TeamMembersList = props => {
         <h4>Email</h4>
         <h4>Admin</h4>
         <h4>Remove</h4>
+        <h4>Role Description</h4>
       </ListHeader>
       {props.users.map(user => (
         <TeamMember
