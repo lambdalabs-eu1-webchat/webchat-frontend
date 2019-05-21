@@ -40,7 +40,7 @@ const TeamMembersAddNewMemberModal = ({
       if (validate(email)) {
         if (password.length > 3) {
           const res = await createUser(name, email, password, 'receptionist');
-          if (res.message) {
+          if (!res.user) {
             handleFlash(res.message);
           } else {
             handleHideModal();
