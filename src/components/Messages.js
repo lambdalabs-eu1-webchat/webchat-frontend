@@ -7,6 +7,7 @@ import Message from './Message';
 import RatingMessage from './RatingMessage';
 import { ADMIN, SUPER_ADMIN } from '../utils/userTypes';
 import { CLOSED } from '../utils/ticketStatus';
+import titleCase from '../utils/titleCase';
 
 class Messages extends React.Component {
   // pass in 'smooth' for smooth scroll
@@ -34,7 +35,7 @@ class Messages extends React.Component {
       >
         {tickets.map((ticket, i) => (
           <div>
-            <p>{`${guestName}'s ticket # ${i + 1}`}</p>
+            <p>{`${titleCase(guestName)}'s ticket # ${i + 1}`}</p>
             <p>{`Status: ${ticket.status}`}</p>
             {status === CLOSED &&
             (userType === ADMIN || userType === SUPER_ADMIN) ? (
