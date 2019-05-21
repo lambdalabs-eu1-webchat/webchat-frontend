@@ -29,16 +29,17 @@ export default class TeamModal extends React.Component {
                 <br></br> Super Admin</h2>
                 <ul>
                 <li><i className="fas fa-check"></i>Unlimited access</li>
-                  <li><i className="fas fa-check"></i>Can register</li>
-                  <li><i className="fas fa-check"></i>Add team members</li>
-                  <li><i className="fas fa-check"></i>Add rooms</li>
+                  <li><i className="fas fa-check"></i>Can register new company</li>
+                  <li><i className="fas fa-check"></i>Can Add team members</li>
+                  <li><i className="fas fa-check"></i>Can Add rooms</li>
                   <li><i className="fas fa-check"></i>Change company settings</li>
+                  <li><i className="fas fa-check"></i>Can monitor everyone</li>
                 </ul>
               </div>
 
               <div className="pricing-card">
               <h2><i className="fas fa-user"></i>
-                <br></br> Admin</h2>
+                <br></br> Admin / Manager</h2>
                 <ul>
                   <li><i className="fas fa-check"></i>Restricted access</li>
                   <li><i className="fas fa-check"></i>Can not remove Admins</li>
@@ -56,7 +57,7 @@ export default class TeamModal extends React.Component {
                   <li><i className="fas fa-check"></i>Live chat with guests</li>
                   <li><i className="fas fa-check"></i>Check guests in and out</li>
                   <li><i className="fas fa-check"></i>Track ticket status</li>
-                  <li><i className="fas fa-check"></i>Change their settings</li>
+                  <li><i className="fas fa-check"></i>Change their own settings</li>
                 </ul>
               </div>
             </div>
