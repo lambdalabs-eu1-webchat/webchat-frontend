@@ -117,6 +117,8 @@ class CompanySettings extends React.Component {
     } else {
       // split the string into an array of room names on the comma separator
       // trim whitespace at the start and end of each string
+      // remove any rooms that resolve to empty after formatting
+      // open restriction modal if addRoom length is zero after room removal
       const roomsToAdd = rooms
         .split(',')
         .map(room => ({ name: room.trim() }))
