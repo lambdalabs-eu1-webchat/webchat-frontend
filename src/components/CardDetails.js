@@ -3,18 +3,20 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
 
-const CardDetails = ({ card, email, handleModalSwitch }) => {
+const CardDetails = ({ card, email, openNeedPaymentPlanModal }) => {
   return (
     <div>
       <CardDetailsWrapper>
         <h3>Credit card information</h3>
         <span>Card: {card.brand}</span>
-        <span>Last four digits: ... {card.last_four}</span>
+        <span>Last four digits: {card.last_four}</span>
         <span>
-          Expiration: {card.expiration.month}/{card.expiration.year}
+          Expiration: {card.expiration.month}
+          {card.brand === '' ? '' : '/'}
+          {card.expiration.year}
         </span>
         <span>Receipts sent to: {email}</span>
-        <button onClick={handleModalSwitch}>Edit</button>
+        <button onClick={openNeedPaymentPlanModal}>Edit</button>
       </CardDetailsWrapper>
     </div>
   );
@@ -25,12 +27,12 @@ CardDetails.propTypes = {
     brand: PT.string.isRequired,
     last_four: PT.string.isRequired,
     expiration: PT.shape({
-      month: PT.number.isRequired,
-      year: PT.number.isRequired,
-    }).isRequired,
+      month: PT.isRequired,
+      year: PT.isRequired
+    }).isRequired
   }).isRequired,
   email: PT.string.isRequired,
-  handleModalSwitch: PT.func.isRequired,
+  openNeedPaymentPlanModal: PT.func.isRequired
 };
 
 export default CardDetails;
@@ -46,7 +48,7 @@ const CardDetailsWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   @media (max-width: 600px) {
-  max-width: 100%;
+    max-width: 100%;
   }
 
   h3 {
@@ -82,9 +84,9 @@ const CardDetailsWrapper = styled.div`
       outline: none;
     }
     @media (max-width: 600px) {
-    width: 100%;
-    height: ${theme.button.height};
-    font-size: ${theme.fontSize.xs};
+      width: 100%;
+      height: ${theme.button.height};
+      font-size: ${theme.fontSize.xs};
     }
   }
 `;

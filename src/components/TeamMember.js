@@ -61,20 +61,26 @@ const TeamMember = ({
   };
   return (
     <HotelStaffWrapper>
-      <p><label>Name:</label>{name}</p>
-      <p><label>Email:</label>{email}</p>
+      <p>
+        <label>Name:</label>
+        {name}
+      </p>
+      <p>
+        <label>Email:</label>
+        {email}
+      </p>
       <div className="checkbox-container">
         <label>Admin:</label>
         <input
-            type="checkbox"
-            checked={isAdmin}
-            disabled={user_type === 'super admin'}
-            onChange={handleAdminPromotion(
-                changeUserType,
-                userId,
-                currentUser,
-                user_type,
-            )}
+          type="checkbox"
+          checked={isAdmin}
+          disabled={user_type === 'super admin'}
+          onChange={handleAdminPromotion(
+            changeUserType,
+            userId,
+            currentUser,
+            user_type,
+          )}
         />
       </div>
 
@@ -120,32 +126,32 @@ const HotelStaffWrapper = styled.div`
     border-radius: ${theme.border.radius};
     margin: 1.5rem 0;
   }
-  
+
   label {
     display: none;
     @media (max-width: 600px) {
-    display: inline-flex;
-    padding-right: 1rem;
-    font-size: ${theme.fontSize.xs};
-    color: ${theme.color.accentPurple};
+      display: inline-flex;
+      padding-right: 1rem;
+      font-size: ${theme.fontSize.xs};
+      color: ${theme.color.accentPurple};
     }
   }
-  
+
   p {
     width: 20rem;
     font-size: ${theme.fontSize.xs};
     @media (max-width: 600px) {
-    width: 100%;
-    padding: 1.5rem;
-    border-bottom: 1px solid ${theme.color.footerText};
+      width: 100%;
+      padding: 1.5rem;
+      border-bottom: 1px solid ${theme.color.footerText};
     }
   }
-  
+
   input {
     padding-left: 1.5rem;
     margin: 0 auto;
     align-self: center;
-    vertical-align:middle;
+    vertical-align: middle;
     text-align: center;
     font-size: 3rem;
     @media (max-width: 600px) {
@@ -155,7 +161,7 @@ const HotelStaffWrapper = styled.div`
     cursor: pointer;
     }
   }
-  
+
   .checkbox-container {
     width: 10rem;
     align-items: center;
@@ -164,13 +170,13 @@ const HotelStaffWrapper = styled.div`
       align-items: center;
       padding: 1.5rem;
       border-bottom: 1px solid ${theme.color.footerText};
-      
+
       label {
         align-self: center;
       }
     }
   }
-  
+
   .fa-trash-alt {
     color: ${theme.color.accentPurple};
     width: 20rem;
@@ -179,7 +185,7 @@ const HotelStaffWrapper = styled.div`
       width: 100%;
       padding: 1.5rem;
       text-align: center;
-      }
+    }
     &:last-child {
       width: 10rem;
     }

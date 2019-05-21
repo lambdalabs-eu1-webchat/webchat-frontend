@@ -6,11 +6,11 @@ const modalTheme = {
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0,
     background: 'rgba(0, 0, 0, 0.6)',
     zIndex: 55,
     width: '100%',
     height: '100%',
+    bottom: 0
   },
   restrictedContent: {
     position: 'absolute',
@@ -23,8 +23,8 @@ const modalTheme = {
     height: '200px',
     backgroundColor: theme.color.offWhite,
     boxShadow: theme.shadow.cardShadow,
-    fontFamily: theme.font.fontFamily,
     border: 'none',
+    fontFamily: theme.font.fontFamily
   },
   translateContent: {
     position: 'absolute',
@@ -38,7 +38,7 @@ const modalTheme = {
     margin: '1rem',
     backgroundColor: theme.color.offWhite,
     boxShadow: theme.shadow.cardShadow,
-    fontFamily: theme.font.fontFamily,
+    fontFamily: theme.font.fontFamily
   },
   paymentContent: {
     position: 'absolute',
@@ -49,11 +49,11 @@ const modalTheme = {
     transform: 'translate(-50%, -50%)',
     padding: '2rem',
     width: '450px',
-    height: '30%',
+    height: '40%',
     backgroundColor: theme.color.offWhite,
     boxShadow: theme.shadow.cardShadow,
-    fontFamily: theme.font.fontFamily,
-  },
+    fontFamily: theme.font.fontFamily
+  }
 };
 
 export default modalTheme;

@@ -7,7 +7,6 @@ import theme from './../theme/styledTheme';
 
 import { messages } from '../utils/messages';
 import { loginRequest } from '../store/actions/auth';
-import { APP_PATHS } from '../utils/paths';
 import Spinner from '../components/reusable/Spinner';
 
 class Login extends React.Component {

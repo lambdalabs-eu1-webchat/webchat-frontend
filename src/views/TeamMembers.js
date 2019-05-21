@@ -12,6 +12,7 @@ import {
 import { fetchSingleHotel } from '../store/actions/hotel';
 import TeamMembersList from '../components/TeamMembersList';
 import TeamMembersAddNewMemberModal from '../components/TeamMembersAddNewMemberModal';
+import Restricted from '../components/reusable/RestrictedModal';
 import styled from 'styled-components';
 import theme from './../theme/styledTheme';
 
@@ -20,6 +21,7 @@ class TeamMembers extends React.Component {
     super(props);
     this.state = {
       modalShown: false,
+      isModalOpen: false,
     };
     this.props = props;
     const { currentUser, dispatchFetchHotelStaff } = this.props;
@@ -30,8 +32,30 @@ class TeamMembers extends React.Component {
     this.props.dispatchFetchSingleHotel(this.props.currentUser.hotel_id);
   }
 
+  checkAddEligibility = () => {
+    const plan = this.props.hotel.plan;
+    const staffAmount = this.props.users.length;
+    if (plan === 'free' && staffAmount === 5) {
+      return false;
+    } else if (plan === 'pro' && staffAmount === 15) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  closeModal = () => {
+    this.setState({
+      isModalOpen: false,
+    });
+  };
+
   handleShowModal = () => {
-    this.setState({ modalShown: true });
+    if (this.checkAddEligibility()) {
+      this.setState({ modalShown: true });
+    } else {
+      this.setState({ isModalOpen: true });
+    }
   };
 
   handleHideModal = () => {
@@ -67,6 +91,13 @@ class TeamMembers extends React.Component {
             loading={this.props.loading}
           />
           <button onClick={this.handleShowModal}>Add Team Members</button>
+          {this.state.isModalOpen && (
+            <Restricted
+              alert="Please upgrade your account to add more users"
+              isRestrictedModalOpen={this.state.isModalOpen}
+              closeRestrictedModal={this.closeModal}
+            />
+          )}
         </TeamMembersWrapper>
       </TeamMembersOuterWrapper>
     );

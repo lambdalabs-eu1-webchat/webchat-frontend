@@ -80,7 +80,7 @@ const RoomWrapper = styled.div`
       transition: all 0.5s ease;
     }
   }
-  
+
   .fa-trash-alt {
     color: ${theme.color.accentPurple};
     font-size: ${theme.fontSize.m};

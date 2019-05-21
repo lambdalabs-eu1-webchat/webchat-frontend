@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -18,7 +18,7 @@ import { fetchRooms } from '../store/actions/rooms';
 
 // temp fix
 const style404 = {
-  minHeight: 'calc(100vh - 236px)',
+  minHeight: 'calc(100vh - 236px)'
 };
 
 function Router({
@@ -26,7 +26,7 @@ function Router({
   fetchRooms,
   hotelHasZeroRooms,
   currentUser,
-  gotRooms,
+  gotRooms
 }) {
   if (!user_type) {
     return (
@@ -126,18 +126,18 @@ function Router({
 }
 
 Router.propTypes = {
-  user_type: propTypes.string.isRequired,
+  user_type: propTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     hotelHasZeroRooms: state.rooms.hotelHasZeroRooms,
     gotRooms: state.rooms.initGotRooms,
-    currentUser: state.currentUser,
+    currentUser: state.currentUser
   };
 }
 
 export default connect(
   mapStateToProps,
-  { fetchRooms },
+  { fetchRooms }
 )(Router);

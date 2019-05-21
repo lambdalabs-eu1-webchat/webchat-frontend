@@ -6,11 +6,10 @@ import ChatsList from '../components/chat/ChatsList';
 import Tabs from '../components/reusable/Tabs';
 import { QUEUED, ACTIVE, CLOSED } from '../utils/ticketStatus';
 import { fetchClosedChats } from '../store/actions/chat';
-import theme from '../theme/styledTheme';
 
 class Chat extends React.Component {
   state = {
-    selectedTab: ACTIVE,
+    selectedTab: ACTIVE
   };
   setSelectedTab = option => {
     if (option === CLOSED) {
@@ -122,11 +121,11 @@ const mapStateToProps = state => {
     closedChats: chats.closedChats,
     currentChat,
     status,
-    currentUser: state.currentUser,
+    currentUser: state.currentUser
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchClosedChats },
+  { fetchClosedChats }
 )(Chat);
