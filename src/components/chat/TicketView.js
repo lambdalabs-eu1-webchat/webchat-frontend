@@ -38,7 +38,7 @@ const TicketView = ({
                   return (
                     <div key={ticket._id}>
                       <div>
-                        Last message:
+                        Last message:<span/>
                         {ticket.messages[ticket.messages.length - 1].text}
                       </div>
                     </div>
@@ -77,7 +77,11 @@ const StyledDiv = styled.div`
   border-radius: 4px;
   color: white;
   font-weight: ${theme.fontWeight.light};
-  font-size: ${theme.fontSize.xxs};
+  font-size: ${theme.fontSize.message};
+  
+  span {
+    padding-left: 5px;
+  }
   &:hover {
     cursor: pointer;
     background: ${theme.color.hoverPurple};

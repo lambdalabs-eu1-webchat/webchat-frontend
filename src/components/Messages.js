@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { translate } from '../store/actions/chat';
+import theme from './.././theme/styledTheme';
+
 import Message from './Message';
 import RatingMessage from './RatingMessage';
 import { ADMIN, SUPER_ADMIN } from '../utils/userTypes';
@@ -81,19 +83,27 @@ Messages.propTypes = {
           _id: propTypes.string.isRequired,
           sender: propTypes.shape({
             id: propTypes.string.isRequired,
-            name: propTypes.string.isRequired
+            name: propTypes.string.isRequired,
           }).isRequired,
-          text: propTypes.string.isRequired
-        })
+          text: propTypes.string.isRequired,
+        }),
       ),
-      status: propTypes.string.isRequired
-    })
+      status: propTypes.string.isRequired,
+    }),
   ).isRequired,
-  guest_id: propTypes.string.isRequired
+  guest_id: propTypes.string.isRequired,
 };
 
 const StyledMessages = styled.div`
   overflow-y: scroll;
+  margin-top: 1.5rem;
+
+  div {
+    p {
+      font-size: ${theme.fontSize.message};
+      margin: 0 1rem;
+    }
+  }
 `;
 
 function mapStateToProps(state) {
