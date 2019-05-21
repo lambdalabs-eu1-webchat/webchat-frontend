@@ -112,14 +112,18 @@ class CompanySettings extends React.Component {
 
   addRooms = () => {
     const rooms = this.state.newRooms;
-    if (!rooms.length) {
+    if (!rooms.length || rooms === ',') {
       this.setState({
         noRoomModalOpen: true,
+        newRooms: '',
       });
     } else {
       // split the string into an array of room names on the comma separator
       // trim whitespace at the start and end of each string
-      const roomsToAdd = rooms.split(',').map(room => ({ name: room.trim() }));
+      const roomsToAdd = rooms
+        .split(',')
+        .map(room => ({ name: room.trim() }))
+        .filter(room => room.name !== '');
       this.props.dispatchCreateRoomForHotel(roomsToAdd, this.props.hotel._id);
       this.clearNewRooms();
     }
