@@ -20,25 +20,29 @@ class MessageComposer extends React.Component {
     socket.emit(SOCKET.STOPPED_TYPING, chat_id);
     this.setInputValue('');
   };
-
+  handleEnter = event => {
+    if ('Enter' === event.key) this.handleSend();
+  };
   translateSend = async () => {
-    try {
-      const { socket, chat_id, last_ticket_id, language } = this.props;
-      // translate hotel staff message based on language from guest message
-      const translatedInputValue = await translateMessage(
-        this.state.inputValue,
-        last_ticket_id,
-        language,
-      );
-      socket.emit(SOCKET.MESSAGE, {
-        chat_id: this.props.chat_id,
-        // emit the translated message to chat
-        text: translatedInputValue,
-      });
-      socket.emit(SOCKET.STOPPED_TYPING, chat_id);
-      this.setInputValue('');
-    } catch (error) {
-      console.error(error);
+    if (this.state.inputValue) {
+      try {
+        const { socket, chat_id, last_ticket_id, language } = this.props;
+        // translate hotel staff message based on language from guest message
+        const translatedInputValue = await translateMessage(
+          this.state.inputValue,
+          last_ticket_id,
+          language,
+        );
+        socket.emit(SOCKET.MESSAGE, {
+          chat_id: this.props.chat_id,
+          // emit the translated message to chat
+          text: translatedInputValue,
+        });
+        socket.emit(SOCKET.STOPPED_TYPING, chat_id);
+        this.setInputValue('');
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -64,6 +68,7 @@ class MessageComposer extends React.Component {
           value={this.state.inputValue}
           onChange={this.handleInput}
           className="flex"
+          onKeyPress={this.handleEnter}
         />
         <StyledMessageComposerSendButton onClick={this.handleSend}>
           <span className="fas fa-paper-plane" />
