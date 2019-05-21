@@ -29,9 +29,12 @@ function PlanCheckout({
       isOpen={!isPayment}
       ariaHideApp={false}
     >
-      <StyledBtn onClick={backFromAddPaymentModal}>
-        <i class="fas fa-times-circle" />
+      <StyledBtn>
+        <button onClick={backFromAddPaymentModal}>
+          X
+        </button>
       </StyledBtn>
+
       <StripeProvider apiKey="pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF">
         <div>
           <Elements>
@@ -57,27 +60,33 @@ PlanCheckout.propTypes = {
 };
 
 const StyledBtn = styled.button`
+  background: none;
   border: none;
-  outline: none;
-  position: absolute;
-  right: 5px;
-
-  .fa-times-circle {
-    background: white;
-    border-radius: 50%;
-    padding: 2.5%;
-    color: ${theme.color.secondaryPurple};
-    font-size: 2.5rem;
-
-    &:hover {
-      box-shadow: ${theme.shadow.buttonHover};
-      cursor: pointer;
+  button {
+      border: none;
+      outline: none;
+      background: none;
+      color: ${theme.color.textColor};
+      width: 3rem;
+      height: 3rem;
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      font-size: ${theme.fontSize.s};
+      font-weight: bold;
+      text-align: center;
+      box-shadow: none;
+      margin: 0;
+      &:hover {
+        box-shadow: none;
+        color: ${theme.color.accentPurple};
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      &:focus {
+        outline: none;
+      }
     }
-  }
-
-  &:focus {
-    outline: none;
-  }
 `;
 
 export default PlanCheckout;
