@@ -157,7 +157,7 @@ class CompanySettings extends React.Component {
                 onChange={this.handleInputChange.bind(this)}
               />
               <div className="action-buttons">
-                <button onClick={this.handleRevert().bind(this)}>Revert</button>
+                <button onClick={this.handleRevert().bind(this)}>Cancel</button>
                 <button
                   onClick={this.handleSubmit(
                     hotel._id,
