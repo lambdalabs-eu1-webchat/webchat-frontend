@@ -104,13 +104,13 @@ const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: 2rem 0;
+  margin: 3rem 0;
   overflow: hidden;
 `;
 
 const StyledBtn = styled.button`
   width: 100%;
-  padding: 1rem;
+  height: ${theme.button.smallButton};
   font-size: ${theme.fontSize.xxs};
   border-radius: ${theme.border.radius};
   background: ${theme.color.accentGreen};
@@ -118,11 +118,12 @@ const StyledBtn = styled.button`
   text-transform: ${theme.textTransform.uppercase};
   color: ${theme.color.white};
   font-weight: ${theme.fontWeight.bold};
-  margin: 2rem 0;
+  margin: 2.5rem 0 1.5rem 0;
   box-shadow: ${theme.shadow.buttonShadow};
   &:hover {
     box-shadow: ${theme.shadow.buttonHover};
     cursor: pointer;
+    transition: all 0.3s ease;
   }
   &:focus {
     outline: none;

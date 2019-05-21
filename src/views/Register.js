@@ -204,11 +204,15 @@ const RegisterWrapper = styled.div`
         outline: none;
       }
     }
+    
+    p {
+      font-size: ${theme.fontSize.xxs};
+    }
 
     button {
       width: 100%;
       height: ${theme.button.height};
-      font-size: ${theme.fontSize.s};
+      font-size: ${theme.fontSize.xs};
       border-radius: ${theme.border.radius};
       background: ${theme.color.accentGreen};
       border: none;
@@ -220,6 +224,7 @@ const RegisterWrapper = styled.div`
       &:hover {
         box-shadow: ${theme.shadow.buttonHover};
         cursor: pointer;
+        transition: all 0.3s ease;
       }
     }
   }

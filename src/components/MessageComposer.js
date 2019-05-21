@@ -109,7 +109,7 @@ const StyledMessageComposer = styled.div`
     border-radius: 5px;
     background: ${theme.color.accentPurple};
     color: ${theme.color.white};
-    font-weight: bold;
+    font-weight: ${theme.fontWeight.bold};
     font-size: ${theme.fontSize.xxs};
     height: ${theme.button.smallButton};
     text-transform: uppercase;

@@ -157,7 +157,7 @@ class CompanySettings extends React.Component {
                 onChange={this.handleInputChange.bind(this)}
               />
               <div className="action-buttons">
-                <button onClick={this.handleRevert().bind(this)}>Revert</button>
+                <button className="cancel" onClick={this.handleRevert().bind(this)}>Cancel</button>
                 <button
                   onClick={this.handleSubmit(
                     hotel._id,
@@ -287,6 +287,7 @@ const CompanySettingsWrapper = styled.div`
         &:hover {
           box-shadow: ${theme.shadow.buttonHover};
           cursor: pointer;
+          transition: all 0.3s ease;
         }
         &:focus {
           outline: none;
@@ -306,6 +307,10 @@ const CompanySettingsWrapper = styled.div`
           height: ${theme.button.height};
           font-size: ${theme.fontSize.xs};
         }
+      }
+      
+      .cancel {
+        background: ${theme.color.accentPurple};
       }
     }
   }
