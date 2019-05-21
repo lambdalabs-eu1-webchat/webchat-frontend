@@ -5,6 +5,7 @@ import { validate } from 'email-validator';
 import { messages } from '../utils/messages';
 import theme from './../theme/styledTheme';
 import Spinner from '../components/reusable/Spinner';
+import TeamModal from './TeamModal'
 
 const TeamMembersAddNewMemberModal = ({
   createUser,
@@ -97,6 +98,10 @@ const TeamMembersAddNewMemberModal = ({
           <p id="add-member-message" />
         </section>
       </AddMembersModalWrapper>
+
+      <TeamModal>
+
+      </TeamModal>
     </AddOuterWrapper>
   );
 };
