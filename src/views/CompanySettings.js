@@ -12,7 +12,6 @@ import {
   createRoomForHotel,
 } from '../store/actions/rooms';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
-import Spinner from '../components/reusable/Spinner';
 
 class CompanySettings extends React.Component {
   constructor(props) {
@@ -157,7 +156,6 @@ class CompanySettings extends React.Component {
                 onChange={this.handleInputChange.bind(this)}
               />
               <div className="action-buttons">
-                <button onClick={this.handleRevert().bind(this)}>Cancel</button>
                 <button
                   onClick={this.handleSubmit(
                     hotel._id,
@@ -165,8 +163,9 @@ class CompanySettings extends React.Component {
                   ).bind(this)}
                   disabled={this.props.loading.updateHotel}
                 >
-                  {this.props.loading.updateHotel ? <Spinner /> : 'Save'}
+                  Save
                 </button>
+                <button onClick={this.handleRevert().bind(this)}>Cancel</button>
               </div>
             </form>
           </section>
