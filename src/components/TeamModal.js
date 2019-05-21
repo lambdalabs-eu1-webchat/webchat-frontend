@@ -1,7 +1,5 @@
 import React from 'react';
 import theme from '../theme/styledTheme';
-import styled from 'styled-components';
-
 
 export default class TeamModal extends React.Component {
 
@@ -14,9 +12,7 @@ export default class TeamModal extends React.Component {
         }
         return (
             <div style={backdropStyle}>
-                <div style={modalStyle}>
-               
-                {this.props.children}
+                <div style={modalStyle}>           
 
                 <section className="pricing-plan">
             <h2>Users and their Roles</h2>

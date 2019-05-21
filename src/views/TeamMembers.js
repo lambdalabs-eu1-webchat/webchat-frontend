@@ -24,6 +24,7 @@ class TeamMembers extends React.Component {
     this.state = {
       modalShown: false,
       isModalOpen: false,
+      show:false,
 
       flashMessage: messages.allRequiredFields,
     };
@@ -93,7 +94,10 @@ class TeamMembers extends React.Component {
           <input type="button"
              onClick={this.showModal}
              value="Show Team member Roles" />
-        <TeamModal show={this.state.show}>
+             
+        <TeamModal 
+        onClose={this.showModal}
+        show={this.state.show}>
          </TeamModal>
 
         <TeamMembersWrapper>
