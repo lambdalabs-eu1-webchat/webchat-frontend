@@ -26,7 +26,8 @@ export const SOCKET = {
   ADD_QUEUED: 'add_queued',
   QUEUED_MESSAGE: 'queued_message',
   TYPING: 'typing',
-  STOPPED_TYPING: 'stopped_typing'
+  STOPPED_TYPING: 'stopped_typing',
+  CHECK_OUT: 'check_out',
 };
 
 export const APP_PATHS = {
@@ -39,5 +40,5 @@ export const APP_PATHS = {
   ACCOUNT_SETTINGS: '/account-settings',
   CHECK_IN_OUT: '/check-in-out',
   COMPANY_DASH: '/company-dash',
-  COMPANY_SETTINGS: '/company-settings'
+  COMPANY_SETTINGS: '/company-settings',
 };

@@ -3,12 +3,19 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 import theme from '../theme/styledTheme';
 
-function Message({ message, guest_id }) {
+function Message({ message, guest_id, translatedMessage }) {
   return (
     <StyledMessage left={guest_id === message.sender.id}>
       <span className="sender-name">{message.sender.name} : </span>
       <div className="bubble-container">
         <span className="bubble me">{message.text}</span>
+        <p>
+          {translatedMessage
+            ? translatedMessage.detectedSourceLanguage !== 'en'
+              ? translatedMessage.translatedText
+              : null
+            : null}
+        </p>
       </div>
     </StyledMessage>
   );

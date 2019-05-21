@@ -14,6 +14,7 @@ const {
   ADD_CURRENT_TYPER,
   CLEAR_CURRENT_TYPER,
   UPDATE_TICKET_LANGUAGE,
+  ADD_TRANSLATED_TICKET,
 } = CHATS;
 
 const initState = {
@@ -22,6 +23,7 @@ const initState = {
   closedChats: [],
   socket: null,
   currentChatIdAndStatus: null,
+  translatedTickets: {},
 };
 
 const chats = (state = initState, action) => {
@@ -41,7 +43,7 @@ const chats = (state = initState, action) => {
       return {
         ...state,
         queuedChats: state.queuedChats.filter(
-          chat => chat._id !== action.target
+          chat => chat._id !== action.target,
         ),
       };
     case ADD_MESSAGE:
@@ -80,6 +82,7 @@ const chats = (state = initState, action) => {
           return chat;
         }),
       };
+
     case ADD_CURRENT_TYPER:
       return {
         ...state,
@@ -109,7 +112,14 @@ const chats = (state = initState, action) => {
           return chat;
         }),
       };
-
+    case ADD_TRANSLATED_TICKET:
+      return {
+        ...state,
+        translatedTickets: {
+          ...state.translatedTickets,
+          [action.target]: action.payload,
+        },
+      };
     case CLEAR_CURRENT_TYPER:
       return {
         ...state,

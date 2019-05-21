@@ -64,7 +64,7 @@ class App extends React.Component {
             this.props.dispatchClearCurrentTyper(chat_id);
           }
         });
-        // socket.on(SOCKET.CHATLOG, chatLog => {});
+
         socket.emit(SOCKET.LOGIN, token);
       });
     }
@@ -109,7 +109,7 @@ class App extends React.Component {
             this.props.dispatchClearCurrentTyper(chat_id);
           }
         });
-        // socket.on(SOCKET.CHATLOG, chatLog => {});
+
         socket.emit(SOCKET.LOGIN, token);
       });
     }
