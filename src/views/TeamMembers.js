@@ -13,6 +13,7 @@ import { fetchSingleHotel } from '../store/actions/hotel';
 import TeamMembersList from '../components/TeamMembersList';
 import TeamMembersAddNewMemberModal from '../components/TeamMembersAddNewMemberModal';
 import Restricted from '../components/reusable/RestrictedModal';
+import { messages } from '../utils/messages';
 import styled from 'styled-components';
 import theme from './../theme/styledTheme';
 
@@ -22,6 +23,7 @@ class TeamMembers extends React.Component {
     this.state = {
       modalShown: false,
       isModalOpen: false,
+      flashMessage: messages.allRequiredFields,
     };
     this.props = props;
     const { currentUser, dispatchFetchHotelStaff } = this.props;
@@ -31,6 +33,12 @@ class TeamMembers extends React.Component {
   componentDidMount() {
     this.props.dispatchFetchSingleHotel(this.props.currentUser.hotel_id);
   }
+
+  handleFlash = flashMessage => {
+    this.setState({
+      flashMessage,
+    });
+  };
 
   checkAddEligibility = () => {
     const plan = this.props.hotel.plan;
@@ -89,6 +97,8 @@ class TeamMembers extends React.Component {
             plan={this.props.hotel.plan}
             staffAmount={users.length}
             loading={this.props.loading}
+            flashMessage={this.state.flashMessage}
+            handleFlash={this.handleFlash}
           />
           <button onClick={this.handleShowModal}>Add Team Members</button>
           {this.state.isModalOpen && (
