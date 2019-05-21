@@ -45,9 +45,7 @@ class Messages extends React.Component {
           <div>
             <p>{`${titleCase(guestName)}'s ticket # ${i + 1}`}</p>
             <p>{`Status: ${ticket.status}`}</p>
-            <button onClick={() => this.translateTicket(ticket)}>
-              Translate
-            </button>
+
             {status === CLOSED &&
             (userType === ADMIN || userType === SUPER_ADMIN) ? (
               ticket.rating ? (
@@ -56,6 +54,12 @@ class Messages extends React.Component {
                 <p>No Rating given</p>
               )
             ) : null}
+            <button
+              className="translate-button"
+              onClick={() => this.translateTicket(ticket)}
+            >
+              Translate
+            </button>
             {ticket.messages.map((message, i) => (
               <Message
                 key={message._id}
@@ -99,6 +103,25 @@ const StyledMessages = styled.div`
   overflow-y: scroll;
   margin-top: 1.5rem;
   flex: 1;
+  .translate-button {
+    margin: 0 1rem;
+    height: ${theme.button.smallButton};
+    font-size: ${theme.fontSize.xxs};
+    border-radius: ${theme.border.radius};
+    background: ${theme.color.accentGreen};
+    border: none;
+    text-transform: ${theme.textTransform.uppercase};
+    color: ${theme.color.white};
+    font-weight: ${theme.fontWeight.bold};
+    box-shadow: ${theme.shadow.buttonShadow};
+    &:hover {
+      box-shadow: ${theme.shadow.buttonHover};
+      cursor: pointer;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
   div {
     p {
       font-size: ${theme.fontSize.message};
