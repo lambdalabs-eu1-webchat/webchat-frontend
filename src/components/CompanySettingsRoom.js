@@ -16,11 +16,14 @@ const CompanySettingsRoom = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState(name);
+  const [isCurrent, setIsCurrent] = useState(false);
   const handleDeleteClick = () => {
     setIsDeleteModalOpen(true);
+    setIsCurrent(true);
   };
   const handleUpdateClick = () => {
     setIsUpdateModalOpen(true);
+    setIsCurrent(true);
   };
 
   return !room ? (
@@ -33,12 +36,12 @@ const CompanySettingsRoom = ({
         value={inputValue}
         onChange={event => setInputValue(event.target.value)}
       />
-      {loading.updateRoom ? (
+      {loading.updateRoom && isCurrent ? (
         <Spinner />
       ) : (
-        <i className="far fa-edit" onClick={handleUpdateClick} disabled={loading.updateRoom}/>
+        <i className="far fa-edit" onClick={handleUpdateClick} disabled={loading.updateRoom} />
       )}
-      {loading.deleteRoom ? (
+      {loading.deleteRoom && isCurrent ? (
         <Spinner />
       ) : (
         <i className="fas fa-trash-alt" onClick={handleDeleteClick} disabled={loading.deleteRoom}/>
