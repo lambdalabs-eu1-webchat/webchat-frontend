@@ -4,6 +4,7 @@ import {
   FETCH_HOTEL_STAFF_SUCCESS,
   CHANGE_USER_TYPE_SUCCESS,
   CREATE_USER_SUCCESS,
+  UPDATE_USER_SUCCESS,
   DELETE_USER_SUCCESS,
 } from '../actions/actionTypes';
 
@@ -19,6 +20,13 @@ const users = (state = initialState, action) => {
       return [...action.payload.hotelStaff];
     case CREATE_USER_SUCCESS:
       return [...state, { ...action.payload.newUser }];
+      case UPDATE_USER_SUCCESS:
+      return state.map(user => {
+        if (user._id === action.payload.updatedCurrentUser._id) {
+          return { ...action.payload.updatedCurrentUser };
+        }
+        return user;
+      });
     case CHANGE_USER_TYPE_SUCCESS:
       return state.map(user => {
         if (user._id === action.payload.promotedUser._id) {
