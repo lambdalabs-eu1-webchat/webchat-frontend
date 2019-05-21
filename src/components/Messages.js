@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { translate } from '../store/actions/chat';
 import theme from './.././theme/styledTheme';
 
 import Message from './Message';
@@ -22,8 +24,14 @@ class Messages extends React.Component {
   componentDidUpdate = () => {
     this.scrollToBottom();
   };
+  translateTicket = ticket => {
+    const textToTranslate = ticket.messages.map(msg => {
+      return msg.text;
+    });
+    this.props.translate(textToTranslate, ticket._id, this.props.chat_id);
+  };
   render() {
-    const { tickets, guest, userType, status } = this.props;
+    const { tickets, guest, userType, status, translatedTickets } = this.props;
     const guestName = guest.name;
     const GuestId = guest.id;
     return (
@@ -37,6 +45,9 @@ class Messages extends React.Component {
           <div>
             <p>{`${titleCase(guestName)}'s ticket # ${i + 1}`}</p>
             <p>{`Status: ${ticket.status}`}</p>
+            <button onClick={() => this.translateTicket(ticket)}>
+              Translate
+            </button>
             {status === CLOSED &&
             (userType === ADMIN || userType === SUPER_ADMIN) ? (
               ticket.rating ? (
@@ -45,8 +56,17 @@ class Messages extends React.Component {
                 <p>No Rating given</p>
               )
             ) : null}
-            {ticket.messages.map(message => (
-              <Message key={message._id} message={message} guest_id={GuestId} />
+            {ticket.messages.map((message, i) => (
+              <Message
+                key={message._id}
+                message={message}
+                guest_id={GuestId}
+                translatedMessage={
+                  translatedTickets[ticket._id]
+                    ? translatedTickets[ticket._id][i]
+                    : { detectedSourceLanguage: false }
+                }
+              />
             ))}
           </div>
         ))}
@@ -87,4 +107,13 @@ const StyledMessages = styled.div`
   }
 `;
 
-export default Messages;
+function mapStateToProps(state) {
+  return {
+    translatedTickets: state.chats.translatedTickets,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { translate },
+)(Messages);

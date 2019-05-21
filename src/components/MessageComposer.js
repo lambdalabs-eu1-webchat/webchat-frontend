@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { SOCKET } from '../utils/paths';
-import { translate } from '../store/actions/chat';
+import { translateMessage } from '../store/actions/chat';
 import theme from '../theme/styledTheme';
 
 class MessageComposer extends React.Component {
@@ -24,25 +24,25 @@ class MessageComposer extends React.Component {
     if ('Enter' === event.key) this.handleSend();
   };
   translateSend = async () => {
-    try {
-      const { socket, chat_id, last_ticket_id, language } = this.props;
-
-      // translate hotel staff message based on language from guest message
-      const translatedInputValue = await translate(
-        this.state.inputValue,
-        last_ticket_id,
-        language,
-      );
-
-      socket.emit(SOCKET.MESSAGE, {
-        chat_id: this.props.chat_id,
-        // emit the translated message to chat
-        text: translatedInputValue,
-      });
-      socket.emit(SOCKET.STOPPED_TYPING, chat_id);
-      this.setInputValue('');
-    } catch (error) {
-      console.error(error);
+    if (this.state.inputValue) {
+      try {
+        const { socket, chat_id, last_ticket_id, language } = this.props;
+        // translate hotel staff message based on language from guest message
+        const translatedInputValue = await translateMessage(
+          this.state.inputValue,
+          last_ticket_id,
+          language,
+        );
+        socket.emit(SOCKET.MESSAGE, {
+          chat_id: this.props.chat_id,
+          // emit the translated message to chat
+          text: translatedInputValue,
+        });
+        socket.emit(SOCKET.STOPPED_TYPING, chat_id);
+        this.setInputValue('');
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 

@@ -27,6 +27,7 @@ export const SOCKET = {
   QUEUED_MESSAGE: 'queued_message',
   TYPING: 'typing',
   STOPPED_TYPING: 'stopped_typing',
+  CHECK_OUT: 'check_out',
 };
 
 export const APP_PATHS = {

@@ -7,7 +7,7 @@ import axios from 'axios';
 import Spinner from '../components/reusable/Spinner';
 import { validate } from 'email-validator';
 import Restricted from './reusable/RestrictedModal';
-import { DOMAIN, USERS, EMAIL } from '../utils/paths';
+import { DOMAIN, USERS, EMAIL, SOCKET } from '../utils/paths';
 
 class CheckOutForm extends React.Component {
   state = {
@@ -74,6 +74,7 @@ class CheckOutForm extends React.Component {
             selectValue: 'DEFAULT',
             isCheckingOut: false,
           });
+          this.props.socket.emit(SOCKET.CHECK_OUT, guest_id);
         }
       } catch (error) {
         this.setState({ isCheckingOut: false });
