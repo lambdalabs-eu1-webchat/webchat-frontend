@@ -34,7 +34,7 @@ class Messages extends React.Component {
       >
         {tickets.map((ticket, i) => (
           <div>
-            <p>{`${guestName}'s ticket # ${i}`}</p>
+            <p>{`${guestName}'s ticket # ${i + 1}`}</p>
             <p>{`Status: ${ticket.status}`}</p>
             {status === CLOSED &&
             (userType === ADMIN || userType === SUPER_ADMIN) ? (
