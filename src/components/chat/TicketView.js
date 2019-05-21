@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { setCurrentChatId } from '../../store/actions/chat';
 import { SOCKET } from '../../utils/paths';
 import theme from '../../theme/styledTheme';
 import styled from 'styled-components';
+import Spinner from '../../components/reusable/Spinner';
+
 const filterTickets = (tickets, filterCond) => {
   return tickets.filter(ticket => ticket.status === filterCond);
 };
@@ -15,6 +18,7 @@ const TicketView = ({
   setCurrentChatId,
   socket,
   currentChatId,
+  loading,
 }) => {
   const handleChatSelect = chat_id => {
     // need to stop typing in current chat
@@ -22,33 +26,42 @@ const TicketView = ({
     // switch chats
     setCurrentChatId(chat_id, status);
   };
+
+  // this.props.loading.fetchClosedChats && status === 'closed' ? <Spinner /> : other thing
+
   return (
-    <StyledTicketView>
-      {chatsArr &&
-        chatsArr.map(chat => {
-          return (
-            <StyledLineDiv
-              onClick={() => handleChatSelect(chat._id)}
-              key={chat._id}
-            >
-              <StyledDiv>
-                <HeaderStyle>Guest Name: {chat.guest.name}</HeaderStyle>
-                <HeaderStyle>Room Number: {chat.room.name}</HeaderStyle>
-                {filterTickets(chat.tickets, status).map(ticket => {
-                  return (
-                    <div key={ticket._id}>
-                      <div>
-                        Last message:
-                        {ticket.messages[ticket.messages.length - 1].text}
-                      </div>
-                    </div>
-                  );
-                })}
-              </StyledDiv>
-            </StyledLineDiv>
-          );
-        })}
-    </StyledTicketView>
+    <>
+      {loading.fetchClosedChats && status === 'closed' ? (
+        <Spinner />
+      ) : (
+        <StyledTicketView>
+          {chatsArr &&
+            chatsArr.map(chat => {
+              return (
+                <StyledLineDiv
+                  onClick={() => handleChatSelect(chat._id)}
+                  key={chat._id}
+                >
+                  <StyledDiv>
+                    <HeaderStyle>Guest Name: {chat.guest.name}</HeaderStyle>
+                    <HeaderStyle>Room Number: {chat.room.name}</HeaderStyle>
+                    {filterTickets(chat.tickets, status).map(ticket => {
+                      return (
+                        <div key={ticket._id}>
+                          <div>
+                            Last message:
+                            {ticket.messages[ticket.messages.length - 1].text}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </StyledDiv>
+                </StyledLineDiv>
+              );
+            })}
+        </StyledTicketView>
+      )}
+    </>
   );
 };
 
@@ -100,6 +113,7 @@ function mapStateToProps(state) {
     currentChatId: state.chats.currentChatIdAndStatus
       ? state.chats.currentChatIdAndStatus.chat_id
       : null,
+    loading: state.loading,
   };
 }
 

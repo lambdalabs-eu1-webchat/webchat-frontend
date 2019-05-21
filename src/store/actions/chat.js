@@ -8,8 +8,10 @@ const {
   ADD_QUEUED_CHATS,
   REMOVE_QUEUED_CHAT,
   FETCH_CLOSED_CHATS,
+  FETCH_CLOSED_CHATS_STARTED,
   FETCH_CLOSED_CHATS_SUCCESS,
   FETCH_CLOSED_CHATS_FAILURE,
+  FETCH_CLOSED_CHATS_FINISHED,
   SAVE_SOCKET,
   SET_CURRENT_CHAT_ID,
   CLEAR_CURRENT_CHAT_ID,
@@ -84,12 +86,15 @@ export const addMessage = (chat_id, message) => {
 
 export const fetchClosedChats = id => async dispatch => {
   dispatch({ type: FETCH_CLOSED_CHATS });
+  dispatch({ type: FETCH_CLOSED_CHATS_STARTED });
   try {
     const result = await fetch(`${DOMAIN}${CHATS_CLOSED}?hotel_id=${id}`);
     const jsonResult = await result.json();
     dispatch(fetchAllClosedChatsSuccess(jsonResult));
+    dispatch({ type: FETCH_CLOSED_CHATS_FINISHED });
   } catch (error) {
     dispatch(fetchAllClosedChatsFailure(error));
+    dispatch({ type: FETCH_CLOSED_CHATS_FINISHED });
   }
 };
 
