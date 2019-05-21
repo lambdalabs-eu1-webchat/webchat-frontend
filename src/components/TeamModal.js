@@ -1,5 +1,5 @@
 import React from 'react';
-import theme from '../theme/modalTheme';
+import theme from '../theme/styledTheme';
 import styled from 'styled-components';
 
 
@@ -19,7 +19,7 @@ export default class TeamModal extends React.Component {
                 {this.props.children}
 
                 <section className="pricing-plan">
-            <h1>Users and their Roles</h1>
+            <h2>Users and their Roles</h2>
               <p>
                 You will have 3 types of Users and each User has access to allocated pages depending on their company status 
               </p>
@@ -50,7 +50,7 @@ export default class TeamModal extends React.Component {
 
               <div className="pricing-card">
               <h2><i className="fas fa-user"></i>
-                <br></br>Employee</h2>
+                <br></br>Employee / Recepionist </h2>
                 <ul>
                   <li><i className="fas fa-check"></i>Restricted access</li>
                   <li><i className="fas fa-check"></i>Live chat with guests</li>
@@ -82,7 +82,7 @@ const backdropStyle = {
     padding:'50'
 };
 const modalStyle = {
-   backgroundColor:'#fff',
+   backgroundColor:theme.color.offWhite,
    borderRadius:5,
    maxWidth:600,
    minHeight:400,
@@ -90,8 +90,24 @@ const modalStyle = {
    padding:30,
    position:'relative'
 };
-const footerStyle = {
- position: 'absolute',
- bottom:20
-};
+// const modalBackDropStyle = styled.div`
+// position:fixed;
+// top:0;
+// bottom:0;
+// left:0;
+// right:0;
+// padding:50;
+// background-color:rgba(0,0,0,0.3)
+// `;
+
+// const modalBackStyle = styled.div`
+//   background-color: #fff;
+//   border-radius: 5;
+//   max-width: 600;
+//   min-height: 400;
+//   margin: 0 auto;
+//   padding: 30;
+//   position:relative;
+// `;
+
 
