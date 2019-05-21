@@ -8,6 +8,7 @@ import Spinner from '../components/reusable/Spinner';
 import { validate } from 'email-validator';
 import Restricted from './reusable/RestrictedModal';
 import { DOMAIN, USERS, EMAIL } from '../utils/paths';
+import { axiosConfig } from '../utils/axiosConfig';
 
 class CheckOutForm extends React.Component {
   state = {
@@ -17,7 +18,7 @@ class CheckOutForm extends React.Component {
     errorRoom: false,
     isCheckingOut: false,
     emailModalOpen: false,
-    noChatModalOpen: false,
+    noChatModalOpen: false
   };
 
   setSelectValue = event => {
@@ -32,16 +33,20 @@ class CheckOutForm extends React.Component {
     const emailDetails = {
       guestEmail: this.state.emailInput,
       guestId: this.state.selectValue,
-      hotelId: this.props.hotel_id,
+      hotelId: this.props.hotel_id
     };
     try {
       if (validate(emailDetails.guestEmail)) {
-        const didSend = await axios.post(`${DOMAIN}${EMAIL}`, emailDetails);
+        const didSend = await axios.post(
+          `${DOMAIN}${EMAIL}`,
+          emailDetails,
+          axiosConfig
+        );
         if (didSend.data) {
           this.setState({ emailInput: '' });
         } else {
           return alert(
-            'This guest had no chats during their stay, please remove their email',
+            'This guest had no chats during their stay, please remove their email'
           );
         }
       } else {
@@ -56,7 +61,7 @@ class CheckOutForm extends React.Component {
     const guestEmail = this.state.emailInput;
     const guest_id = this.state.selectValue;
     const guest = this.props.currentGuests.find(
-      guest => guest._id === guest_id,
+      guest => guest._id === guest_id
     );
 
     if (guestEmail) {
@@ -72,7 +77,7 @@ class CheckOutForm extends React.Component {
           this.props.addAvailableRoom(room);
           this.setState({
             selectValue: 'DEFAULT',
-            isCheckingOut: false,
+            isCheckingOut: false
           });
         }
       } catch (error) {
@@ -138,7 +143,7 @@ class CheckOutForm extends React.Component {
 }
 
 CheckOutForm.propTypes = {
-  hotel_id: propTypes.string.isRequired,
+  hotel_id: propTypes.string.isRequired
 };
 
 const CheckOutFormWrapper = styled.div`
