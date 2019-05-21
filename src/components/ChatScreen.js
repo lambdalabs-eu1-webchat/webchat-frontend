@@ -15,6 +15,7 @@ import {
   updateTicketLanguage,
 } from '../store/actions/chat';
 import TranslateModal from './TranslateModal';
+import titleCase from '../utils/titleCase';
 
 class ChatScreen extends React.Component {
   state = {
@@ -79,7 +80,7 @@ class ChatScreen extends React.Component {
       <StyledChatScreen status={status}>
         <div className="top-group">
           <ChatScreenHeader
-            guest_name={chat.guest.name}
+            guest_name={titleCase(chat.guest.name)}
             room_name={chat.room.name}
           />
           <Messages
@@ -89,7 +90,9 @@ class ChatScreen extends React.Component {
             guest={chat.guest}
           />
           {chat.typingUser ? (
-            <p className="typing">{chat.typingUser.name} is typing...</p>
+            <p className="typing">
+              {titleCase(chat.typingUser.name)} is typing...
+            </p>
           ) : null}
         </div>
         {ACTIVE === status ? (
