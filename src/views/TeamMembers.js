@@ -92,9 +92,9 @@ class TeamMembers extends React.Component {
         <h2>Team Members</h2>
           <input type="button"
              onClick={this.showModal}
-             value="Show User Roles" />
+             value="Show Team member Roles" />
         <TeamModal show={this.state.show}>
-        </TeamModal>
+         </TeamModal>
 
         <TeamMembersWrapper>
           <h3>Update and Assign Team Members</h3>
