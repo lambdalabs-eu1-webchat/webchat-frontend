@@ -46,17 +46,36 @@ class EmployeeSettings extends React.Component {
     });
   };
 
-  checkPasswordMatch = (password, passwordRetype) => {
+  resetPasswords = () => {
+    this.setState({
+      employeeChanges: {
+        ...this.state.employeeChanges,
+        password: '',
+        passwordConf: '',
+      },
+    });
+  };
+
+  resetUser = () => {
+    this.setState({
+      employeeChanges: {
+        ...this.state.employeeChanges,
+        name: this.props.employee.name,
+        email: this.props.employee.email,
+      },
+    });
+  };
+
+  checkPassword = (password, passwordRetype) => {
     if (password === passwordRetype) {
-      return true;
+      if (password.length > 6) {
+        return true;
+      } else {
+        this.resetPasswords();
+        this.setFlashMessage(messages.passwordLength);
+      }
     } else {
-      this.setState({
-        employeeChanges: {
-          ...this.state.employeeChanges,
-          password: '',
-          passwordConf: '',
-        },
-      });
+      this.resetPasswords();
       this.setFlashMessage(messages.passwordMatch);
     }
   };
@@ -66,30 +85,33 @@ class EmployeeSettings extends React.Component {
     if (employeeChanges.name && employeeChanges.email) {
       return true;
     } else {
-      this.setState({
-        employeeChanges: {
-          ...this.state.employeeChanges,
-          name: this.props.employee.name,
-          email: this.props.employee.email,
-        },
-      });
+      this.resetUser();
       this.setFlashMessage(messages.nameAndEmail);
     }
   };
 
-  fireUserUpdates = () => {
+  fireUserUpdates = async () => {
     const employeeChanges = this.state.employeeChanges;
     if (
       (!employeeChanges.password ||
         (employeeChanges.password &&
-          this.checkPasswordMatch(
+          this.checkPassword(
             employeeChanges.password,
             employeeChanges.passwordConf,
           ))) &&
       this.checkEligibileUpdates()
     ) {
       const userUpdates = this.state.employeeChanges;
-      this.props.updateUser(userUpdates, this.props.employee._id);
+      const res = await this.props.updateUser(
+        userUpdates,
+        this.props.employee._id,
+      );
+      if (!res.name) {
+        this.setFlashMessage(res);
+        this.resetUser();
+      } else {
+        this.setFlashMessage('');
+      }
     }
   };
 

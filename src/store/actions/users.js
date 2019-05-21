@@ -252,13 +252,10 @@ export const fetchHotelStaff = id => async dispatch => {
   }
 };
 
-export const createUser = (
-  name,
-  email,
-  password,
-  user_type,
-
-) => async (dispatch, getState) => {
+export const createUser = (name, email, password, user_type) => async (
+  dispatch,
+  getState,
+) => {
   dispatch({ type: CREATE_USER });
   dispatch({ type: CREATE_USER_STARTED });
   const user = {
@@ -309,11 +306,13 @@ export const updateUser = (userUpdates, id) => async dispatch => {
     dispatch({ type: UPDATE_USER_FINISHED });
     if (result.ok) {
       dispatch(updateUserSuccess(jsonResult));
+      return jsonResult;
     } else {
       throw new Error(jsonResult.message);
     }
   } catch (error) {
     dispatch(updateUserFailure(error.message));
+    return error.message;
   }
 };
 
