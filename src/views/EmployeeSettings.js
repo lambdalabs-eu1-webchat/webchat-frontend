@@ -142,7 +142,6 @@ EmployeeSettings.propTypes = {
     token: PropTypes.string.isRequired,
     user_type: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    motto: PropTypes.string.isRequired,
   }).isRequired,
 };
 
