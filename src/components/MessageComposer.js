@@ -12,34 +12,37 @@ class MessageComposer extends React.Component {
     inputValue: '',
   };
   handleSend = () => {
-    const { socket, chat_id } = this.props;
-    socket.emit(SOCKET.MESSAGE, {
-      chat_id: this.props.chat_id,
-      text: this.state.inputValue,
-    });
-    socket.emit(SOCKET.STOPPED_TYPING, chat_id);
-    this.setInputValue('');
-  };
-
-  translateSend = async () => {
-    try {
-      const { socket, chat_id, last_ticket_id, language } = this.props;
-      // translate hotel staff message based on language from guest message
-      debugger;
-      const translatedInputValue = await translateMessage(
-        this.state.inputValue,
-        last_ticket_id,
-        language,
-      );
+    if (this.state.inputValue) {
+      const { socket, chat_id } = this.props;
       socket.emit(SOCKET.MESSAGE, {
         chat_id: this.props.chat_id,
-        // emit the translated message to chat
-        text: translatedInputValue,
+        text: this.state.inputValue,
       });
       socket.emit(SOCKET.STOPPED_TYPING, chat_id);
       this.setInputValue('');
-    } catch (error) {
-      console.error(error);
+    }
+  };
+
+  translateSend = async () => {
+    if (this.state.inputValue) {
+      try {
+        const { socket, chat_id, last_ticket_id, language } = this.props;
+        // translate hotel staff message based on language from guest message
+        const translatedInputValue = await translateMessage(
+          this.state.inputValue,
+          last_ticket_id,
+          language,
+        );
+        socket.emit(SOCKET.MESSAGE, {
+          chat_id: this.props.chat_id,
+          // emit the translated message to chat
+          text: translatedInputValue,
+        });
+        socket.emit(SOCKET.STOPPED_TYPING, chat_id);
+        this.setInputValue('');
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
