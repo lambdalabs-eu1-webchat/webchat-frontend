@@ -48,16 +48,30 @@ const RestrictedIcon = styled.img`
 
 const RestrictedMsg = styled.div`
   line-height: ${theme.spacing.lineHeight};
-  font-size: ${theme.fontSize.sm};
-  text-align: left;
+  font-size: ${theme.fontSize.xs};
+  text-align: center;
   color: ${theme.color.textColor};
   margin-bottom: 1rem;
 `;
 
 const RestrictedBtn = styled.button`
-  align-self: end;
-  width: 100px;
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  height: ${theme.button.smallButton};
+  border: none;
+  background: ${theme.color.accentGreen};
+  width: 15rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: ${theme.fontSize.xxs};
+  border-radius: ${theme.border.radius};
   color: ${theme.color.white};
+  &:hover {
+    box-shadow: ${theme.shadow.buttonHover};
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
 `;
 
 export default Restricted;
