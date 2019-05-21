@@ -82,7 +82,7 @@ const TeamMembersAddNewMemberModal = ({
             name="password"
             placeholder="Default password..."
           />
-          <p>{flashMessage}</p>
+          <p id="flash-message">{flashMessage}</p>
           <button
             type="submit"
             onClick={handleClick(
@@ -127,6 +127,10 @@ const AddMembersModalWrapper = styled.div`
     font-size: ${theme.fontSize.xs};
     color: ${theme.color.accentPurple};
     padding: 1.5rem 0;
+  }
+  #flash-message {
+    font-size: ${theme.fontSize.xxs};
+    color: ${theme.color.textColor};
   }
   input {
     width: 100%;
