@@ -208,7 +208,7 @@ class HomePage extends React.Component {
               </div>
             </div>
           </section>
-        </HomePageContainer>
+         </HomePageContainer>
       </HomePageOuter>
     );
   }
