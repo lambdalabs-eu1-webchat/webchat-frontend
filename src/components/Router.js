@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import Logout from './Logout';
 import HomePage from '../views/HomePage';
+import TermsPage from '../views/TermsPage';
+import PrivacyPage from '../views/PrivacyPage';
 import Chat from '../views/Chat';
 import Login from '../views/Login';
 import Register from '../views/Register';
@@ -34,6 +36,8 @@ function Router({
         <Route exact path="/" component={HomePage} />
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
+        <Route exact path={APP_PATHS.TERMS} component={TermsPage} />
+        <Route exact path={APP_PATHS.PRIVACY} component={PrivacyPage} />
         <Route render={() => <div style={style404}>404 not found</div>} />
       </Switch>
     );
