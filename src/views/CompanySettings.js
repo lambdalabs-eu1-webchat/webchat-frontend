@@ -177,7 +177,7 @@ class CompanySettings extends React.Component {
                   ).bind(this)}
                   disabled={this.props.loading.updateHotel}
                 >
-                  Save
+                  Update
                 </button>
                 <button className="cancel" onClick={this.handleRevert().bind(this)}>Cancel</button>
               </div>
