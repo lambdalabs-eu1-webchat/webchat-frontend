@@ -81,9 +81,9 @@ const Container = styled.div`
   box-shadow: ${theme.shadow.containerShadow};
   overflow-y:scroll;
     button {
-      margin: 25px;
+      margin: 40px;
       padding: 10px 20px;
-      width: 20rem;
+      width: 90%;
       border-radius: 5px;
       height: ${theme.button.height};
       font-size: ${theme.fontSize.xs};
@@ -110,16 +110,16 @@ const Container = styled.div`
   }
 
   .pricing-plan {
-    padding: 0 2.5% 5% 2.5%;
+    padding: 5 2.5% 5% 2.5%;
     @media (max-width: 1000px) {
       width: 95%;
       padding: 10% 0 15% 0;
-      margin: 0 auto;
+      margin: 0 5%;
     }
       
     .pricing-cards {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       margin: 0 2.5%;
       @media (max-width: 1000px) {
         flex-direction: column;
@@ -131,7 +131,7 @@ const Container = styled.div`
     .pricing-card {
       background: ${theme.color.lightPurple};
       border-radius: 3px;
-      text-align: center;
+      text-align: left;
       width: 30%;
       padding: 2.5%;
       margin: 2.5%;
@@ -181,6 +181,7 @@ const Container = styled.div`
 
 // need to change these to styled components
 const backdropStyle = {
+    flexDirection:'column',
     position:'fixed',
     top:0,
     bottom:0,
