@@ -15,49 +15,24 @@ export default class TeamModal extends React.Component {
             <Container>
             <div style={backdropStyle}>
                 <div style={modalStyle}>           
+                <h2>Welcome to FrontDesk</h2>
+           <section>
+          <p className="card">
+        <ul>
+        <li> - As the Super Admin for your Hotel, you have access to all areas of the app including company information and billing.</li>
+          <li> - To get talking to your guests right away, simply add your hotel's rooms on this settings page and check in your first guest.</li>
+          <li> - You can also add any colleagues you'd like to work with over on the Team Members page. </li>
+          <li> - There are two types of user permissions you can assign to your team:</li>
+        </ul>
+          </p>
+          <br />
 
-                <section className="pricing-plan">
-            <h2>User guide :</h2>
-              <p>
-                You will have 3 types of Users and each User has access to allocated pages depending on their company status 
-              </p>
-            <div className="pricing-cards">
-              <div className="pricing-card">
-                <h2> Super Admin</h2>
-                <ul>
-                <li>- Unlimited access</li>
-                  <li>- Can Add new team members</li>
-                  <li>- Can Add and delete rooms</li>
-                  <li>- Can change company settings</li>
-                  <li>- Live chat with guests</li>
-                  <li>- Can monitor everything</li>
-                </ul>
-              </div>
-
-              <div className="pricing-card">
-              <h2>Admin</h2>
-                <ul>
-                  <li>- Restricted access</li>
-                  <li>- Can not remove Admins</li>
-                  <li>- Can check guests in and out</li>
-                  <li>- Live chat with guests</li>
-                  <li>- Track ticket status</li>
-                  <li>- Add team members </li>
-                </ul>
-              </div>
-
-              <div className="pricing-card">
-              <h2>Employee</h2>
-                <ul>
-                  <li>- Restricted access</li>
-                  <li>- Live chat with guests</li>
-                  <li>- Check guests in and out</li>
-                  <li>- Track ticket status</li>
-                  <li>- Change their own settings</li>
-                </ul>
-              </div>
-            </div>
-          </section>
+        <ul>
+        <li> Non-admin: Live chat with guests, check guests in/out, track tickets.</li>
+           
+           <li>Admin: All of the above, see guest's chat ratings, add team members</li>
+        </ul>
+         </section>
 
                 <div>
                 <button onClick={(e) => { this.onClose(e)}}>
@@ -74,6 +49,9 @@ export default class TeamModal extends React.Component {
 const Container = styled.div`
   background: ${theme.color.white};
   margin: 0 5rem;
+  text-align:center;
+
+ 
 
   box-shadow: ${theme.shadow.containerShadow};
   overflow-y:scroll;
@@ -106,39 +84,15 @@ const Container = styled.div`
     }
   }
 
-  .pricing-plan {
+  .card {
     padding: 10 2.5% 5% 2.5%;
+    text-align:left;
     @media (max-width: 1000px) {
       width: 95%;
       padding: 10% 0 15% 0;
       margin: 0 5%;
     }
-      
-    .pricing-cards {
-      display: column;
-      justify-content: space-evenly;
-      margin: 0 2.5%;
-      @media (max-width: 1000px) {
-        flex-direction: column;
-        width: 90%;
-        margin: 0 5%;
-      }
-    }
-    
-    .pricing-card {
-      background: ${theme.color.lightPurple};
-      border-radius: 3px;
-      text-align:left;
-      width: 30%;
-      padding: 3%;
-      margin: 2.5%;
-      box-shadow: 0 16px 48px rgba(32, 41, 50, 0.21);
-      @media (max-width: 1000px) {
-        padding: 10%;
-        margin: 10% auto;
-        width: 100%;
-      }
-    }
+  
   }
 `;
 
@@ -159,9 +113,11 @@ const modalStyle = {
    borderRadius:5,
    maxWidth:800,
    minHeight:200,
+   top:60,
    margin:'0 auto',
    padding:30,
    position:'relative',
+   fontSize:'22px',
   
 };
 
