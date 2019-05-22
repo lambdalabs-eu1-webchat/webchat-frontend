@@ -49,8 +49,8 @@ export default class TeamModal extends React.Component {
               </div>
 
               <div className="pricing-card">
-              <h2><i className="fas fa-user"></i>
-                <br></br>Employee </h2>
+              <h2> <i className="fas fa-user"></i>
+                <br></br>Employee</h2>
                 <ul>
                   <li>- Restricted access</li>
                   <li>- Live chat with guests</li>
@@ -110,7 +110,7 @@ const Container = styled.div`
   }
 
   .pricing-plan {
-    padding: 5 2.5% 5% 2.5%;
+    padding: 10 2.5% 5% 2.5%;
     @media (max-width: 1000px) {
       width: 95%;
       padding: 10% 0 15% 0;
@@ -131,49 +131,15 @@ const Container = styled.div`
     .pricing-card {
       background: ${theme.color.lightPurple};
       border-radius: 3px;
-      text-align: left;
+      text-align:left;
       width: 30%;
-      padding: 2.5%;
+      padding: 3%;
       margin: 2.5%;
       box-shadow: 0 16px 48px rgba(32, 41, 50, 0.21);
       @media (max-width: 1000px) {
         padding: 10%;
         margin: 10% auto;
         width: 100%;
-      }
-      
-     
-      button {
-        margin: 5% 0;
-        height: ${theme.button.height};
-        width: 100%;
-        color: ${theme.color.white};
-        border: none;
-        background: ${theme.color.accentGreen};
-        text-transform: uppercase;
-        font-size: ${theme.fontSize.xs};
-        border-radius: ${theme.border.radius};
-        font-weight: bold;
-        box-shadow: ${theme.shadow.buttonShadow};
-        &:hover {
-          box-shadow: ${theme.shadow.buttonHover};
-          background: ${theme.color.accentPurple};
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        @media(max-width: 500px) {
-          margin: 0 auto;  
-        }
-      }
-      
-      .fa-check {
-        background: #e2fdf8;
-        border: 1px solid white;
-        border-radius: 50%;
-        padding: 2.5%;
-        color: ${theme.color.accentGreen};
-        font-size: 1rem;
-        margin-right: 2.5%;
       }
     }
   }
