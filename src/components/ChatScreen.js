@@ -44,7 +44,7 @@ class ChatScreen extends React.Component {
     this.props.setCurrentChatId(chat_id, ACTIVE);
   };
 
-  translateMessage = async () => {
+  translateMessage = async cb => {
     // get last ticket in current active chat
     const lastTicket = this.props.chat.tickets[
       this.props.chat.tickets.length - 1
@@ -57,7 +57,7 @@ class ChatScreen extends React.Component {
       return msg.text;
     });
     // translate message from guest
-    this.props.translate(textToTranslate, ticket_id, this.props.chat._id);
+    this.props.translate(textToTranslate, ticket_id, this.props.chat._id, cb);
 
     // this.setState({ translatedMessages: translatedText });
 
@@ -101,10 +101,11 @@ class ChatScreen extends React.Component {
               chat_id={chat._id}
               last_ticket_id={lastTicket._id}
               language={lastTicket.language}
+              translateMessage={this.translateMessage}
             />
             <StyledChatButtons>
               <button onClick={this.closeTicket}>Close Ticket</button>
-              <button onClick={this.translateMessage}>Translate</button>
+              <button onClick={() => this.translateMessage()}>Translate</button>
             </StyledChatButtons>
           </React.Fragment>
         ) : null}

@@ -23,11 +23,24 @@ class MessageComposer extends React.Component {
   handleEnter = event => {
     if ('Enter' === event.key) this.handleSend();
   };
+  handleTranslateSend = async () => {
+    if (this.state.inputValue) {
+      const { language } = this.props;
+      // translate hotel staff message based on language from guest message
+      // if language is english (default) check that it is the right language
+      if (language === 'en') {
+        this.props.translateMessage(this.translateSend);
+      } else {
+        this.translateSend();
+      }
+    }
+  };
   translateSend = async () => {
     if (this.state.inputValue) {
       try {
         const { socket, chat_id, last_ticket_id, language } = this.props;
         // translate hotel staff message based on language from guest message
+        // if language is english (default) check that it is the right language
         const translatedInputValue = await translateMessage(
           this.state.inputValue,
           last_ticket_id,
@@ -75,7 +88,7 @@ class MessageComposer extends React.Component {
         </StyledMessageComposerSendButton>
         <button
           className="translate-and-send"
-          onClick={() => this.translateSend()}
+          onClick={() => this.handleTranslateSend()}
         >
           Translate & Send
         </button>
