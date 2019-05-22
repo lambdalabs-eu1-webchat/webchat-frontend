@@ -138,7 +138,7 @@ export const fetchRoomsForHotel = hotel_id => async dispatch => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Headers: { Authorization: localStorage.getItem('token') }
+        Authorization: localStorage.getItem('token')
       }
     };
     const result = await fetch(`${DOMAIN}${HOTEL}/${hotel_id}/rooms`, config);
@@ -160,7 +160,7 @@ export const createRoomForHotel = (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: JSON.stringify(newRoomArray)
   };
@@ -190,7 +190,7 @@ export const updateRoomForHotel = (id, hotel_id, name) => async dispatch => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: JSON.stringify(updatedRoom)
   };
@@ -222,7 +222,7 @@ export const deleteRoomForHotel = (id, hotel_id) => async (
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     }
   };
   try {

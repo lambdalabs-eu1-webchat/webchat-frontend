@@ -93,7 +93,7 @@ export const fetchClosedChats = id => async dispatch => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Headers: { Authorization: localStorage.getItem('token') }
+        Authorization: localStorage.getItem('token')
       }
     };
     const result = await fetch(
@@ -177,7 +177,7 @@ export const translate = (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: language
       ? JSON.stringify({ text, ticket_id, language })
@@ -203,7 +203,7 @@ export const translateMessage = async (text, ticket_id, language) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: language
       ? JSON.stringify({ text, ticket_id, language })

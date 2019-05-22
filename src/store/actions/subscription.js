@@ -90,7 +90,7 @@ export const switchCustomerPlan = (hotelId, newPlan) => async dispatch => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: JSON.stringify(newPlan)
   };
@@ -118,7 +118,7 @@ export const createNewCustomer = (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: JSON.stringify(enhancedStripeToken)
   };
@@ -146,7 +146,7 @@ export const updateCustomerMethod = (
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: JSON.stringify(enhancedStripeToken)
   };

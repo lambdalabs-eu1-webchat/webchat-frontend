@@ -221,7 +221,7 @@ export const fetchAllUsers = () => async dispatch => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Headers: { Authorization: localStorage.getItem('token') }
+        Authorization: localStorage.getItem('token')
       }
     };
     const result = await fetch(`${DOMAIN}${USERS}`, config);
@@ -242,7 +242,7 @@ export const fetchSingleUser = id => async dispatch => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Headers: { Authorization: localStorage.getItem('token') }
+        Authorization: localStorage.getItem('token')
       }
     };
     const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
@@ -262,7 +262,7 @@ export const fetchHotelStaff = id => async dispatch => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Headers: { Authorization: localStorage.getItem('token') }
+        Authorization: localStorage.getItem('token')
       }
     };
     const result = await fetch(`${DOMAIN}${USERS}?hotel_id=${id}`, config);
@@ -292,7 +292,7 @@ export const createUser = (name, email, password, user_type) => async (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: JSON.stringify(user)
   };
@@ -320,7 +320,7 @@ export const updateUser = (userUpdates, id) => async dispatch => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: JSON.stringify(userUpdates)
   };
@@ -348,7 +348,7 @@ export const changeUserType = (id, newType) => async dispatch => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: JSON.stringify(promotedUser)
   };
@@ -374,7 +374,7 @@ export const deleteUser = id => async (dispatch, getState) => {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     }
   };
   try {

@@ -72,7 +72,7 @@ export const fetchSingleHotel = id => async dispatch => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Headers: { Authorization: localStorage.getItem('token') }
+        Authorization: localStorage.getItem('token')
       }
     };
     const result = await fetch(`${DOMAIN}${HOTEL}/${id}`, config);
@@ -94,7 +94,7 @@ export const updateHotel = (id, name) => async dispatch => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Headers: { Authorization: localStorage.getItem('token') }
+      Authorization: localStorage.getItem('token')
     },
     body: JSON.stringify(updatedHotel)
   };
