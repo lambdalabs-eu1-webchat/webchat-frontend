@@ -1,6 +1,6 @@
 import { ROOMS } from './actionTypes';
 import axios from 'axios';
-import { axiosConfig } from '../utils/axiosConfig';
+import { axiosConfig } from '../../utils/axiosConfig';
 import { HOTEL, DOMAIN } from '../../utils/paths';
 
 export const fetchRooms = hotel_id => async dispatch => {
