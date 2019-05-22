@@ -89,7 +89,17 @@ export const fetchClosedChats = id => async dispatch => {
   dispatch({ type: FETCH_CLOSED_CHATS });
   dispatch({ type: FETCH_CLOSED_CHATS_STARTED });
   try {
-    const result = await fetch(`${DOMAIN}${CHATS_CLOSED}?hotel_id=${id}`);
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+    };
+    const result = await fetch(
+      `${DOMAIN}${CHATS_CLOSED}?hotel_id=${id}`,
+      config,
+    );
     const jsonResult = await result.json();
     dispatch(fetchAllClosedChatsSuccess(jsonResult));
     dispatch({ type: FETCH_CLOSED_CHATS_FINISHED });
@@ -162,6 +172,7 @@ export const translate = (text, ticket_id, chat_id, cb) => async dispatch => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
     },
     body: JSON.stringify({ text, ticket_id }),
   };
@@ -188,6 +199,7 @@ export const translateMessage = async (text, ticket_id, language) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
     },
     body: language
       ? JSON.stringify({ text, ticket_id, language })

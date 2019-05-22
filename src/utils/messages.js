@@ -5,4 +5,6 @@ export const messages = {
   tempPasswordLength: 'New user passwords must be at least 4 characters',
   registrationInProgress: 'Registering...',
   duplicateEmail: 'This email has already been used',
+  passwordMatch: 'Passwords must match',
+  nameAndEmail: 'Name and email cannot be left blank',
 };

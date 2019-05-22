@@ -20,10 +20,10 @@ const users = (state = initialState, action) => {
       return [...action.payload.hotelStaff];
     case CREATE_USER_SUCCESS:
       return [...state, { ...action.payload.newUser }];
-    case UPDATE_USER_SUCCESS:
+      case UPDATE_USER_SUCCESS:
       return state.map(user => {
-        if (user._id === action.payload.updatedUser._id) {
-          return { ...action.payload.updatedUser };
+        if (user._id === action.payload.updatedCurrentUser._id) {
+          return { ...action.payload.updatedCurrentUser };
         }
         return user;
       });

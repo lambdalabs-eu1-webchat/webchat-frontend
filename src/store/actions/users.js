@@ -1,4 +1,3 @@
-// import axios from "axios";
 import { DOMAIN, USERS } from '../../utils/paths';
 import {
   FETCH_ALL_USERS,
@@ -35,7 +34,7 @@ import {
   DELETE_USER_STARTED,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILURE,
-  DELETE_USER_FINISHED,
+  DELETE_USER_FINISHED
 } from './actionTypes';
 
 // Synchronous action creators
@@ -47,8 +46,8 @@ export const fetchAllUsersSuccess = users => {
   return {
     type: FETCH_ALL_USERS_SUCCESS,
     payload: {
-      users,
-    },
+      users
+    }
   };
 };
 
@@ -59,8 +58,8 @@ export const fetchAllUsersFailure = error => {
   return {
     type: FETCH_ALL_USERS_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -71,8 +70,8 @@ export const fetchSingleUserSuccess = user => {
   return {
     type: FETCH_SINGLE_USER_SUCCESS,
     payload: {
-      user,
-    },
+      user
+    }
   };
 };
 
@@ -83,8 +82,8 @@ export const fetchSingleUserFailure = error => {
   return {
     type: FETCH_SINGLE_USER_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -95,8 +94,8 @@ export const createUserSuccess = newUser => {
   return {
     type: CREATE_USER_SUCCESS,
     payload: {
-      newUser,
-    },
+      newUser
+    }
   };
 };
 
@@ -107,8 +106,8 @@ export const fetchHotelStaffSuccess = hotelStaff => {
   return {
     type: FETCH_HOTEL_STAFF_SUCCESS,
     payload: {
-      hotelStaff,
-    },
+      hotelStaff
+    }
   };
 };
 
@@ -119,8 +118,8 @@ export const fetchHotelStaffFailure = error => {
   return {
     type: FETCH_HOTEL_STAFF_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -131,8 +130,8 @@ export const createUserFailure = error => {
   return {
     type: CREATE_USER_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -146,7 +145,7 @@ export const updateUserSuccess = updatedUser => {
   return {
     type: UPDATE_USER_SUCCESS,
     payload: {
-      updatedUser,
+      updatedCurrentUser,
     },
   };
 };
@@ -158,8 +157,8 @@ export const updateUserFailure = error => {
   return {
     type: UPDATE_USER_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -170,8 +169,8 @@ export const changeUserTypeSuccess = promotedUser => {
   return {
     type: CHANGE_USER_TYPE_SUCCESS,
     payload: {
-      promotedUser,
-    },
+      promotedUser
+    }
   };
 };
 
@@ -182,8 +181,8 @@ export const changeUserTypeFailure = error => {
   return {
     type: CHANGE_USER_TYPE_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -194,8 +193,8 @@ export const deleteUserSuccess = id => {
   return {
     type: DELETE_USER_SUCCESS,
     payload: {
-      id,
-    },
+      id
+    }
   };
 };
 
@@ -206,18 +205,26 @@ export const deleteUserFailure = error => {
   return {
     type: DELETE_USER_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
 // Asynchronous action creators
 
+// not used
 export const fetchAllUsers = () => async dispatch => {
   dispatch({ type: FETCH_ALL_USERS });
   dispatch({ type: FETCH_ALL_USERS_STARTED });
   try {
-    const result = await fetch(`${DOMAIN}${USERS}`);
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      }
+    };
+    const result = await fetch(`${DOMAIN}${USERS}`, config);
     const jsonResult = await result.json();
     dispatch({ type: FETCH_ALL_USERS_FINISHED });
     dispatch(fetchAllUsersSuccess(jsonResult));
@@ -226,11 +233,19 @@ export const fetchAllUsers = () => async dispatch => {
   }
 };
 
+// not used
 export const fetchSingleUser = id => async dispatch => {
   dispatch({ type: FETCH_SINGLE_USER });
   dispatch({ type: FETCH_SINGLE_USER_STARTED });
   try {
-    const result = await fetch(`${DOMAIN}${USERS}/${id}`);
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      }
+    };
+    const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
     const jsonResult = await result.json();
     dispatch({ type: FETCH_SINGLE_USER_FINISHED });
     dispatch(fetchAllUsersSuccess(jsonResult));
@@ -243,7 +258,14 @@ export const fetchHotelStaff = id => async dispatch => {
   dispatch({ type: FETCH_HOTEL_STAFF });
   dispatch({ type: FETCH_HOTEL_STAFF_STARTED });
   try {
-    const result = await fetch(`${DOMAIN}${USERS}?hotel_id=${id}`);
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      }
+    };
+    const result = await fetch(`${DOMAIN}${USERS}?hotel_id=${id}`, config);
     const jsonResult = await result.json();
     dispatch({ type: FETCH_HOTEL_STAFF_FINISHED });
     dispatch(fetchHotelStaffSuccess(jsonResult));
@@ -252,13 +274,10 @@ export const fetchHotelStaff = id => async dispatch => {
   }
 };
 
-export const createUser = (
-  name,
-  email,
-  password,
-  user_type,
-
-) => async (dispatch, getState) => {
+export const createUser = (name, email, password, user_type) => async (
+  dispatch,
+  getState,
+) => {
   dispatch({ type: CREATE_USER });
   dispatch({ type: CREATE_USER_STARTED });
   const user = {
@@ -267,14 +286,15 @@ export const createUser = (
     email: String(email),
     password: String(password),
 
-    user_type: String(user_type),
+    user_type: String(user_type)
   };
   const config = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token')
     },
-    body: JSON.stringify(user),
+    body: JSON.stringify(user)
   };
   try {
     const result = await fetch(`${DOMAIN}${USERS}`, config);
@@ -300,8 +320,9 @@ export const updateUser = (userUpdates, id) => async dispatch => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token')
     },
-    body: JSON.stringify(userUpdates),
+    body: JSON.stringify(userUpdates)
   };
   try {
     const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
@@ -309,11 +330,13 @@ export const updateUser = (userUpdates, id) => async dispatch => {
     dispatch({ type: UPDATE_USER_FINISHED });
     if (result.ok) {
       dispatch(updateUserSuccess(jsonResult));
+      return jsonResult;
     } else {
       throw new Error(jsonResult.message);
     }
   } catch (error) {
     dispatch(updateUserFailure(error.message));
+    return error.message;
   }
 };
 
@@ -321,14 +344,15 @@ export const changeUserType = (id, newType) => async dispatch => {
   dispatch({ type: CHANGE_USER_TYPE });
   dispatch({ type: CHANGE_USER_TYPE_STARTED });
   const promotedUser = {
-    user_type: String(newType),
+    user_type: String(newType)
   };
   const config = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token')
     },
-    body: JSON.stringify(promotedUser),
+    body: JSON.stringify(promotedUser)
   };
   try {
     const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
@@ -352,7 +376,8 @@ export const deleteUser = id => async (dispatch, getState) => {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-    },
+      Authorization: localStorage.getItem('token')
+    }
   };
   try {
     const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
