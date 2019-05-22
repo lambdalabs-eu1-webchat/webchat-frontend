@@ -13,6 +13,7 @@ import {
 } from '../store/actions/rooms';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
 import Spinner from '../components/reusable/Spinner';
+import TeamModal from '../components/TeamModal'
 
 class CompanySettings extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class CompanySettings extends React.Component {
       rooms: hotel.rooms,
       newRooms: '',
       infoModal:false,
+      showInfoModal:false,
     };
     dispatchFetchSingleHotel(currentUser.hotel_id);
     dispatchFetchRoomsForHotel(currentUser.hotel_id);
@@ -47,13 +49,20 @@ class CompanySettings extends React.Component {
     if (this.state.rooms !== this.props.rooms) {
       this.setState({ rooms: this.props.rooms });
     }
-    if(this.props.room.length === 0 && !this.state.infoModal){
+    if(this.props.initGotRooms && this.props.rooms.length === 0 && !this.state.showInfoModal){
+      debugger
       this.setState({
-        infoModal:true
+        infoModal:true,
+        showInfoModal:true,
       })
     }
   }
- 
+  closeInfoModal = () => { 
+    debugger
+    this.setState ({
+    infoModal:false
+   })
+  }
   handleInputChange = event => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -179,7 +188,9 @@ class CompanySettings extends React.Component {
             loading={this.props.loading}
             fileRead={this.fileRead}
           />
+
         </CompanySettingsWrapper>
+       { <TeamModal show={this.state.infoModal}  onClose={this.closeInfoModal} />}
       </CompanySettingsOuterWrapper>
     );
   }
@@ -203,6 +214,7 @@ const mapStateToProps = state => {
     rooms: state.rooms.rooms,
     currentUser: state.currentUser,
     loading: state.loading,
+    initGotRooms:state.rooms.initGotRooms,
   };
 };
 

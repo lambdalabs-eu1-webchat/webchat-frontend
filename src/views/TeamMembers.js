@@ -72,14 +72,7 @@ class TeamMembers extends React.Component {
   handleHideModal = () => {
     this.setState({ modalShown: false });
   };
-  
-  showModal = () => {
-  this.setState({
-    ...this.state,
-    show: !this.state.show
-  })
-  }
-
+ 
   render() {
     const {
       users,
@@ -91,15 +84,7 @@ class TeamMembers extends React.Component {
     return (
       <TeamMembersOuterWrapper>
         <h2>Team Members</h2>
-          <input type="button"
-             onClick={this.showModal}
-             value="Show Team member Roles" />
-             
-        <TeamModal 
-        onClose={this.showModal}
-        show={this.state.show}>
-         </TeamModal>
-
+           
         <TeamMembersWrapper>
           <h3>Update and Assign Team Members</h3>
           <TeamMembersList
