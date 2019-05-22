@@ -16,7 +16,6 @@ import Restricted from '../components/reusable/RestrictedModal';
 import { messages } from '../utils/messages';
 import styled from 'styled-components';
 import theme from './../theme/styledTheme';
-import TeamModal from '../components/TeamModal'
 
 class TeamMembers extends React.Component {
   constructor(props) {
