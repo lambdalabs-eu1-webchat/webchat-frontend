@@ -67,7 +67,11 @@ class Login extends React.Component {
               onChange={this.handleInput}
             />
             <p>{this.state.flashMessage}</p>
-            <button type="submit" onClick={this.handleLogin}>
+            <button
+              type="submit"
+              onClick={this.handleLogin}
+              disabled={this.props.loading.login}
+            >
               {this.props.loading.login ? <Spinner /> : 'Login'}
             </button>
           </form>
@@ -138,9 +142,8 @@ const LoginWrapper = styled.div`
       color: ${theme.color.textColor};
     }
     label {
-      font-size: ${theme.fontSize.xxs};
+      font-size: ${theme.fontSize.xs};
       color: ${theme.color.accentPurple};
-      font-weight: bold;
     }
 
     input {
@@ -155,11 +158,15 @@ const LoginWrapper = styled.div`
         outline: none;
       }
     }
+    
+    p {
+      font-size: ${theme.fontSize.xs};
+    }
 
     button {
       width: 100%;
       height: ${theme.button.height};
-      font-size: ${theme.fontSize.s};
+      font-size: ${theme.fontSize.xs};
       border-radius: ${theme.border.radius};
       background: ${theme.color.accentGreen};
       border: none;

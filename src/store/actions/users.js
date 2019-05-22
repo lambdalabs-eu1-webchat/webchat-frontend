@@ -254,13 +254,10 @@ export const fetchHotelStaff = id => async dispatch => {
   }
 };
 
-export const createUser = (
-  name,
-  email,
-  password,
-  user_type,
-  motto = ''
-) => async (dispatch, getState) => {
+export const createUser = (name, email, password, user_type) => async (
+  dispatch,
+  getState
+) => {
   dispatch({ type: CREATE_USER });
   dispatch({ type: CREATE_USER_STARTED });
   const user = {
@@ -268,7 +265,7 @@ export const createUser = (
     name: String(name),
     email: String(email),
     password: String(password),
-    motto: String(motto),
+
     user_type: String(user_type)
   };
   const config = {
@@ -281,16 +278,17 @@ export const createUser = (
   try {
     const result = await fetch(`${DOMAIN}${USERS}`, config);
     const jsonResult = await result.json();
-    const newUser = { ...jsonResult };
     dispatch({ type: CREATE_USER_FINISHED });
     if (result.ok) {
-      dispatch(createUserSuccess(newUser));
+      dispatch(createUserSuccess(jsonResult));
       dispatch(fetchHotelStaff(getState().currentUser.hotel_id));
+      return jsonResult;
     } else {
       throw new Error(jsonResult.message);
     }
   } catch (error) {
     dispatch(createUserFailure(error.message));
+    return error;
   }
 };
 

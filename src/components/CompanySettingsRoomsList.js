@@ -24,7 +24,9 @@ const CompanySettingsRoomsList = props => {
         Add rooms with a CSV, or type out your hotel's room names, separating
         each with a comma
       </h3>
-      <input name="roomsUpload" type="file" accept=".csv" onChange={fileRead} />
+      <div className="file-upload">
+        <label><input id="upload" name="roomsUpload" type="file" accept=".csv" onChange={fileRead} /></label>
+      </div>
       <AddRooms>
         <input
           placeholder="Add rooms..."
@@ -32,7 +34,7 @@ const CompanySettingsRoomsList = props => {
           value={newRooms}
           onChange={handleInputChange}
         />
-        <button type="submit" onClick={addRooms}>
+        <button type="submit" onClick={addRooms} disabled={loading.updateRoom}>
           {loading.createRoom ? <Spinner /> : 'Add Rooms'}
         </button>
       </AddRooms>
@@ -73,6 +75,17 @@ const CompanySettingsRoomsListWrapper = styled.div`
     color: ${theme.color.accentPurple};
     padding: 1.5rem 0;
   }
+  
+  .file-upload {
+    align-items: center;
+    #upload {
+      margin-bottom: 5px;
+      display: flex;
+      align-self: center;
+      border: none;
+      width: 100%;
+    }
+  }
 
   .rooms-list {
     display: flex;
@@ -100,8 +113,9 @@ const CompanySettingsRoomsListWrapper = styled.div`
 
 const AddRooms = styled.section`
   display: flex;
+  justify-content: space-between;
   align-items: baseline;
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     max-width: 100%;
     flex-direction: column;
   }
@@ -114,9 +128,12 @@ const AddRooms = styled.section`
     font-size: ${theme.fontSize.xs};
     padding: 20px 0;
     border-radius: 0;
-    width: 100%;
+    width: 70%;
     &:focus {
       outline: none;
+    }
+    @media(max-width: 800px) {
+      width: 100%;
     }
   }
 
@@ -135,6 +152,7 @@ const AddRooms = styled.section`
     &:hover {
       box-shadow: ${theme.shadow.buttonHover};
       cursor: pointer;
+      transition: all 0.3s ease;
     }
     &:focus {
       outline: none;
@@ -142,8 +160,6 @@ const AddRooms = styled.section`
     @media (max-width: 800px) {
       height: ${theme.button.height};
       font-size: ${theme.fontSize.xs};
-    }
-    @media (max-width: 600px) {
       width: 100%;
       margin: 0 0 2rem;
     }

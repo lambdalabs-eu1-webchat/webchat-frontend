@@ -8,7 +8,7 @@ import Spinner from '../components/reusable/Spinner';
 const PlanCard = ({ plan, current, fireSwitchCustomerPlan, loading }) => {
   return (
     <HighlighterWrapper
-      highlight={current ? 'blanchedalmond' : theme.color.lightPurple}
+        highlight={current ? theme.color.lightGreen : theme.color.lightPurple}
     >
       <h2>{plan.title.toUpperCase()}</h2>
       <ul>
@@ -47,7 +47,7 @@ PlanCard.propTypes = {
 export default PlanCard;
 
 const HighlighterWrapper = styled.div`
-  background-color: ${props => props.highlight};
+  background: ${props => props.highlight};
   border-radius: 5px;
   text-align: center;
   width: 30%;
@@ -81,7 +81,7 @@ const HighlighterWrapper = styled.div`
 
   .fa-check {
     background: #e2fdf8;
-    border: 1px solid white;
+    border: 2px solid white;
     border-radius: 50%;
     padding: 2.5%;
     color: ${theme.color.accentGreen};
@@ -106,6 +106,7 @@ const HighlighterWrapper = styled.div`
     &:hover {
       box-shadow: ${theme.shadow.buttonHover};
       cursor: pointer;
+      transition: all 0.3s ease;
     }
     &:focus {
       outline: none;

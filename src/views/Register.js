@@ -16,9 +16,7 @@ class Register extends React.Component {
       name: '',
       email: '',
       password: '',
-      motto: '',
       hotelName: '',
-      hotelMotto: '',
     },
     flashMessage: messages.allRequiredFields,
   };
@@ -109,13 +107,6 @@ class Register extends React.Component {
               value={this.state.newUser.password}
               onChange={this.handleInput}
             />
-            <label>Motto</label>
-            <input
-              name="motto"
-              type="text"
-              value={this.state.newUser.motto}
-              onChange={this.handleInput}
-            />
             <label>Hotel Name*</label>
             <input
               name="hotelName"
@@ -123,15 +114,12 @@ class Register extends React.Component {
               value={this.state.newUser.hotelName}
               onChange={this.handleInput}
             />
-            <label>Hotel Motto</label>
-            <input
-              name="hotelMotto"
-              type="text"
-              value={this.state.newUser.hotelMotto}
-              onChange={this.handleInput}
-            />
             <p>{this.state.flashMessage}</p>
-            <button type="submit" onClick={this.handleRegister}>
+            <button
+              type="submit"
+              onClick={this.handleRegister}
+              disabled={this.props.loading.register}
+            >
               {this.props.loading.register ? <Spinner /> : 'Register'}
             </button>
           </form>
@@ -158,6 +146,10 @@ export default connect(
 
 const RegisterOuterWrapper = styled.div`
   background: ${theme.color.offWhite};
+  height: 100%;
+  @media (max-width: 600px) {
+    background: ${theme.color.white};
+  }
 `;
 
 const RegisterWrapper = styled.div`
@@ -180,6 +172,7 @@ const RegisterWrapper = styled.div`
       width: 100%;
       margin: 0;
       padding-bottom: 65px;
+      box-shadow: none;
     }
     h2 {
       font-size: ${theme.fontSize.xl};
@@ -187,9 +180,8 @@ const RegisterWrapper = styled.div`
       color: ${theme.color.textColor};
     }
     label {
-      font-size: ${theme.fontSize.xxs};
+      font-size: ${theme.fontSize.xs};
       color: ${theme.color.accentPurple};
-      font-weight: bold;
     }
 
     input {
@@ -204,11 +196,15 @@ const RegisterWrapper = styled.div`
         outline: none;
       }
     }
+    
+    p {
+      font-size: ${theme.fontSize.xs};
+    }
 
     button {
       width: 100%;
       height: ${theme.button.height};
-      font-size: ${theme.fontSize.s};
+      font-size: ${theme.fontSize.xs};
       border-radius: ${theme.border.radius};
       background: ${theme.color.accentGreen};
       border: none;
@@ -220,6 +216,7 @@ const RegisterWrapper = styled.div`
       &:hover {
         box-shadow: ${theme.shadow.buttonHover};
         cursor: pointer;
+        transition: all 0.3s ease;
       }
     }
   }

@@ -101,6 +101,7 @@ class CheckInForm extends React.Component {
           variant="contained"
           color="primary"
           onClick={this.checkInGuest}
+          disabled={this.state.isCheckingIn}
         >
           {this.state.isCheckingIn ? <Spinner /> : 'Check In'}
         </button>
@@ -165,6 +166,7 @@ const CheckInFormWrapper = styled.div`
     &:hover {
       box-shadow: ${theme.shadow.buttonHover};
       cursor: pointer;
+      transition: all 0.3s ease;
     }
     &:focus {
       outline: none;

@@ -23,6 +23,7 @@ import {
   CHANGE_USER_TYPE_FINISHED,
   DELETE_USER_STARTED,
   DELETE_USER_FINISHED,
+  CHATS,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -44,6 +45,7 @@ const initialState = {
   updateUser: false,
   changeUserType: false,
   deleteUser: false,
+  fetchClosedChats: false,
 };
 
 const loading = (state = initialState, action) => {
@@ -227,6 +229,16 @@ const loading = (state = initialState, action) => {
       return {
         ...state,
         deleteUser: false,
+      };
+    case CHATS.FETCH_CLOSED_CHATS_STARTED:
+      return {
+        ...state,
+        fetchClosedChats: true,
+      };
+    case CHATS.FETCH_CLOSED_CHATS_FINISHED:
+      return {
+        ...state,
+        fetchClosedChats: false,
       };
     default:
       return state;

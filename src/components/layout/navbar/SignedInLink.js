@@ -42,7 +42,7 @@ const LoggedIn = ({ userType }) => {
         ) : null}
         <li>
           <NavLink onClick={closeNav} to={APP_PATHS.CHECK_IN_OUT}>
-            Check In
+            Check In/Out
           </NavLink>
         </li>
         {/* this will be linked to the Employee settings as an icon with their Initials or img */}
@@ -52,7 +52,7 @@ const LoggedIn = ({ userType }) => {
             to={APP_PATHS.ACCOUNT_SETTINGS}
             className="btn btn-floating green lighten-1"
           >
-            Account settings
+            Settings
           </NavLink>
         </li>
         <li>

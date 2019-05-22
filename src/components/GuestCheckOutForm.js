@@ -7,8 +7,8 @@ import axios from 'axios';
 import Spinner from '../components/reusable/Spinner';
 import { validate } from 'email-validator';
 import Restricted from './reusable/RestrictedModal';
-import { DOMAIN, USERS, EMAIL } from '../utils/paths';
 import { axiosConfig } from '../utils/axiosConfig';
+import { DOMAIN, USERS, EMAIL, SOCKET } from '../utils/paths';
 
 class CheckOutForm extends React.Component {
   state = {
@@ -29,6 +29,19 @@ class CheckOutForm extends React.Component {
     this.setState({ emailInput });
   };
 
+  closeRestrictedModal = () => {
+    this.setState({
+      emailModalOpen: false,
+      noChatModalOpen: false
+    });
+  };
+
+  openRestrictedModal = modalState => {
+    this.setState({
+      [modalState]: true
+    });
+  };
+
   sendGuestEmail = async () => {
     const emailDetails = {
       guestEmail: this.state.emailInput,
@@ -45,12 +58,10 @@ class CheckOutForm extends React.Component {
         if (didSend.data) {
           this.setState({ emailInput: '' });
         } else {
-          return alert(
-            'This guest had no chats during their stay, please remove their email'
-          );
+          this.openRestrictedModal('noChatModalOpen');
         }
       } else {
-        return alert('Please provide a valid email address');
+        this.openRestrictedModal('emailModalOpen');
       }
     } catch (error) {
       console.error(error);
@@ -79,6 +90,7 @@ class CheckOutForm extends React.Component {
             selectValue: 'DEFAULT',
             isCheckingOut: false
           });
+          this.props.socket.emit(SOCKET.CHECK_OUT, guest_id);
         }
       } catch (error) {
         this.setState({ isCheckingOut: false });
@@ -196,6 +208,7 @@ const CheckOutFormWrapper = styled.div`
     &:hover {
       box-shadow: ${theme.shadow.buttonHover};
       cursor: pointer;
+      transition: all 0.3s ease;
     }
     &:focus {
       outline: none;

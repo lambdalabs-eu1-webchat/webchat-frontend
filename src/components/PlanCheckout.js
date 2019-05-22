@@ -29,8 +29,10 @@ function PlanCheckout({
       isOpen={!isPayment}
       ariaHideApp={false}
     >
-      <StyledBtn onClick={closeRestrictedModal}>
-        <i className="fas fa-times-circle" />
+      <StyledBtn>
+        <button onClick={closeRestrictedModal}>
+          X
+        </button>
       </StyledBtn>
       {alert && <Sth3>{alert}</Sth3>}
       <StripeProvider apiKey="pk_test_2tIDnmax83LWPMlH2j1eiu9a00CtNJbDfF">
@@ -66,27 +68,32 @@ const Sth3 = styled.h3`
   font-weight: bold;
 `;
 
-const StyledBtn = styled.button`
+const StyledBtn = styled.div`
   border: none;
-  outline: none;
-  position: absolute;
-  right: 5px;
-
-  .fa-times-circle {
-    background: white;
-    border-radius: 50%;
-    padding: 2.5%;
-    color: ${theme.color.secondaryPurple};
-    font-size: 2.5rem;
-
-    &:hover {
-      box-shadow: ${theme.shadow.buttonHover};
-      cursor: pointer;
-    }
-  }
-
-  &:focus {
+  button {
+    border: none;
     outline: none;
+    background: none;
+    color: ${theme.color.textColor};
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    font-size: ${theme.fontSize.s};
+    font-weight: bold;
+    text-align: center;
+    box-shadow: none;
+    margin: 0;
+    &:hover {
+      box-shadow: none;
+      color: ${theme.color.accentPurple};
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    &:focus {
+      outline: none;
+    }
   }
 `;
 

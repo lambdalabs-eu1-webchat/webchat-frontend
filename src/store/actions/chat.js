@@ -8,8 +8,10 @@ const {
   ADD_QUEUED_CHATS,
   REMOVE_QUEUED_CHAT,
   FETCH_CLOSED_CHATS,
+  FETCH_CLOSED_CHATS_STARTED,
   FETCH_CLOSED_CHATS_SUCCESS,
   FETCH_CLOSED_CHATS_FAILURE,
+  FETCH_CLOSED_CHATS_FINISHED,
   SAVE_SOCKET,
   SET_CURRENT_CHAT_ID,
   CLEAR_CURRENT_CHAT_ID,
@@ -18,6 +20,7 @@ const {
   CLEAR_CURRENT_TYPER,
   UPDATE_TICKET_LANGUAGE,
   TRANSLATE_CHATS_FAILURE,
+  ADD_TRANSLATED_TICKET,
 } = CHATS;
 
 export const saveSocket = socket => {
@@ -84,12 +87,15 @@ export const addMessage = (chat_id, message) => {
 
 export const fetchClosedChats = id => async dispatch => {
   dispatch({ type: FETCH_CLOSED_CHATS });
+  dispatch({ type: FETCH_CLOSED_CHATS_STARTED });
   try {
     const result = await fetch(`${DOMAIN}${CHATS_CLOSED}?hotel_id=${id}`);
     const jsonResult = await result.json();
     dispatch(fetchAllClosedChatsSuccess(jsonResult));
+    dispatch({ type: FETCH_CLOSED_CHATS_FINISHED });
   } catch (error) {
     dispatch(fetchAllClosedChatsFailure(error));
+    dispatch({ type: FETCH_CLOSED_CHATS_FINISHED });
   }
 };
 
@@ -151,7 +157,37 @@ export const clearCurrentTyper = chat_id => {
   };
 };
 
-export const translate = async (text, ticket_id, language) => {
+export const translate = (
+  text,
+  ticket_id,
+  chat_id,
+  language,
+) => async dispatch => {
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: language
+      ? JSON.stringify({ text, ticket_id, language })
+      : JSON.stringify({ text, ticket_id }),
+  };
+
+  try {
+    const response = await fetch(`${DOMAIN}${TRANSLATE_CHAT}`, config);
+    const jsonResponse = await response.json();
+    dispatch(addTranslatedTicket(ticket_id, jsonResponse));
+    // return jsonResponse;
+    const lasrTranslatedText = jsonResponse[jsonResponse.length - 1];
+    dispatch(
+      updateTicketLanguage(chat_id, lasrTranslatedText.detectedSourceLanguage),
+    );
+  } catch (error) {
+    // dispatch(translateChatFailure(error));
+    console.error(error);
+  }
+};
+export const translateMessage = async (text, ticket_id, language) => {
   const config = {
     method: 'POST',
     headers: {
@@ -179,6 +215,14 @@ export const updateTicketLanguage = (chat_id, language) => {
     payload: language,
   };
 };
+
+export function addTranslatedTicket(ticket_id, messages) {
+  return {
+    type: ADD_TRANSLATED_TICKET,
+    target: ticket_id,
+    payload: messages,
+  };
+}
 
 export const translateChatFailure = error => {
   if (!error) {
