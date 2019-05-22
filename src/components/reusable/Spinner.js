@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import theme from '../../theme/styledTheme';
 
-const Spinner = () => (
-  <StyledSpinner viewBox="0 0 50 50">
+const Spinner = ({ diameter, color }) => (
+  <StyledSpinner viewBox="0 0 50 50" diameter={diameter} color={color}>
     <circle
       className="path"
       cx="25"
