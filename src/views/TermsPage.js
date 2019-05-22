@@ -140,7 +140,7 @@ const TermsPageContainer = styled.div`
   
   section {
     width: 60%;
-    padding: 2rem;
+    padding: 2rem 0 2rem 3.2rem;
     @media(max-width: 1000px) {
       width: 100%;
       padding: 2rem 1rem;
