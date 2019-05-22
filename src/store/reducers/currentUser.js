@@ -21,8 +21,8 @@ const currentUser = (state = initialState, action) => {
     case LOGOUT:
       return { ...initialState };
     case UPDATE_USER_SUCCESS:
-      if (state._id === action.payload.updatedUser._id) {
-        return action.payload.updatedUser;
+      if (state._id === action.payload.updatedCurrentUser._id) {
+        return action.payload.updatedCurrentUser;
       }
       return state;
       // break;
