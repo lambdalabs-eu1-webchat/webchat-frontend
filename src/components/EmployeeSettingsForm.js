@@ -44,7 +44,7 @@ const EmployeeSettingsForm = ({
           placeholder="retype new password"
         />
         <p>{flashMessage}</p>
-     
+
         <div className="form-buttons">
           <button type="submit" onClick={fireUserUpdates} disabled={loading.updateUser}>
             {loading.updateUser ? <Spinner /> : 'Update'}
@@ -103,6 +103,10 @@ const EmployeeSettingsFormWrapper = styled.div`
     &:focus {
       outline: none;
     }
+  }
+  
+  p {
+    font-size: ${theme.fontSize.xs};
   }
 
   .form-buttons {
