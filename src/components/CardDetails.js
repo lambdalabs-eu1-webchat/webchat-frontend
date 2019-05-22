@@ -3,7 +3,7 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
 
-const CardDetails = ({ card, email, openNeedPaymentPlanModal }) => {
+const CardDetails = ({ payment, card, email, openNeedPaymentPlanModal }) => {
   return (
     <div>
       <CardDetailsWrapper>
@@ -16,7 +16,9 @@ const CardDetails = ({ card, email, openNeedPaymentPlanModal }) => {
           {card.expiration.year}
         </span>
         <span>Receipts sent to: {email}</span>
-        <button onClick={openNeedPaymentPlanModal}>Edit</button>
+        <button onClick={openNeedPaymentPlanModal}>
+          {card.brand ? 'Edit' : 'Add'}
+        </button>
       </CardDetailsWrapper>
     </div>
   );
@@ -28,11 +30,11 @@ CardDetails.propTypes = {
     last_four: PT.string.isRequired,
     expiration: PT.shape({
       month: PT.isRequired,
-      year: PT.isRequired
-    }).isRequired
+      year: PT.isRequired,
+    }).isRequired,
   }).isRequired,
   email: PT.string.isRequired,
-  openNeedPaymentPlanModal: PT.func.isRequired
+  openNeedPaymentPlanModal: PT.func.isRequired,
 };
 
 export default CardDetails;
@@ -56,6 +58,7 @@ const CardDetailsWrapper = styled.div`
     text-align: left;
     font-size: ${theme.fontSize.s};
     font-weight: bold;
+    padding: 15px 0;
   }
 
   span {

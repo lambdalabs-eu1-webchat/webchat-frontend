@@ -93,6 +93,7 @@ const TeamMembersAddNewMemberModal = ({
               plan,
               staffAmount,
             )}
+            disabled={loading.createUser}
           >
             {loading.createUser ? <Spinner /> : 'Add Member'}
           </button>

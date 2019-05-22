@@ -10,12 +10,12 @@ import Spinner from '../components/reusable/Spinner';
 
 class PlanCheckoutForm extends Component {
   state = {
-    flashMessage: messages.allRequiredFields
+    flashMessage: messages.allRequiredFields,
   };
 
   setFlashMessage = flashMessage => {
     this.setState({
-      flashMessage
+      flashMessage,
     });
   };
 
@@ -54,6 +54,10 @@ class PlanCheckoutForm extends Component {
               ? () => this.editPaymentMethod()
               : () => this.createCustomer()
           }
+          disabled={
+            this.props.loading.createCustomer ||
+            this.props.loading.updateCustomerMethod
+          }
         >
           {this.props.loading.createCustomer ||
           this.props.loading.updateCustomerMethod ? (
@@ -69,18 +73,18 @@ class PlanCheckoutForm extends Component {
 }
 
 PlanCheckoutForm.defaultProps = {
-  billingEmail: ''
+  billingEmail: '',
 };
 
 PlanCheckoutForm.propTypes = {
   stripe: PT.shape({
-    createToken: PT.func.isRequired
+    createToken: PT.func.isRequired,
   }).isRequired,
   fireCreateNewCustomer: PT.func.isRequired,
   fireUpdateCustomerMethod: PT.func.isRequired,
   billingEmail: PT.string.isRequired,
   handleInputChange: PT.func.isRequired,
-  buttonText: PT.string.isRequired
+  buttonText: PT.string.isRequired,
 };
 
 const createOptions = () => {
@@ -88,15 +92,15 @@ const createOptions = () => {
     style: {
       base: {
         fontSize: theme.fontSize.xxs,
-        fontFamily: theme.font.fontFamily
+        fontFamily: theme.font.fontFamily,
       },
       invalid: {
-        color: '#9e2146'
+        color: '#9e2146',
       },
       empty: {
-        color: '#333'
-      }
-    }
+        color: '#333',
+      },
+    },
   };
 };
 
@@ -106,6 +110,10 @@ const FormWrapper = styled.div`
   justify-content: space-around;
   margin: 3rem 0;
   overflow: hidden;
+  
+  p {
+    font-size: ${theme.fontSize.xs};
+  }
 `;
 
 const StyledBtn = styled.button`

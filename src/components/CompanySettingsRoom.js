@@ -16,9 +16,11 @@ const CompanySettingsRoom = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState(name);
+
   const handleDeleteClick = () => {
     setIsDeleteModalOpen(true);
   };
+
   const handleUpdateClick = () => {
     setIsUpdateModalOpen(true);
   };
@@ -36,12 +38,20 @@ const CompanySettingsRoom = ({
       {loading.updateRoom ? (
         <Spinner />
       ) : (
-        <i className="far fa-edit" onClick={handleUpdateClick} />
+        <i
+          className="far fa-edit"
+          onClick={handleUpdateClick}
+          disabled={loading.updateRoom}
+        />
       )}
       {loading.deleteRoom ? (
         <Spinner />
       ) : (
-        <i className="fas fa-trash-alt" onClick={handleDeleteClick} />
+        <i
+          className="fas fa-trash-alt"
+          onClick={handleDeleteClick}
+          disabled={loading.deleteRoom}
+        />
       )}
       {
         <React.Fragment>
