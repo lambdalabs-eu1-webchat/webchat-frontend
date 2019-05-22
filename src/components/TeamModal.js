@@ -17,7 +17,7 @@ export default class TeamModal extends React.Component {
                 <div style={modalStyle}>           
 
                 <section className="pricing-plan">
-            <h2>Users and their Roles</h2>
+            <h2>User guide :</h2>
               <p>
                 You will have 3 types of Users and each User has access to allocated pages depending on their company status 
               </p>
@@ -26,36 +26,37 @@ export default class TeamModal extends React.Component {
                 <h2><i className="fas fa-user-cog"></i>
                 <br></br> Super Admin</h2>
                 <ul>
-                <li><i className="fas fa-check"></i>Unlimited access</li>
-                  <li><i className="fas fa-check"></i>Can register new company</li>
-                  <li><i className="fas fa-check"></i>Can Add team members</li>
-                  <li><i className="fas fa-check"></i>Can Add rooms</li>
-                  <li><i className="fas fa-check"></i>Change company settings</li>
-                  <li><i className="fas fa-check"></i>Can monitor everyone</li>
+                <li>- Unlimited access</li>
+                  <li>- Can Add new team members</li>
+                  <li>- Can Add and delete rooms</li>
+                  <li>- Can change company settings</li>
+                  <li>- Live chat with guests</li>
+                  <li>- Can monitor everything</li>
                 </ul>
               </div>
 
               <div className="pricing-card">
               <h2><i className="fas fa-user"></i>
-                <br></br> Admin / Manager</h2>
+                <br></br>Admin</h2>
                 <ul>
-                  <li><i className="fas fa-check"></i>Restricted access</li>
-                  <li><i className="fas fa-check"></i>Can not remove Admins</li>
-                  <li><i className="fas fa-check"></i>Check guests in and out</li>
-                  <li><i className="fas fa-check"></i>Track ticket status</li>
-                  <li><i className="fas fa-check"></i>Add team members</li>
+                  <li>- Restricted access</li>
+                  <li>- Can not remove Admins</li>
+                  <li>- Can check guests in and out</li>
+                  <li>- Live chat with guests</li>
+                  <li>- Track ticket status</li>
+                  <li>- Add team members </li>
                 </ul>
               </div>
 
               <div className="pricing-card">
               <h2><i className="fas fa-user"></i>
-                <br></br>Employee / Receptionist </h2>
+                <br></br>Employee </h2>
                 <ul>
-                  <li><i className="fas fa-check"></i>Restricted access</li>
-                  <li><i className="fas fa-check"></i>Live chat with guests</li>
-                  <li><i className="fas fa-check"></i>Check guests in and out</li>
-                  <li><i className="fas fa-check"></i>Track ticket status</li>
-                  <li><i className="fas fa-check"></i>Change their own settings</li>
+                  <li>- Restricted access</li>
+                  <li>- Live chat with guests</li>
+                  <li>- Check guests in and out</li>
+                  <li>- Track ticket status</li>
+                  <li>- Change their own settings</li>
                 </ul>
               </div>
             </div>
@@ -76,7 +77,7 @@ export default class TeamModal extends React.Component {
 const Container = styled.div`
   background: ${theme.color.white};
   margin: 0 5rem;
-  
+
   box-shadow: ${theme.shadow.containerShadow};
   overflow-y:scroll;
     button {
@@ -199,24 +200,4 @@ const modalStyle = {
    position:'relative',
   
 };
-// const modalBackDropStyle = styled.div`
-// position:fixed;
-// top:0;
-// bottom:0;
-// left:0;
-// right:0;
-// padding:50;
-// background-color:rgba(0,0,0,0.3)
-// `;
-
-// const modalBackStyle = styled.div`
-//   background-color: #fff;
-//   border-radius: 5;
-//   max-width: 600;
-//   min-height: 400;
-//   margin: 0 auto;
-//   padding: 30;
-//   position:relative;
-// `;
-
 
