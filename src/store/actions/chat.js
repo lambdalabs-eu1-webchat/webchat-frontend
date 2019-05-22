@@ -186,7 +186,6 @@ export const translate = (text, ticket_id, chat_id, cb) => async dispatch => {
     dispatch(
       updateTicketLanguage(chat_id, lasrTranslatedText.detectedSourceLanguage),
     );
-    debugger;
     if (cb) cb();
   } catch (error) {
     // dispatch(translateChatFailure(error));
