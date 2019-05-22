@@ -13,7 +13,6 @@ import {
 } from '../store/actions/rooms';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
 import Restricted from '../components/reusable/RestrictedModal';
-import Spinner from '../components/reusable/Spinner';
 
 class CompanySettings extends React.Component {
   constructor(props) {
@@ -182,8 +181,9 @@ class CompanySettings extends React.Component {
                     hotel._id,
                     dispatchUpdateHotel,
                   ).bind(this)}
+                  disabled={this.props.loading.updateHotel}
                 >
-                  {this.props.loading.updateHotel ? <Spinner /> : 'Save'}
+                  Save
                 </button>
               </div>
             </form>
