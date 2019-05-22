@@ -76,39 +76,9 @@ export default class TeamModal extends React.Component {
 const Container = styled.div`
   background: ${theme.color.white};
   margin: 0 5rem;
+  
   box-shadow: ${theme.shadow.containerShadow};
   overflow-y:scroll;
-
-  h1 {
-    font-size: ${theme.fontSize.xl};
-    padding: 25px;
-    font-weight: bold;
-    width: 60%;
-    color: ${theme.color.textColor};
-    @media (max-width: 1000px) {
-      width: 90%;
-    }
-  }
-  h2 {
-    font-size: ${theme.fontSize.l};
-    color: ${theme.color.textColor};
-  }
-  h3 {
-    font-size: ${theme.fontSize.m};
-    color: ${theme.color.textColor};
-  }
-  p {
-    font-size: ${theme.fontSize.m};
-    color: ${theme.color.textColor};
-    padding: 25px;
-  }
-  
-  a {
-    text-decoration: none;
-    color: ${theme.color.white};
-    font-weight: bold;
-  }
-
     button {
       margin: 25px;
       padding: 10px 20px;
@@ -171,31 +141,7 @@ const Container = styled.div`
         width: 100%;
       }
       
-      h2 {
-        font-weight: bold;
-        text-align: center;
-        font-size: ${theme.fontSize.m};
-        color: ${theme.color.accentText};
-      }
-      
-      ul {
-        padding: 0 5%;
-        
-        li {
-          font-size: ${theme.fontSize.xs};
-          padding: 5% 0;
-          text-align: left;
-        }
-      }
-      
-      h3 {
-        color: ${theme.color.accentText};
-        text-align: center;
-        font-size: ${theme.fontSize.s};
-        font-weight: bold;
-        padding: 5% 0;
-      }
-      
+     
       button {
         margin: 5% 0;
         height: ${theme.button.height};
@@ -231,6 +177,8 @@ const Container = styled.div`
     }
   }
 `;
+
+// need to change these to styled components
 const backdropStyle = {
     position:'fixed',
     top:0,
