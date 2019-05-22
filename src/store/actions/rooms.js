@@ -1,12 +1,16 @@
 import { ROOMS } from './actionTypes';
 import axios from 'axios';
+import { axiosConfig } from '../../utils/axiosConfig';
 import { HOTEL, DOMAIN } from '../../utils/paths';
 
 export const fetchRooms = hotel_id => async dispatch => {
   dispatch({ type: ROOMS.FETCH_ROOMS_FOR_HOTEL });
   dispatch({ type: ROOMS.FETCH_ROOMS_FOR_HOTEL_STARTED });
   try {
-    const roomsRes = await axios.get(`${DOMAIN}${HOTEL}/${hotel_id}/rooms`);
+    const roomsRes = await axios.get(
+      `${DOMAIN}${HOTEL}/${hotel_id}/rooms`,
+      axiosConfig
+    );
     dispatch({ type: ROOMS.FETCH_ROOMS_FOR_HOTEL_FINISHED });
     dispatch(successFetchRooms(roomsRes.data));
   } catch (error) {
@@ -17,18 +21,18 @@ export const fetchRooms = hotel_id => async dispatch => {
 function successFetchRooms(rooms) {
   if (rooms.length === 0) {
     return {
-      type: ROOMS.HOTEL_HAS_ZERO_ROOMS,
+      type: ROOMS.HOTEL_HAS_ZERO_ROOMS
     };
   }
   return {
     type: ROOMS.FETCH_ROOMS_FOR_HOTEL_SUCCESS,
-    payload: rooms,
+    payload: rooms
   };
 }
 function failFetchRooms(error) {
   return {
     type: ROOMS.FETCH_ROOMS_FOR_HOTEL_FAILURE,
-    payload: error,
+    payload: error
   };
 }
 
@@ -38,7 +42,7 @@ export const fetchRoomsForHotelSuccess = rooms => {
   }
   return {
     type: ROOMS.FETCH_ROOMS_FOR_HOTEL_SUCCESS,
-    payload: rooms,
+    payload: rooms
   };
 };
 
@@ -49,8 +53,8 @@ export const fetchRoomsForHotelFailure = error => {
   return {
     type: ROOMS.FETCH_ROOMS_FOR_HOTEL_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -61,8 +65,8 @@ export const createRoomForHotelSuccess = newRoom => {
   return {
     type: ROOMS.CREATE_ROOM_FOR_HOTEL_SUCCESS,
     payload: {
-      newRoom,
-    },
+      newRoom
+    }
   };
 };
 
@@ -73,20 +77,20 @@ export const createRoomForHotelFailure = error => {
   return {
     type: ROOMS.CREATE_ROOM_FOR_HOTEL_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
 export const updateRoomForHotelSuccess = updatedRoom => {
   if (!updatedRoom) {
     throw new Error(
-      'updateRoomForHotelSuccess requires an updatedRoom argument',
+      'updateRoomForHotelSuccess requires an updatedRoom argument'
     );
   }
   return {
     type: ROOMS.UPDATE_ROOM_FOR_HOTEL_SUCCESS,
-    payload: updatedRoom,
+    payload: updatedRoom
   };
 };
 
@@ -97,8 +101,8 @@ export const updateRoomForHotelFailure = error => {
   return {
     type: ROOMS.UPDATE_ROOM_FOR_HOTEL_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -109,8 +113,8 @@ export const deleteRoomForHotelSuccess = id => {
   return {
     type: ROOMS.DELETE_ROOM_FOR_HOTEL_SUCCESS,
     payload: {
-      id,
-    },
+      id
+    }
   };
 };
 
@@ -121,8 +125,8 @@ export const deleteRoomForHotelFailure = error => {
   return {
     type: ROOMS.DELETE_ROOM_FOR_HOTEL_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -130,7 +134,14 @@ export const fetchRoomsForHotel = hotel_id => async dispatch => {
   dispatch({ type: ROOMS.FETCH_ROOMS_FOR_HOTEL });
   dispatch({ type: ROOMS.FETCH_ROOMS_FOR_HOTEL_STARTED });
   try {
-    const result = await fetch(`${DOMAIN}${HOTEL}/${hotel_id}/rooms`);
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      }
+    };
+    const result = await fetch(`${DOMAIN}${HOTEL}/${hotel_id}/rooms`, config);
     const jsonResult = await result.json();
     dispatch({ type: ROOMS.FETCH_ROOMS_FOR_HOTEL_FINISHED });
     dispatch(fetchRoomsForHotelSuccess(jsonResult));
@@ -141,7 +152,7 @@ export const fetchRoomsForHotel = hotel_id => async dispatch => {
 
 export const createRoomForHotel = (
   newRoomArray,
-  hotel_id,
+  hotel_id
 ) => async dispatch => {
   dispatch({ type: ROOMS.CREATE_ROOM_FOR_HOTEL });
   dispatch({ type: ROOMS.CREATE_ROOM_FOR_HOTEL_STARTED });
@@ -149,8 +160,9 @@ export const createRoomForHotel = (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token')
     },
-    body: JSON.stringify(newRoomArray),
+    body: JSON.stringify(newRoomArray)
   };
   try {
     const result = await fetch(`${DOMAIN}${HOTEL}/${hotel_id}/rooms`, config);
@@ -172,19 +184,20 @@ export const updateRoomForHotel = (id, hotel_id, name) => async dispatch => {
   dispatch({ type: ROOMS.UPDATE_ROOM_FOR_HOTEL });
   dispatch({ type: ROOMS.UPDATE_ROOM_FOR_HOTEL_STARTED });
   const updatedRoom = {
-    name: String(name),
+    name: String(name)
   };
   const config = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token')
     },
-    body: JSON.stringify(updatedRoom),
+    body: JSON.stringify(updatedRoom)
   };
   try {
     const result = await fetch(
       `${DOMAIN}${HOTEL}/${hotel_id}/rooms/${id}`,
-      config,
+      config
     );
     const jsonResult = await result.json();
     dispatch({ type: ROOMS.UPDATE_ROOM_FOR_HOTEL_FINISHED });
@@ -201,7 +214,7 @@ export const updateRoomForHotel = (id, hotel_id, name) => async dispatch => {
 
 export const deleteRoomForHotel = (id, hotel_id) => async (
   dispatch,
-  getState,
+  getState
 ) => {
   dispatch({ type: ROOMS.DELETE_ROOM_FOR_HOTEL });
   dispatch({ type: ROOMS.DELETE_ROOM_FOR_HOTEL_STARTED });
@@ -209,12 +222,13 @@ export const deleteRoomForHotel = (id, hotel_id) => async (
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-    },
+      Authorization: localStorage.getItem('token')
+    }
   };
   try {
     const result = await fetch(
       `${DOMAIN}${HOTEL}/${hotel_id}/rooms/${id}`,
-      config,
+      config
     );
     const jsonResult = await result.json();
     dispatch({ type: ROOMS.DELETE_ROOM_FOR_HOTEL_FINISHED });
