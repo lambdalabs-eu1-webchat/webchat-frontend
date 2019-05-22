@@ -6,7 +6,7 @@ const theme = {
     secondaryPurple: '#5B66AC',
     hoverGreen: '',
     hoverPurple: '#5969c6',
-    lightGreen: '',
+    lightGreen: '#e2fdf8',
     lightPurple: '#F4F6FF',
     darkContrast: '',
     textColor: '#333', //main text color

@@ -3,7 +3,7 @@ import PT from 'prop-types';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
 
-const CardDetails = ({ card, email, openNeedPaymentPlanModal }) => {
+const CardDetails = ({ payment, card, email, openNeedPaymentPlanModal }) => {
   return (
     <div>
       <CardDetailsWrapper>
@@ -58,6 +58,7 @@ const CardDetailsWrapper = styled.div`
     text-align: left;
     font-size: ${theme.fontSize.s};
     font-weight: bold;
+    padding: 15px 0;
   }
 
   span {

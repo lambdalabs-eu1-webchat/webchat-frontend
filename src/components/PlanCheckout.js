@@ -71,30 +71,30 @@ const Sth3 = styled.h3`
 const StyledBtn = styled.div`
   border: none;
   button {
-      border: none;
-      outline: none;
-      background: none;
-      color: ${theme.color.textColor};
-      width: 3rem;
-      height: 3rem;
-      position: absolute;
-      right: 2px;
-      top: 2px;
-      font-size: ${theme.fontSize.s};
-      font-weight: bold;
-      text-align: center;
+    border: none;
+    outline: none;
+    background: none;
+    color: ${theme.color.textColor};
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    font-size: ${theme.fontSize.s};
+    font-weight: bold;
+    text-align: center;
+    box-shadow: none;
+    margin: 0;
+    &:hover {
       box-shadow: none;
-      margin: 0;
-      &:hover {
-        box-shadow: none;
-        color: ${theme.color.accentPurple};
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      &:focus {
-        outline: none;
-      }
+      color: ${theme.color.accentPurple};
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 
 export default PlanCheckout;
