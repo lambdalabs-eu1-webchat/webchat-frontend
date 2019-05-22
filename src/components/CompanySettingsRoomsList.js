@@ -99,7 +99,6 @@ const CompanySettingsRoomsListWrapper = styled.div`
   .rooms-list {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding-top: 20px;
     height: 300px;
     overflow-y: scroll;
