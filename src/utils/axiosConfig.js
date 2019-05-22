@@ -1,3 +1,3 @@
 export const axiosConfig = {
-  headers: { Authorization: localStorage.getItem('token') }
+  Headers: { Authorization: localStorage.getItem('token') }
 };

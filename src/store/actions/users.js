@@ -1,4 +1,3 @@
-// import axios from "axios";
 import { DOMAIN, USERS } from '../../utils/paths';
 import {
   FETCH_ALL_USERS,

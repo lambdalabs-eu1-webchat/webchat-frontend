@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import QRCode from 'qrcode.react';
 import axios from 'axios';
 
+import { axiosConfig } from '../utils/axiosConfig';
 import { DOMAIN, USERS, GUEST_CLIENT_DOMAIN } from '../utils/paths';
 import Spinner from '../components/reusable/Spinner';
 
@@ -18,7 +19,7 @@ class CheckInForm extends React.Component {
     errorRoom: false,
     errorName: false,
     guestToken: '',
-    isCheckingIn: false,
+    isCheckingIn: false
   };
 
   setNameInput = nameInput => {
@@ -36,15 +37,19 @@ class CheckInForm extends React.Component {
       // turn on spinner
       this.setState({ isCheckingIn: true });
       try {
-        const res = await axios.post(`${DOMAIN}${USERS}`, {
-          hotel_id: this.props.hotel_id,
-          user_type: 'guest',
-          name,
-          room: {
-            name: room.name,
-            id: room._id,
+        const res = await axios.post(
+          `${DOMAIN}${USERS}`,
+          {
+            hotel_id: this.props.hotel_id,
+            user_type: 'guest',
+            name,
+            room: {
+              name: room.name,
+              id: room._id
+            }
           },
-        });
+          axiosConfig
+        );
         const data = jwt.decode(res.data.token);
         this.props.filterAvailableRoom(room_id);
         this.props.addCurrentGuest(res.data.user);
@@ -53,7 +58,7 @@ class CheckInForm extends React.Component {
           selectValue: 'DEFAULT',
           nameInput: '',
           guestToken: res.data.token,
-          isCheckingIn: false,
+          isCheckingIn: false
         });
       } catch (error) {
         this.setState({ isCheckingIn: false });
@@ -117,7 +122,7 @@ class CheckInForm extends React.Component {
 }
 
 CheckInForm.propTypes = {
-  hotel_id: propTypes.string.isRequired,
+  hotel_id: propTypes.string.isRequired
 };
 
 const CheckInFormWrapper = styled.div`

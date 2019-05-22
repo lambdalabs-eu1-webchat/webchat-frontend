@@ -82,7 +82,10 @@ class CheckOutForm extends React.Component {
       const room = { name: guest.room.name, _id: guest.room.id };
       this.setState({ isCheckingOut: true });
       try {
-        const didDel = await axios.delete(`${DOMAIN}${USERS}/${guest_id}`);
+        const didDel = await axios.delete(
+          `${DOMAIN}${USERS}/${guest_id}`,
+          axiosConfig
+        );
         if (didDel) {
           this.props.filterCurrentGuests(guest_id);
           this.props.addAvailableRoom(room);

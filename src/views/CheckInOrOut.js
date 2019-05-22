@@ -5,21 +5,24 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { DOMAIN, HOTEL } from '../utils/paths';
-
+import { axiosConfig } from '../utils/axiosConfig';
 import CheckInForm from '../components/GuestCheckInForm';
 import CheckOutForm from '../components/GuestCheckOutForm';
 
 class CheckInOrOut extends React.Component {
   state = {
     availableRooms: [],
-    currentGuests: [],
+    currentGuests: []
   };
   componentDidMount() {
     axios
-      .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/rooms/available`)
+      .get(
+        `${DOMAIN}${HOTEL}/${this.props.hotel_id}/rooms/available`,
+        axiosConfig
+      )
       .then(res => {
         this.setState({
-          availableRooms: res.data,
+          availableRooms: res.data
         });
       })
       .catch(error => {
@@ -27,10 +30,13 @@ class CheckInOrOut extends React.Component {
       });
     // get the hotels current guests
     axios
-      .get(`${DOMAIN}${HOTEL}/${this.props.hotel_id}/guests?status=here`)
+      .get(
+        `${DOMAIN}${HOTEL}/${this.props.hotel_id}/guests?status=here`,
+        axiosConfig
+      )
       .then(res => {
         this.setState({
-          currentGuests: res.data,
+          currentGuests: res.data
         });
       })
       .catch(error => {
@@ -47,7 +53,7 @@ class CheckInOrOut extends React.Component {
     this.setState(cState => {
       // get the room
       const availableRooms = cState.availableRooms.filter(
-        room => room._id !== room_id,
+        room => room._id !== room_id
       );
       return { availableRooms };
     });
@@ -56,17 +62,17 @@ class CheckInOrOut extends React.Component {
     this.setState(cState => {
       const currentGuests = [...cState.currentGuests, guest];
       return {
-        currentGuests,
+        currentGuests
       };
     });
   };
   filterCurrentGuests = guest_id => {
     this.setState(cState => {
       const newCurrentGuests = cState.currentGuests.filter(
-        guest => guest_id !== guest._id,
+        guest => guest_id !== guest._id
       );
       return {
-        currentGuests: newCurrentGuests,
+        currentGuests: newCurrentGuests
       };
     });
   };
@@ -101,7 +107,7 @@ class CheckInOrOut extends React.Component {
 
 CheckInOrOut.propTypes = {
   hotel_id: propTypes.string.isRequired,
-  loading: propTypes.object.isRequired,
+  loading: propTypes.object.isRequired
 };
 
 const StyledCheckInOrOut = styled.div`
@@ -147,7 +153,7 @@ function mapStateToProps(state) {
   return {
     hotel_id: state.currentUser.hotel_id,
     loading: state.loading,
-    socket: state.chats.socket,
+    socket: state.chats.socket
   };
 }
 
