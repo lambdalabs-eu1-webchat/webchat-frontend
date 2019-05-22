@@ -157,20 +157,13 @@ export const clearCurrentTyper = chat_id => {
   };
 };
 
-export const translate = (
-  text,
-  ticket_id,
-  chat_id,
-  language,
-) => async dispatch => {
+export const translate = (text, ticket_id, chat_id, cb) => async dispatch => {
   const config = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: language
-      ? JSON.stringify({ text, ticket_id, language })
-      : JSON.stringify({ text, ticket_id }),
+    body: JSON.stringify({ text, ticket_id }),
   };
 
   try {
@@ -182,6 +175,8 @@ export const translate = (
     dispatch(
       updateTicketLanguage(chat_id, lasrTranslatedText.detectedSourceLanguage),
     );
+    debugger;
+    if (cb) cb();
   } catch (error) {
     // dispatch(translateChatFailure(error));
     console.error(error);
