@@ -13,24 +13,24 @@ export default class TeamModal extends React.Component {
         }
         return (
             <Container>
-            <div style={backdropStyle}>
-                <div style={modalStyle}>           
+            <div className="backStyle">
+                <div className="backmodal">           
                 <h2>Welcome to FrontDesk</h2>
            <section>
           <p className="card">
         <ul>
-        <li> - As the Super Admin for your Hotel, you have access to all areas of the app including company information and billing.</li>
-          <li> - To get talking to your guests right away, simply add your hotel's rooms on this settings page and check in your first guest.</li>
-          <li> - You can also add any colleagues you'd like to work with over on the Team Members page. </li>
-          <li> - There are two types of user permissions you can assign to your team:</li>
+         As the Super Admin for your Hotel, you have access to all areas of the app including company information and billing.
+         To get talking to your guests right away, simply add your hotel's rooms on this settings page and check in your first guest.
+          You can also add any colleagues you'd like to work with over on the Team Members page. 
+           There are two types of user permissions you can assign to your team:
         </ul>
           </p>
           <br />
 
         <ul>
-        <li> Non-admin: Live chat with guests, check guests in/out, track tickets.</li>
-           
-           <li>Admin: All of the above, see guest's chat ratings, add team members</li>
+        <li>Team-Member: Live chat with guests, check guests in/out, track tickets.</li>
+        <li>Admin: All of the above, see guest's chat ratings, add team members</li>
+       
         </ul>
          </section>
 
@@ -79,9 +79,6 @@ const Container = styled.div`
         margin: 5%;
       }
     }
-    a {
-    align-self: center;
-    }
   }
 
   .card {
@@ -94,30 +91,53 @@ const Container = styled.div`
     }
   
   }
+  .backmodal {
+    background-color:${theme.color.offWhite};
+    border-radius:2rem;
+    max-width:80rem;
+    min-height:20rem;
+    top:8rem;
+    margin:0 auto;
+    padding:5rem;
+    position:relative;
+    font-size:22px;
+   
+  }
+  .backStyle {
+      flex-direction:column;
+      position:fixed;
+      top:0;
+      bottom:0;
+      left:0;
+      right:0;
+      background-color:rgba(0,0,0,0.3);
+      padding:5rem;
+      overflow:scroll;
+  }
 `;
 
 // need to change these to styled components
-const backdropStyle = {
-    flexDirection:'column',
-    position:'fixed',
-    top:0,
-    bottom:0,
-    left:0,
-    right:0,
-    backgroundColor:'rgba(0,0,0,0.3)',
-    padding:'50',
-    overflow:'scroll',
-};
-const modalStyle = {
-   backgroundColor:theme.color.offWhite,
-   borderRadius:5,
-   maxWidth:800,
-   minHeight:200,
-   top:60,
-   margin:'0 auto',
-   padding:30,
-   position:'relative',
-   fontSize:'22px',
+// const backdropStyle = {
+//     flexDirection:'column',
+//     position:'fixed',
+//     top:0,
+//     bottom:0,
+//     left:0,
+//     right:0,
+//     backgroundColor:'rgba(0,0,0,0.3)',
+//     padding:'50',
+//     overflow:'scroll',
+// };
+// const modalBigStyle = styled.div`
+//    background-color:theme.color.offWhite;
+//    border-radius:5;
+//    max-width:800;
+//    min-height:200;
+//    top:60;
+//    margin:0 auto;
+//    padding:30;
+//    position:relative;
+//    font-size:22px;
   
-};
+// `;
 
