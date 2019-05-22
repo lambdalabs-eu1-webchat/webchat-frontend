@@ -12,6 +12,7 @@ import {
   createRoomForHotel,
 } from '../store/actions/rooms';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
+import Restricted from '../components/reusable/RestrictedModal';
 
 class CompanySettings extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class CompanySettings extends React.Component {
       companyName: hotel.name,
       rooms: hotel.rooms,
       newRooms: '',
+      noRoomModalOpen: false,
     };
     dispatchFetchSingleHotel(currentUser.hotel_id);
     dispatchFetchRoomsForHotel(currentUser.hotel_id);
@@ -110,14 +112,36 @@ class CompanySettings extends React.Component {
   addRooms = () => {
     const rooms = this.state.newRooms;
     if (!rooms.length) {
-      return alert('Please add at least one room name');
+      this.openRestrictedModal();
     } else {
       // split the string into an array of room names on the comma separator
       // trim whitespace at the start and end of each string
-      const roomsToAdd = rooms.split(',').map(room => ({ name: room.trim() }));
-      this.props.dispatchCreateRoomForHotel(roomsToAdd, this.props.hotel._id);
-      this.clearNewRooms();
+      // remove any rooms that resolve to empty after formatting
+      // open restriction modal if addRoom length is zero after room removal
+      const roomsToAdd = rooms
+        .split(',')
+        .map(room => ({ name: room.trim() }))
+        .filter(room => room.name !== '');
+      if (!roomsToAdd.length) {
+        this.openRestrictedModal();
+      } else {
+        this.props.dispatchCreateRoomForHotel(roomsToAdd, this.props.hotel._id);
+        this.clearNewRooms();
+      }
     }
+  };
+
+  openRestrictedModal = () => {
+    this.setState({
+      noRoomModalOpen: true,
+      newRooms: '',
+    });
+  };
+
+  closeRestrictedModal = () => {
+    this.setState({
+      noRoomModalOpen: false,
+    });
   };
 
   render() {
@@ -146,7 +170,12 @@ class CompanySettings extends React.Component {
                 onChange={this.handleInputChange.bind(this)}
               />
               <div className="action-buttons">
-                <button className="cancel" onClick={this.handleRevert().bind(this)}>Cancel</button>
+                <button
+                  className="cancel"
+                  onClick={this.handleRevert().bind(this)}
+                >
+                  Cancel
+                </button>
                 <button
                   onClick={this.handleSubmit(
                     hotel._id,
@@ -174,6 +203,14 @@ class CompanySettings extends React.Component {
             fileRead={this.fileRead}
           />
         </CompanySettingsWrapper>
+
+        {this.state.noRoomModalOpen && (
+          <Restricted
+            alert="Please add at least one room name"
+            isRestrictedModalOpen={this.state.noRoomModalOpen}
+            closeRestrictedModal={this.closeRestrictedModal}
+          />
+        )}
       </CompanySettingsOuterWrapper>
     );
   }
@@ -298,7 +335,7 @@ const CompanySettingsWrapper = styled.div`
           font-size: ${theme.fontSize.xs};
         }
       }
-      
+
       .cancel {
         background: ${theme.color.accentPurple};
       }
