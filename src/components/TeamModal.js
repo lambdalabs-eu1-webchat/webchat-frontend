@@ -1,49 +1,60 @@
 import React from 'react';
 import theme from '../theme/styledTheme';
+import modalTheme from '../theme/modalTheme';
 import styled from 'styled-components';
 
 export default class TeamModal extends React.Component {
 
-    onClose = (e) => {
-        this.props.onClose && this.props.onClose(e);
+  onClose = (e) => {
+    this.props.onClose && this.props.onClose(e);
+  };
+
+  render() {
+    if (!this.props.show) {
+        return null;
     }
-    render() {
-        if (!this.props.show) {
-            return null;
-        }
-        return (
-            <Container>
-            <div className="backStyle">
-                <div className="backmodal">           
-                <h2>Welcome to FrontDesk</h2>
-           <section>
-          <p className="card">
-        <ul>
-         As the Super Admin for your Hotel, you have access to all areas of the app including company information and billing.
-         To get talking to your guests right away, simply add your hotel's rooms on this settings page and check in your first guest.
-        You can also add any colleagues you'd like to work with over on the Team Members page. 
-           There are two types of user permissions you can assign to your team:
-        </ul>
-          </p>
-          <br />
+    return (
+      <Container>
+        <div className="backStyle">
+          <div className="backmodal">
+            <h2>Welcome to FrontDesk</h2>
+            <ul>
+              <li>
+                As the Super Admin for your Hotel, you have access to all areas of the app including company information and billing.
+              </li>
+              <li>
+                To get talking to your guests right away, simply add your hotel's rooms on this settings page and check in your first guest.
+              </li>
+              <li>
+                You can also add any colleagues you'd like to work with over on the Team Members page.
+              </li>
+              <li>
+                There are two types of user permissions you can assign to your team:
+              </li>
+              <li>
+                <span>
+                  Team Member:
+                </span>
+                Live chat with guests, check guests in/out, track tickets.
+              </li>
+              <li>
+                <span>
+                  Admin:
+                </span>
+                All of the above, see guest's chat ratings, add team members.
+              </li>
+            </ul>
 
-        <ul>
-        <li>Team-Member: Live chat with guests, check guests in/out, track tickets.</li>
-        <li>Admin: All of the above, see guest's chat ratings, add team members</li>
-       
-        </ul>
-         </section>
-
-                <div>
-                <button onClick={(e) => { this.onClose(e)}}>
-                    Close
-                </button>
-              </div>
+            <div>
+              <button onClick={(e) => { this.onClose(e)}}>
+                  Close
+              </button>
             </div>
+          </div>
         </div>
-        </Container>
-        )
-    }
+      </Container>
+    )
+  }
 }
 
 const Container = styled.div`
@@ -53,44 +64,57 @@ const Container = styled.div`
 
   box-shadow: ${theme.shadow.containerShadow};
   overflow-y:scroll;
+  
+  ul {
+    font-size: ${theme.fontSize.xs};
+    text-align: left;
+    list-style: disc;
+    
+    li {
+    padding-top: 1.5rem;
+      &:nth-last-child(2) {
+        padding-top:15px;
+        list-style: none;
+      }
+      &:nth-last-child(1) {
+        list-style: none;
+        padding-top: 0;
+        padding-bottom: 2rem;
+      }
+      span {
+        font-weight: bold;
+        color: ${theme.color.accentPurple};
+        padding-right: 5px;
+      }
+    }
+  }
     button {
-      margin: 40px;
-      padding: 10px 20px;
-      width: 90%;
-      border-radius: 5px;
-      height: ${theme.button.height};
-      font-size: ${theme.fontSize.xs};
+      margin-top: 2rem;
       text-transform: uppercase;
+      width: 15rem;
+      border-radius: ${theme.border.radius};
+      height: ${theme.button.smallButton};
+      font-size: ${theme.fontSize.xs};
       color: ${theme.color.white};
       background: ${theme.color.accentGreen};
       font-weight: bold;
       box-shadow: ${theme.shadow.buttonShadow};
+      position: absolute;
+      right: 2rem;
+      bottom: 2rem;
       &:hover {
         box-shadow: ${theme.shadow.buttonHover};
-        background: ${theme.color.accentPurple};
         cursor: pointer;
         transition: all 0.3s ease;
-      }
-      @media(max-width: 600px) {
-        width: 90%;
-        margin: 5%;
       }
     }
   }
 
-  .card {
-    padding: 10 2.5% 5% 2.5%;
-    text-align:left;
-    @media (max-width: 1000px) {
-      width: 95%;
-      padding: 10% 0 15% 0;
-      margin: 0 5%;
-    }
-  
-  }
   .backmodal {
     background-color:${theme.color.offWhite};
-    border-radius:1rem;
+    border-radius: ${theme.border.radius};
+    box-shadow: ${theme.shadow.cardShadow};
+    z-index: 55;
     max-width:80rem;
     min-height:20rem;
     top:8rem;
@@ -98,17 +122,20 @@ const Container = styled.div`
     padding:5rem;
     position:relative;
     font-size:22px;
-   
+    @media(max-width: 600px) {
+      top: 2rem;
+    }  
   }
+  
   .backStyle {
-      position:fixed;
-      top:0;
-      bottom:0;
-      left:0;
-      right:0;
-      background-color:rgba(0,0,0,0.3);
-      padding:5rem;
-      overflow:scroll;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:${modalTheme.overlay.background};
+    padding:5rem;
+    overflow:scroll;
   }
 `;
 
