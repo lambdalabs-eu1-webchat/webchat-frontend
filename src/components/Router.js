@@ -7,6 +7,7 @@ import Logout from './Logout';
 import HomePage from '../views/HomePage';
 import TermsPage from '../views/TermsPage';
 import PrivacyPage from '../views/PrivacyPage';
+import NotFound from '../views/NotFound';
 import Chat from '../views/Chat';
 import Login from '../views/Login';
 import Register from '../views/Register';
@@ -17,11 +18,6 @@ import CompanyDash from '../views/CompanyDash';
 import { APP_PATHS } from '../utils/paths';
 import { Redirect } from 'react-router-dom';
 import { fetchRooms } from '../store/actions/rooms';
-
-// temp fix
-const style404 = {
-  minHeight: 'calc(100vh - 236px)'
-};
 
 function Router({
   user_type,
@@ -38,7 +34,7 @@ function Router({
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.TERMS} component={TermsPage} />
         <Route exact path={APP_PATHS.PRIVACY} component={PrivacyPage} />
-        <Route render={() => <div style={style404}>404 not found</div>} />
+        <Route exact path={APP_PATHS.NOT_FOUND} component={NotFound} />
       </Switch>
     );
   } else if (user_type === 'admin') {

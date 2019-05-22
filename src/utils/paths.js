@@ -43,4 +43,5 @@ export const APP_PATHS = {
   COMPANY_SETTINGS: '/company-settings',
   TERMS: '/terms',
   PRIVACY: '/privacy',
+  NOT_FOUND: '/not-found',
 };
