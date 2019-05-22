@@ -28,6 +28,19 @@ class CheckOutForm extends React.Component {
     this.setState({ emailInput });
   };
 
+  closeRestrictedModal = () => {
+    this.setState({
+      emailModalOpen: false,
+      noChatModalOpen: false,
+    });
+  };
+
+  openRestrictedModal = modalState => {
+    this.setState({
+      [modalState]: true,
+    });
+  };
+
   sendGuestEmail = async () => {
     const emailDetails = {
       guestEmail: this.state.emailInput,
@@ -40,12 +53,10 @@ class CheckOutForm extends React.Component {
         if (didSend.data) {
           this.setState({ emailInput: '' });
         } else {
-          return alert(
-            'This guest had no chats during their stay, please remove their email',
-          );
+          this.openRestrictedModal('noChatModalOpen');
         }
       } else {
-        return alert('Please provide a valid email address');
+        this.openRestrictedModal('emailModalOpen');
       }
     } catch (error) {
       console.error(error);
