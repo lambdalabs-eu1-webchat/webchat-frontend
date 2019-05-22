@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
 import luke from '../avatar/luke.jpg';
-import talent from '../avatar/talent.jpg';
+import talent from '../avatar/talent.jpeg';
 import diana from '../avatar/diana.jpg';
 import mark from '../avatar/mark.jpg';
 import pavol from '../avatar/pavol.PNG';
@@ -71,8 +71,8 @@ background: ${theme.color.white};
 `;
 
 const PageContainer = styled.div`
-  background: ${theme.color.secondaryPurple};
-  margin: 0 5rem;
+  background: ${theme.color.lightPurple};
+  margin: 5rem 5rem;
   box-shadow: ${theme.shadow.containerShadow};
   border:none;
 
@@ -89,7 +89,7 @@ const PageContainer = styled.div`
       
       .card{
         padding: 20px;
-        border-bottom: #08addd 2px solid;
+        border-bottom:2px solid ${theme.color.accentPurple};
         margin: 16px 10px;
       }
        
@@ -97,19 +97,10 @@ const PageContainer = styled.div`
         width: 180px;
         border-radius: 60%;
       }
-      h1 {
-        font-size: ${theme.fontSize.m};
-        padding: 25px;
-        font-weight: bold;
-        width: 60%;
-        color: ${theme.color.textColor};
-        @media (max-width: 1000px) {
-          width: 90%;
-        }
-      }
+      
       h2 {
         font-size: ${theme.fontSize.l};
-        color: ${theme.color.white};
+        color: ${theme.color.textColor};
       }
       p {
         font-size: ${theme.fontSize.xs};
@@ -120,7 +111,8 @@ const PageContainer = styled.div`
       a {
         text-decoration: none;
         color: ${theme.color.footerText};
-        size:500px;
+        height:30px;
+        width:30px;
         font-weight: bold;
       }
   }
