@@ -3,17 +3,18 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 import theme from '../theme/styledTheme';
 import titleCase from '../utils/titleCase';
+import decode from '../utils/decodeHtml';
 
 function Message({ message, guest_id, translatedMessage }) {
   return (
     <StyledMessage left={guest_id === message.sender.id}>
       <span className="sender-name">{titleCase(message.sender.name)} : </span>
       <div className="bubble-container">
-        <span className="bubble me">{message.text}</span>
+        <span className="bubble me">{decode(message.text)}</span>
         <p>
           {translatedMessage
             ? translatedMessage.detectedSourceLanguage !== 'en'
-              ? translatedMessage.translatedText
+              ? decode(translatedMessage.translatedText)
               : null
             : null}
         </p>

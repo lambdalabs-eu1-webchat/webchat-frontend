@@ -1,20 +1,20 @@
 export const freePlan = {
     title: 'free',
-    features: ['Live chat with guests', 'Check guests in and out', 'Track ticket status', 'Up to 5 users'],
+    features: ['Live chat with guests', 'Check guests in/out', 'Track ticket status', 'Up to 5 users'],
     price: '£0 /mo',
     buttonText: 'Switch to Free',
 }
 
 export const plusPlan = {
     title: 'plus',
-    features: ['Live chat with guests', 'Check guests in and out', 'Track ticket status', 'Up to 15 users'],
+    features: ['Live chat with guests', 'Check guests in/out', 'Track ticket status', 'Up to 15 users'],
     price: '£59 /mo',
     buttonText: 'Switch to Plus',
 }
 
 export const proPlan = {
     title: 'pro',
-    features: ['Live chat with guests', 'Check guests in and out', 'Track ticket status', 'Unilimited users'],
+    features: ['Live chat with guests', 'Check guests in/out', 'Track ticket status', 'Unilimited users'],
     price: '£119 /mo',
     buttonText: 'Switch to Pro',
 }

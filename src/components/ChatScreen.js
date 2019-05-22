@@ -105,7 +105,7 @@ class ChatScreen extends React.Component {
             />
             <StyledChatButtons>
               <button onClick={this.closeTicket}>Close Ticket</button>
-              <button onClick={this.translateMessage}>Translate</button>
+              <button onClick={() => this.translateMessage()}>Translate</button>
             </StyledChatButtons>
           </React.Fragment>
         ) : null}
