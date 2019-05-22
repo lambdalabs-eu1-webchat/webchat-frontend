@@ -7,7 +7,7 @@ import { SOCKET } from '../../utils/paths';
 import theme from '../../theme/styledTheme';
 import styled from 'styled-components';
 import Spinner from '../../components/reusable/Spinner';
-
+import decode from '../../utils/decodeHtml';
 import titleCase from '../../utils/titleCase';
 const filterTickets = (tickets, filterCond) => {
   return tickets.filter(ticket => ticket.status === filterCond);
@@ -54,7 +54,9 @@ const TicketView = ({
                           <div>
                             Last message:
                             <span />
-                            {ticket.messages[ticket.messages.length - 1].text}
+                            {decode(
+                              ticket.messages[ticket.messages.length - 1].text,
+                            )}
                           </div>
                         </div>
                       );
