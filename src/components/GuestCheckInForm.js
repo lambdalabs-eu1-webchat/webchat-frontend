@@ -5,9 +5,10 @@ import propTypes from 'prop-types';
 import jwt from 'jsonwebtoken';
 import QRCode from 'qrcode.react';
 import axios from 'axios';
+
+import { getToken } from '../utils/axiosConfig';
 import { connect } from 'react-redux';
 import { fetchSingleHotel } from '../store/actions/hotel';
-import { axiosConfig } from '../utils/axiosConfig';
 import { DOMAIN, USERS, GUEST_CLIENT_DOMAIN } from '../utils/paths';
 import Spinner from '../components/reusable/Spinner';
 
@@ -42,6 +43,7 @@ class CheckInForm extends React.Component {
       // turn on spinner
       this.setState({ isCheckingIn: true });
       try {
+        const axiosConfig = getToken();
         const res = await axios.post(
           `${DOMAIN}${USERS}`,
           {
