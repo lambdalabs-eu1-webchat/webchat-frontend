@@ -46,7 +46,7 @@ const EmployeeSettingsForm = ({
         <p>{flashMessage}</p>
      
         <div className="form-buttons">
-          <button type="submit" onClick={fireUserUpdates}>
+          <button type="submit" onClick={fireUserUpdates} disabled={loading.updateUser}>
             {loading.updateUser ? <Spinner /> : 'Update'}
           </button>
           <button className="cancel" type="submit" onClick={clearChanges}>
