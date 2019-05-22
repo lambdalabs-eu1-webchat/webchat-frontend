@@ -23,8 +23,7 @@ export default class TeamModal extends React.Component {
               </p>
             <div className="pricing-cards">
               <div className="pricing-card">
-                <h2><i className="fas fa-user-cog"></i>
-                <br></br> Super Admin</h2>
+                <h2> Super Admin</h2>
                 <ul>
                 <li>- Unlimited access</li>
                   <li>- Can Add new team members</li>
@@ -36,8 +35,7 @@ export default class TeamModal extends React.Component {
               </div>
 
               <div className="pricing-card">
-              <h2><i className="fas fa-user"></i>
-                <br></br>Admin</h2>
+              <h2>Admin</h2>
                 <ul>
                   <li>- Restricted access</li>
                   <li>- Can not remove Admins</li>
@@ -49,8 +47,7 @@ export default class TeamModal extends React.Component {
               </div>
 
               <div className="pricing-card">
-              <h2> <i className="fas fa-user"></i>
-                <br></br>Employee</h2>
+              <h2>Employee</h2>
                 <ul>
                   <li>- Restricted access</li>
                   <li>- Live chat with guests</li>
@@ -118,8 +115,8 @@ const Container = styled.div`
     }
       
     .pricing-cards {
-      display: flex;
-      justify-content: space-between;
+      display: column;
+      justify-content: space-evenly;
       margin: 0 2.5%;
       @media (max-width: 1000px) {
         flex-direction: column;
