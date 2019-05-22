@@ -25,7 +25,15 @@ const CompanySettingsRoomsList = props => {
         each with a comma
       </h3>
       <div className="file-upload">
-        <label><input id="upload" name="roomsUpload" type="file" accept=".csv" onChange={fileRead} /></label>
+        <label>
+          <input
+            id="upload"
+            name="roomsUpload"
+            type="file"
+            accept=".csv"
+            onChange={fileRead}
+          />
+        </label>
       </div>
       <AddRooms>
         <input
@@ -40,6 +48,7 @@ const CompanySettingsRoomsList = props => {
       </AddRooms>
       <section className="rooms-list">
         {rooms &&
+          rooms.map &&
           rooms.map((room, idx) => (
             <CompanySettingsRoom
               key={room._id || 'new'}
@@ -75,7 +84,7 @@ const CompanySettingsRoomsListWrapper = styled.div`
     color: ${theme.color.accentPurple};
     padding: 1.5rem 0;
   }
-  
+
   .file-upload {
     align-items: center;
     #upload {
@@ -90,7 +99,6 @@ const CompanySettingsRoomsListWrapper = styled.div`
   .rooms-list {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding-top: 20px;
     height: 300px;
     overflow-y: scroll;
@@ -132,7 +140,7 @@ const AddRooms = styled.section`
     &:focus {
       outline: none;
     }
-    @media(max-width: 800px) {
+    @media (max-width: 800px) {
       width: 100%;
     }
   }
