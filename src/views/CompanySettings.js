@@ -9,7 +9,7 @@ import {
   deleteRoomForHotel,
   updateRoomForHotel,
   fetchRoomsForHotel,
-  createRoomForHotel,
+  createRoomForHotel
 } from '../store/actions/rooms';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
 import Spinner from '../components/reusable/Spinner';
@@ -24,14 +24,14 @@ class CompanySettings extends React.Component {
       hotel,
       currentUser,
       dispatchFetchSingleHotel,
-      dispatchFetchRoomsForHotel,
+      dispatchFetchRoomsForHotel
     } = this.props;
     this.state = {
       currentHotel: {},
       companyName: hotel.name,
       companyMotto: hotel.motto,
       rooms: hotel.rooms,
-      newRooms: '',
+      newRooms: ''
     };
     dispatchFetchSingleHotel(currentUser.hotel_id);
     dispatchFetchRoomsForHotel(currentUser.hotel_id);
@@ -42,7 +42,7 @@ class CompanySettings extends React.Component {
       this.setState({
         currentHotel: this.props.hotel,
         companyName: this.props.hotel.name,
-        companyMotto: this.props.hotel.motto,
+        companyMotto: this.props.hotel.motto
       });
     }
     if (this.state.rooms !== this.props.rooms) {
@@ -56,14 +56,14 @@ class CompanySettings extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
   };
 
   handleRoomInputChange = (event, index) => {
     const newRoomName = event.target.value;
     this.setState(cState => ({
-      rooms: [...cState.rooms, (cState.rooms[index].name = newRoomName)],
+      rooms: [...cState.rooms, (cState.rooms[index].name = newRoomName)]
     }));
   };
 
@@ -83,14 +83,14 @@ class CompanySettings extends React.Component {
       event.preventDefault();
       this.setState({
         companyName: this.props.hotel.name,
-        companyMotto: this.props.hotel.motto,
+        companyMotto: this.props.hotel.motto
       });
     };
   }
 
   clearNewRooms = () => {
     this.setState({
-      newRooms: '',
+      newRooms: ''
     });
   };
 
@@ -104,7 +104,7 @@ class CompanySettings extends React.Component {
         // spacing is used for cleaner display on the Add Rooms input
         const newRooms = rooms.replace(/\n/g, ', ');
         this.setState({
-          newRooms,
+          newRooms
         });
       };
       reader.readAsText(file);
@@ -132,7 +132,7 @@ class CompanySettings extends React.Component {
       dispatchDeleteRoomForHotel,
       dispatchCreateRoomForHotel,
       currentUser,
-      dispatchUpdateRoomForHotel,
+      dispatchUpdateRoomForHotel
     } = this.props;
 
     return (
@@ -161,7 +161,7 @@ class CompanySettings extends React.Component {
                 <button
                   onClick={this.handleSubmit(
                     hotel._id,
-                    dispatchUpdateHotel,
+                    dispatchUpdateHotel
                   ).bind(this)}
                 >
                   {this.props.loading.updateHotel ? <Spinner /> : 'Save'}
@@ -198,7 +198,7 @@ CompanySettings.propTypes = {
   dispatchFetchRoomsForHotel: PropTypes.func.isRequired,
   dispatchDeleteRoomForHotel: PropTypes.func.isRequired,
   dispatchUpdateRoomForHotel: PropTypes.func.isRequired,
-  dispatchCreateRoomForHotel: PropTypes.func.isRequired,
+  dispatchCreateRoomForHotel: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
@@ -206,7 +206,7 @@ const mapStateToProps = state => {
     hotel: state.hotel,
     rooms: state.rooms.rooms,
     currentUser: state.currentUser,
-    loading: state.loading,
+    loading: state.loading
   };
 };
 
@@ -218,8 +218,8 @@ export default connect(
     dispatchFetchRoomsForHotel: fetchRoomsForHotel,
     dispatchDeleteRoomForHotel: deleteRoomForHotel,
     dispatchUpdateRoomForHotel: updateRoomForHotel,
-    dispatchCreateRoomForHotel: createRoomForHotel,
-  },
+    dispatchCreateRoomForHotel: createRoomForHotel
+  }
 )(CompanySettings);
 
 const CompanySettingsOuterWrapper = styled.div`
