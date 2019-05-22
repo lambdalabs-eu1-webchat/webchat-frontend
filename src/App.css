@@ -9,7 +9,7 @@
 }
 
 .show-on-print {
-  display: none;
+  display: none !important;
 }
 @media print {
   /* All your print styles go here */
@@ -17,7 +17,6 @@
     display: none !important;
   }
   .show-on-print {
-    display: block;
+    display: block !important;
   }
 }
-

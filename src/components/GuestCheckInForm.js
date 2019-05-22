@@ -5,7 +5,8 @@ import propTypes from 'prop-types';
 import jwt from 'jsonwebtoken';
 import QRCode from 'qrcode.react';
 import axios from 'axios';
-
+import { connect } from 'react-redux';
+import { fetchSingleHotel } from '../store/actions/hotel';
 import { axiosConfig } from '../utils/axiosConfig';
 import { DOMAIN, USERS, GUEST_CLIENT_DOMAIN } from '../utils/paths';
 import Spinner from '../components/reusable/Spinner';
@@ -19,8 +20,12 @@ class CheckInForm extends React.Component {
     errorRoom: false,
     errorName: false,
     guestToken: '',
-    isCheckingIn: false
+    isCheckingIn: false,
+    checkedInGuest: '',
   };
+  componentDidMount() {
+    this.props.fetchSingleHotel(this.props.hotel_id);
+  }
 
   setNameInput = nameInput => {
     this.setState({ nameInput, errorName: false });
@@ -45,10 +50,10 @@ class CheckInForm extends React.Component {
             name,
             room: {
               name: room.name,
-              id: room._id
-            }
+              id: room._id,
+            },
           },
-          axiosConfig
+          axiosConfig,
         );
         const data = jwt.decode(res.data.token);
         this.props.filterAvailableRoom(room_id);
@@ -58,7 +63,8 @@ class CheckInForm extends React.Component {
           selectValue: 'DEFAULT',
           nameInput: '',
           guestToken: res.data.token,
-          isCheckingIn: false
+          isCheckingIn: false,
+          checkedInGuest: data.name,
         });
       } catch (error) {
         this.setState({ isCheckingIn: false });
@@ -110,7 +116,19 @@ class CheckInForm extends React.Component {
         >
           {this.state.isCheckingIn ? <Spinner /> : 'Check In'}
         </button>
-        <p className="show-on-print">https://webchatlabs-guest.netlify.com</p>
+        <div className="show-on-print">
+          <h2> Welcome to {this.props.hotel.name}</h2>
+          <p>
+            If there is anything we can do to help you during your stay please
+            reach out to us on the FrontDesk App.
+          </p>
+          <p className="domain">{GUEST_CLIENT_DOMAIN}</p>
+          <div className=" passcode">
+            <span className="login-code-label">Login Name:</span>
+            <span className="login-code">{this.state.checkedInGuest}</span>
+          </div>
+        </div>
+
         <div className="passcode">
           <span className="login-code-label">Login Code:</span>
           <span className="login-code">{this.state.loginCode}</span>
@@ -122,12 +140,37 @@ class CheckInForm extends React.Component {
 }
 
 CheckInForm.propTypes = {
-  hotel_id: propTypes.string.isRequired
+  hotel_id: propTypes.string.isRequired,
 };
 
 const CheckInFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  @media print {
+    align-items: center;
+    h2 {
+      font-size: ${theme.fontSize.l};
+      text-align: center;
+      padding-bottom: 30px;
+    }
+    p {
+      font-size: ${theme.fontSize.s};
+      padding-bottom: 20px;
+    }
+    .domain {
+      font-size: ${theme.fontSize.m};
+      text-align: center;
+    }
+    .login-code-label {
+      position: static !important;
+      font-size: ${theme.fontSize.xs};
+      color: black !important;
+    }
+    .login-code {
+      width: 200px;
+      color: black !important;
+    }
+  }
   select {
     background: ${theme.color.lightPurple};
     font-size: ${theme.fontSize.xxs};
@@ -232,4 +275,14 @@ const CheckInFormWrapper = styled.div`
   }
 `;
 
-export default CheckInForm;
+function mapStateToProps(state) {
+  return {
+    hotel: state.hotel,
+    hotelId: state.currentUser.hotel_id,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { fetchSingleHotel },
+)(CheckInForm);
