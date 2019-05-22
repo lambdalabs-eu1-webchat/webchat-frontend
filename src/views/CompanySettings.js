@@ -12,7 +12,6 @@ import {
   createRoomForHotel
 } from '../store/actions/rooms';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
-import Spinner from '../components/reusable/Spinner';
 import TeamModal from '../components/TeamModal'
 import Restricted from '../components/reusable/RestrictedModal';
 
@@ -52,19 +51,17 @@ class CompanySettings extends React.Component {
       this.setState({ rooms: this.props.rooms });
     }
     if(this.props.initGotRooms && this.props.rooms.length === 0 && !this.state.showInfoModal){
-      debugger
       this.setState({
         infoModal:true,
         showInfoModal:true,
       })
     }
   }
-  closeInfoModal = () => { 
-    debugger
+  closeInfoModal = () => {
     this.setState ({
     infoModal:false
    })
-  }
+  };
   handleInputChange = event => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
