@@ -138,7 +138,7 @@ class HomePage extends React.Component {
                   </li>
                   <li>
                     <i className="fas fa-check" />
-                    Check guests in and out
+                    Check guests in/out
                   </li>
                   <li>
                     <i className="fas fa-check" />
@@ -164,7 +164,7 @@ class HomePage extends React.Component {
                   </li>
                   <li>
                     <i className="fas fa-check" />
-                    Check guests in and out
+                    Check guests in/out
                   </li>
                   <li>
                     <i className="fas fa-check" />
@@ -190,7 +190,7 @@ class HomePage extends React.Component {
                   </li>
                   <li>
                     <i className="fas fa-check" />
-                    Check guests in and out
+                    Check guests in/out
                   </li>
                   <li>
                     <i className="fas fa-check" />
