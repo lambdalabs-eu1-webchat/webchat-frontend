@@ -7,7 +7,7 @@ import axios from 'axios';
 import Spinner from '../components/reusable/Spinner';
 import { validate } from 'email-validator';
 import Restricted from './reusable/RestrictedModal';
-import { axiosConfig } from '../utils/axiosConfig';
+import { getToken } from '../utils/axiosConfig';
 import { DOMAIN, USERS, EMAIL, SOCKET } from '../utils/paths';
 
 class CheckOutForm extends React.Component {
@@ -50,6 +50,7 @@ class CheckOutForm extends React.Component {
     };
     try {
       if (validate(emailDetails.guestEmail)) {
+        const axiosConfig = getToken();
         const didSend = await axios.post(
           `${DOMAIN}${EMAIL}`,
           emailDetails,
@@ -82,6 +83,7 @@ class CheckOutForm extends React.Component {
       const room = { name: guest.room.name, _id: guest.room.id };
       this.setState({ isCheckingOut: true });
       try {
+        const axiosConfig = getToken();
         const didDel = await axios.delete(
           `${DOMAIN}${USERS}/${guest_id}`,
           axiosConfig
