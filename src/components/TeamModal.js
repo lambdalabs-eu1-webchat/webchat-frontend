@@ -21,7 +21,7 @@ export default class TeamModal extends React.Component {
         <ul>
          As the Super Admin for your Hotel, you have access to all areas of the app including company information and billing.
          To get talking to your guests right away, simply add your hotel's rooms on this settings page and check in your first guest.
-          You can also add any colleagues you'd like to work with over on the Team Members page. 
+        You can also add any colleagues you'd like to work with over on the Team Members page. 
            There are two types of user permissions you can assign to your team:
         </ul>
           </p>
@@ -51,8 +51,6 @@ const Container = styled.div`
   margin: 0 5rem;
   text-align:center;
 
- 
-
   box-shadow: ${theme.shadow.containerShadow};
   overflow-y:scroll;
     button {
@@ -62,7 +60,6 @@ const Container = styled.div`
       border-radius: 5px;
       height: ${theme.button.height};
       font-size: ${theme.fontSize.xs};
-      border: none;
       text-transform: uppercase;
       color: ${theme.color.white};
       background: ${theme.color.accentGreen};
@@ -93,7 +90,7 @@ const Container = styled.div`
   }
   .backmodal {
     background-color:${theme.color.offWhite};
-    border-radius:2rem;
+    border-radius:1rem;
     max-width:80rem;
     min-height:20rem;
     top:8rem;
@@ -104,7 +101,6 @@ const Container = styled.div`
    
   }
   .backStyle {
-      flex-direction:column;
       position:fixed;
       top:0;
       bottom:0;
@@ -115,29 +111,4 @@ const Container = styled.div`
       overflow:scroll;
   }
 `;
-
-// need to change these to styled components
-// const backdropStyle = {
-//     flexDirection:'column',
-//     position:'fixed',
-//     top:0,
-//     bottom:0,
-//     left:0,
-//     right:0,
-//     backgroundColor:'rgba(0,0,0,0.3)',
-//     padding:'50',
-//     overflow:'scroll',
-// };
-// const modalBigStyle = styled.div`
-//    background-color:theme.color.offWhite;
-//    border-radius:5;
-//    max-width:800;
-//    min-height:200;
-//    top:60;
-//    margin:0 auto;
-//    padding:30;
-//    position:relative;
-//    font-size:22px;
-  
-// `;
 
