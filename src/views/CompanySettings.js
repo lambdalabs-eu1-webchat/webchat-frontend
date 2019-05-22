@@ -31,6 +31,7 @@ class CompanySettings extends React.Component {
       companyName: hotel.name,
       rooms: hotel.rooms,
       newRooms: '',
+      infoModal:false,
     };
     dispatchFetchSingleHotel(currentUser.hotel_id);
     dispatchFetchRoomsForHotel(currentUser.hotel_id);
@@ -46,8 +47,13 @@ class CompanySettings extends React.Component {
     if (this.state.rooms !== this.props.rooms) {
       this.setState({ rooms: this.props.rooms });
     }
+    if(this.props.room.length === 0 && !this.state.infoModal){
+      this.setState({
+        infoModal:true
+      })
+    }
   }
-
+ 
   handleInputChange = event => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
