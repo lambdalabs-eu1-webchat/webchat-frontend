@@ -115,7 +115,11 @@ class Register extends React.Component {
               onChange={this.handleInput}
             />
             <p>{this.state.flashMessage}</p>
-            <button type="submit" onClick={this.handleRegister}>
+            <button
+              type="submit"
+              onClick={this.handleRegister}
+              disabled={this.props.loading.register}
+            >
               {this.props.loading.register ? <Spinner /> : 'Register'}
             </button>
           </form>

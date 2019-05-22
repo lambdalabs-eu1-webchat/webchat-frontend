@@ -19,6 +19,7 @@ const TeamMember = ({
   // use Hooks here, as it's already a func component
   const [isRestrictedModalOpen, setRestrictedModalOpen] = useState(false);
   const [isConfirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [isCurrent, setIsCurrent] = useState(false);
 
   const isAdmin = user_type === 'admin' || user_type === 'super admin';
 
@@ -57,6 +58,7 @@ const TeamMember = ({
         return;
       }
       setConfirmDeleteOpen(true);
+      setIsCurrent(true);
     };
   };
   return (
@@ -84,7 +86,7 @@ const TeamMember = ({
         />
       </div>
 
-      {loading.deleteUser ? (
+      {loading.deleteUser && isCurrent ? (
         <Spinner />
       ) : (
         <i
@@ -158,7 +160,7 @@ const HotelStaffWrapper = styled.div`
       padding-bottom: 15px;
     }
     &:hover {
-    cursor: pointer;
+      cursor: pointer;
     }
   }
 

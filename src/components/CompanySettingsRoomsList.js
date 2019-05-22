@@ -34,7 +34,7 @@ const CompanySettingsRoomsList = props => {
           value={newRooms}
           onChange={handleInputChange}
         />
-        <button type="submit" onClick={addRooms}>
+        <button type="submit" onClick={addRooms} disabled={loading.updateRoom}>
           {loading.createRoom ? <Spinner /> : 'Add Rooms'}
         </button>
       </AddRooms>
