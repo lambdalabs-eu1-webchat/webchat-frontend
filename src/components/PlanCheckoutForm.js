@@ -110,6 +110,10 @@ const FormWrapper = styled.div`
   justify-content: space-around;
   margin: 3rem 0;
   overflow: hidden;
+  
+  p {
+    font-size: ${theme.fontSize.xs};
+  }
 `;
 
 const StyledBtn = styled.button`

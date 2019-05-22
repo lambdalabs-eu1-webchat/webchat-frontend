@@ -24,7 +24,9 @@ const CompanySettingsRoomsList = props => {
         Add rooms with a CSV, or type out your hotel's room names, separating
         each with a comma
       </h3>
-      <input name="roomsUpload" type="file" accept=".csv" onChange={fileRead} />
+      <div className="file-upload">
+        <label><input id="upload" name="roomsUpload" type="file" accept=".csv" onChange={fileRead} /></label>
+      </div>
       <AddRooms>
         <input
           placeholder="Add rooms..."
@@ -72,6 +74,17 @@ const CompanySettingsRoomsListWrapper = styled.div`
     font-size: ${theme.fontSize.xs};
     color: ${theme.color.accentPurple};
     padding: 1.5rem 0;
+  }
+  
+  .file-upload {
+    align-items: center;
+    #upload {
+      margin-bottom: 5px;
+      display: flex;
+      align-self: center;
+      border: none;
+      width: 100%;
+    }
   }
 
   .rooms-list {

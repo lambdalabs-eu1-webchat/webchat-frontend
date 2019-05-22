@@ -124,7 +124,7 @@ class HomePage extends React.Component {
           <section className="pricing-plan">
             <h1>Our pricing plans</h1>
             <p>
-              No hotel is to big or too small for FrontDesk.
+              No hotel is too big or too small for FrontDesk.
               <br /> Our services can be customized to suit any need you may
               have.
             </p>
@@ -497,7 +497,7 @@ const HomePageContainer = styled.div`
 
       .fa-check {
         background: #e2fdf8;
-        border: 1px solid white;
+        border: 2px solid white;
         border-radius: 50%;
         padding: 2.5%;
         color: ${theme.color.accentGreen};
