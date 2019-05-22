@@ -9,7 +9,7 @@ import {
   FETCH_SINGLE_HOTEL_STARTED,
   FETCH_SINGLE_HOTEL_SUCCESS,
   FETCH_SINGLE_HOTEL_FAILURE,
-  FETCH_SINGLE_HOTEL_FINISHED,
+  FETCH_SINGLE_HOTEL_FINISHED
 } from './actionTypes';
 
 // Synchronous action creators
@@ -21,8 +21,8 @@ export const fetchSingleHotelSuccess = hotel => {
   return {
     type: FETCH_SINGLE_HOTEL_SUCCESS,
     payload: {
-      hotel,
-    },
+      hotel
+    }
   };
 };
 
@@ -33,8 +33,8 @@ export const fetchSingleHotelFailure = error => {
   return {
     type: FETCH_SINGLE_HOTEL_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -45,8 +45,8 @@ export const updateHotelSuccess = updatedHotel => {
   return {
     type: UPDATE_HOTEL_SUCCESS,
     payload: {
-      updatedHotel,
-    },
+      updatedHotel
+    }
   };
 };
 
@@ -57,8 +57,8 @@ export const updateHotelFailure = error => {
   return {
     type: UPDATE_HOTEL_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -68,7 +68,14 @@ export const fetchSingleHotel = id => async dispatch => {
   dispatch({ type: FETCH_SINGLE_HOTEL });
   dispatch({ type: FETCH_SINGLE_HOTEL_STARTED });
   try {
-    const result = await fetch(`${DOMAIN}${HOTEL}/${id}`);
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Headers: { Authorization: localStorage.getItem('token') }
+      }
+    };
+    const result = await fetch(`${DOMAIN}${HOTEL}/${id}`, config);
     const jsonResult = await result.json();
     dispatch({ type: FETCH_SINGLE_HOTEL_FINISHED });
     dispatch(fetchSingleHotelSuccess(jsonResult));
@@ -81,14 +88,15 @@ export const updateHotel = (id, name) => async dispatch => {
   dispatch({ type: UPDATE_HOTEL });
   dispatch({ type: UPDATE_HOTEL_STARTED });
   const updatedHotel = {
-    name: String(name),
+    name: String(name)
   };
   const config = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Headers: { Authorization: localStorage.getItem('token') }
     },
-    body: JSON.stringify(updatedHotel),
+    body: JSON.stringify(updatedHotel)
   };
   try {
     const result = await fetch(`${DOMAIN}${HOTEL}/${id}`, config);

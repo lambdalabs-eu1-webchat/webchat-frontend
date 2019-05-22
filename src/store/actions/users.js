@@ -218,7 +218,14 @@ export const fetchAllUsers = () => async dispatch => {
   dispatch({ type: FETCH_ALL_USERS });
   dispatch({ type: FETCH_ALL_USERS_STARTED });
   try {
-    const result = await fetch(`${DOMAIN}${USERS}`);
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Headers: { Authorization: localStorage.getItem('token') }
+      }
+    };
+    const result = await fetch(`${DOMAIN}${USERS}`, config);
     const jsonResult = await result.json();
     dispatch({ type: FETCH_ALL_USERS_FINISHED });
     dispatch(fetchAllUsersSuccess(jsonResult));
@@ -232,7 +239,14 @@ export const fetchSingleUser = id => async dispatch => {
   dispatch({ type: FETCH_SINGLE_USER });
   dispatch({ type: FETCH_SINGLE_USER_STARTED });
   try {
-    const result = await fetch(`${DOMAIN}${USERS}/${id}`);
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Headers: { Authorization: localStorage.getItem('token') }
+      }
+    };
+    const result = await fetch(`${DOMAIN}${USERS}/${id}`, config);
     const jsonResult = await result.json();
     dispatch({ type: FETCH_SINGLE_USER_FINISHED });
     dispatch(fetchAllUsersSuccess(jsonResult));
@@ -245,7 +259,14 @@ export const fetchHotelStaff = id => async dispatch => {
   dispatch({ type: FETCH_HOTEL_STAFF });
   dispatch({ type: FETCH_HOTEL_STAFF_STARTED });
   try {
-    const result = await fetch(`${DOMAIN}${USERS}?hotel_id=${id}`);
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Headers: { Authorization: localStorage.getItem('token') }
+      }
+    };
+    const result = await fetch(`${DOMAIN}${USERS}?hotel_id=${id}`, config);
     const jsonResult = await result.json();
     dispatch({ type: FETCH_HOTEL_STAFF_FINISHED });
     dispatch(fetchHotelStaffSuccess(jsonResult));
@@ -271,7 +292,8 @@ export const createUser = (name, email, password, user_type) => async (
   const config = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Headers: { Authorization: localStorage.getItem('token') }
     },
     body: JSON.stringify(user)
   };
@@ -298,7 +320,8 @@ export const updateUser = (userUpdates, id) => async dispatch => {
   const config = {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Headers: { Authorization: localStorage.getItem('token') }
     },
     body: JSON.stringify(userUpdates)
   };
@@ -325,7 +348,8 @@ export const changeUserType = (id, newType) => async dispatch => {
   const config = {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Headers: { Authorization: localStorage.getItem('token') }
     },
     body: JSON.stringify(promotedUser)
   };
@@ -350,7 +374,8 @@ export const deleteUser = id => async (dispatch, getState) => {
   const config = {
     method: 'DELETE',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Headers: { Authorization: localStorage.getItem('token') }
     }
   };
   try {

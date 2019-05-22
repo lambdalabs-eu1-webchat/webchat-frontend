@@ -10,7 +10,7 @@ import {
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE,
   REGISTER_USER_FINISHED,
-  LOGOUT,
+  LOGOUT
 } from './actionTypes';
 
 export const registerUserSuccess = newUser => {
@@ -20,8 +20,8 @@ export const registerUserSuccess = newUser => {
   return {
     type: REGISTER_USER_SUCCESS,
     payload: {
-      newUser,
-    },
+      newUser
+    }
   };
 };
 
@@ -32,32 +32,23 @@ export const registerUserFailure = error => {
   return {
     type: REGISTER_USER_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
 export const logout = () => ({
-  type: LOGOUT,
+  type: LOGOUT
 });
 
-export const loginSuccess = (
-  id,
-  hotel_id,
-  email,
-  token,
-  user_type,
-  name,
-
-) => {
+export const loginSuccess = (id, hotel_id, email, token, user_type, name) => {
   const currentUser = {
     id,
     hotel_id,
     email,
     token,
     user_type,
-    name,
-  
+    name
   };
   localStorage.setItem('currentUser', JSON.stringify(currentUser));
   localStorage.setItem('token', token);
@@ -69,17 +60,16 @@ export const loginSuccess = (
       email,
       token,
       user_type,
-      name,
-  
-    },
+      name
+    }
   };
 };
 
 export const loginFailure = error => ({
   type: LOGIN_FAILURE,
   payload: {
-    error,
-  },
+    error
+  }
 });
 
 // Asynchronous action creators
@@ -90,9 +80,9 @@ export const loginRequest = (email, password) => async dispatch => {
   const config = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, password })
   };
   try {
     const result = await fetch(`${DOMAIN}${LOGIN}`, config);
@@ -108,8 +98,8 @@ export const loginRequest = (email, password) => async dispatch => {
         jsonResult.user.email,
         jsonResult.token,
         jsonResult.user.user_type,
-        jsonResult.user.name,
-      ),
+        jsonResult.user.name
+      )
     );
     return jsonResult;
   } catch (error) {
@@ -121,8 +111,7 @@ export const registerUser = ({
   name,
   email,
   password,
-  hotelName,
-
+  hotelName
 }) => async dispatch => {
   dispatch({ type: REGISTER_USER });
   dispatch({ type: REGISTER_USER_STARTED });
@@ -130,15 +119,14 @@ export const registerUser = ({
     name: String(name),
     email: String(email),
     password: String(password),
-    hotel_name: String(hotelName),
-
+    hotel_name: String(hotelName)
   };
   const config = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(user),
+    body: JSON.stringify(user)
   };
   try {
     const result = await fetch(`${DOMAIN}${REGISTER}`, config);

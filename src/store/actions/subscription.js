@@ -6,14 +6,14 @@ import { SUBSCRIPTIONS } from './actionTypes';
 export const switchCustomerPlanSuccess = updatedHotel => {
   if (!updatedHotel) {
     throw new Error(
-      'switchCustomerPlanSuccess requires an updatedHotel argument',
+      'switchCustomerPlanSuccess requires an updatedHotel argument'
     );
   }
   return {
     type: SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN_SUCCESS,
     payload: {
-      updatedHotel,
-    },
+      updatedHotel
+    }
   };
 };
 
@@ -24,22 +24,22 @@ export const switchCustomerPlanFailure = error => {
   return {
     type: SUBSCRIPTIONS.SWITCH_CUSTOMER_PLAN_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
 export const creatNewCustomerSuccess = updatedHotel => {
   if (!updatedHotel) {
     throw new Error(
-      'creatNewCustomerSuccess requires an updatedHotel argument',
+      'creatNewCustomerSuccess requires an updatedHotel argument'
     );
   }
   return {
     type: SUBSCRIPTIONS.CREATE_NEW_CUSTOMER_SUCCESS,
     payload: {
-      updatedHotel,
-    },
+      updatedHotel
+    }
   };
 };
 
@@ -50,22 +50,22 @@ export const createNewCustomerFailure = error => {
   return {
     type: SUBSCRIPTIONS.CREATE_NEW_CUSTOMER_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
 export const updateCustomerMethodSuccess = updatedHotel => {
   if (!updatedHotel) {
     throw new Error(
-      'updateCustomerMethodSuccess requires an updatedHotel argument',
+      'updateCustomerMethodSuccess requires an updatedHotel argument'
     );
   }
   return {
     type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_SUCCESS,
     payload: {
-      updatedHotel,
-    },
+      updatedHotel
+    }
   };
 };
 
@@ -76,8 +76,8 @@ export const updateCustomerMethodFailure = error => {
   return {
     type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_FAILURE,
     payload: {
-      error,
-    },
+      error
+    }
   };
 };
 
@@ -90,8 +90,9 @@ export const switchCustomerPlan = (hotelId, newPlan) => async dispatch => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Headers: { Authorization: localStorage.getItem('token') }
     },
-    body: JSON.stringify(newPlan),
+    body: JSON.stringify(newPlan)
   };
   try {
     const result = await fetch(`${DOMAIN}${SUBSCRIPTION}/${hotelId}`, config);
@@ -109,7 +110,7 @@ export const switchCustomerPlan = (hotelId, newPlan) => async dispatch => {
 
 export const createNewCustomer = (
   hotelId,
-  enhancedStripeToken,
+  enhancedStripeToken
 ) => async dispatch => {
   dispatch({ type: SUBSCRIPTIONS.CREATE_NEW_CUSTOMER });
   dispatch({ type: SUBSCRIPTIONS.CREATE_NEW_CUSTOMER_STARTED });
@@ -117,8 +118,9 @@ export const createNewCustomer = (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Headers: { Authorization: localStorage.getItem('token') }
     },
-    body: JSON.stringify(enhancedStripeToken),
+    body: JSON.stringify(enhancedStripeToken)
   };
   try {
     const result = await fetch(`${DOMAIN}${SUBSCRIPTION}/${hotelId}`, config);
@@ -136,7 +138,7 @@ export const createNewCustomer = (
 
 export const updateCustomerMethod = (
   hotelId,
-  enhancedStripeToken,
+  enhancedStripeToken
 ) => async dispatch => {
   dispatch({ type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD });
   dispatch({ type: SUBSCRIPTIONS.UPDATE_CUSTOMER_METHOD_STARTED });
@@ -144,8 +146,9 @@ export const updateCustomerMethod = (
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Headers: { Authorization: localStorage.getItem('token') }
     },
-    body: JSON.stringify(enhancedStripeToken),
+    body: JSON.stringify(enhancedStripeToken)
   };
   try {
     const result = await fetch(`${DOMAIN}${METHOD}/${hotelId}`, config);
