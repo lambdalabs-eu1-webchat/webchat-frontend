@@ -169,6 +169,7 @@ export const translate = (text, ticket_id, chat_id, cb) => async dispatch => {
   try {
     const response = await fetch(`${DOMAIN}${TRANSLATE_CHAT}`, config);
     const jsonResponse = await response.json();
+    debugger;
     dispatch(addTranslatedTicket(ticket_id, jsonResponse));
     // return jsonResponse;
     const lasrTranslatedText = jsonResponse[jsonResponse.length - 1];

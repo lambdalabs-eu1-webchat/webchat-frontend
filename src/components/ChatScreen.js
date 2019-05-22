@@ -57,7 +57,7 @@ class ChatScreen extends React.Component {
       return msg.text;
     });
     // translate message from guest
-
+    debugger;
     this.props.translate(textToTranslate, ticket_id, this.props.chat._id, cb);
 
     // this.setState({ translatedMessages: translatedText });
@@ -106,7 +106,7 @@ class ChatScreen extends React.Component {
             />
             <StyledChatButtons>
               <button onClick={this.closeTicket}>Close Ticket</button>
-              <button onClick={this.translateMessage}>Translate</button>
+              <button onClick={() => this.translateMessage()}>Translate</button>
             </StyledChatButtons>
           </React.Fragment>
         ) : null}
