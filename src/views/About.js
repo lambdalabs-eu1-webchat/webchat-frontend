@@ -83,9 +83,9 @@ const PageContainer = styled.div`
 }
   .about-container {
       display:flex;
-      justify-content:space-around;
+      justify-content:space-evenly;
       padding: 100px 0;
-      flex-flow:row wrap;
+      flex-flow: wrap;
       
       .card{
         padding: 20px;
