@@ -76,6 +76,7 @@ class ChatScreen extends React.Component {
             status={status}
             tickets={chat.tickets}
             guest={chat.guest}
+            chat_id={chat._id}
           />
           {chat.typingUser ? (
             <p className="typing">
