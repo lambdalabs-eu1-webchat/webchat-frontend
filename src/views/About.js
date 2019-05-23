@@ -123,15 +123,27 @@ const PageContainer = styled.div`
       }
       .gh{
         font-size: 30px;
-        color: #55596d;
+        color: ${theme.color.accentPurple};
         transition: transform 0.2s ease-in-out;
         margin: 0 10px;
+        &:hover {
+          color: #222;
+          transition: all 0.3s ease-in;
+          cursor: pointer;
+          transform: scale(1.5);
+        }
       }
       .tw{
         font-size: 30px;
-        color: #1da1f2;
+        color: ${theme.color.accentPurple};
         transition: transform 0.2s ease-in-out;
-        margin: 0 10px;
+        margin: 10px;
+        &:hover {
+          color:#08addd;
+          transition: all 0.3s ease-in;
+          cursor: pointer;
+          transform: scale(1.5);
+        }
       
         }
       }
