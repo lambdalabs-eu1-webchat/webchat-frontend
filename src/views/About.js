@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import theme from '../theme/styledTheme';
 import luke from '../avatar/luke.jpg';
 import talent from '../avatar/talent.jpeg';
+import tale from '../avatar/tale.jpg';
 import diana from '../avatar/diana.jpg';
 import mark from '../avatar/mark.jpg';
 import pavol from '../avatar/pavol.PNG';
@@ -62,7 +63,7 @@ class About extends React.Component {
             
                </div> 
                <div className="card">
-              <img src={talent} alt=""/>
+              <img src={tale} alt="tale"/>
                <h2>Talent Antonio</h2>
                <p>Full Stack Developer</p>
                <a href="https://github.com/sampler36"><i className="fab fa-github gh"></i></a>
