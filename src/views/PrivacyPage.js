@@ -61,6 +61,7 @@ const PrivacyPageContainer = styled.div`
   background: ${theme.color.white};
   margin: 0 5rem;
   box-shadow: ${theme.shadow.containerShadow};
+  padding-bottom: 4rem;
   
   section {
     width: 60%;
