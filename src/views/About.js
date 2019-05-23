@@ -22,6 +22,7 @@ class About extends React.Component {
                <h2>Lukasz Busk</h2>
                <p>Project Manager</p>
                <a href="https://github.com/Velsu"><i class="fab fa-github gh"></i></a>
+               <a href="https://uk.linkedin.com/"><i class="fab fa-linkedin tw"></i></a>
                <a href="https://twitter.com"><i class="fab fa-twitter tw "></i></a>
                </div>  
                <div className="card">
@@ -29,35 +30,45 @@ class About extends React.Component {
                <h2>Diana Ignatescu</h2>
                <p>Full Stack Developer</p>
                <a href="https://github.com/DianaIgnatescu"><i class="fab fa-github gh"></i></a>
+               <a href="https://uk.linkedin.com/"><i class="fab fa-linkedin tw"></i></a>
                <a href="https://twitter.com"><i class="fab fa-twitter tw "></i></a>
+            
                </div> 
                <div className="card">
               <img src={connor} alt=""/>
                <h2>Connor Robertson</h2>
                <p>Full Stack Developer</p>
                <a href="https://github.com/ConConRob"><i class="fab fa-github gh"></i></a>
+               <a href="https://uk.linkedin.com/"><i class="fab fa-linkedin tw"></i></a>
                <a href="https://twitter.com"><i class="fab fa-twitter tw "></i></a>
+               
                </div> 
                <div className="card">
               <img src={mark} alt=""/>
                <h2>Mark Marshall</h2>
                <p>Full Stack Developer</p>
                <a href="https://github.com/mark-marshall"><i class="fab fa-github gh"></i></a>
+               <a href="https://uk.linkedin.com/"><i class="fab fa-linkedin tw"></i></a>
                <a href="https://twitter.com"><i class="fab fa-twitter tw "></i></a>
+              
                </div> 
               <div className="card">
               <img src={pavol} alt=""/>
                <h2>Pavol Karas</h2>
                <p>Full Stack Developer</p>
                <a href="https://github.com/Pav0l"><i class="fab fa-github gh"></i></a>
+               <a href="https://uk.linkedin.com/"><i class="fab fa-linkedin tw"></i></a>
                <a href="https://twitter.com/KarasPavol"><i class="fab fa-twitter tw "></i></a>
+            
                </div> 
                <div className="card">
               <img src={talent} alt=""/>
                <h2>Talent Antonio</h2>
                <p>Full Stack Developer</p>
                <a href="https://github.com/sampler36"><i class="fab fa-github gh"></i></a>
+               <a href="https://uk.linkedin.com/"><i class="fab fa-linkedin tw"></i></a>
                <a href="https://twitter.com"><i class="fab fa-twitter tw "></i></a>
+              
                </div> 
             </section>
           </PageContainer>
