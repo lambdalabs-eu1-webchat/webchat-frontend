@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import theme from '../theme/styledTheme';
 import luke from '../avatar/luke.jpg';
-import talent from '../avatar/talent.jpeg';
 import tale from '../avatar/tale.jpg';
 import diana from '../avatar/diana.jpg';
 import mark from '../avatar/mark.jpg';
@@ -11,69 +10,98 @@ import connor from '../avatar/connor.jpg';
 
 class About extends React.Component {
   render() {
-    return (  
-      
+    return (
       <PageOuter>
-         <h1 className="header">Meet The Team</h1>
+        <h1 className="header">Meet The Team</h1>
         <PageContainer>
-         
-        <section className="about-container">
+          <section className="about-container">
             <div className="card">
-              <img src={luke} alt=""/>
-               <h2>Lukasz Busk</h2>
-               <p>Project Manager</p>
-               <a href="https://github.com/Velsu"><i className="fab fa-github gh"></i></a>
-               <a href="https://uk.linkedin.com/"><i className="fab fa-linkedin tw"></i></a>
-               <a href="https://twitter.com"><i className="fab fa-twitter tw "></i></a>
-               </div>  
-               <div className="card">
-              <img src={diana} alt="Diana"/>
-               <h2>Diana Ignatescu</h2>
-               <p>Full Stack Developer</p>
-               <a href="https://github.com/DianaIgnatescu"><i className="fab fa-github gh"></i></a>
-               <a href="https://uk.linkedin.com/"><i className="fab fa-linkedin tw"></i></a>
-               <a href="https://twitter.com"><i className="fab fa-twitter tw "></i></a>
-            
-               </div> 
-               <div className="card">
-              <img src={connor} alt=""/>
-               <h2>Connor Robertson</h2>
-               <p>Full Stack Developer</p>
-               <a href="https://github.com/ConConRob"><i className="fab fa-github gh"></i></a>
-               <a href="https://uk.linkedin.com/"><i className="fab fa-linkedin tw"></i></a>
-               <a href="https://twitter.com"><i className="fab fa-twitter tw "></i></a>
-               
-               </div> 
-               <div className="card">
-              <img src={mark} alt=""/>
-               <h2>Mark Marshall</h2>
-               <p>Full Stack Developer</p>
-               <a href="https://github.com/mark-marshall"><i className="fab fa-github gh"></i></a>
-               <a href="https://uk.linkedin.com/"><i className="fab fa-linkedin tw"></i></a>
-               <a href="https://twitter.com"><i className="fab fa-twitter tw "></i></a>
-              
-               </div> 
-              <div className="card">
-              <img src={pavol} alt=""/>
-               <h2>Pavol Karas</h2>
-               <p>Full Stack Developer</p>
-               <a href="https://github.com/Pav0l"><i className="fab fa-github gh"></i></a>
-               <a href="https://uk.linkedin.com/"><i className="fab fa-linkedin tw"></i></a>
-               <a href="https://twitter.com/KarasPavol"><i className="fab fa-twitter tw "></i></a>
-            
-               </div> 
-               <div className="card">
-              <img src={tale} alt="tale"/>
-               <h2>Talent Antonio</h2>
-               <p>Full Stack Developer</p>
-               <a href="https://github.com/sampler36"><i className="fab fa-github gh"></i></a>
-               <a href="https://uk.linkedin.com/"><i className="fab fa-linkedin tw"></i></a>
-               <a href="https://twitter.com"><i className="fab fa-twitter tw "></i></a>
-              
-               </div> 
-            </section>
-          </PageContainer>
-        </PageOuter>
+              <img src={luke} alt="" />
+              <h2>Lukasz Busk</h2>
+              <p>Project Manager</p>
+              <a href="https://github.com/Velsu">
+                <i className="fab fa-github gh" />
+              </a>
+              <a href="https://uk.linkedin.com/">
+                <i className="fab fa-linkedin tw" />
+              </a>
+              <a href="https://twitter.com">
+                <i className="fab fa-twitter tw " />
+              </a>
+            </div>
+            <div className="card">
+              <img src={diana} alt="Diana" />
+              <h2>Diana Ignatescu</h2>
+              <p>Full Stack Developer</p>
+              <a href="https://github.com/DianaIgnatescu">
+                <i className="fab fa-github gh" />
+              </a>
+              <a href="https://uk.linkedin.com/">
+                <i className="fab fa-linkedin tw" />
+              </a>
+              <a href="https://twitter.com">
+                <i className="fab fa-twitter tw " />
+              </a>
+            </div>
+            <div className="card">
+              <img src={connor} alt="" />
+              <h2>Connor Robertson</h2>
+              <p>Full Stack Developer</p>
+              <a href="https://github.com/ConConRob">
+                <i className="fab fa-github gh" />
+              </a>
+              <a href="https://uk.linkedin.com/">
+                <i className="fab fa-linkedin tw" />
+              </a>
+              <a href="https://twitter.com">
+                <i className="fab fa-twitter tw " />
+              </a>
+            </div>
+            <div className="card">
+              <img src={mark} alt="" />
+              <h2>Mark Marshall</h2>
+              <p>Full Stack Developer</p>
+              <a href="https://github.com/mark-marshall">
+                <i className="fab fa-github gh" />
+              </a>
+              <a href="https://uk.linkedin.com/">
+                <i className="fab fa-linkedin tw" />
+              </a>
+              <a href="https://twitter.com">
+                <i className="fab fa-twitter tw " />
+              </a>
+            </div>
+            <div className="card">
+              <img src={pavol} alt="" />
+              <h2>Pavol Karas</h2>
+              <p>Full Stack Developer</p>
+              <a href="https://github.com/Pav0l">
+                <i className="fab fa-github gh" />
+              </a>
+              <a href="https://uk.linkedin.com/">
+                <i className="fab fa-linkedin tw" />
+              </a>
+              <a href="https://twitter.com/KarasPavol">
+                <i className="fab fa-twitter tw " />
+              </a>
+            </div>
+            <div className="card">
+              <img src={tale} alt="tale" />
+              <h2>Talent Antonio</h2>
+              <p>Full Stack Developer</p>
+              <a href="https://github.com/sampler36">
+                <i className="fab fa-github gh" />
+              </a>
+              <a href="https://uk.linkedin.com/">
+                <i className="fab fa-linkedin tw" />
+              </a>
+              <a href="https://twitter.com">
+                <i className="fab fa-twitter tw " />
+              </a>
+            </div>
+          </section>
+        </PageContainer>
+      </PageOuter>
     );
   }
 }
@@ -81,14 +109,14 @@ class About extends React.Component {
 export default About;
 
 const PageOuter = styled.div`
-background: ${theme.color.white};
+  background: ${theme.color.white};
 
-.header {
-  font-size:2.5rem;
-  color:${theme.color.accentPurple};
-  text-align:center;
-  padding-top: 1.5625rem;
-}
+  .header {
+    font-size: 2.5rem;
+    color: ${theme.color.accentPurple};
+    text-align: center;
+    padding-top: 1.5625rem;
+  }
 `;
 
 const PageContainer = styled.div`
