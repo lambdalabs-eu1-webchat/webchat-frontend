@@ -30,13 +30,6 @@ class About extends React.Component {
                <a href="https://twitter.com"><i class="fab fa-twitter tw "></i></a>
                </div> 
                <div class="card">
-              <img src={mark} alt=""/>
-               <h2>Mark Marshall</h2>
-               <p>Full Stack Developer</p>
-               <a href="https://github.com/mark-marshall"><i class="fab fa-github gh"></i></a>
-               <a href="https://twitter.com"><i class="fab fa-twitter tw "></i></a>
-               </div> 
-               <div class="card">
               <img src={connor} alt=""/>
                <h2>Connor Robertson</h2>
                <p>Full Stack Developer</p>
@@ -44,6 +37,13 @@ class About extends React.Component {
                <a href="https://twitter.com"><i class="fab fa-twitter tw "></i></a>
                </div> 
                <div class="card">
+              <img src={mark} alt=""/>
+               <h2>Mark Marshall</h2>
+               <p>Full Stack Developer</p>
+               <a href="https://github.com/mark-marshall"><i class="fab fa-github gh"></i></a>
+               <a href="https://twitter.com"><i class="fab fa-twitter tw "></i></a>
+               </div> 
+              <div class="card">
               <img src={pavol} alt=""/>
                <h2>Pavol Karas</h2>
                <p>Full Stack Developer</p>
@@ -88,6 +88,7 @@ const PageContainer = styled.div`
       flex-flow: wrap;
       
       .card{
+        width:340px;
         padding: 20px;
         border-bottom:2px solid ${theme.color.accentPurple};
         margin: 16px 10px;
@@ -109,11 +110,7 @@ const PageContainer = styled.div`
       }
     
       a {
-        text-decoration: none;
         color: ${theme.color.footerText};
-        height:30px;
-        width:30px;
-        font-weight: bold;
       }
   }
 `;
