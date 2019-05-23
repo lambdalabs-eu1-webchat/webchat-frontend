@@ -230,6 +230,11 @@ const StyledJoinButton = styled.div`
       font-size: ${theme.fontSize.xs};
       height: ${theme.button.height};
     }
+    &:hover {
+      box-shadow: ${theme.shadow.buttonHover};
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
   }
 `;
 export default connect(

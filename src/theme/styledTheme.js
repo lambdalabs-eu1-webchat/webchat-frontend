@@ -1,14 +1,12 @@
 const theme = {
   color: {
-    // accentGreen: '#62CABE',
     accentGreen: '#0CD4AF',
     accentPurple: '#6876CB',
     secondaryPurple: '#5B66AC',
-    hoverGreen: '',
+    hoverGreen: '#0bc1a0',
     hoverPurple: '#5969c6',
     lightGreen: '#e2fdf8',
     lightPurple: '#F4F6FF',
-    darkContrast: '',
     textColor: '#333', //main text color
     accentText: '#6876CB',
     footerText: '#c7ccec',
@@ -19,7 +17,7 @@ const theme = {
   shadow: {
     cardShadow: '0 16px 48px rgba(32, 41, 50, 0.21)',
     containerShadow: '0 0 2px 0 rgba(0, 0, 0, 0.19)',
-    buttonHover: '0 10px 20px rgba(0,0,0,0.15), 0 6px 6px rgba(0,0,0,0.19)',
+    buttonHover: '0 3px 10px rgba(0, 0, 0, 0.15)',
     buttonShadow: '0 0 3px 0 rgba(0, 0, 0, 0.19)',
   },
 
