@@ -13,7 +13,9 @@ class About extends React.Component {
     return (  
       
       <PageOuter>
+         <h1 className="header">Meet The Team</h1>
         <PageContainer>
+         
         <section className="about-container">
             <div class="card">
               <img src={luke} alt=""/>
@@ -68,6 +70,13 @@ export default About;
 
 const PageOuter = styled.div`
 background: ${theme.color.white};
+
+.header {
+  font-size:40px;
+  color:${theme.color.accentPurple};
+  text-align:center;
+  padding-top: 25px;
+}
 `;
 
 const PageContainer = styled.div`
@@ -101,11 +110,11 @@ const PageContainer = styled.div`
       
       h2 {
         font-size: ${theme.fontSize.l};
-        color: ${theme.color.textColor};
+        color: ${theme.color.accentPurple};
       }
       p {
         font-size: ${theme.fontSize.xs};
-        color: ${theme.color.textColor};
+        color:${theme.color.accentPurple};
         padding: 5px;
       }
     
