@@ -40,5 +40,8 @@ export const APP_PATHS = {
   ACCOUNT_SETTINGS: '/account-settings',
   CHECK_IN_OUT: '/check-in-out',
   COMPANY_DASH: '/company-dash',
-  COMPANY_SETTINGS: '/company-settings'
+  COMPANY_SETTINGS: '/company-settings',
+  TERMS: '/terms',
+  PRIVACY: '/privacy',
+  NOT_FOUND: '/not-found',
 };
