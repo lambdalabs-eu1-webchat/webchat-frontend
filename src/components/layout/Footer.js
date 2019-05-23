@@ -9,9 +9,9 @@ const Footer = () => {
     <FooterWrapper className="hide-on-print">
       <div className="footer-company">
         <div className="social-icons">
-          <i className="fab fa-github" />
+          <a href="https://github.com/lambdalabs-eu1-webchat"><i className="fab fa-github" /></a>
           <i className="fab fa-linkedin-in" />
-          <i className="far fa-envelope" />
+          <a href="mailto:webchatlabs@gmail.com"><i className="far fa-envelope" /></a>
         </div>
         <span>© {currentYear} FrontDesk</span>
       </div>
@@ -96,6 +96,11 @@ const FooterWrapper = styled.div`
         text-align: center;
         padding: 1.5rem;
         margin: 0 auto;
+      }
+      
+      a {
+      text-decoration: none;
+      color: ${theme.color.lightPurple};
       }
 
       .fab,

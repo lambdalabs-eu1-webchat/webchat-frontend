@@ -134,7 +134,8 @@ const StyledMessageComposer = styled.div`
     font-size: ${theme.fontSize.xxs};
     height: ${theme.button.smallButton};
     text-transform: uppercase;
-
+    box-shadow: ${theme.shadow.buttonShadow};
+    
     &:focus {
       outline: none;
     }
