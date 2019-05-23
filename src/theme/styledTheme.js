@@ -3,7 +3,7 @@ const theme = {
     // accentGreen: '#62CABE',
     accentGreen: '#0CD4AF',
     accentPurple: '#6876CB',
-    secondaryPurple: 'black',
+    secondaryPurple: '#5B66AC',
     hoverGreen: '',
     hoverPurple: '#5969c6',
     lightGreen: '#e2fdf8',
