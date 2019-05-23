@@ -34,6 +34,7 @@ export const APP_PATHS = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   REGISTER: '/register',
+  ABOUT: '/about',
   TEAM_MEMBERS: '/team-members',
   BILLING: '/billing',
   CHAT: '/chat',
