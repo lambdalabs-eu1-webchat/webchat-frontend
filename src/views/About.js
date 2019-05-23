@@ -101,6 +101,11 @@ const PageContainer = styled.div`
         padding: 1.25rem;
         border-bottom:0.125rem solid ${theme.color.accentPurple};
         margin: 1rem 0.625rem;
+        &:hover {
+          background-color:${theme.color.white}
+          transition: all 0.3s ease-in;
+          transform: scale(1.2);
+        }
       }
        
       img{
