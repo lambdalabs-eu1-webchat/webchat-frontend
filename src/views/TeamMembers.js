@@ -23,6 +23,8 @@ class TeamMembers extends React.Component {
     this.state = {
       modalShown: false,
       isModalOpen: false,
+      show:false,
+
       flashMessage: messages.allRequiredFields,
     };
     this.props = props;
@@ -69,7 +71,7 @@ class TeamMembers extends React.Component {
   handleHideModal = () => {
     this.setState({ modalShown: false });
   };
-
+ 
   render() {
     const {
       users,
@@ -81,6 +83,7 @@ class TeamMembers extends React.Component {
     return (
       <TeamMembersOuterWrapper>
         <h2>Team Members</h2>
+           
         <TeamMembersWrapper>
           <h3>Update and Assign Team Members</h3>
           <TeamMembersList

@@ -66,7 +66,9 @@ const TeamMembersAddNewMemberModal = ({
   };
 
   return (
+  
     <AddOuterWrapper>
+
       <AddMembersModalWrapper className={showHideClassName}>
         <section className="modal-main">
           <button type="button" id="close" onClick={handleHideModal}>
