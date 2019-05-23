@@ -12,6 +12,9 @@ import { CLOSED } from '../utils/ticketStatus';
 import titleCase from '../utils/titleCase';
 
 class Messages extends React.Component {
+  state = {
+    numMessages: 0,
+  };
   // pass in 'smooth' for smooth scroll
   scrollToBottom = behavior => {
     const scrollObject = { top: this.component.scrollHeight };
@@ -20,9 +23,24 @@ class Messages extends React.Component {
   };
   componentDidMount = () => {
     this.scrollToBottom();
+    this.setState({
+      numMessages: this.props.tickets.reduce(
+        (total, ticket) => total + ticket.messages.length,
+        0,
+      ),
+    });
   };
   componentDidUpdate = () => {
-    this.scrollToBottom();
+    const numMessages = this.state.numMessages;
+    const newNumMessages = this.props.tickets.reduce(
+      (total, ticket) => total + ticket.messages.length,
+      0,
+    );
+
+    if (numMessages !== newNumMessages) {
+      this.setState({ numMessages: newNumMessages });
+      this.scrollToBottom('smooth');
+    }
   };
   translateTicket = ticket => {
     const textToTranslate = ticket.messages.map(msg => {
