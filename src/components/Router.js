@@ -34,10 +34,10 @@ function Router({
         <Route exact path={APP_PATHS.LOGIN} component={Login} />
         <Route exact path={APP_PATHS.REGISTER} component={Register} />
         <Route exact path={APP_PATHS.ABOUT} component={About} />
-        <Route render={() => <div>404 not found</div>} />
         <Route exact path={APP_PATHS.TERMS} component={TermsPage} />
         <Route exact path={APP_PATHS.PRIVACY} component={PrivacyPage} />
         <Route exact path={APP_PATHS.NOT_FOUND} component={NotFound} />
+
       </Switch>
     );
   } else if (user_type === 'admin') {
