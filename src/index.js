@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import rootReducer from './store/reducers/index';
@@ -10,25 +10,20 @@ import './index.css';
 import App from './App';
 import { loginSuccess } from './store/actions/auth';
 
-const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-      window.__REDUX_DEVTOOLS_EXTENSION__(),
-  ),
-);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 if (currentUser) {
-  store.dispatch(loginSuccess(
-    currentUser.id, 
-    currentUser.hotel_id, 
-    currentUser.email, 
-    currentUser.token, 
-    currentUser.user_type, 
-    currentUser.name, 
-  ));
+  store.dispatch(
+    loginSuccess(
+      currentUser.id,
+      currentUser.hotel_id,
+      currentUser.email,
+      currentUser.token,
+      currentUser.user_type,
+      currentUser.name
+    )
+  );
 }
 
 ReactDOM.render(
@@ -37,5 +32,5 @@ ReactDOM.render(
       <App />
     </Router>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
