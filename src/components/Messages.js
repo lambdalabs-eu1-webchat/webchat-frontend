@@ -12,6 +12,10 @@ import { CLOSED } from '../utils/ticketStatus';
 import titleCase from '../utils/titleCase';
 
 class Messages extends React.Component {
+  state = {
+    numMessages: 0,
+    chat_id: this.props.chat_id,
+  };
   // pass in 'smooth' for smooth scroll
   scrollToBottom = behavior => {
     const scrollObject = { top: this.component.scrollHeight };
@@ -20,9 +24,28 @@ class Messages extends React.Component {
   };
   componentDidMount = () => {
     this.scrollToBottom();
+    this.setState({
+      numMessages: this.props.tickets.reduce(
+        (total, ticket) => total + ticket.messages.length,
+        0,
+      ),
+    });
   };
   componentDidUpdate = () => {
-    this.scrollToBottom();
+    const { numMessages, chat_id } = this.state;
+    const newNumMessages = this.props.tickets.reduce(
+      (total, ticket) => total + ticket.messages.length,
+      0,
+    );
+    // handles when changing chat or new message
+    if (chat_id !== this.props.chat_id) {
+      this.setState({ chat_id: this.props.chat_id });
+      this.scrollToBottom(); // not smooth scroll when changing chat
+    }
+    if (numMessages !== newNumMessages) {
+      this.setState({ numMessages: newNumMessages });
+      this.scrollToBottom('smooth'); // smooth scroll when a new message comes in
+    }
   };
   translateTicket = ticket => {
     const textToTranslate = ticket.messages.map(msg => {
