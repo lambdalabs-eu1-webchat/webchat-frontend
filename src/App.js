@@ -27,6 +27,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
+    
   }
   componentDidMount() {
     const token = localStorage.getItem('token');

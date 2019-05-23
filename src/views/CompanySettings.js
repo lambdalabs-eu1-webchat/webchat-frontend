@@ -12,6 +12,7 @@ import {
   createRoomForHotel
 } from '../store/actions/rooms';
 import CompanySettingsRoomsList from '../components/CompanySettingsRoomsList';
+import TeamModal from '../components/TeamModal'
 import Restricted from '../components/reusable/RestrictedModal';
 
 class CompanySettings extends React.Component {
@@ -31,6 +32,8 @@ class CompanySettings extends React.Component {
       companyName: hotel.name,
       rooms: hotel.rooms,
       newRooms: '',
+      infoModal:false,
+      showInfoModal:false,
       noRoomModalOpen: false
     };
     dispatchFetchSingleHotel(currentUser.hotel_id);
@@ -47,8 +50,18 @@ class CompanySettings extends React.Component {
     if (this.state.rooms !== this.props.rooms) {
       this.setState({ rooms: this.props.rooms });
     }
+    if(this.props.initGotRooms && this.props.rooms.length === 0 && !this.state.showInfoModal){
+      this.setState({
+        infoModal:true,
+        showInfoModal:true,
+      })
+    }
   }
-
+  closeInfoModal = () => {
+    this.setState ({
+    infoModal:false
+   })
+  };
   handleInputChange = event => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -197,7 +210,9 @@ class CompanySettings extends React.Component {
             loading={this.props.loading}
             fileRead={this.fileRead}
           />
+
         </CompanySettingsWrapper>
+       { <TeamModal show={this.state.infoModal}  onClose={this.closeInfoModal} />}
 
         {this.state.noRoomModalOpen && (
           <Restricted
@@ -228,7 +243,8 @@ const mapStateToProps = state => {
     hotel: state.hotel,
     rooms: state.rooms.rooms,
     currentUser: state.currentUser,
-    loading: state.loading
+    loading: state.loading,
+    initGotRooms:state.rooms.initGotRooms,
   };
 };
 

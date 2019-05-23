@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { DOMAIN, HOTEL } from '../utils/paths';
-import { axiosConfig } from '../utils/axiosConfig';
+import { getToken } from '../utils/axiosConfig';
 import CheckInForm from '../components/GuestCheckInForm';
 import CheckOutForm from '../components/GuestCheckOutForm';
 
@@ -15,6 +15,7 @@ class CheckInOrOut extends React.Component {
     currentGuests: []
   };
   componentDidMount() {
+    const axiosConfig = getToken();
     axios
       .get(
         `${DOMAIN}${HOTEL}/${this.props.hotel_id}/rooms/available`,
