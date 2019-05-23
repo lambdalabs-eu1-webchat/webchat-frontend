@@ -121,5 +121,19 @@ const PageContainer = styled.div`
       a {
         color: ${theme.color.footerText};
       }
+      .gh{
+        font-size: 30px;
+        color: #55596d;
+        transition: transform 0.2s ease-in-out;
+        margin: 0 10px;
+      }
+      .tw{
+        font-size: 30px;
+        color: #1da1f2;
+        transition: transform 0.2s ease-in-out;
+        margin: 0 10px;
+      
+        }
+      }
   }
 `;
