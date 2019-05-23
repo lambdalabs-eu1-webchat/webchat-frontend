@@ -1,12 +1,13 @@
 import { ROOMS } from './actionTypes';
 import axios from 'axios';
-import { axiosConfig } from '../../utils/axiosConfig';
+import { getToken } from '../../utils/axiosConfig';
 import { HOTEL, DOMAIN } from '../../utils/paths';
 
 export const fetchRooms = hotel_id => async dispatch => {
   dispatch({ type: ROOMS.FETCH_ROOMS_FOR_HOTEL });
   dispatch({ type: ROOMS.FETCH_ROOMS_FOR_HOTEL_STARTED });
   try {
+    const axiosConfig = getToken();
     const roomsRes = await axios.get(
       `${DOMAIN}${HOTEL}/${hotel_id}/rooms`,
       axiosConfig

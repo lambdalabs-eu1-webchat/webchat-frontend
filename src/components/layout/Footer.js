@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import theme from '../../theme/styledTheme';
-import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -16,12 +16,9 @@ const Footer = () => {
         <span>© {currentYear} FrontDesk</span>
       </div>
       <nav className="footer-nav">
-        <button>
         <Link to="/about">About</Link>
-        </button>
-        <button>Help</button>
-        <button>Terms</button>
-        <button>Privacy</button>
+        <Link to="/terms">Terms</Link>
+        <Link to="/privacy">Privacy</Link>
       </nav>
     </FooterWrapper>
   );
@@ -56,7 +53,7 @@ const FooterWrapper = styled.div`
       padding: 20px 0;
     }
     
-    button {
+    a {
       font-size: ${theme.fontSize.xxs};
       color: ${theme.color.lightPurple};
       text-decoration: none;
