@@ -72,10 +72,10 @@ const PageOuter = styled.div`
 background: ${theme.color.white};
 
 .header {
-  font-size:40px;
+  font-size:2.5rem;
   color:${theme.color.accentPurple};
   text-align:center;
-  padding-top: 25px;
+  padding-top: 1.5625rem;
 }
 `;
 
@@ -87,7 +87,7 @@ const PageContainer = styled.div`
 
   section {
     text-align: center;
-    padding: 5px 2px;
+    padding: 0.3125rem 0.125rem;
     border:none;
 }
   .about-container {
@@ -98,9 +98,9 @@ const PageContainer = styled.div`
       
       .card{
         width:340px;
-        padding: 20px;
-        border-bottom:2px solid ${theme.color.accentPurple};
-        margin: 16px 10px;
+        padding: 1.25rem;
+        border-bottom:0.125rem solid ${theme.color.accentPurple};
+        margin: 1rem 0.625rem;
       }
        
       img{
@@ -115,17 +115,17 @@ const PageContainer = styled.div`
       p {
         font-size: ${theme.fontSize.xs};
         color:${theme.color.accentPurple};
-        padding: 5px;
+        padding: 0.3125rem;
       }
     
       a {
         color: ${theme.color.footerText};
       }
       .gh{
-        font-size: 30px;
+        font-size: 1.875rem;
         color: ${theme.color.accentPurple};
         transition: transform 0.2s ease-in-out;
-        margin: 0 10px;
+        margin: 0 0.625rem;
         &:hover {
           color: #222;
           transition: all 0.3s ease-in;
@@ -134,10 +134,10 @@ const PageContainer = styled.div`
         }
       }
       .tw{
-        font-size: 30px;
+        font-size: 1.875rem;
         color: ${theme.color.accentPurple};
         transition: transform 0.2s ease-in-out;
-        margin: 10px;
+        margin: 0.625rem;
         &:hover {
           color:#08addd;
           transition: all 0.3s ease-in;
