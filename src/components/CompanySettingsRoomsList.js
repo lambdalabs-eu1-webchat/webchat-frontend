@@ -93,6 +93,7 @@ const CompanySettingsRoomsListWrapper = styled.div`
       align-self: center;
       border: none;
       width: 100%;
+      box-sizing: content-box;
     }
   }
 
